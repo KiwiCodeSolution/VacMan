@@ -5,7 +5,6 @@ import type { RootState } from './store';
 //   isAuth: boolean;
 //   name: string;
 //   email: string;
-//   password: string;
 //   token: string;
 //   profile: { [key: string]: string };
 // }
