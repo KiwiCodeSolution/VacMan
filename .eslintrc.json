@@ -38,6 +38,7 @@
     "prettier/prettier": [
       "error",
       {
+        "arrowParens": 0,
         "endOfLine": "auto"
       }
     ]

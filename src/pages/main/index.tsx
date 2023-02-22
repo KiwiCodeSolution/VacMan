@@ -1,8 +1,10 @@
-import { useAppDispatch } from '../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { setIsAuth } from '../../redux/userSlice';
 
 export default function Main() {
   const dispatch = useAppDispatch();
+  const { token } = useAppSelector((state) => state.user);
+  console.log('token:', token);
 
   return (
     <div className="container mx-auto px-4">
