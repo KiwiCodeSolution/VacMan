@@ -7,7 +7,7 @@ import './styles.css';
 
 export default function LogInPage() {
   const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector(store => store.user);
+  const { isAuth } = useAppSelector(state => state.user);
   const navigate = useNavigate();
   
   useEffect(() => {if (isAuth) navigate('/')},[isAuth, navigate]);
