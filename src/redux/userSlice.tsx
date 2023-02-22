@@ -14,7 +14,6 @@ const initialState = {
   isAuth: false,
   name: '',
   email: '',
-  password: '',
   token: '',
   profile: {
     phoneNumber: '',
