@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { setIsAuth } from '../../redux/userSlice';
+import InputFileForm from '../../components/inputFile';
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -10,7 +11,7 @@ export default function Main() {
     <div className="container mx-auto px-4">
       <h1 className="text-2xl mb-4">User Main Page</h1>
       <h2>Hello user!</h2>
-      <button type="button" onClick={() => dispatch(setIsAuth(false))}>
+      <button className="m-2 border-2 p-1" type="button" onClick={() => dispatch(setIsAuth(false))}>
         LogOUT
       </button>
       <p>
@@ -18,6 +19,7 @@ export default function Main() {
         vitae corrupti esse assumenda sunt, labore culpa enim non tempore nulla quam distinctio praesentium doloremque!
         Harum!
       </p>
+      <InputFileForm />
     </div>
   );
 }
