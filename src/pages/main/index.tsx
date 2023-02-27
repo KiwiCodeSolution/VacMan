@@ -4,8 +4,7 @@ import * as Icons from '../../img/iconsComponents';
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector(state => state.user);
-  console.log('token:', token);
+  const { onBoarding } = useAppSelector(state => state.user);
 
   return (
     <div className="container mx-auto px-4">

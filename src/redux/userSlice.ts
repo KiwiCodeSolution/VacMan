@@ -14,7 +14,8 @@ const initialState = {
   name: '',
   email: '',
   token: '',
-  firstTime: true,
+  onBoarding: true,
+  isLoading: true,
   profile: {
     phoneNumber: '',
     position: '',
@@ -28,12 +29,15 @@ const userSlice = createSlice({
     setIsAuth(state, action: PayloadAction<boolean>) {
       state.isAuth = action.payload;
     },
-    setFirstTime(state, action: PayloadAction<boolean>) {
-      state.firstTime = action.payload;
+    setOnBoarding(state, action: PayloadAction<boolean>) {
+      state.onBoarding = action.payload;
+    },
+    setIsLoading(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload;
     },
   },
 });
 
 export const selectIsAuth = (state: RootState) => state.user.isAuth; // а нахрена это ? <Sander-Pod>
-export const { setIsAuth, setFirstTime } = userSlice.actions;
+export const { setIsAuth, setOnBoarding, setIsLoading } = userSlice.actions;
 export default userSlice.reducer;
