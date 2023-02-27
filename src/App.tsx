@@ -2,6 +2,8 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
+// pages & components
+import OnBoarding from './pages/onBoarding';
 import LogInPage from './pages/login';
 import Welcome from './pages/welcome';
 import SignUpPage from './pages/signup';
@@ -11,9 +13,9 @@ import ConfirmPassPage from './pages/confirmPass';
 import NotFound from './pages/notfound';
 import PrivateRout from './hocs/PrivateRoute';
 
-function App() {
+const App = () => {
   const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector(state => state.user);
+  const { isAuth, firstTime } = useAppSelector(state => state.user);
 
   useEffect(() => {
     console.log("isAuth", isAuth);
@@ -21,6 +23,8 @@ function App() {
   }, [dispatch, isAuth])
 
   return (
+    firstTime ? <Routes><Route path="/" element={<OnBoarding />} /></Routes> :
+
     <Routes>
       <Route path="/" element={<PrivateRout isAuth={isAuth}><Main /></PrivateRout>} />
       <Route path="/welcome" element={<Welcome />} />
