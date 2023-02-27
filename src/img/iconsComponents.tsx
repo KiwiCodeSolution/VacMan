@@ -1,4 +1,4 @@
-export function Rubber() {
+export const Rubber = () => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -7,8 +7,8 @@ export function Rubber() {
       />
     </svg>
   );
-}
-export function Eye(props: { fill?: string; cross?: boolean }) {
+};
+export const Eye = (props: { fill?: string; cross?: boolean }) => {
   const { cross, fill = 'none' } = props;
   return (
     <svg
@@ -27,8 +27,8 @@ export function Eye(props: { fill?: string; cross?: boolean }) {
       {cross && <path d="M4 4L20 20" />}
     </svg>
   );
-}
-export function SuitMan() {
+};
+export const SuitMan = () => {
   return (
     <svg fill="orange" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 48 48" version="1.1">
       <path d="M 24 18.945312 C 29.222656 18.945312 33.472656 14.695312 33.472656 9.472656 C 33.472656 4.25 29.222656 0 24 0 C 18.777344 0 14.53125 4.25 14.53125 9.472656 C 14.53125 14.695312 18.777344 18.945312 24 18.945312 Z M 24 18.945312 " />
@@ -36,4 +36,4 @@ export function SuitMan() {
       <path d="M 26.144531 22.402344 C 25.917969 22.15625 25.585938 22.03125 25.25 22.03125 L 22.75 22.03125 C 22.414062 22.03125 22.082031 22.15625 21.855469 22.402344 C 21.503906 22.785156 21.453125 23.335938 21.703125 23.769531 L 23.039062 25.785156 L 22.414062 31.070312 L 23.648438 34.351562 C 23.765625 34.679688 24.234375 34.679688 24.355469 34.351562 L 25.585938 31.070312 L 24.960938 25.785156 L 26.296875 23.769531 C 26.546875 23.335938 26.496094 22.785156 26.144531 22.402344 Z M 26.144531 22.402344 " />
     </svg>
   );
-}
+};
