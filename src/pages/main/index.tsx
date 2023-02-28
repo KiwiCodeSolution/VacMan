@@ -1,10 +1,9 @@
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { useAppDispatch } from '../../hooks/reduxHooks';
 import { setIsAuth } from '../../redux/userSlice';
 import * as Icons from '../../img/iconsComponents';
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const { onBoarding } = useAppSelector(state => state.user);
 
   return (
     <div className="container mx-auto px-4">
