@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../hooks/reduxHooks';
-import { setIsAuth } from '../redux/userSlice';
+import { setIsAuth, setUser } from '../redux/userSlice';
 
 const URL = 'http://localhost:3030/auth/emailVerify';
 
@@ -21,10 +21,11 @@ const ConfirmEmailPage = () => {
     fetch(`${URL}?token=${token}`, { method: 'GET' })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        console.log(data.user);
+        dispatch(setUser(data.user));
         setConfirmed(true);
-      });
-    // .catch((error: { message: any; }) => console.log('error:', error.message))
+      })
+      .catch((error: { message: unknown }) => console.log('error:', error.message));
   }, [dispatch, token]);
 
   // if response "ok" -> dispatch(setUser(data)), setConfirmed(true)

@@ -22,9 +22,8 @@ const App = () => {
   useEffect(() => {
     console.log("isAuth", isAuth);
     // if (token && !isAuth) dispatch(auth.getCurrentUser());
+    setTimeout(() => dispatch(setIsLoading(false)), 3000); // App Logo
   }, [dispatch, isAuth])
-
-  setTimeout(() => dispatch(setIsLoading(false)), 3000); // App Logo
 
   return (
     isLoading ? <StartingPage /> :
