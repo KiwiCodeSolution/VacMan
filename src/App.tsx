@@ -13,7 +13,7 @@ import SignUpPage from './pages/signup';
 import RestorePassPage from './pages/restorePass';
 import ConfirmPassPage from './pages/confirmPass';
 import NotFound from './pages/notfound';
-import PrivateRout from './hocs/PrivateRoute';
+import { PrivateRoute, RedirectRoute } from './hocs/PrivateRoute';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -29,13 +29,13 @@ const App = () => {
   return (
     isLoading ? <StartingPage /> :
     <Routes>
-      <Route path="/" element={<PrivateRout isAuth={isAuth}><Entrance /></PrivateRout>} />
-      <Route path="/welcome" element={<Welcome />} />
-      <Route path="/login" element={<LogInPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/restorePass" element={<RestorePassPage />} />
-      <Route path="/confirmPass" element={<ConfirmPassPage />} />
-      <Route path="/confirmEmail/:code" element={<ConfirmEmailPage />} />
+      <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>} />
+      <Route path="/welcome" element={<RedirectRoute ><Welcome /></RedirectRoute>} />
+      <Route path="/login" element={<RedirectRoute ><LogInPage /></RedirectRoute>} />
+      <Route path="/signup" element={<RedirectRoute><SignUpPage /></RedirectRoute>} />
+      <Route path="/restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
+      <Route path="/confirmPass" element={<RedirectRoute><ConfirmPassPage /></RedirectRoute>} />
+      <Route path="/confirmEmail/:token" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
