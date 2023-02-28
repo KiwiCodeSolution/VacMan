@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { setIsAuth, setUser } from '../redux/userSlice';
 
-const URL = 'http://localhost:3030/auth/emailVerify';
+// const URL = 'http://localhost:3030/auth/emailVerify';
+const URL = 'http://kiwicode.tech:5000/auth/emailVerify';
 
 const ConfirmEmailPage = () => {
   const { token } = useParams();
