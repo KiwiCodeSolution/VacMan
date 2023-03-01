@@ -34,7 +34,7 @@ const App = () => {
       <Route path="/signup" element={<RedirectRoute><SignUpPage /></RedirectRoute>} />
       <Route path="/restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
       <Route path="/confirmPass" element={<RedirectRoute><ConfirmPassPage /></RedirectRoute>} />
-      <Route path="/confirmEmail/:token" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
+      <Route path="/confirm_email/:token" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
