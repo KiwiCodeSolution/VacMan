@@ -17,7 +17,7 @@ import { PrivateRoute, RedirectRoute } from './hocs/PrivateRoute';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { isAuth, isLoading, token } = useAppSelector(state => state.user);
+  const { isAuth, isLoading } = useAppSelector(state => state.user);
 
   useEffect(() => {
     console.log("isAuth", isAuth);
