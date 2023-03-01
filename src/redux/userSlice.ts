@@ -1,35 +1,45 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
 
-// interface IisAuth {
-//   isAuth: boolean;
-//   name: string;
-//   email: string;
-//   token: string;
-//   profile: { [key: string]: string };
-// }
+interface IUser {
+  email: string;
+  token: string;
+  isAuth: boolean;
+  onBoarding: true;
+  isLoading: true;
+  profile: { [key: string]: string };
+}
 
 const initialState = {
-  isAuth: false,
-  name: '',
   email: '',
   token: '',
-  profile: {
-    phoneNumber: '',
-    position: '',
-  },
+  isAuth: false,
+  onBoarding: true,
+  isLoading: true,
+  profile: {},
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setIsAuth(state, action: PayloadAction<boolean>) {
-      state.isAuth = action.payload;
+    setIsAuth(state, { payload }: PayloadAction<boolean>) {
+      state.isAuth = payload;
+    },
+    setOnBoarding(state, { payload }: PayloadAction<boolean>) {
+      state.onBoarding = payload;
+    },
+    setIsLoading(state, { payload }: PayloadAction<boolean>) {
+      state.isLoading = payload;
+    },
+    setUser(state, { payload }: PayloadAction<IUser>) {
+      state.email = payload.email;
+      state.token = payload.token;
+      state.profile = payload.profile;
     },
   },
 });
 
-export const selectIsAuth = (state: RootState) => state.user.isAuth;
-export const { setIsAuth } = userSlice.actions;
+export const selectIsAuth = (state: RootState) => state.user.isAuth; // а нахрена это ? <Sander-Pod>
+export const { setIsAuth, setOnBoarding, setIsLoading, setUser } = userSlice.actions;
 export default userSlice.reducer;

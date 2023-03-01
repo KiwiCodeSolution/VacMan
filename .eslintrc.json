@@ -21,6 +21,13 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
 
   "rules": {
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": ["function-declaration", "function-expression", "arrow-function"],
+        "unnamedComponents": ["arrow-function", "function-expression", "arrow-function"]
+      }
+    ],
     "react/button-has-type": 0,
     "react/require-default-props": [0, {
       "ignoreFunctionalComponent": true

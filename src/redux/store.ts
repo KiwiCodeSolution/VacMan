@@ -11,13 +11,12 @@ const store = configureStore({
     user: persistedUserReducer,
     // vacancies: persistedVacancy
   },
-  middleware: getDefaultMiddleware => [
-    ...getDefaultMiddleware({
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
       serializableCheck: {
         ignoreActions: true,
       },
     }),
-  ],
 });
 
 const persistor = persistStore(store);

@@ -1,13 +1,16 @@
 import { Navigate } from 'react-router-dom';
+import { useAppSelector } from '../hooks/reduxHooks';
 
 interface IPrivateRoute {
   children: JSX.Element;
-  isAuth: boolean;
 }
 
-export default function PrivateRout({ children, isAuth }: IPrivateRoute) {
-  if (isAuth) {
-    return children;
-  }
-  return <Navigate to="/welcome" />;
-}
+export const PrivateRoute = ({ children }: IPrivateRoute) => {
+  const { isAuth } = useAppSelector(state => state.user);
+  return isAuth ? children : <Navigate to="/welcome" />;
+};
+
+export const RedirectRoute = ({ children }: IPrivateRoute) => {
+  const { isAuth } = useAppSelector(state => state.user);
+  return isAuth ? <Navigate to="/" /> : children;
+};
