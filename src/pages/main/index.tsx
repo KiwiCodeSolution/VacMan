@@ -1,6 +1,7 @@
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { setIsAuth } from '../../redux/userSlice';
 import * as Icons from '../../img/iconsComponents';
+import AddBtn from '../../components/addBtn';
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ export default function Main() {
         <Icons.MenuSettings />
         <Icons.MenuSettings active />
       </div>
+      <AddBtn />
     </div>
   );
 }
