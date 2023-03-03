@@ -17,7 +17,7 @@ import { PrivateRoute, RedirectRoute } from './hocs/PrivateRoute';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { isAuth, isLoading, token } = useAppSelector(state => state.user);
+  const { isAuth, isLoading } = useAppSelector(state => state.user);
 
   useEffect(() => {
     console.log("isAuth", isAuth);
@@ -34,7 +34,7 @@ const App = () => {
       <Route path="/signup" element={<RedirectRoute><SignUpPage /></RedirectRoute>} />
       <Route path="/restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
       <Route path="/confirmPass" element={<RedirectRoute><ConfirmPassPage /></RedirectRoute>} />
-      <Route path="/confirmEmail/:token" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
+      <Route path="/confirm_email/:token" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
