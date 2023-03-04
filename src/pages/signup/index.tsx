@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import './styles.css';
 
 const token = '1677595510238';

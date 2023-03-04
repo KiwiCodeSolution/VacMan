@@ -1,4 +1,4 @@
-import * as Icons from '../img/iconsComponents';
+import * as Icons from './iconsComponents';
 
 const AddBtn = () => (
   <span className="relative flex h-14 w-14">
