@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { setIsAuth } from '../../redux/userSlice';
-import * as Icons from '../../img/iconsComponents';
+import * as Icons from '../../components/iconsComponents';
 import AddBtn from '../../components/addBtn';
 
 export default function Main() {
