@@ -2,7 +2,7 @@
   @apply flex gap-4
 }
 .dots__item {
-  @apply w-4 h-4 rounded-full bg-[#5b5b69];
+  @apply w-4 h-4 rounded-full bg-bg-grey;
 }
 
 .dots__item_active {
