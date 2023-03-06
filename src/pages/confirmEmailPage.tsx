@@ -10,7 +10,6 @@ const URL = 'https://vacmanserver-production.up.railway.app/auth/emailVerify';
 const ConfirmEmailPage = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
-  console.log('params:', token);
   const [confirmed, setConfirmed] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
