@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useAppDispatch } from '../hooks/reduxHooks';
-
-import { setOnBoarding } from '../redux/userSlice';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { setOnBoarding } from '../../redux/userSlice';
+import * as Icons from '../../img/iconsComponents';
+import Dots from '../../components/ui/dots';
 
 const text = [
   'We can help you organize your job search',
@@ -22,26 +23,29 @@ const OnBoarding = () => {
   };
 
   return (
-    <>
+    <div className="container mx-auto px-4">
       <button type="button" onClick={goBack}>
-        [ Go back ]
+        <Icons.ArrowBack />
+        {/* [ Go back ] */}
       </button>
       <button type="button" onClick={() => dispatch(setOnBoarding(false))}>
         [ Skip ]
+        <Icons.ArrowForward white />
       </button>
       <h2>onBoarding page</h2>
       <p>{text[onBoardingPage - 1]}</p>
+      <Dots amount={4} activeIndex={onBoardingPage - 1} />
       {/* position bar */}
       {onBoardingPage < 4 ? (
         <button type="button" onClick={goNext}>
-          [ Next ]
+          [ Next ]<Icons.ArrowForward />
         </button>
       ) : (
         <button type="button" onClick={() => dispatch(setOnBoarding(false))}>
           [ Lets Start ]
         </button>
       )}
-    </>
+    </div>
   );
 };
 
