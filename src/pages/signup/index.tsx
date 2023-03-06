@@ -1,6 +1,7 @@
 import './styles.css';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTA4NTI5ZjFiNjk5YjQyYTdiZTY2NyIsImlhdCI6MTY3NjU1MTAwOX0.e-quTDPC3_tAlXj56KhZ173OraK6M18fYZD8LSfd32c';
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTA4NTI5ZjFiNjk5YjQyYTdiZTY2NyIsImlhdCI6MTY3NjU1MTAwOX0.e-quTDPC3_tAlXj56KhZ173OraK6M18fYZD8LSfd32c';
 export default function SignUpPage() {
   return (
     <div className="container mx-auto px-4">
