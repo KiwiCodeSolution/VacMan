@@ -1,0 +1,10 @@
+.onboarding__wrapper {
+  @apply flex gap-2;
+  justify-content: space-between;
+}
+
+.onboarding__button_wrapper {
+  @apply flex gap-2;
+  justify-content: space-between;
+  align-items: center;
+}
