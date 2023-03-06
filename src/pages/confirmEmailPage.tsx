@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { setIsAuth, setUser } from '../redux/userSlice';
 
@@ -8,8 +8,8 @@ import { setIsAuth, setUser } from '../redux/userSlice';
 const URL = 'https://vacmanserver-production.up.railway.app/auth/emailVerify';
 
 const ConfirmEmailPage = () => {
-  const { token } = useParams();
-  console.log('params:', token);
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
   const [confirmed, setConfirmed] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
