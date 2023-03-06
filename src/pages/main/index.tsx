@@ -14,9 +14,7 @@ export default function Main() {
           <h2 className="p-2">Hello user!</h2>
         </li>
         <li className="flex odd:bg-gray-200 even:bg-orange-200 last:ml-20">
-          <div className="rotate-45">
-            <Icons.Eye />
-          </div>
+          <Icons.Eye />
           <button className="p-2" type="button" onClick={() => dispatch(setIsAuth(false))}>
             LogOUT
           </button>

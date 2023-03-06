@@ -9,6 +9,7 @@ const URL = 'https://vacmanserver-production.up.railway.app/auth/emailVerify';
 
 const ConfirmEmailPage = () => {
   const { token } = useParams();
+  console.log('params:', token);
   const [confirmed, setConfirmed] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const ConfirmEmailPage = () => {
       <h2>Email confirmation</h2>
       <div className="mt-20">{/* icon ok */}</div>
       {confirmed ? <p>Congratulations registration succesful</p> : <p>Email confirmation false ...</p>}
-      <button className="mt-20 bg-gray-200" onClick={goToHomePage}>
+      <button className="mt-20 bg-bg-grey" onClick={goToHomePage}>
         [ START ]
       </button>
     </>
