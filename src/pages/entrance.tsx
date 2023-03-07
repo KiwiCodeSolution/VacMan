@@ -1,6 +1,6 @@
 import { useAppSelector } from '../hooks/reduxHooks';
 import Main from './main';
-import OnBoarding from './onBoarding';
+import OnBoarding from './onBoarding/onBoarding';
 
 const Entrance = () => {
   const { onBoarding } = useAppSelector(state => state.user);

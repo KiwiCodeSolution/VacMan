@@ -1,10 +1,11 @@
-.dots{
-  @apply flex gap-4
+.dots {
+  @apply flex gap-4;
+  align-items: center;
 }
 .dots__item {
   @apply w-4 h-4 rounded-full bg-bg-grey;
 }
 
 .dots__item_active {
-  @apply bg-[#f0be6c]
+  @apply w-6 h-6 bg-[#f0be6c];
 }
