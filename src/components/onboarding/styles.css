@@ -1,10 +1,60 @@
+.onboarding__container {
+  @apply flex mx-auto  w-[22.5rem] h-[45rem];
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.onboarding__container_first-step {
+  @apply bg-[url('../../img/images/onboarding_step_1.png')] bg-no-repeat;
+}
+
+.onboarding__container_second-step {
+  @apply bg-[url('../../img/images/onboarding_step_2.png')] bg-no-repeat;
+}
+
+.onboarding__container_third-step {
+  @apply bg-[url('../../img/images/onboarding_step_3.png')] bg-no-repeat;
+}
+
+.onboarding__container_fourth-step {
+  @apply bg-[url('../../img/images/onboarding_step_4.png')] bg-no-repeat;
+}
+
 .onboarding__wrapper {
-  @apply flex gap-2;
+  @apply flex;
   justify-content: space-between;
 }
 
 .onboarding__button_wrapper {
-  @apply flex gap-2;
+  @apply flex gap-1;
   justify-content: space-between;
   align-items: center;
+}
+
+.onboarding__content {
+  @apply px-4 w-[100%] h-[22rem] pt-16 pb-[72px] bottom-0;
+}
+
+.onboarding__content_firstbg {
+  @apply bg-[url('../../img/images/onboarding_1_white.png')];
+}
+
+.onboarding__content_secondbg {
+  @apply bg-[url('../../img/images/onboarding_2_white.png')];
+}
+
+.onboarding__content_wrapper {
+  @apply mt-4 text-xl text-[#5B5B69];
+}
+
+.onboarding__content_title {
+  @apply font-medium text-4xl text-[#040C0C];
+}
+
+.onboarding__button_start {
+  @apply w-36 h-12 bg-[#040C0C] rounded-xl;
+}
+
+.onboarding__button_wrapper-text {
+  @apply text-base text-white font-semibold;
 }
