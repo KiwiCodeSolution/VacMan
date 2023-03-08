@@ -28,24 +28,24 @@ const Onboarding = () => {
       ? 'onboarding__content_firstbg'
       : 'onboarding__content_secondbg';
 
-  let currentImage = `onboarding__container_first-step`;
+  const currentImage = `../../img/images/onboarding_step_${onBoardingPage}.png`;
 
-  switch (onBoardingPage) {
-    case 2:
-      currentImage = `onboarding__container_second-step`;
-      break;
-    case 3:
-      currentImage = `onboarding__container_third-step`;
-      break;
-    case 4:
-      currentImage = `onboarding__container_fourth-step`;
-      break;
-    default:
-      currentImage = `onboarding__container_first-step`;
-  }
+  // switch (onBoardingPage) {
+  //   case 2:
+  //     currentImage = `onboarding__container_second-step`;
+  //     break;
+  //   case 3:
+  //     currentImage = `onboarding__container_third-step`;
+  //     break;
+  //   case 4:
+  //     currentImage = `onboarding__container_fourth-step`;
+  //     break;
+  //   default:
+  //     currentImage = `onboarding__container_first-step`;
+  // }
 
   return (
-    <div className={`onboarding__container ${currentImage}`}>
+    <div className={`onboarding__container bg-[url(${currentImage})]`}>
       <div className="onboarding__wrapper py-5 px-4">
         <button type="button" onClick={goBack}>
           <Icons.ArrowBack white />
@@ -54,7 +54,7 @@ const Onboarding = () => {
           <span className="onboarding__button_wrapper-text">Skip</span> <Icons.ArrowForward white />
         </button>
       </div>
-      <div className={`onboarding__content ${currentBackground}`}>
+      <div className={`onboarding__content  ${currentBackground}`}>
         <h2 className="onboarding__content_title">onBoarding page</h2>
         <p className="onboarding__content_wrapper">{text[onBoardingPage - 1]}</p>
 

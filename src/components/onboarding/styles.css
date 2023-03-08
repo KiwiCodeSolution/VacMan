@@ -56,5 +56,5 @@
 }
 
 .onboarding__button_wrapper-text {
-  @apply text-base text-white font-semibold;
+  @apply text-base text-txt-white font-semibold;
 }
