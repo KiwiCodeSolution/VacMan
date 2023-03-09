@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useAppDispatch } from '../../hooks/reduxHooks';
-import { setOnBoarding } from '../../redux/userSlice';
-import * as Icons from '../../img/iconsComponents';
+import { useAppDispatch } from 'hooks/reduxHooks';
+import { setOnBoarding } from 'redux/userSlice';
+import * as Icons from '../iconsComponents';
 import Dots from '../ui/dots';
 import './styles.css';
 
