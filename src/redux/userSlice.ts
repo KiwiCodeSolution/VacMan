@@ -5,8 +5,8 @@ interface IUser {
   email: string;
   token: string;
   isAuth: boolean;
-  onBoarding: true;
-  isLoading: true;
+  onBoarding: boolean;
+  isLoading: boolean;
   profile: { [key: string]: string };
 }
 

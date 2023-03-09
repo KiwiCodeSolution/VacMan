@@ -1,6 +1,7 @@
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { setIsAuth } from '../../redux/userSlice';
-import * as Icons from '../../img/iconsComponents';
+import * as Icons from '../../components/iconsComponents';
+import AddBtn from '../../components/addBtn';
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -17,7 +18,7 @@ export default function Main() {
           <button className="p-2" type="button" onClick={() => dispatch(setIsAuth(false))}>
             LogOUT
           </button>
-          <Icons.Eye cross fill="blue" />
+          <Icons.Eye cross />
         </li>
       </ul>
       <p className="mt-4">
@@ -25,6 +26,28 @@ export default function Main() {
         vitae corrupti esse assumenda sunt, labore culpa enim non tempore nulla quam distinctio praesentium doloremque!
         Harum!
       </p>
+      <div className="flex bg-gray-200">
+        <Icons.Todos />
+        <Icons.Funnel />
+        <Icons.Bell />
+        <Icons.ArrowBack />
+        <Icons.ArrowBack white />
+        <Icons.ArrowForward />
+        <Icons.ArrowForward white />
+        <Icons.Star fill />
+        <Icons.Star />
+        <Icons.Question />
+        <Icons.Clock />
+        <Icons.MenuHome />
+        <Icons.MenuHome active />
+        <Icons.MenuTask />
+        <Icons.MenuTask active />
+        <Icons.MenuCalendar />
+        <Icons.MenuCalendar active />
+        <Icons.MenuSettings />
+        <Icons.MenuSettings active />
+      </div>
+      <AddBtn />
     </div>
   );
 }
