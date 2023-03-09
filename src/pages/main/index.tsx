@@ -2,6 +2,7 @@ import { useAppDispatch } from '../../hooks/reduxHooks';
 import { setIsAuth } from '../../redux/userSlice';
 import * as Icons from '../../components/iconsComponents';
 import AddBtn from '../../components/addBtn';
+import OnBoarding from '../onBoarding/onBoarding';
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ export default function Main() {
         <Icons.MenuSettings active />
       </div>
       <AddBtn />
+      <OnBoarding />
     </div>
   );
 }
