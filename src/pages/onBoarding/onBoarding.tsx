@@ -3,7 +3,6 @@ import { useAppDispatch } from '../../hooks/reduxHooks';
 import { setOnBoarding } from '../../redux/userSlice';
 import * as Icons from '../../components/iconsComponents';
 import Dots from '../../components/ui/dots';
-import './styles.css';
 
 interface IimageUrl {
   [key: number]: string;
