@@ -7,7 +7,8 @@ import RegisterForm from '../../components/forms/RegisterForm';
 import './styles.css';
 
 // const serverURL = 'http://kiwicode.tech:5000';
-const serverURL = 'http://localhost:3030';
+const serverURL = 'https://vacmanserver-production.up.railway.app';
+// const serverURL = 'http://localhost:3030';
 
 const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTA4NTI5ZjFiNjk5YjQyYTdiZTY2NyIsImlhdCI6MTY3NjU1MTAwOX0.e-quTDPC3_tAlXj56KhZ173OraK6M18fYZD8LSfd32c';

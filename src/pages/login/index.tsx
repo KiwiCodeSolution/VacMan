@@ -10,7 +10,8 @@ import getGoogleUserData from '../../utilities/googleUserData';
 import './styles.css';
 
 // const serverURL = 'http://kiwicode.tech:5000';
-const serverURL = 'http://localhost:3030';
+const serverURL = 'https://vacmanserver-production.up.railway.app';
+// const serverURL = 'http://localhost:3030';
 
 export default function LogInPage() {
   const dispatch = useAppDispatch();
