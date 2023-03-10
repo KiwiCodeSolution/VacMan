@@ -6,16 +6,20 @@ type CustomInputProps = FieldHookConfig<string> & {
 };
 
 function CustomInput(props: CustomInputProps): ReactElement {
-  const [field, meta] = useField(props);
+  const [field, meta, helpers] = useField(props);
   const [isPasswordShown, setIsPasswordShown] = useState(false);
+
+  const { name, id, placeholder, type, label } = props;
+  const { value, onBlur, onChange } = field;
+  const { touched, error } = meta;
 
   function togglePasswordShow(): void {
     setIsPasswordShown((prevState: boolean): boolean => !prevState);
   }
 
-  const { name, id, placeholder, type, label } = props;
-  const { value, onBlur, onChange } = field;
-  const { touched, error } = meta;
+  function clearField(): void {
+    helpers.setValue('', false);
+  }
 
   const isPasswordField: boolean = type === 'password';
 
@@ -34,13 +38,17 @@ function CustomInput(props: CustomInputProps): ReactElement {
           autoComplete="off"
           style={{ border: '1px solid black' }}
         />
-        {isPasswordField && (
+        {isPasswordField ? (
           <button
             type="button"
             onClick={(): void => togglePasswordShow()}
             style={{ border: '1px solid black', marginLeft: '10px' }}
           >
             {isPasswordShown ? 'hide' : 'show'}
+          </button>
+        ) : (
+          <button type="button" onClick={clearField} style={{ border: '1px solid black', marginLeft: '10px' }}>
+            clear
           </button>
         )}
       </div>
