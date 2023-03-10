@@ -36,7 +36,7 @@ const RegisterForm: FC = (): ReactElement => {
           />
 
           <button type="submit" style={{ border: '1px solid black', marginTop: '16px' }}>
-            done
+            REGISTER
           </button>
         </form>
       )}
