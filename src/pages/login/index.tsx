@@ -23,9 +23,12 @@ export default function LogInPage() {
   const googleRegister = useGoogleLogin({
     onSuccess: async (resp) => {
       const userData = await getGoogleUserData(resp.access_token);
-      console.log(userData);
       const { data } = await axios.post(`${serverURL}/auth/googleAuth`, { userData });
-      console.log('data from server:', data);
+      if (!data) {
+        console.log('Error from server');
+        return;
+      }
+      // console.log('data from server:', data);
       dispatch(setUser(data));
       dispatch(setIsAuth(true));
     },
