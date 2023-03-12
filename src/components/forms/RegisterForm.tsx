@@ -22,7 +22,7 @@ const RegisterForm: FC = (): ReactElement => {
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     console.log('Form was submitted.');
     console.log('values: ', values);
-    dispatch(registration({ ...values, username: 'Evochka' }));
+    dispatch(registration(values));
     resetForm();
   };
 
