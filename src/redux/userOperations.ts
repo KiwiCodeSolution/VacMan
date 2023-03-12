@@ -8,11 +8,18 @@ axios.defaults.baseURL = 'http://localhost:3001';
 interface IUser {
   email: string;
   token: string;
-  isAuth: boolean;
-  onBoarding: boolean;
-  isLoading: boolean;
   profile: { [key: string]: string };
 }
+
+interface ICurrentUser {
+  email: string;
+  token: string;
+  profile: { [key: string]: string };
+}
+
+// interface IState {
+//   user: { [key: string]: string };
+// }
 
 const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -65,35 +72,47 @@ export const logOut = createAsyncThunk<boolean, boolean, { rejectValue: string }
   }
 );
 
-export const currentUser = createAsyncThunk<IUser, undefined, { rejectValue: string }>(
+export const currentUser = createAsyncThunk<ICurrentUser, undefined, { rejectValue: string }>(
   'user/current',
-  // eslint-disable-next-line consistent-return
   async (_, { rejectWithValue, getState }) => {
     const state = getState();
-    if (typeof state === 'object' && state !== null) {
-      const persistedToken = state.user.token;
+    console.log(state);
+    const persistedToken = state.user.token;
 
-      if (persistedToken === null) {
-        return rejectWithValue('Unable to fetch user');
-      }
-      const response = await axios.get(`/auth/current`);
-
-      if (!response) {
-        return rejectWithValue('Server error.');
-      }
-      console.log(response.data);
-      return response.data;
+    if (persistedToken === null) {
+      return rejectWithValue('Unable to fetch user');
     }
+
+    setAuthHeader(persistedToken);
+
+    const response = await axios.get(`/auth/current`);
+
+    if (!response) {
+      return rejectWithValue('Server error.');
+    }
+    console.log(response.data);
+    return response.data;
   }
 );
 
-export const emailVerify = createAsyncThunk('user/emailVerify', async (_, thunkAPI) => {
-  try {
-    // setAuthHeader();
-    const res = await axios.get('/auth/emailVerify');
-    return res.data;
-  } catch (error) {
-    console.log('Please, try one more');
-    return thunkAPI.rejectWithValue(error);
+export const emailVerify = createAsyncThunk<ICurrentUser, undefined, { rejectValue: string }>(
+  'user/emailVerify',
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState();
+    console.log(state);
+    const persistedToken = state.user.token;
+
+    if (persistedToken === null) {
+      return rejectWithValue('Unable to fetch user');
+    }
+
+    setAuthHeader(persistedToken);
+
+    const response = await axios.get('/auth/emailVerify');
+    console.log(response);
+    if (!response) {
+      return rejectWithValue('Server error.');
+    }
+    return response.data;
   }
-});
+);
