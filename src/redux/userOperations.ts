@@ -12,9 +12,9 @@ interface IUser {
   profile: { [key: string]: string };
 }
 
-const setAuthHeader = (responsToken) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${responsToken}`;
-};
+// const setAuthHeader = (responsToken) => {
+//   axios.defaults.headers.common.Authorization = `Bearer ${responsToken}`;
+// };
 
 // const clearAuthHeader = () => {
 //   axios.defaults.headers.common.Authorization = '';
@@ -27,7 +27,7 @@ export const registration = createAsyncThunk<IUser[], undefined, { rejectValue: 
     try {
       const response = await axios.post('/auth/register', credentials);
       const responsToken = response.data.token;
-      setAuthHeader(responsToken);
+      //   setAuthHeader(responsToken);
       console.log('Congratulations! You are registered!');
 
       return response.data;
@@ -52,7 +52,7 @@ export const logIn = createAsyncThunk('user/login', async (credentials, thunkAPI
 
 export const logOut = createAsyncThunk('user/logout', async (_, thunkAPI) => {
   try {
-    setAuthHeader();
+    // setAuthHeader();
     const res = await axios.get('/auth/logout');
     return res.data;
   } catch (error) {
@@ -63,7 +63,7 @@ export const logOut = createAsyncThunk('user/logout', async (_, thunkAPI) => {
 
 export const currentUser = createAsyncThunk('user/current', async (_, thunkAPI) => {
   try {
-    setAuthHeader();
+    // setAuthHeader();
     const res = await axios.get('/auth/current');
     return res.data;
   } catch (error) {
@@ -75,7 +75,7 @@ export const currentUser = createAsyncThunk('user/current', async (_, thunkAPI) 
 
 export const emailVerify = createAsyncThunk('user/emailVerify', async (_, thunkAPI) => {
   try {
-    setAuthHeader();
+    // setAuthHeader();
     const res = await axios.get('/auth/emailVerify');
     return res.data;
   } catch (error) {
