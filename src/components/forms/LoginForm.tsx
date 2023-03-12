@@ -26,7 +26,13 @@ const LoginForm: FC = (): ReactElement => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handelFormSubmit} validationSchema={loginSchema}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handelFormSubmit}
+      validationSchema={loginSchema}
+      validateOnBlur={false}
+      validateOnChange={false}
+    >
       {({ handleSubmit }: FormikProps<Values>) => (
         <form onSubmit={handleSubmit}>
           <CustomInput name="email" label="Email" placeholder="Type email" id="email" type="email" />
