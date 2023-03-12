@@ -43,18 +43,17 @@ export const logIn = createAsyncThunk<IUser, { email: string; password: string }
     const response = await axios.post('/auth/login', credentials);
     setAuthHeader(response.data.token);
     console.log('Congratulations! You are logined!');
-    console.log(response.data);
+    console.log(response.data.user);
     if (!response) {
       return rejectWithValue("Can't log in. Server error.");
     }
-    return response.data;
+    return response.data.user;
   }
 );
 
 export const logOut = createAsyncThunk<boolean, boolean, { rejectValue: string }>(
   'user/logout',
   async (_, { rejectWithValue }) => {
-    console.log('/auth/logout');
     const response = await axios.get('/auth/logout');
     console.log(response);
     if (!response) {
@@ -64,17 +63,27 @@ export const logOut = createAsyncThunk<boolean, boolean, { rejectValue: string }
   }
 );
 
-export const currentUser = createAsyncThunk('user/current', async (_, thunkAPI) => {
-  try {
-    // setAuthHeader();
-    const res = await axios.get('/auth/current');
-    return res.data;
-  } catch (error) {
-    console.log('Please, try one more');
-    //    return thunkAPI.rejectWithValue(error.message);
-    return thunkAPI.rejectWithValue(error);
+export const currentUser = createAsyncThunk<IUser, { token: string }, { rejectValue: string }>(
+  'user/current',
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState();
+    const persistedToken = state.user.token;
+
+    if (persistedToken === null) {
+      return rejectWithValue('Unable to fetch user');
+    }
+
+    setAuthHeader(persistedToken);
+
+    const response = await axios.get(`/auth/current`);
+
+    if (!response) {
+      return rejectWithValue('Server error.');
+    }
+    console.log(response.data);
+    return response.data;
   }
-});
+);
 
 export const emailVerify = createAsyncThunk('user/emailVerify', async (_, thunkAPI) => {
   try {
