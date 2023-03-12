@@ -3,8 +3,10 @@ import { Formik, FormikHelpers, FormikProps } from 'formik';
 import { InferType } from 'yup';
 
 import registerSchema from '../../validationSchemas/registerShema';
+import { useAppDispatch } from '../../hooks/reduxHooks';
 
 import CustomInput from './CustomInput';
+import { registration } from '../../redux/userOperations';
 
 type Values = InferType<typeof registerSchema>;
 
@@ -15,9 +17,12 @@ const initialValues: Values = {
 };
 
 const RegisterForm: FC = (): ReactElement => {
+  const dispatch = useAppDispatch();
+
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     console.log('Form was submitted.');
     console.log('values: ', values);
+    dispatch(registration({ ...values, username: 'Evochka' }));
     resetForm();
   };
 

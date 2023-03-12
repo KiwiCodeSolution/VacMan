@@ -23,7 +23,6 @@ const text = [
 ];
 
 const OnBoarding = () => {
-  console.log(text.length);
   const [onBoardingPage, setOnBoardingPage] = useState<number>(1);
   const dispatch = useAppDispatch();
 

@@ -1,7 +1,8 @@
 import { useAppDispatch } from '../../hooks/reduxHooks';
-import { setIsAuth } from '../../redux/userSlice';
+// import { setIsAuth } from '../../redux/userSlice';
 import * as Icons from '../../components/iconsComponents';
 import AddBtn from '../../components/addBtn';
+import { logOut } from '../../redux/userOperations';
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ export default function Main() {
         </li>
         <li className="flex odd:bg-gray-200 even:bg-orange-200 last:ml-20">
           <Icons.Eye />
-          <button className="p-2" type="button" onClick={() => dispatch(setIsAuth(false))}>
+          <button className="p-2" type="button" onClick={() => dispatch(logOut(false))}>
             LogOUT
           </button>
           <Icons.Eye cross />

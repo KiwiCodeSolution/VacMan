@@ -12,54 +12,57 @@ interface IUser {
   profile: { [key: string]: string };
 }
 
-// const setAuthHeader = (responsToken) => {
-//   axios.defaults.headers.common.Authorization = `Bearer ${responsToken}`;
-// };
+const setAuthHeader = (token: string) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
 
 // const clearAuthHeader = () => {
 //   axios.defaults.headers.common.Authorization = '';
 // };
 
-export const registration = createAsyncThunk<IUser[], undefined, { rejectValue: string }>(
-  'user/registration',
-  async (credentials, { rejectWithValue }) => {
-    console.log(credentials);
-    try {
-      const response = await axios.post('/auth/register', credentials);
-      const responsToken = response.data.token;
-      //   setAuthHeader(responsToken);
-      console.log('Congratulations! You are registered!');
+export const registration = createAsyncThunk<
+  IUser,
+  { email: string; password: string; username: string },
+  { rejectValue: string }
+>('user/registration', async (credentials, { rejectWithValue }) => {
+  const response = await axios.post('/auth/register', credentials);
+  //   const responsToken = response.data.token;
+  //   setAuthHeader(responsToken);
+  console.log('Congratulations! You are registered!');
+  console.log(response.data);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (!response) {
+    return rejectWithValue("Can't register. Server error.");
+  }
+  return response.data as IUser;
+});
 
-      return response.data;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.log(`Sorry, registration error: ${error.message}`);
-      return rejectWithValue(error.message);
+export const logIn = createAsyncThunk<IUser, { email: string; password: string }, { rejectValue: string }>(
+  'user/login',
+  async (credentials, { rejectWithValue }) => {
+    const response = await axios.post('/auth/login', credentials);
+    setAuthHeader(response.data.token);
+    console.log('Congratulations! You are logined!');
+    console.log(response.data);
+    if (!response) {
+      return rejectWithValue("Can't log in. Server error.");
     }
+    return response.data;
   }
 );
 
-export const logIn = createAsyncThunk('user/login', async (credentials, thunkAPI) => {
-  try {
-    const response = await axios.post('/auth/login', credentials);
-    // setAuthHeader(response.data.token);
-    return response.data;
-  } catch (error) {
-    console.log('Incorrect email or password. Please, try one more');
-    return thunkAPI.rejectWithValue(error);
+export const logOut = createAsyncThunk<boolean, boolean, { rejectValue: string }>(
+  'user/logout',
+  async (_, { rejectWithValue }) => {
+    console.log('/auth/logout');
+    const response = await axios.get('/auth/logout');
+    console.log(response);
+    if (!response) {
+      return rejectWithValue('Server error.');
+    }
+    return false;
   }
-});
-
-export const logOut = createAsyncThunk('user/logout', async (_, thunkAPI) => {
-  try {
-    // setAuthHeader();
-    const res = await axios.get('/auth/logout');
-    return res.data;
-  } catch (error) {
-    console.log('Please, try one more');
-    return thunkAPI.rejectWithValue(error);
-  }
-});
+);
 
 export const currentUser = createAsyncThunk('user/current', async (_, thunkAPI) => {
   try {
