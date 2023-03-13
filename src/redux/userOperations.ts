@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'http://localhost:3001';
-// axios.defaults.baseURL = 'http://kiwicode.tech:5000';
+// axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = 'http://kiwicode.tech:5000';
 // axios.defaults.baseURL = 'https://vacmanserver-production.up.railway.app';
 
 interface IUser {
