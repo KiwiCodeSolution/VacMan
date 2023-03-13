@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { currentUser, logIn, logOut, registration } from './userOperations';
+import { currentUser, emailVerify, logIn, logOut, registration } from './userOperations';
 
 interface IUser {
   email: string;
@@ -40,34 +41,39 @@ const userSlice = createSlice({
     },
   },
 
-  extraReducers: builder =>
+  extraReducers: (builder) =>
     builder
-      .addCase(registration.pending, state => state)
+      .addCase(registration.pending, (state) => state)
       .addCase(registration.fulfilled, (state, action) => {
         state.isAuth = action.payload;
       })
-      .addCase(registration.rejected, state => state)
-      .addCase(logIn.pending, state => state)
+      .addCase(registration.rejected, (state) => state)
+      .addCase(logIn.pending, (state) => state)
       .addCase(logIn.fulfilled, (state, action) => {
-        console.log('action.payload', action.payload);
         state.email = action.payload.email;
         state.profile = action.payload.profile;
         state.token = action.payload.token;
-      }) // eslint-disable-next-line prettier/prettier
-      .addCase(logIn.rejected, (state) => state) // eslint-disable-next-line prettier/prettier
+      })
+      .addCase(logIn.rejected, (state) => state)
       .addCase(logOut.pending, (state) => state)
       .addCase(logOut.fulfilled, (state, action) => {
         state.isAuth = action.payload;
-      }) // eslint-disable-next-line prettier/prettier
-      .addCase(logOut.rejected, (state) => state) // eslint-disable-next-line prettier/prettier
+      })
+      .addCase(logOut.rejected, (state) => state)
       .addCase(currentUser.pending, (state) => state)
       .addCase(currentUser.fulfilled, (state, action) => {
-        console.log('action.payload', action.payload);
         state.email = action.payload.email;
         state.profile = action.payload.profile;
         state.token = action.payload.token;
-      }) // eslint-disable-next-line prettier/prettier
-      .addCase(currentUser.rejected, (state) => state),
+      })
+      .addCase(currentUser.rejected, (state) => state)
+      .addCase(emailVerify.pending, (state) => state)
+      .addCase(emailVerify.fulfilled, (state, action) => {
+        state.email = action.payload.email;
+        state.profile = action.payload.profile;
+        state.token = action.payload.token;
+      })
+      .addCase(emailVerify.rejected, (state) => state),
 });
 
 export const selectIsAuth = (state: RootState) => state.user.isAuth; // а нахрена это ? <Sander-Pod>
