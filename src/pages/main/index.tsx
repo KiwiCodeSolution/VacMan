@@ -2,7 +2,7 @@ import { useAppDispatch } from '../../hooks/reduxHooks';
 // import { setIsAuth } from '../../redux/userSlice';
 import * as Icons from '../../components/iconsComponents';
 import AddBtn from '../../components/addBtn';
-import { currentUser, emailVerify, logOut } from '../../redux/userOperations';
+import { logOut } from '../../redux/userOperations';
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -49,12 +49,6 @@ export default function Main() {
         <Icons.MenuSettings active />
       </div>
       <AddBtn />
-      <button className="p-2" type="button" onClick={() => dispatch(currentUser())}>
-        currentUser
-      </button>
-      <button className="p-2" type="button" onClick={() => dispatch(emailVerify())}>
-        email
-      </button>
     </div>
   );
 }
