@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
+import { currentUser, logIn, logOut, registration } from './userOperations';
 
 interface IUser {
   email: string;
@@ -38,6 +39,36 @@ const userSlice = createSlice({
       state.profile = payload.profile;
     },
   },
+  // eslint-disable-next-line prettier/prettier
+  extraReducers: (builder) =>
+    builder
+      // eslint-disable-next-line prettier/prettier
+      .addCase(registration.pending, (state) => state)
+      .addCase(registration.fulfilled, (state, action) => {
+        state.isAuth = action.payload;
+      }) // eslint-disable-next-line prettier/prettier
+      .addCase(registration.rejected, (state) => state) // eslint-disable-next-line prettier/prettier
+      .addCase(logIn.pending, (state) => state)
+      .addCase(logIn.fulfilled, (state, action) => {
+        console.log('action.payload', action.payload);
+        state.email = action.payload.email;
+        state.profile = action.payload.profile;
+        state.token = action.payload.token;
+      }) // eslint-disable-next-line prettier/prettier
+      .addCase(logIn.rejected, (state) => state) // eslint-disable-next-line prettier/prettier
+      .addCase(logOut.pending, (state) => state)
+      .addCase(logOut.fulfilled, (state, action) => {
+        state.isAuth = action.payload;
+      }) // eslint-disable-next-line prettier/prettier
+      .addCase(logOut.rejected, (state) => state) // eslint-disable-next-line prettier/prettier
+      .addCase(currentUser.pending, (state) => state)
+      .addCase(currentUser.fulfilled, (state, action) => {
+        console.log('action.payload', action.payload);
+        state.email = action.payload.email;
+        state.profile = action.payload.profile;
+        state.token = action.payload.token;
+      }) // eslint-disable-next-line prettier/prettier
+      .addCase(currentUser.rejected, (state) => state),
 });
 
 export const selectIsAuth = (state: RootState) => state.user.isAuth; // а нахрена это ? <Sander-Pod>
