@@ -6,9 +6,9 @@ import { currentUser, emailVerify, logIn, logOut, registration } from './userOpe
 interface IUser {
   email: string;
   token: string;
-  isAuth: boolean;
-  onBoarding: boolean;
-  isLoading: boolean;
+  // isAuth: boolean;
+  // onBoarding: boolean;
+  // isLoading: boolean;
   profile: { [key: string]: string };
 }
 
@@ -18,6 +18,8 @@ const initialState = {
   isAuth: false,
   onBoarding: true,
   isLoading: true,
+  showStartingPage: true,
+  lang: "eng",
   profile: {},
 };
 
@@ -33,6 +35,12 @@ const userSlice = createSlice({
     },
     setIsLoading(state, { payload }: PayloadAction<boolean>) {
       state.isLoading = payload;
+    },
+    setShowStartingPage(state, { payload }: PayloadAction<boolean>) {
+      state.showStartingPage = payload;
+    },
+    setLang(state, { payload }: PayloadAction<"eng" | "ru" | "ukr">) {
+      state.lang = payload;
     },
     setUser(state, { payload }: PayloadAction<IUser>) {
       state.email = payload.email;
@@ -77,5 +85,5 @@ const userSlice = createSlice({
 });
 
 export const selectIsAuth = (state: RootState) => state.user.isAuth; // а нахрена это ? <Sander-Pod>
-export const { setIsAuth, setOnBoarding, setIsLoading, setUser } = userSlice.actions;
+export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setLang, setUser } = userSlice.actions;
 export default userSlice.reducer;

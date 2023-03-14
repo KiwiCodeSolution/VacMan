@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
 // pages & components
-import { setIsLoading } from './redux/userSlice';
+import { setShowStartingPage } from './redux/userSlice';
 import StartingPage from './pages/starting';
 import ConfirmEmailPage from './pages/confirmEmailPage';
 import Entrance from './pages/entrance';
@@ -17,16 +17,16 @@ import { PrivateRoute, RedirectRoute } from './hocs/PrivateRoute';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { isAuth, isLoading } = useAppSelector(state => state.user);
+  const { isAuth, showStartingPage } = useAppSelector(state => state.user);
 
   useEffect(() => {
-    console.log("isAuth", isAuth);
+
     // if (token && !isAuth) dispatch(auth.getCurrentUser());
-    setTimeout(() => dispatch(setIsLoading(false)), 3000); // App Logo
+    setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
   }, [dispatch, isAuth])
 
   return (
-    isLoading ? <StartingPage /> :
+    showStartingPage ? <StartingPage /> :
     <Routes>
       <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>} />
       <Route path="/welcome" element={<RedirectRoute ><Welcome /></RedirectRoute>} />
