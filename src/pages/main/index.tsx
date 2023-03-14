@@ -48,6 +48,33 @@ export default function Main() {
         <Icons.MenuSettings />
         <Icons.MenuSettings active />
       </div>
+      <br />
+      <div className="flex">
+        <Icons.FalseInCircle />
+        <Icons.OkInCircle />
+        <Icons.Phone />
+        <Icons.Position />
+        <Icons.Location />
+        <Icons.LinkedIn />
+        <Icons.Telegram />
+        <Icons.Facebook />
+        <Icons.Instagram />
+        <Icons.CompanyName />
+        <Icons.CompanyName archived />
+        <Icons.Position large />
+        <Icons.Position large archived />
+        <Icons.Stage />
+        <Icons.Stage archived />
+        <Icons.Salary />
+        <Icons.Salary archived />
+        <Icons.Star large />
+        <Icons.Star large fill />
+        <Icons.Color />
+        <Icons.Review />
+        <Icons.Notebook />
+        <Icons.Link />
+        <Icons.Link blue />
+      </div>
       <AddBtn />
     </div>
   );
