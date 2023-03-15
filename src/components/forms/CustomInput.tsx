@@ -1,6 +1,8 @@
 import { ReactElement, useState } from 'react';
 import { useField, FieldHookConfig } from 'formik';
 
+import { Rubber, Eye } from '../iconsComponents';
+
 type CustomInputProps = FieldHookConfig<string> & {
   label: string;
 };
@@ -42,13 +44,17 @@ function CustomInput(props: CustomInputProps): ReactElement {
           <button
             type="button"
             onClick={(): void => togglePasswordShow()}
-            style={{ border: '1px solid black', marginLeft: '10px' }}
+            style={{ width: '32px', height: '32px', border: '1px solid black', marginLeft: '10px' }}
           >
-            {isPasswordShown ? 'hide' : 'show'}
+            <Eye cross={!isPasswordShown} />
           </button>
         ) : (
-          <button type="button" onClick={clearField} style={{ border: '1px solid black', marginLeft: '10px' }}>
-            clear
+          <button
+            type="button"
+            onClick={clearField}
+            style={{ width: '32px', height: '32px', border: '1px solid black', marginLeft: '10px' }}
+          >
+            <Rubber />
           </button>
         )}
       </div>
