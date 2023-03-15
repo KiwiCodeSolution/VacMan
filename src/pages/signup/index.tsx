@@ -4,6 +4,7 @@ import useGoogleAuth from 'hooks/googleAuth';
 import RegisterForm from 'components/forms/RegisterForm';
 import Button from 'components/ui/button';
 import GoogleLogo from 'img/images/image 259.png';
+import Logo from 'components/ui/loader';
 import './styles.css';
 
 const token = '1677595510238';
@@ -12,13 +13,16 @@ export default function SignUpPage() {
   const googleAuth = useGoogleAuth();
 
   return (
-    <div className="container flex flex-col mx-auto px-4 h-screen">
-      <h1 className="text-2xl text-center">Sign Up Page</h1>
+    <div className="container flex flex-col mx-auto px-4 py-5 h-screen">
+      <div className="flex flex-col gap-y-6 items-center">
+        <Logo active />
+        <h1 className="text-2xl">Registration</h1>
+      </div>
       <RegisterForm />
-      <div className="mt-auto pb-5">
+      <div className="mt-auto">
         <Button variant="white" clickFn={() => googleAuth()}>
           <div className="flex flex-row items-center">
-            <img className="mr-4" src={GoogleLogo} alt="" />
+            <img className="mr-4" src={GoogleLogo} alt="google logo" />
             Use Google
           </div>
         </Button>
