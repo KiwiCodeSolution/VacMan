@@ -50,11 +50,17 @@ function CustomInput(props: CustomInputProps): ReactElement {
             className="absolute bottom-1/2 right-2 translate-y-1/2"
             type="button"
             onClick={(): void => togglePasswordShow()}
+            aria-label="show/hide password button"
           >
             <Eye cross={!isPasswordShown} />
           </button>
         ) : (
-          <button type="button" className="absolute bottom-1/2 right-2 translate-y-1/2" onClick={clearField}>
+          <button
+            type="button"
+            className="absolute bottom-1/2 right-2 translate-y-1/2"
+            onClick={clearField}
+            aria-label="clear field button"
+          >
             <Rubber />
           </button>
         )}

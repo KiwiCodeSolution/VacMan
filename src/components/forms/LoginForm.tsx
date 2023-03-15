@@ -25,7 +25,6 @@ const LoginForm: FC = (): ReactElement => {
     console.log('values: ', values);
 
     dispatch(logIn(values));
-    dispatch(setIsAuth(true));
     resetForm();
   };
 
@@ -38,7 +37,7 @@ const LoginForm: FC = (): ReactElement => {
       validateOnChange={false}
     >
       {({ handleSubmit }: FormikProps<Values>) => (
-        <form onSubmit={handleSubmit} className="mt-14">
+        <form onSubmit={handleSubmit} className="mt-14" noValidate>
           <ul>
             <li>
               <CustomInput name="email" label="Email" placeholder="Type email" id="email" type="email" />
