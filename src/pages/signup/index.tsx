@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useGoogleAuth from 'hooks/googleAuth';
 import RegisterForm from 'components/forms/RegisterForm';
 import Button from 'components/ui/button';
+import GoogleLogo from 'img/images/image 259.png';
 import './styles.css';
 
 const token = '1677595510238';
@@ -14,8 +15,13 @@ export default function SignUpPage() {
     <div className="container mx-auto px-4">
       <h1 className="text-2xl">Sign Up Page</h1>
       <RegisterForm />
-      <Button variant="white" clickFn={() => googleAuth()}>Use Google</Button>
       <Button variant="black">Register</Button> 
+      <Button variant="white" clickFn={() => googleAuth()}>
+        <div className="flex flex-row items-center">
+          <img className="mr-4" src={GoogleLogo} alt=''/>
+          Use Google
+        </div>
+      </Button>
       <div className="text-center text-txt-main">Already have an account? 
         <Link to="/login"><span className="text-base font-bold">LOGIN</span></Link>
       </div>

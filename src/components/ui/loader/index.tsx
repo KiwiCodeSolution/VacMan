@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import circle from '../../../assets/icons/circle.svg';
-import triangle from '../../../assets/icons/triangle.svg';
+import circle from 'assets/icons/circle.svg';
+import triangle from 'assets/icons/triangle.svg';
 
 export default function Loader({ active }: { active?: boolean }) {
   return (

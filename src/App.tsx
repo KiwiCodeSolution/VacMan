@@ -8,7 +8,6 @@ import StartingPage from './pages/starting';
 import ConfirmEmailPage from './pages/confirmEmailPage';
 import Entrance from './pages/entrance';
 import LogInPage from './pages/login';
-import Welcome from './pages/welcome';
 import SignUpPage from './pages/signup';
 import RestorePassPage from './pages/restorePass';
 import ConfirmPassPage from './pages/confirmPass';
