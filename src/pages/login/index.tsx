@@ -11,21 +11,22 @@ export default function LogInPage() {
   const googleAuth = useGoogleAuth();
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-2xl">Log In Page</h1>
+    <div className="container flex flex-col mx-auto px-4 h-screen">
+      <h1 className="text-2xl text-center">Log In Page</h1>
       <LoginForm />
-      {/* <Button variant="black">Login</Button>  */}
-      <Button variant="white" clickFn={() => googleAuth()}>
-        <div className="flex flex-row items-center">
-          <img className="mr-4" src={GoogleLogo} alt="" />
-          Use Google
+      <div className="mt-auto pb-5">
+        <Button variant="white" clickFn={() => googleAuth()}>
+          <div className="flex flex-row items-center">
+            <img className="mr-4" src={GoogleLogo} alt="" />
+            Use Google
+          </div>
+        </Button>
+        <div className="mt-6 text-center text-txt-main">
+          Haven’t an account?
+          <Link to="/signup">
+            <span className="text-base font-bold">Registration</span>
+          </Link>
         </div>
-      </Button>
-      <div className="text-center text-txt-main">
-        Haven’t an account?
-        <Link to="/signup">
-          <span className="text-base font-bold">Registration</span>
-        </Link>
       </div>
     </div>
   );

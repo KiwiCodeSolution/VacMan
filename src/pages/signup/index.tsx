@@ -12,10 +12,9 @@ export default function SignUpPage() {
   const googleAuth = useGoogleAuth();
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-2xl">Sign Up Page</h1>
+    <div className="container  mx-auto px-4">
+      <h1 className="text-2xl text-center">Sign Up Page</h1>
       <RegisterForm />
-      {/* <Button variant="black">Register</Button>  */}
       <Button variant="white" clickFn={() => googleAuth()}>
         <div className="flex flex-row items-center">
           <img className="mr-4" src={GoogleLogo} alt="" />
