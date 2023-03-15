@@ -1,41 +1,32 @@
-import { useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
-import { setUser, setIsAuth } from '../../redux/userSlice';
-import { useAppDispatch } from '../../hooks/reduxHooks';
-import getGoogleUserData from '../../utilities/googleUserData';
-import RegisterForm from '../../components/forms/RegisterForm';
+/* eslint-disable prettier/prettier */
+import { Link } from 'react-router-dom'; 
+import useGoogleAuth from 'hooks/googleAuth';
+import RegisterForm from 'components/forms/RegisterForm';
+import Button from 'components/ui/button';
+import GoogleLogo from 'img/images/image 259.png';
 import './styles.css';
 
-// const serverURL = 'http://kiwicode.tech:5000';
-const serverURL = 'https://vacmanserver-production.up.railway.app';
-// const serverURL = 'http://localhost:3030';
+const token = '1677595510238';
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTA4NTI5ZjFiNjk5YjQyYTdiZTY2NyIsImlhdCI6MTY3NjU1MTAwOX0.e-quTDPC3_tAlXj56KhZ173OraK6M18fYZD8LSfd32c';
 export default function SignUpPage() {
-  const dispatch = useAppDispatch();
-
-  const googleRegister = useGoogleLogin({
-    onSuccess: async resp => {
-      const userData = await getGoogleUserData(resp.access_token);
-      console.log(userData);
-      const { data } = await axios.post(`${serverURL}/auth/googleAuth`, { userData });
-      console.log('data from server:', data);
-      dispatch(setUser(data));
-      dispatch(setIsAuth(true));
-    },
-    onError: err => console.log('error:', err),
-  });
+  const googleAuth = useGoogleAuth();
 
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-2xl">Sign Up Page</h1>
       <RegisterForm />
-      <button className="mt-20 bg-bg-light p-2 rounded-md" type="button" onClick={() => googleRegister()}>
-        Google Register
-      </button>
+      <Button variant="black">Register</Button> 
+      <Button variant="white" clickFn={() => googleAuth()}>
+        <div className="flex flex-row items-center">
+          <img className="mr-4" src={GoogleLogo} alt=''/>
+          Use Google
+        </div>
+      </Button>
+      <div className="text-center text-txt-main">Already have an account? 
+        <Link to="/login"><span className="text-base font-bold">LOGIN</span></Link>
+      </div>
       <h2 className="mt-20">Имитация письма с сылкой подтверждения..</h2>
-      <a className="bg-bg-grey" href={`http://localhost:5173/confirmEmail?token=${token}`}>
+      <a className="border p-1" href={`http://localhost:5173/confirmEmail?token=${token}`}>
         Подтвердить email
       </a>
     </div>

@@ -7,6 +7,7 @@ import { setIsAuth } from '../../redux/userSlice';
 import loginSchema from '../../validationSchemas/loginSchema';
 
 import CustomInput from './CustomInput';
+import { logIn } from '../../redux/userOperations';
 
 type Values = InferType<typeof loginSchema>;
 
@@ -21,6 +22,8 @@ const LoginForm: FC = (): ReactElement => {
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     console.log('Form was submitted.');
     console.log('values: ', values);
+
+    dispatch(logIn(values));
     dispatch(setIsAuth(true));
     resetForm();
   };
