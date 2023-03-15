@@ -3,7 +3,7 @@ import { Formik, FormikHelpers, FormikProps } from 'formik';
 import { InferType } from 'yup';
 
 import { useAppDispatch } from '../../hooks/reduxHooks';
-import { setIsAuth } from '../../redux/userSlice';
+// import { setIsAuth } from '../../redux/userSlice';
 import loginSchema from '../../validationSchemas/loginSchema';
 
 import CustomInput from './CustomInput';

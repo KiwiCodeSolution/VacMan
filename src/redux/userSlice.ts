@@ -6,9 +6,6 @@ import { currentUser, emailVerify, logIn, logOut, registration } from './userOpe
 interface IUser {
   email: string;
   token: string;
-  // isAuth: boolean;
-  // onBoarding: boolean;
-  // isLoading: boolean;
   profile: { [key: string]: string };
 }
 
@@ -17,7 +14,7 @@ const initialState = {
   token: '',
   isAuth: false,
   onBoarding: true,
-  isLoading: true,
+  isLoading: false,
   showStartingPage: true,
   lang: "eng",
   profile: {},
@@ -66,6 +63,10 @@ const userSlice = createSlice({
       .addCase(logOut.pending, (state) => state)
       .addCase(logOut.fulfilled, (state, action) => {
         state.isAuth = action.payload;
+        state.token = '';
+        state.email = '';
+        state.profile = {};
+        state.showStartingPage = true;
       })
       .addCase(logOut.rejected, (state) => state)
       .addCase(currentUser.pending, (state) => state)

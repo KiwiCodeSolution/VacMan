@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// axios.defaults.baseURL = 'http://localhost:3001';
-axios.defaults.baseURL = 'http://kiwicode.tech:5000';
-// axios.defaults.baseURL = 'https://vacmanserver-production.up.railway.app';
+// axios.defaults.baseURL = 'http://localhost:3030';
+// axios.defaults.baseURL = 'http://kiwicode.tech:5000';
+axios.defaults.baseURL = 'https://vacmanserver-production.up.railway.app';
 
 interface IUser {
   email: string;
@@ -11,11 +11,11 @@ interface IUser {
   profile: { [key: string]: string };
 }
 
-const setAuthHeader = (token: string) => {
+export const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const clearAuthHeader = () => {
+export const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
@@ -37,11 +37,11 @@ export const logIn = createAsyncThunk<IUser, { email: string; password: string }
   'user/login',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/auth/login', credentials);
-      setAuthHeader(response.data.token);
+      const { data } = await axios.post('/auth/login', credentials);
+      setAuthHeader(data.token);
       console.log('Congratulations! You are logined!');
-      console.log(response.data.user);
-      return response.data.user;
+      console.log(data.user);
+      return data.user;
     } catch (error) {
       console.log((error as Error).message);
       return rejectWithValue("Can't register. Server error.");
