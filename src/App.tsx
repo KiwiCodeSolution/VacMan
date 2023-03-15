@@ -29,7 +29,6 @@ const App = () => {
     showStartingPage ? <StartingPage /> :
     <Routes>
       <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>} />
-      <Route path="/welcome" element={<RedirectRoute ><Welcome /></RedirectRoute>} />
       <Route path="/login" element={<RedirectRoute ><LogInPage /></RedirectRoute>} />
       <Route path="/signup" element={<RedirectRoute><SignUpPage /></RedirectRoute>} />
       <Route path="/restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />

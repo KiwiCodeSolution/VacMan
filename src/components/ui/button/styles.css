@@ -1,6 +1,6 @@
-.btn {
-  @apply rounded-md py-4 text-white h-14 w-full text-base font-extrabold;
-}
+/* .btn {
+  @apply rounded-md py-4 txt-white h-14 w-full text-base font-extrabold;
+} */
 
 .btn_dark {
   @apply bg-[#2E2E35];
@@ -8,4 +8,8 @@
 
 .btn_orange {
   @apply bg-[#F0BE6C];
+}
+
+.btn_white {
+  @apply bg-[#fffdf4];
 }
