@@ -4,10 +4,6 @@ import { emailVerify } from '../redux/userOperations';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { setIsAuth } from '../redux/userSlice';
 
-// const URL = 'http://localhost:3030/auth/emailVerify';
-// const URL = 'http://kiwicode.tech:5000/auth/emailVerify';
-// const URL = 'https://vacmanserver-production.up.railway.app/auth/emailVerify';
-
 const ConfirmEmailPage = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
@@ -25,17 +21,8 @@ const ConfirmEmailPage = () => {
     if (!token) return;
     dispatch(emailVerify({ token }));
     setConfirmed(true);
-    // fetch(`${URL}?token=${token}`, { method: 'GET' });
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data.user);
-    //     dispatch(setUser(data.user));
-    //     setConfirmed(true);
-    //   })
-    //   .catch((error: { message: unknown }) => console.log('error:', error.message));
   }, [dispatch, token]);
 
-  // if response "ok" -> dispatch(setUser(data)), setConfirmed(true)
   return (
     <>
       <h2>Email confirmation</h2>

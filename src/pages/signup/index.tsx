@@ -6,7 +6,7 @@ import Button from 'components/ui/button';
 import GoogleLogo from 'img/images/image 259.png';
 import './styles.css';
 
-const token = '1677595510238';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTI0N2VlYzgxOWNhMWJlZGZiNTAzOSIsImlhdCI6MTY3ODkxOTY2Mn0.6LQnsLQ04BuQZ3fs11EQc4-xnhZiKCugBpjvI-Oh50M';
 
 export default function SignUpPage() {
   const googleAuth = useGoogleAuth();
@@ -25,7 +25,7 @@ export default function SignUpPage() {
       <div className="text-center text-txt-main">
         Already have an account?
         <Link to="/login">
-          <span className="text-base font-bold">LOGIN</span>
+          <span className="text-base font-bold"> LOGIN</span>
         </Link>
       </div>
       <h2 className="mt-20">Имитация письма с сылкой подтверждения..</h2>
