@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import { Link } from 'react-router-dom';
+import { useAppSelector } from 'hooks/reduxHooks';
 import LoginForm from 'components/forms/LoginForm';
 import useGoogleAuth from 'hooks/googleAuth';
 import Button from 'components/ui/button';
@@ -10,11 +11,12 @@ import './styles.css';
 
 export default function LogInPage() {
   const googleAuth = useGoogleAuth();
+  const { isLoading } = useAppSelector(state => state.user);
 
   return (
     <div className="container flex flex-col mx-auto px-4 py-5 h-screen">
       <div className="flex flex-col gap-y-6 items-center">
-        <Logo active />
+        <Logo active={isLoading} />
         <h1 className="text-2xl">Login</h1>
       </div>
       <LoginForm />

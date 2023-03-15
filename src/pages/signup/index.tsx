@@ -6,16 +6,19 @@ import Button from 'components/ui/button';
 import GoogleLogo from 'img/images/image 259.png';
 import Logo from 'components/ui/loader';
 import './styles.css';
+import { useAppSelector } from 'hooks/reduxHooks';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTI0N2VlYzgxOWNhMWJlZGZiNTAzOSIsImlhdCI6MTY3ODkxOTY2Mn0.6LQnsLQ04BuQZ3fs11EQc4-xnhZiKCugBpjvI-Oh50M';
+// для имитации письма подтверждения имейла
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTI0N2VlYzgxOWNhMWJlZGZiNTAzOSIsImlhdCI6MTY3ODkxOTY2Mn0.6LQnsLQ04BuQZ3fs11EQc4-xnhZiKCugBpjvI-Oh50M';
 
 export default function SignUpPage() {
   const googleAuth = useGoogleAuth();
+  const { isLoading } = useAppSelector(state => state.user);
 
   return (
     <div className="container flex flex-col mx-auto px-4 py-5 h-screen">
       <div className="flex flex-col gap-y-6 items-center">
-        <Logo active />
+        <Logo active={isLoading} />
         <h1 className="text-2xl">Registration</h1>
       </div>
       <RegisterForm />
