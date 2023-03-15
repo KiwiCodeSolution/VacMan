@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../hooks/reduxHooks';
 
 import CustomInput from './CustomInput';
 import { registration } from '../../redux/userOperations';
+import Button from '../ui/button';
 
 type Values = InferType<typeof registerSchema>;
 
@@ -35,20 +36,22 @@ const RegisterForm: FC = (): ReactElement => {
       validateOnChange={false}
     >
       {({ handleSubmit }: FormikProps<Values>) => (
-        <form onSubmit={handleSubmit}>
-          <CustomInput name="email" label="Email" placeholder="Type email" id="email" type="email" />
-          <CustomInput name="password" label="Password" placeholder="Type password" id="password" type="password" />
-          <CustomInput
-            name="confirmPassword"
-            label="Confirm Password"
-            placeholder="type password"
-            id="confirmPassword"
-            type="password"
-          />
+        <form onSubmit={handleSubmit} className="mt-14">
+          <ul>
+            <li>
+              <CustomInput name="email" label="Email" id="email" type="email" />
+            </li>
+            <li className="mt-4">
+              <CustomInput name="password" label="Password" id="password" type="password" />
+            </li>
+            <li className="mt-4">
+              <CustomInput name="confirmPassword" label="Confirm Password" id="confirmPassword" type="password" />
+            </li>
+          </ul>
 
-          <button type="submit" style={{ border: '1px solid black', marginTop: '16px' }}>
+          <Button btnType="submit" variant="black">
             REGISTER
-          </button>
+          </Button>
         </form>
       )}
     </Formik>
