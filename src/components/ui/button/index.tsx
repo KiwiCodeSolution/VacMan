@@ -6,7 +6,8 @@ interface IButton {
 }
 
 // eslint-disable-next-line prettier/prettier
-const button = 'flex bg-black rounded-xl border mx-auto my-6 py-3 h-12 w-11/12 justify-center text-base items-center font-bold';
+const button =
+  'flex bg-black rounded-xl border mx-auto  py-3 h-12 w-11/12 justify-center text-base items-center font-bold';
 
 export default function Button({ children, variant, btnType, clickFn }: IButton) {
   const currentStyle = variant

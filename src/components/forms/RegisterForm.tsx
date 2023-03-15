@@ -36,22 +36,24 @@ const RegisterForm: FC = (): ReactElement => {
       validateOnChange={false}
     >
       {({ handleSubmit }: FormikProps<Values>) => (
-        <form onSubmit={handleSubmit} className="mt-14" noValidate>
-          <ul>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-y-6 grow mt-14 pb-6" noValidate>
+          <ul className="flex flex-col gap-y-6">
             <li>
               <CustomInput name="email" label="Email" id="email" type="email" />
             </li>
-            <li className="mt-4">
+            <li>
               <CustomInput name="password" label="Password" id="password" type="password" />
             </li>
-            <li className="mt-4">
+            <li>
               <CustomInput name="confirmPassword" label="Confirm Password" id="confirmPassword" type="password" />
             </li>
           </ul>
 
-          <Button btnType="submit" variant="black">
-            REGISTER
-          </Button>
+          <div className="mt-auto">
+            <Button btnType="submit" variant="black">
+              REGISTER
+            </Button>
+          </div>
         </form>
       )}
     </Formik>
