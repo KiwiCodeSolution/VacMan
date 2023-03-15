@@ -28,7 +28,7 @@ export default function LogInPage() {
         <div className="mt-6 text-center text-txt-main">
           Haven’t an account?
           <Link to="/signup">
-            <span className="text-base font-bold">Registration</span>
+            <span className="text-base font-bold"> Registration</span>
           </Link>
         </div>
       </div>
