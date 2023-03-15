@@ -25,7 +25,6 @@ const LoginForm: FC = (): ReactElement => {
     console.log('values: ', values);
 
     dispatch(logIn(values));
-    dispatch(setIsAuth(true));
     resetForm();
   };
 
