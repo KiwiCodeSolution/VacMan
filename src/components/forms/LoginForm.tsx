@@ -8,6 +8,7 @@ import loginSchema from '../../validationSchemas/loginSchema';
 
 import CustomInput from './CustomInput';
 import { logIn } from '../../redux/userOperations';
+import Button from '../ui/button';
 
 type Values = InferType<typeof loginSchema>;
 
@@ -29,15 +30,27 @@ const LoginForm: FC = (): ReactElement => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handelFormSubmit} validationSchema={loginSchema}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handelFormSubmit}
+      validationSchema={loginSchema}
+      validateOnBlur={false}
+      validateOnChange={false}
+    >
       {({ handleSubmit }: FormikProps<Values>) => (
-        <form onSubmit={handleSubmit}>
-          <CustomInput name="email" label="Email" placeholder="Type email" id="email" type="email" />
-          <CustomInput name="password" label="Password" placeholder="Type password" id="password" type="password" />
+        <form onSubmit={handleSubmit} className="mt-14">
+          <ul>
+            <li>
+              <CustomInput name="email" label="Email" placeholder="Type email" id="email" type="email" />
+            </li>
+            <li className="mt-4">
+              <CustomInput name="password" label="Password" placeholder="Type password" id="password" type="password" />
+            </li>
+          </ul>
 
-          <button type="submit" style={{ border: '1px solid black', marginTop: '16px' }}>
+          <Button variant="black" btnType="submit">
             LOGIN
-          </button>
+          </Button>
         </form>
       )}
     </Formik>
