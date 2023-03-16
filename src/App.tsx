@@ -13,16 +13,16 @@ import RestorePassPage from './pages/restorePass';
 import ConfirmPassPage from './pages/confirmPass';
 import NotFound from './pages/notfound';
 import { PrivateRoute, RedirectRoute } from './hocs/PrivateRoute';
+import { currentUser } from 'redux/userOperations';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { isAuth, showStartingPage } = useAppSelector(state => state.user);
+  const { token, showStartingPage } = useAppSelector(state => state.user);
 
   useEffect(() => {
-
-    // if (token && !isAuth) dispatch(auth.getCurrentUser());
+    if (token) dispatch(currentUser());
     setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
-  }, [dispatch, isAuth])
+  }, [dispatch, token])
 
   return (
     showStartingPage ? <StartingPage /> :

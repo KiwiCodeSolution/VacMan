@@ -38,7 +38,7 @@ export const logIn = createAsyncThunk<IUser, { email: string; password: string }
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('/auth/login', credentials);
-      setAuthHeader(data.token);
+      setAuthHeader(data.user.token);
       console.log('Congratulations! You are logined!');
       console.log(data.user);
       return data.user;
@@ -70,14 +70,11 @@ export const currentUser = createAsyncThunk<IUser, undefined, { rejectValue: str
     try {
       const { user } = getState() as { user: IUser };
       const persistedToken = user.token;
-
-      const response = await axios.get(`/auth/current`);
-      if (persistedToken === null) {
-        return rejectWithValue('Unable to fetch user');
-      }
       setAuthHeader(persistedToken);
-      console.log(response.data);
-      return response.data;
+
+      const { data } = await axios.get(`/auth/current`);
+      console.log('currentUser:', data);
+      return data;
     } catch (error) {
       console.log((error as Error).message);
       return rejectWithValue('Server error.');
