@@ -89,10 +89,10 @@ export const emailVerify = createAsyncThunk<IUser, { token: string }, { rejectVa
   'user/emailVerify',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/auth/emailVerify?token=${credentials.token}`);
+      const { data } = await axios.get(`/auth/emailVerify?token=${credentials.token}`);
       setAuthHeader(credentials.token);
-      console.log(response.data);
-      return response.data;
+      console.log(data);
+      return data.user;
     } catch (error) {
       console.log((error as Error).message);
       return rejectWithValue('Server error.');

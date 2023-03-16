@@ -81,6 +81,7 @@ const userSlice = createSlice({
         state.email = action.payload.email;
         state.profile = action.payload.profile;
         state.token = action.payload.token;
+        state.onBoarding = true;
       })
       .addCase(emailVerify.rejected, (state) => state),
 });
