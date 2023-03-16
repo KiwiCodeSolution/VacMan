@@ -8,6 +8,8 @@ import Logo from 'components/ui/loader';
 import './styles.css';
 
 const token = '1677595510238';
+// const token =
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTIxOGQwM2U4NjVkMGQwODRlNTZlOCIsImlhdCI6MTY3ODkwNzYwMH0.pjn-uo4hHA5gCG-tsKja8nHPvV6n4iQXlKl1kbi8OR8';
 
 export default function SignUpPage() {
   const googleAuth = useGoogleAuth();
