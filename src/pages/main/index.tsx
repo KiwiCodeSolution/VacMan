@@ -1,11 +1,16 @@
-import { useAppDispatch } from '../../hooks/reduxHooks';
-// import { setIsAuth } from '../../redux/userSlice';
-import * as Icons from '../../components/iconsComponents';
-import AddBtn from '../../components/addBtn';
-import { logOut } from '../../redux/userOperations';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import * as Icons from 'components/iconsComponents';
+import AddBtn from 'components/addBtn';
+import { logOut, setAuthHeader } from 'redux/userOperations';
+import { useGetVacanciesQuery } from 'redux/VacancyQueries';
 
 export default function Main() {
   const dispatch = useAppDispatch();
+  const { token } = useAppSelector(state => state.user);
+  setAuthHeader(token);
+
+  const { data } = useGetVacanciesQuery();
+  console.log('Vacancies:', data);
 
   return (
     <div className="container mx-auto px-4">
@@ -15,11 +20,9 @@ export default function Main() {
           <h2 className="p-2">Hello user!</h2>
         </li>
         <li className="flex odd:bg-gray-200 even:bg-orange-200 last:ml-20">
-          <Icons.Eye />
           <button className="p-2" type="button" onClick={() => dispatch(logOut(false))}>
             LogOUT
           </button>
-          <Icons.Eye cross />
         </li>
       </ul>
       <p className="mt-4">
