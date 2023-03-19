@@ -3,10 +3,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
 import { currentUser, emailVerify, logIn, logOut, registration } from './userOperations';
 
-interface IUser {
+interface IProfile {
+  [key: string]: string;
+}
+
+export interface IUser {
   email: string;
   token: string;
-  profile: { [key: string]: string };
+  currProfile?: string;
+  profile: IProfile;
 }
 
 const initialState = {
@@ -17,7 +22,8 @@ const initialState = {
   isLoading: false,
   showStartingPage: true,
   lang: "eng",
-  profile: {},
+  currProfile: '',
+  profile: {} as IProfile,
 };
 
 const userSlice = createSlice({
@@ -43,6 +49,7 @@ const userSlice = createSlice({
       state.email = payload.email;
       state.token = payload.token;
       state.profile = payload.profile;
+      state.currProfile = payload.currProfile || '';
     },
   },
 
@@ -54,10 +61,10 @@ const userSlice = createSlice({
       })
       .addCase(registration.rejected, (state) => state)
       .addCase(logIn.pending, (state) => state)
-      .addCase(logIn.fulfilled, (state, action) => {
-        state.email = action.payload.email;
-        state.profile = action.payload.profile;
-        state.token = action.payload.token;
+      .addCase(logIn.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
+        state.email = payload.email;
+        state.profile = payload.profile;
+        state.token = payload.token;
       })
       .addCase(logIn.rejected, (state) => state)
       .addCase(logOut.pending, (state) => state)
@@ -65,27 +72,28 @@ const userSlice = createSlice({
         state.isAuth = action.payload;
         state.token = '';
         state.email = '';
-        state.profile = {};
+        state.currProfile = '';
+        state.profile = {} as IProfile;
         state.showStartingPage = true;
       })
       .addCase(logOut.rejected, (state) => state)
       .addCase(currentUser.pending, (state) => state)
-      .addCase(currentUser.fulfilled, (state, action) => {
-        state.email = action.payload.email;
-        state.profile = action.payload.profile;
-        state.token = action.payload.token;
+      .addCase(currentUser.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
+        state.email = payload.email;
+        state.profile = payload.profile;
+        state.token = payload.token;
       })
       .addCase(currentUser.rejected, (state) => state)
       .addCase(emailVerify.pending, (state) => state)
-      .addCase(emailVerify.fulfilled, (state, action) => {
-        state.email = action.payload.email;
-        state.profile = action.payload.profile;
-        state.token = action.payload.token;
+      .addCase(emailVerify.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
+        state.email = payload.email;
+        state.profile = payload.profile;
+        state.token = payload.token;
         state.onBoarding = true;
       })
       .addCase(emailVerify.rejected, (state) => state),
 });
 
-export const selectIsAuth = (state: RootState) => state.user.isAuth; // а нахрена это ? <Sander-Pod>
+export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>
 export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setLang, setUser } = userSlice.actions;
 export default userSlice.reducer;

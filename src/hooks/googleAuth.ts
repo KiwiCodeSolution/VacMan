@@ -26,6 +26,7 @@ const useGoogleAuth = () => {
       const { data } = await axios.post(`${serverURL}/auth/googleAuth`, { userData });
       console.log('data from server:', data);
       setAuthHeader(data.token);
+      data.currProfile = 'google';
       dispatch(setUser(data));
       dispatch(setIsAuth(true));
     },

@@ -191,6 +191,18 @@ export const Plus = () => (
 );
 
 //      Profile
+export const Avatar = () => (
+  <svg width="59" height="59" viewBox="0 0 59 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="29.7586" cy="29.7586" r="28.4828" fill={colors.main} strokeWidth="1.44828"/>
+    <mask id="mask0_832_53770" maskUnits="userSpaceOnUse" x="2" y="2" width="56" height="56">
+      <circle cx="29.7586" cy="29.7586" r="27.7586" fill="#94A3B8"/>
+    </mask>
+    <g mask="url(#mask0_832_53770)">
+      <path d="M10 54.3331V60.9998H50V54.3331C50 50.7969 48.5952 47.4055 46.0948 44.905C43.5943 42.4045 40.9091 40.9998 37.2727 42.818C33.6364 44.6361 27.5758 44.6361 23.6364 42.818C19.697 40.9998 16.4057 42.4045 13.9052 44.905C11.4048 47.4055 10 50.7969 10 54.3331Z" fill="#D9D9D9" stroke="#D9D9D9" strokeWidth="2.75" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="29.9968" cy="23.7273" r="12.7273" fill={colors.grey}/>
+    </g>
+  </svg>
+)
 export const Phone = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke={colors.main} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
     <path d="M3.33333 2.6665H6L7.33333 5.99984L5.66667 6.99984C6.38064 8.44752 7.55231 9.6192 9 10.3332L10 8.6665L13.3333 9.99984V12.6665C13.3333 13.0201 13.1929 13.3593 12.9428 13.6093C12.6928 13.8594 12.3536 13.9998 12 13.9998C9.39951 13.8418 6.94677 12.7375 5.10455 10.8953C3.26234 9.05307 2.15803 6.60033 2 3.99984C2 3.64622 2.14048 3.30708 2.39052 3.05703C2.64057 2.80698 2.97971 2.6665 3.33333 2.6665Z" />
