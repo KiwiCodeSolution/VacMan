@@ -51,42 +51,33 @@ const axiosBaseQuery = ({ baseUrl }: { baseUrl: string } = {baseUrl: ''}): BaseQ
       };
     }
   };
+const baseUrl = 'https://vacmanserver-production.up.railway.app/';
+// const baseUrl = 'http://localhost:3030/';
 
 export const vacancyAPI = createApi({
   reducerPath: 'vacancies',
-  baseQuery: axiosBaseQuery({ baseUrl: 'https://vacmanserver-production.up.railway.app/' }),
+  baseQuery: axiosBaseQuery({ baseUrl }),
   tagTypes: ['vacancies'],
   endpoints: builder => ({
     getVacancies: builder.query<IVacancy[], void>({
       query: () => ({ url: 'vacancy', method: 'GET' }),
-      keepUnusedDataFor: 3,
+      // keepUnusedDataFor: 3,
       providesTags: ['vacancies'],
     }),
     // getVacancyById: builder.query<IVacancy, string>({
-    //   query: vacancyId => `vacancy/${vacancyId}`,
+    //   query: id => ({ url: `vacancy/${id}`, method: 'GET' }),
     //   providesTags: ['vacancies'],
     // }),
     addVacancy: builder.mutation<IVacancy, void>({
-      query: data => ({
-        url: 'vacancy',
-        method: 'POST',
-        data,
-      }),
+      query: data => ({ url: 'vacancy', method: 'POST', body: data }),
       invalidatesTags: ['vacancies'],
     }),
     updateVacancy: builder.mutation<IVacancy, { data: Partial<IVacancy> }>({
-      query: ({ data }) => ({
-        url: `vacancy`,
-        method: 'PUT',
-        body: data,
-      }),
+      query: data => ({ url: `vacancy`, method: 'PUT', body: data }),
       invalidatesTags: ['vacancies'],
     }),
     deleteVacancy: builder.mutation({
-      query: id => ({
-        url: `vacancy/${id}`,
-        method: 'DELETE',
-      }),
+      query: id => ({ url: `vacancy/${id}`, method: 'PUT' }),
       invalidatesTags: ['vacancies'],
     }),
   }),
