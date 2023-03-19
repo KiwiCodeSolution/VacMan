@@ -25,17 +25,6 @@ export default function Main() {
         <br />
       </div>
       <AddBtn />
-      <Icons.Envelope />
-      <Icons.TelegramSmall />
-      <Icons.TelegramLarge />
-      <Icons.LinkedIn />
-      <Icons.LinkedInLarge />
-      <Icons.Instagram />
-      <Icons.Instagram small />
-      <Icons.Trash />
-      <Icons.Trash small />
-      <Icons.Recover />
-      <Icons.Edit />
     </div>
   );
 }

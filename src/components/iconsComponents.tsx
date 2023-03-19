@@ -271,7 +271,7 @@ export const FacebookLarge = () => (
   </svg>
 )
 export const Instagram = ({ small }: {small?: boolean}) => (
-  <svg width={small ? "16" : "32"} height={small ? "16" : "32"} viewBox="0 0 32 32" fill="none" stroke={small ? colors.main : colors.black} strokeWidth={small ? "4" : "2"} strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+  <svg width={small ? 16 : 32} height={small ? 16 : 32} viewBox="0 0 32 32" fill="none" stroke={small ? colors.main : colors.black} strokeWidth={small ? 4 : 2} strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.3359 5.3335H10.6693C7.72375 5.3335 5.33594 7.72131 5.33594 10.6668V21.3335C5.33594 24.279 7.72375 26.6668 10.6693 26.6668H21.3359C24.2815 26.6668 26.6693 24.279 26.6693 21.3335V10.6668C26.6693 7.72131 24.2815 5.3335 21.3359 5.3335Z" />
     <path d="M16 20C18.2091 20 20 18.2091 20 16C20 13.7909 18.2091 12 16 12C13.7909 12 12 13.7909 12 16C12 18.2091 13.7909 20 16 20Z" />
     <path d="M22 10V10.001" />
@@ -385,7 +385,7 @@ export const SettingsPolicy = () => (
 
 //    Archive
 export const Trash = ({ small }: {small?: boolean}) => (
-  <svg width={small ? "24" : "32"} height={small ? "24" : "32"} viewBox="0 0 32 32" fill="none" stroke={colors.black} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+  <svg width={small ? 24 : 32} height={small ? 24 : 32} viewBox="0 0 32 32" fill="none" stroke={colors.black} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
     <path d="M19.6538 12L19.1923 24M12.8077 24L12.3462 12M25.6369 7.72076C26.0928 7.78962 26.5472 7.86329 27 7.94172M25.6369 7.72076L24.2131 26.2301C24.0928 27.7931 22.7895 29 21.2219 29H10.7781C9.21048 29 7.90716 27.7931 7.78693 26.2301L6.36314 7.72076M25.6369 7.72076C24.1083 7.48992 22.562 7.31314 21 7.19243M5 7.94172C5.45277 7.86329 5.90716 7.78962 6.36314 7.72076M6.36314 7.72076C7.8917 7.48992 9.43799 7.31314 11 7.19243M21 7.19243V5.97092C21 4.39843 19.7858 3.08564 18.2141 3.03536C17.479 3.01185 16.7409 3 16 3C15.2591 3 14.521 3.01185 13.7859 3.03536C12.2142 3.08564 11 4.39843 11 5.97092V7.19243M21 7.19243C19.3501 7.06493 17.6826 7 16 7C14.3174 7 12.6499 7.06493 11 7.19243" />
   </svg>
 );
