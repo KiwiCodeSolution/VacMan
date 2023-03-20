@@ -12,17 +12,27 @@ interface IAction {
 interface IVacancy {
   id: string;
   companyName: string;
-  companyURL: string;
-  source: string;
-  sourceURL: string;
-  position: string;
-  salary: number;
-  currency: string;
-  notes: INote[];
-  actions: IAction[];
-  status: string;
-  userRank: number;
-  archived: boolean;
+  companyURL?: string;
+  source?: string;
+  sourceURL?: string;
+  position?: string;
+  salary?: number;
+  currency?: string;
+  notes?: INote[];
+  actions?: IAction[];
+  status?: string;
+  userRank?: number;
+  archived?: boolean;
+  cardColor?: string;
+  // | 'app-red'
+  // | 'app-blue'
+  // | 'app-green'
+  // | 'app-pink'
+  // | 'app-smoke'
+  // | 'app-grey'
+  // | 'app-yellow'
+  // | 'app-mustard'
+  // | 'app-orange';
 }
 
 // eslint-disable-next-line prettier/prettier
@@ -38,7 +48,6 @@ const axiosBaseQuery = ({ baseUrl }: { baseUrl: string } = {baseUrl: ''}): BaseQ
   > =>
   async ({ url, method, data, params }) => {
     try {
-      // console.log('Header auth:', axios.defaults.headers.common.Authorization);
       const result = await axios({ url: baseUrl + url, method, data, params });
       return { data: result.data };
     } catch (axiosError) {
@@ -59,7 +68,7 @@ export const vacancyAPI = createApi({
   baseQuery: axiosBaseQuery({ baseUrl }),
   tagTypes: ['vacancies'],
   endpoints: builder => ({
-    getVacancies: builder.query<IVacancy[], void>({
+    getVacancies: builder.query<{ data: IVacancy[] }, void>({
       query: () => ({ url: 'vacancy', method: 'GET' }),
       // keepUnusedDataFor: 3,
       providesTags: ['vacancies'],
@@ -68,12 +77,12 @@ export const vacancyAPI = createApi({
     //   query: id => ({ url: `vacancy/${id}`, method: 'GET' }),
     //   providesTags: ['vacancies'],
     // }),
-    addVacancy: builder.mutation<IVacancy, void>({
-      query: data => ({ url: 'vacancy', method: 'POST', body: data }),
+    addVacancy: builder.mutation<IVacancy, Partial<IVacancy>>({
+      query: data => ({ url: 'vacancy', method: 'POST', data }),
       invalidatesTags: ['vacancies'],
     }),
     updateVacancy: builder.mutation<IVacancy, { data: Partial<IVacancy> }>({
-      query: data => ({ url: `vacancy`, method: 'PUT', body: data }),
+      query: data => ({ url: `vacancy`, method: 'PUT', data }),
       invalidatesTags: ['vacancies'],
     }),
     deleteVacancy: builder.mutation({
