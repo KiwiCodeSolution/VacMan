@@ -6,7 +6,7 @@ import ShortNote from './ShortNote';
 const ListNotes = () => {
   const { data: response } = useGetVacanciesQuery();
   const vacansies = response?.data;
-  console.log(vacansies);
+  // console.log(vacansies);
 
   return (
     <div className="container mx-auto px-4">

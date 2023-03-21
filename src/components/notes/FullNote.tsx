@@ -20,23 +20,26 @@ const FullNote = () => {
 
   return (
     <div className="container mx-auto px-4">
-      <p>FullNote</p>
-      <div className="flex">
+      <div className="flex mt-6 mb-10">
         <button className="flex-none" onClick={() => dispatch(setIsOpenFullNote(false))}>
-          back
+          <Icons.ArrowBack />
         </button>
-        <span className="grow text-center">{position}</span>
-        <button className="flex-none">change</button>
+        <span className="grow text-center font-bold text-2xl">{position}</span>
+        <button className="flex-none">
+          <Icons.Edit />
+        </button>
       </div>
       <ul>
         <li className="flex justify-between">
           <div>
-            <p>{companyName}</p>
+            <p className="mb-2 font-bold text-xl">{companyName}</p>
             <Stars amount={5} active={3} />
           </div>
           <div>
-            <p>Salary</p>
-            <p>{salary}$</p>
+            <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
+              <Icons.Salary /> <p className="text-base">Salary</p>
+            </span>
+            <p className="text-[32px]">{salary}$</p>
           </div>
         </li>
         <li className="flex gap-x-2 gap-y-1">
@@ -49,8 +52,14 @@ const FullNote = () => {
           <p>Action</p>
         </li>
         <li>{actions !== undefined && actions?.length > 0 ? actions?.join(', ') : <p>...</p>}</li>
-        <li>link 1 - Company Link:</li>
-        <li>link 2 - Sourse:</li>
+        <li>
+          <Icons.Link blue />
+          link 1 - Company Link:
+        </li>
+        <li>
+          <Icons.Link blue />
+          link 2 - Sourse:
+        </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Notebook large />
           <p>Notebook</p>

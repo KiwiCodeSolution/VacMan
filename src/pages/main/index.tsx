@@ -16,7 +16,7 @@ export default function Main() {
   setAuthHeader(token);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
-  console.log('Vacancies:', response?.data);
+  // console.log('Vacancies:', response?.data);
   const [addVacancy] = useAddVacancyMutation();
 
   // Временное решение
@@ -34,12 +34,15 @@ export default function Main() {
 
   return (
     <div className="container mx-auto px-4">
-      <Header />
-      <hr />
-      <button className="p-2" type="button" onClick={() => dispatch(logOut(false))}>
-        LogOUT
-      </button>
-      <hr />
+      {!isOpenFullNote && (
+        <>
+          <Header /> <hr />
+          <button className="p-2" type="button" onClick={() => dispatch(logOut(false))}>
+            LogOUT
+          </button>
+          <hr />
+        </>
+      )}
       {isLoading ? (
         <Loader active />
       ) : isError ? (
@@ -49,13 +52,15 @@ export default function Main() {
           <Icons.Todos />
         </div>
       ) : response && !isOpenFullNote ? (
-        <ListNotes />
+        <>
+          <ListNotes />
+          <div className="flex mx-4 justify-end sticky bottom-2 right-2">
+            <AddBtn clickFn={generateVacancy} />
+          </div>
+        </>
       ) : (
         <FullNote />
       )}
-      <div className="flex mx-4 justify-end sticky bottom-2 right-2">
-        <AddBtn clickFn={generateVacancy} />
-      </div>
     </div>
   );
 }
