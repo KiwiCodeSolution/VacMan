@@ -12,7 +12,7 @@ import FullNote from 'components/notes/FullNote';
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector((state) => state.user);
+  const { token, isOpenFullNote } = useAppSelector((state) => state.user);
   setAuthHeader(token);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
@@ -33,36 +33,38 @@ export default function Main() {
   };
 
   return (
-    <>
-      <div className="container mx-auto px-4">
-        <Header />
-        <hr />
-        <button className="p-2" type="button" onClick={() => dispatch(logOut(false))}>
-          LogOUT
-        </button>
-        <hr />
-        {isLoading ? (
-          <Loader active />
-        ) : isError ? (
-          <h2>ERROR</h2>
-        ) : response ? (
-          response.data.map((vacancy) => (
-            <>
-              <p>{vacancy.companyName}</p>
-              <br />
-            </>
-          ))
-        ) : (
-          <div className="flex items-center justify-items-center">
-            <Icons.Todos />
-          </div>
-        )}
-        <div className="flex mx-4 justify-end">
-          <AddBtn clickFn={generateVacancy} />
+    <div className="container mx-auto px-4">
+      <Header />
+      <hr />
+      <button className="p-2" type="button" onClick={() => dispatch(logOut(false))}>
+        LogOUT
+      </button>
+      <hr />
+      {isLoading ? (
+        <Loader active />
+      ) : isError ? (
+        <h2>ERROR</h2>
+      ) : !response ? (
+        <div className="flex items-center justify-items-center">
+          <Icons.Todos />
         </div>
+      ) : response && !isOpenFullNote ? (
+        <ListNotes />
+      ) : (
+        <FullNote />
+      )}
+      <div className="flex mx-4 justify-end sticky bottom-2 right-2">
+        <AddBtn clickFn={generateVacancy} />
       </div>
-      <ListNotes />
-      <FullNote />
-    </>
+    </div>
   );
 }
+
+// {
+//   response.data.map((vacancy) => (
+//     <>
+//       <p>{vacancy.companyName}</p>
+//       <br />
+//     </>
+//   ));
+// }

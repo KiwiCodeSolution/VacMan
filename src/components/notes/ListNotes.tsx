@@ -6,14 +6,16 @@ import ShortNote from './ShortNote';
 const ListNotes = () => {
   const { data: response } = useGetVacanciesQuery();
   const vacansies = response?.data;
+  console.log(vacansies);
 
   return (
     <div className="container mx-auto px-4">
       {vacansies ? (
         <div>
-          {vacansies.map(({ id, companyName, position, salary, status, cardColor, actions, archived }) => (
+          {vacansies.map(({ _id, companyName, position, salary, status, cardColor, actions, archived }) => (
             <ShortNote
-              key={id}
+              key={_id}
+              _id={_id}
               companyName={companyName}
               position={position}
               salary={salary}

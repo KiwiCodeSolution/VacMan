@@ -24,6 +24,8 @@ const initialState = {
   lang: 'eng',
   currProfile: '',
   profile: {} as IProfile,
+  isOpenFullNote: false,
+  noteId: '',
 };
 
 const userSlice = createSlice({
@@ -50,6 +52,12 @@ const userSlice = createSlice({
       state.token = payload.token;
       state.profile = payload.profile;
       state.currProfile = payload.currProfile || '';
+    },
+    setIsOpenFullNote(state, { payload }: PayloadAction<boolean>) {
+      state.isOpenFullNote = payload;
+    },
+    setNoteId(state, { payload }: PayloadAction<string>) {
+      state.noteId = payload;
     },
   },
 
@@ -96,5 +104,14 @@ const userSlice = createSlice({
 });
 
 export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>
-export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setLang, setUser } = userSlice.actions;
+export const {
+  setIsAuth,
+  setOnBoarding,
+  setIsLoading,
+  setShowStartingPage,
+  setLang,
+  setUser,
+  setIsOpenFullNote,
+  setNoteId,
+} = userSlice.actions;
 export default userSlice.reducer;

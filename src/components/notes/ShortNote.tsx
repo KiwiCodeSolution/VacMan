@@ -2,12 +2,16 @@
 import * as Icons from 'components/iconsComponents';
 import Stars from 'components/ui/stars';
 
+import { useAppDispatch } from 'hooks/reduxHooks';
+import { setIsOpenFullNote, setNoteId } from 'redux/userSlice';
+
 interface IAction {
   name: string;
   deadline: number;
 }
 
 interface IVacancy {
+  _id: string;
   companyName: string | undefined;
   position: string | undefined;
   salary: number | undefined;
@@ -18,15 +22,22 @@ interface IVacancy {
   archived: boolean | undefined;
 }
 
-const ShortNote = ({ companyName, position, salary, status, color, active = 5, actions, archived }: IVacancy) => {
+const ShortNote = ({ _id, companyName, position, salary, status, color, active = 5, actions, archived }: IVacancy) => {
+  const dispatch = useAppDispatch();
+  // console.log('clickNote', _id);
+
+  function openFullNote() {
+    dispatch(setIsOpenFullNote(true));
+    dispatch(setNoteId(_id));
+  }
+
   return (
-    <>
+    <div>
       {!archived ? (
         <ul
-          className={`border-solid border-2 w-[328px] rounded-xl py-4 pr-4 pl-2 gap-y-1 flex flex-col relative mt-4 bg-${color}`}
+          className={`border-solid border-2 min-w-[328px] rounded-xl py-4 pr-4 pl-2 gap-y-1 flex flex-col relative mt-4 bg-${color}`}
         >
-          <button className="absolute top-2 right-[14px]">
-            {/* {!archived ? <Icons.Eye /> : <Icons.Eye cross />} */}
+          <button className="absolute top-2 right-[14px]" onClick={openFullNote}>
             <Icons.Eye />
           </button>
           <li className="flex gap-x-2 gap-y-1 font-bold">
@@ -54,7 +65,7 @@ const ShortNote = ({ companyName, position, salary, status, color, active = 5, a
           </li>
         </ul>
       ) : null}
-    </>
+    </div>
   );
 };
 

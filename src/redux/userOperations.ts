@@ -23,6 +23,7 @@ export const clearAuthHeader = () => {
 export const registration = createAsyncThunk<boolean, { email: string; password: string }, { rejectValue: string }>(
   'user/registration',
   async (credentials, { rejectWithValue }) => {
+    console.log('credentials', credentials);
     try {
       await axios.post('/auth/register', credentials);
       console.log('Congratulations! You are registered!');
