@@ -24,6 +24,7 @@ const initialState = {
   lang: "eng",
   currProfile: '',
   profile: {} as IProfile,
+  message: '' 
 };
 
 const userSlice = createSlice({
@@ -57,9 +58,11 @@ const userSlice = createSlice({
     builder
       .addCase(registration.pending, (state) => state)
       .addCase(registration.fulfilled, (state, action) => {
-        state.isAuth = action.payload;
+        state.message = action.payload;
       })
-      .addCase(registration.rejected, (state) => state)
+      .addCase(registration.rejected, (state, { payload }) => {
+        if (payload) state.message = payload;
+      })
       .addCase(logIn.pending, (state) => state)
       .addCase(logIn.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
         state.email = payload.email;

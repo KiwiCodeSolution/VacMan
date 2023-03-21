@@ -1,10 +1,11 @@
+/* eslint-disable prettier/prettier */
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { IUser } from './userSlice';
 
-// axios.defaults.baseURL = 'http://localhost:3030';
+axios.defaults.baseURL = 'http://localhost:3030';
 // axios.defaults.baseURL = 'http://kiwicode.tech:5000';
-axios.defaults.baseURL = 'https://vacmanserver-production.up.railway.app';
+// axios.defaults.baseURL = 'https://vacmanserver-production.up.railway.app';
 
 // interface IUser {
 //   email: string;
@@ -20,16 +21,19 @@ export const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-export const registration = createAsyncThunk<boolean, { email: string; password: string }, { rejectValue: string }>(
+export const registration = createAsyncThunk<string, { message: string, verificationCode: string}, { rejectValue: string | undefined }>(
   'user/registration',
+  // eslint-disable-next-line consistent-return
   async (credentials, { rejectWithValue }) => {
     try {
-      await axios.post('/auth/register', credentials);
-      console.log('Congratulations! You are registered!');
-      return true;
+      const response = await axios.post('/auth/register', credentials);
+      console.log('AsyncThunk: Congratulations! You are registered!');
+      return response.data.message;
     } catch (error) {
-      console.log((error as Error).message);
-      return rejectWithValue("Can't register. Server error.");
+      if (axios.isAxiosError(error)) {
+        // console.log(error);
+        return rejectWithValue(error.response?.data?.message);
+      }
     }
   }
 );
@@ -82,12 +86,12 @@ export const currentUser = createAsyncThunk<IUser, undefined, { rejectValue: str
   }
 );
 
-export const emailVerify = createAsyncThunk<IUser, { token: string }, { rejectValue: string }>(
+export const emailVerify = createAsyncThunk<IUser, { verificationCode: string }, { rejectValue: string }>(
   'user/emailVerify',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`/auth/emailVerify?token=${credentials.token}`);
-      setAuthHeader(credentials.token);
+      const { data } = await axios.get(`/auth/emailVerify?verificationCode=${credentials.verificationCode}`);
+      setAuthHeader(data.user.token);
       console.log(data);
       return data.user;
     } catch (error) {
