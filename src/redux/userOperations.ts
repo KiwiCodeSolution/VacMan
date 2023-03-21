@@ -3,9 +3,9 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { IUser } from './userSlice';
 
-axios.defaults.baseURL = 'http://localhost:3030';
+// axios.defaults.baseURL = 'http://localhost:3030';
 // axios.defaults.baseURL = 'http://kiwicode.tech:5000';
-// axios.defaults.baseURL = 'https://vacmanserver-production.up.railway.app';
+axios.defaults.baseURL = 'https://vacmanserver-production.up.railway.app';
 
 // interface IUser {
 //   email: string;
