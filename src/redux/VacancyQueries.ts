@@ -10,7 +10,7 @@ interface IAction {
   deadline: number;
 }
 interface IVacancy {
-  id: string;
+  _id: string;
   companyName: string;
   companyURL?: string;
   source?: string;
@@ -81,12 +81,12 @@ export const vacancyAPI = createApi({
       query: data => ({ url: 'vacancy', method: 'POST', data }),
       invalidatesTags: ['vacancies'],
     }),
-    updateVacancy: builder.mutation<IVacancy, { data: Partial<IVacancy> }>({
+    updateVacancy: builder.mutation<IVacancy, Partial<IVacancy>>({
       query: data => ({ url: `vacancy`, method: 'PUT', data }),
       invalidatesTags: ['vacancies'],
     }),
     deleteVacancy: builder.mutation({
-      query: id => ({ url: `vacancy/${id}`, method: 'PUT' }),
+      query: _id => ({ url: `vacancy/${_id}`, method: 'PUT' }),
       invalidatesTags: ['vacancies'],
     }),
   }),
