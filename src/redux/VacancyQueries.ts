@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 
@@ -8,10 +7,9 @@ interface INote {
 }
 interface IAction {
   name: string;
-  deadline: string;
+  deadline: number;
 }
-
-export interface IVacancy {
+interface IVacancy {
   _id: string;
   companyName: string;
   companyURL?: string;
@@ -23,9 +21,9 @@ export interface IVacancy {
   notes?: INote[];
   actions?: IAction[];
   status?: string;
-  userRank: number;
+  userRank?: number;
   archived?: boolean;
-  cardColor: string;
+  cardColor?: string;
   // | 'app-red'
   // | 'app-blue'
   // | 'app-green'
@@ -86,7 +84,7 @@ export const vacancyAPI = createApi({
       query: (data) => ({ url: 'vacancy', method: 'POST', data }),
       invalidatesTags: ['vacancies'],
     }),
-    updateVacancy: builder.mutation<IVacancy, { data: Partial<IVacancy> }>({
+    updateVacancy: builder.mutation<IVacancy, Partial<IVacancy>>({
       query: (data) => ({ url: `vacancy`, method: 'PUT', data }),
       invalidatesTags: ['vacancies'],
     }),
