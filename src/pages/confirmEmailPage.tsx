@@ -6,7 +6,7 @@ import { setIsAuth } from '../redux/userSlice';
 
 const ConfirmEmailPage = () => {
   const [searchParams] = useSearchParams();
-  const token = searchParams.get('token');
+  const verificationCode = searchParams.get('verificationCode');
   const [confirmed, setConfirmed] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -18,10 +18,10 @@ const ConfirmEmailPage = () => {
 
   // send request on server with code
   useEffect(() => {
-    if (!token) return;
-    dispatch(emailVerify({ token }));
+    if (!verificationCode) return;
+    dispatch(emailVerify({ verificationCode }));
     setConfirmed(true);
-  }, [dispatch, token]);
+  }, [dispatch, verificationCode]);
 
   return (
     <>
