@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import noticeSlice from './noticeSlice';
 import user from './userSlice';
 import { vacancyAPI } from './VacancyQueries';
 
@@ -11,8 +12,9 @@ const store = configureStore({
   reducer: {
     user: persistedUserReducer,
     [vacancyAPI.reducerPath]: vacancyAPI.reducer,
+    notice: noticeSlice,
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

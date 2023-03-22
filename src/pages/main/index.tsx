@@ -7,12 +7,13 @@ import { logOut, setAuthHeader } from 'redux/userOperations';
 import { useGetVacanciesQuery, useAddVacancyMutation } from 'redux/VacancyQueries';
 import Header from 'components/Header';
 import Loader from 'components/ui/loader';
-import ListNotes from 'components/notes/ListNotes';
-import FullNote from 'components/notes/FullNote';
+import ListNotes from 'components/notices/ListNotices';
+import FullNote from 'components/notices/FullNotice';
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const { token, isOpenFullNote } = useAppSelector((state) => state.user);
+  const { token } = useAppSelector((state) => state.user);
+  const { isOpenFullNote } = useAppSelector((state) => state.notice);
   setAuthHeader(token);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
@@ -20,14 +21,14 @@ export default function Main() {
   const [addVacancy] = useAddVacancyMutation();
 
   // Временное решение
-  const colors = ['red', 'blue', 'green', 'pink', 'smoke', 'grey', 'yello'];
+  const colors = ['red', 'blue', 'green', 'pink', 'smoke', 'grey', 'yellow'];
   const generateVacancy = () => {
     const vacancy = {
       companyName: `company ${Math.floor(Math.random() * 98 + 1)}`,
       position: `FullStack ${Math.floor(Math.random() * 98 + 1)}`,
       salary: Math.floor(Math.random() * 10 + 5) * 100,
       userRank: Math.floor(Math.random() * 4 + 1),
-      cardColor: `app-${colors[Math.floor(Math.random() * 6 + 1)]}`,
+      cardColor: `${colors[Math.floor(Math.random() * 6 + 1)]}`,
     };
     addVacancy(vacancy);
   };

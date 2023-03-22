@@ -24,7 +24,7 @@ export interface IVacancy {
   status?: string;
   userRank?: number;
   archived?: boolean;
-  cardColor?: string;
+  cardColor: string;
   // | 'app-red'
   // | 'app-blue'
   // | 'app-green'

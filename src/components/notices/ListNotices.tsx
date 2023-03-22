@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { useGetVacanciesQuery } from 'redux/VacancyQueries';
-import ShortNote from './ShortNote';
+import ShortNote from './ShortNotice';
 
 // eslint-disable-next-line prettier/prettier
 const ListNotes = () => {

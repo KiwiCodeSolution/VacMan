@@ -3,7 +3,7 @@ import * as Icons from 'components/iconsComponents';
 import Stars from 'components/ui/stars';
 
 import { useAppDispatch } from 'hooks/reduxHooks';
-import { setIsOpenFullNote, setNoteId } from 'redux/userSlice';
+import { setIsOpenFullNotice, setNoteId } from 'redux/noticeSlice';
 
 interface IAction {
   name: string;
@@ -16,28 +16,44 @@ interface IVacancy {
   position: string | undefined;
   salary: number | undefined;
   status: string | undefined;
-  color: string | undefined;
+  color: string;
   active: number | undefined;
   actions: IAction[] | undefined;
   archived: boolean | undefined;
 }
 
-const ShortNote = ({ _id, companyName, position, salary, status, color, active = 5, actions, archived }: IVacancy) => {
-  const dispatch = useAppDispatch();
-  // console.log('clickNote', _id);
+interface IColor {
+  [key: string]: string | undefined;
+}
 
-  function openFullNote() {
-    dispatch(setIsOpenFullNote(true));
+const ShortNote = ({ _id, companyName, position, salary, status, color, active = 5, actions, archived }: IVacancy) => {
+  console.log(color);
+  const dispatch = useAppDispatch();
+
+  function openFullNotice() {
+    dispatch(setIsOpenFullNotice(true));
     dispatch(setNoteId(_id));
   }
+
+  const colorVariants = {
+    red: 'bg-app-red',
+    blue: 'bg-app-blue',
+    green: 'bg-app-green',
+    pink: 'bg-app-pink',
+    smoke: 'bg-app-smoke',
+    grey: 'bg-app-grey',
+    yellow: 'bg-app-yellow',
+    mustard: 'bg-app-mustard',
+    orange: 'bg-app-orange',
+  } as IColor;
 
   return (
     <div>
       {!archived ? (
         <ul
-          className={`border-solid border-2 min-w-[328px] rounded-xl py-4 pr-4 pl-2 gap-y-1 flex flex-col relative mt-4 bg-${color}`}
+          className={`border-solid border-2 min-w-[328px] rounded-xl py-4 pr-4 pl-2 gap-y-1 flex flex-col relative mt-4 ${colorVariants[color]}`}
         >
-          <button className="absolute top-2 right-[14px]" onClick={openFullNote}>
+          <button className="absolute top-2 right-[14px]" onClick={openFullNotice}>
             <Icons.Eye />
           </button>
           <li className="flex gap-x-2 gap-y-1 font-bold">

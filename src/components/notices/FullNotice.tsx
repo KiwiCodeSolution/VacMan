@@ -3,14 +3,14 @@ import Button from 'components/ui/button';
 
 import Stars from 'components/ui/stars';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
-import { setIsOpenFullNote } from 'redux/userSlice';
+import { setIsOpenFullNotice } from 'redux/noticeSlice';
 import { IVacancy, useGetVacanciesQuery } from 'redux/VacancyQueries';
 
 const FullNote = () => {
   const dispatch = useAppDispatch();
   const { data: response } = useGetVacanciesQuery();
   // eslint-disable-next-line prettier/prettier
-  const { noteId } = useAppSelector((state) => state.user);
+  const { noteId } = useAppSelector((state) => state.notice);
   const vacansies = response?.data;
 
   // eslint-disable-next-line no-underscore-dangle, prettier/prettier
@@ -21,7 +21,7 @@ const FullNote = () => {
   return (
     <div className="container mx-auto px-4">
       <div className="flex mt-6 mb-10">
-        <button className="flex-none" onClick={() => dispatch(setIsOpenFullNote(false))}>
+        <button className="flex-none" onClick={() => dispatch(setIsOpenFullNotice(false))}>
           <Icons.ArrowBack />
         </button>
         <span className="grow text-center font-bold text-2xl">{position}</span>
