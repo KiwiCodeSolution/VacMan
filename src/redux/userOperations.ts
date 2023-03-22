@@ -65,7 +65,7 @@ export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string
       return rejectWithValue(response.data.message)
     }
     clearAuthHeader();
-    return true;
+    return false;
   }
 );
 
