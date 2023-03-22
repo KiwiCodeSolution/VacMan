@@ -83,7 +83,7 @@ const userSlice = createSlice({
         state.showStartingPage = true;
       })
       .addCase(logOut.rejected, (state, { payload }) => {
-        if (typeof(payload) === 'string') state.message = payload;
+        if (payload) state.message = payload;
       })
       .addCase(currentUser.pending, (state) => state)
       .addCase(currentUser.fulfilled, (state, { payload }: PayloadAction<IUser>) => {

@@ -59,17 +59,13 @@ export const logIn = createAsyncThunk<IUser, { email: string; password: string }
 export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string }>(
   'user/logout',
   async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get('/auth/logout');
-      console.log('AxiosResponse:', response);
-      clearAuthHeader();
-      return true;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(error.response?.data.message);
-      }
-      return error;
+    const response = await axios.get('/auth/logout');
+    console.log('AxiosResponse:', response);
+    if (response.status !== 200) {
+      return rejectWithValue(response.data.message)
     }
+    clearAuthHeader();
+    return true;
   }
 );
 
