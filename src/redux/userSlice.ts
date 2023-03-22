@@ -65,6 +65,7 @@ const userSlice = createSlice({
       })
       .addCase(logIn.pending, (state) => state)
       .addCase(logIn.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
+        state.isAuth = true;
         state.email = payload.email;
         state.profile = payload.profile;
         state.token = payload.token;

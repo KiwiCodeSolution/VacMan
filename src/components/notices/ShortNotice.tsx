@@ -7,23 +7,23 @@ import { setIsOpenFullNotice, setNoteId } from 'redux/noticeSlice';
 
 export interface IAction {
   name: string;
-  deadline: string;
+  deadline: number;
 }
 
 interface IVacancy {
   _id: string;
-  companyName: string | undefined;
-  position: string | undefined;
-  salary: number | undefined;
-  status: string | undefined;
+  companyName: string;
+  position: string;
+  salary: number;
+  status: string;
   color: string;
   active: number;
-  actions: IAction[] | undefined;
-  archived: boolean | undefined;
+  actions: IAction[];
+  archived: boolean;
 }
 
 export interface IColor {
-  [key: string]: string | undefined;
+  [key: string]: string;
 }
 
 export const colorVariants = {
@@ -50,9 +50,9 @@ const ShortNote = ({ _id, companyName, position, salary, status, color, active, 
     <div>
       {!archived ? (
         <ul
-          className={`border-solid border-2 min-w-[328px] rounded-xl py-4 pr-4 pl-2 gap-y-1 flex flex-col relative mt-4 ${colorVariants[color]}`}
+          className={`shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] min-w-[328px] rounded-xl py-4 pr-4 pl-2 gap-y-1 flex flex-col relative mt-4 ${colorVariants[color]}`}
         >
-          <button className="absolute top-2 right-[14px]" onClick={openFullNotice}>
+          <button className="absolute top-2 right-[14px] hover:scale-110 focus:scale-110" onClick={openFullNotice}>
             <Icons.Eye />
           </button>
           <li className="flex gap-x-2 gap-y-1 font-bold">

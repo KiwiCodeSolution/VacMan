@@ -1,16 +1,19 @@
 import { IAction } from './ShortNotice';
 
 const Actions = ({ name, deadline }: IAction) => {
+  const deadlineFormat = new Date(deadline);
+  const month = deadlineFormat.getMonth() + 1;
+  const newdate = `${deadlineFormat.getDate()}-${month < 10 ? '0' : ''}${month}-${deadlineFormat.getFullYear()}`;
+
   return (
-    <p>Text test</p>
-    // <div className="flex justify-between text-txt-main">
-    //   <div className="flex-1">
-    //     <p>{name} </p>
-    //   </div>
-    //   <div className="flex-none">
-    //     <p className="font-medium mb-2">{deadline}</p>
-    //   </div>
-    // </div>
+    <div className="flex justify-between text-txt-main">
+      <div>
+        <p>{name} </p>
+      </div>
+      <div>
+        <p className="mb-2">{newdate}</p>
+      </div>
+    </div>
   );
 };
 

@@ -4,8 +4,8 @@ import Button from 'components/ui/button';
 import Stars from 'components/ui/stars';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { setIsOpenFullNotice } from 'redux/noticeSlice';
-import { useGetVacanciesQuery } from 'redux/VacancyQueries';
-// import Actions from './Actions';
+import { useGetVacanciesQuery, useDeleteVacancyMutation } from 'redux/VacancyQueries';
+import Actions from './Actions';
 import { colorVariants } from './ShortNotice';
 
 interface INote {
@@ -19,31 +19,24 @@ interface IAction {
 interface IVacancy {
   _id: string;
   companyName: string;
-  companyURL?: string;
-  source?: string;
+  companyURL: string;
+  source: string;
   sourceURL?: string;
   position?: string;
   salary?: number;
   currency?: string;
   notes?: INote[];
-  actions?: IAction[];
+  actions: IAction[];
   status?: string;
   userRank: number;
   archived?: boolean;
   cardColor: string;
-  // | 'app-red'
-  // | 'app-blue'
-  // | 'app-green'
-  // | 'app-pink'
-  // | 'app-smoke'
-  // | 'app-grey'
-  // | 'app-yellow'
-  // | 'app-mustard'
-  // | 'app-orange';
 }
 
 const FullNote = () => {
   const dispatch = useAppDispatch();
+  const [deleteVacancy] = useDeleteVacancyMutation();
+
   const { data: response } = useGetVacanciesQuery();
   // eslint-disable-next-line prettier/prettier
   const { noteId } = useAppSelector((state) => state.notice);
@@ -52,21 +45,28 @@ const FullNote = () => {
   // eslint-disable-next-line no-underscore-dangle, prettier/prettier
   const currentVacansy = vacansies?.filter((vacansy) => vacansy._id === noteId) as IVacancy[];
 
-  const { companyName, position, salary, status, actions, notes, userRank, cardColor, source, sourceURL } =
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { _id, companyName, position, salary, status, notes, userRank, actions, cardColor, source, sourceURL } =
     currentVacansy[0];
 
-  const caudata = Date.now();
-
-  console.log(`Date`, caudata.toString());
+  const onArchive = () => {
+    deleteVacancy(_id);
+    dispatch(setIsOpenFullNotice(false));
+  };
 
   return (
-    <div className={`container mx-auto rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base`}>
+    <div
+      className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]`}
+    >
       <div className="flex mb-10">
-        <button className="flex-none" onClick={() => dispatch(setIsOpenFullNotice(false))}>
+        <button
+          className="flex-none hover:scale-110 focus:scale-110"
+          onClick={() => dispatch(setIsOpenFullNotice(false))}
+        >
           <Icons.ArrowBack />
         </button>
         <span className="grow text-center font-bold text-2xl">{position}</span>
-        <button className="flex-none">
+        <button className="flex-none hover:scale-110 focus:scale-110">
           <Icons.Edit />
         </button>
       </div>
@@ -90,29 +90,33 @@ const FullNote = () => {
         <li className="mb-4 text-txt-main">{status}</li>
         <li className="mb-4">
           <div className="flex justify-between">
-            <div className="flex-1">
+            <div>
               <div className="flex gap-x-2 gap-y-1 mb-2 font-medium">
                 <Icons.Action />
                 <p>Action</p>
               </div>
             </div>
-            <div className="flex-none">
+            <div>
               <p className="font-medium mb-2">Deadline</p>
             </div>
           </div>
-          {/* {actions !== undefined && actions?.length > 0 ? (
-            actions.map(({ name, deadline }) => <Actions key={deadline} name={name} deadline={deadline} />)
-          ) : (
-            <p className="text-txt-main">Call to company</p>
-          )} */}
+          {actions.map(({ name, deadline }) => (
+            <Actions key={deadline} name={name} deadline={deadline} />
+          ))}
         </li>
-        <li className="flex gap-x-2 gap-y-1 mb-2 items-center">
-          <Icons.Link blue /> {source} link 1 - Company Link:
+        <li className="flex gap-x-2 gap-y-1 mb-2 items-center text-txt-link text-base font-semibold">
+          <Icons.Link blue />
+          <a href={source} target="_blank" rel="noreferrer">
+            {source}
+          </a>
         </li>
-        <li className="flex gap-x-2 gap-y-1 mb-6  items-center">
-          <Icons.Link blue /> {sourceURL} link 2 - Sourse:
+        <li className="flex gap-x-2 gap-y-1 mb-6  items-center text-txt-link text-base font-semibold">
+          <Icons.Link blue />
+          <a href={sourceURL} target="_blank" rel="noreferrer">
+            {sourceURL}
+          </a>
         </li>
-        <li className="flex gap-x-2 gap-y-1 mb-2">
+        <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
           <Icons.Notebook large stroke />
           <p>Notebook</p>
         </li>
@@ -126,7 +130,9 @@ const FullNote = () => {
           </div>
         </li>
       </ul>
-      <Button variant="black" /* clickFn={dispatch(useDeleteVacancyMutation({ _id }))} */>Archive</Button>
+      <Button variant="black" clickFn={onArchive}>
+        Archive
+      </Button>
     </div>
   );
 };
