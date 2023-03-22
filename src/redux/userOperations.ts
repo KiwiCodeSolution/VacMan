@@ -60,7 +60,6 @@ export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string
   'user/logout',
   async (_, { rejectWithValue }) => {
     const response = await axios.get('/auth/logout');
-    console.log('AxiosResponse:', response);
     if (response.status !== 200) {
       return rejectWithValue(response.data.message)
     }
@@ -77,7 +76,6 @@ export const currentUser = createAsyncThunk<IUser, undefined, { rejectValue: str
       const persistedToken = user.token;
       setAuthHeader(persistedToken);
       const { data } = await axios.get(`/auth/current?currProfile=${user.currProfile}`);
-      // console.log('currentUser:', data);
       return data;
     } catch (error) {
       if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
