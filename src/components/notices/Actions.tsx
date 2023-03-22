@@ -2,6 +2,7 @@ import { IAction } from './ShortNotice';
 
 const Actions = ({ name, deadline }: IAction) => {
   return (
+    <p>Text test</p>
     // <div className="flex justify-between text-txt-main">
     //   <div className="flex-1">
     //     <p>{name} </p>

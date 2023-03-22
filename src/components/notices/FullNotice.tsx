@@ -4,9 +4,43 @@ import Button from 'components/ui/button';
 import Stars from 'components/ui/stars';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { setIsOpenFullNotice } from 'redux/noticeSlice';
-import { IVacancy, useGetVacanciesQuery } from 'redux/VacancyQueries';
-import Actions from './Actions';
+import { useGetVacanciesQuery } from 'redux/VacancyQueries';
+// import Actions from './Actions';
 import { colorVariants } from './ShortNotice';
+
+interface INote {
+  data: number;
+  text: string;
+}
+interface IAction {
+  name: string;
+  deadline: number;
+}
+interface IVacancy {
+  _id: string;
+  companyName: string;
+  companyURL?: string;
+  source?: string;
+  sourceURL?: string;
+  position?: string;
+  salary?: number;
+  currency?: string;
+  notes?: INote[];
+  actions?: IAction[];
+  status?: string;
+  userRank: number;
+  archived?: boolean;
+  cardColor: string;
+  // | 'app-red'
+  // | 'app-blue'
+  // | 'app-green'
+  // | 'app-pink'
+  // | 'app-smoke'
+  // | 'app-grey'
+  // | 'app-yellow'
+  // | 'app-mustard'
+  // | 'app-orange';
+}
 
 const FullNote = () => {
   const dispatch = useAppDispatch();
@@ -66,11 +100,11 @@ const FullNote = () => {
               <p className="font-medium mb-2">Deadline</p>
             </div>
           </div>
-          {actions !== undefined && actions?.length > 0 ? (
+          {/* {actions !== undefined && actions?.length > 0 ? (
             actions.map(({ name, deadline }) => <Actions key={deadline} name={name} deadline={deadline} />)
           ) : (
             <p className="text-txt-main">Call to company</p>
-          )}
+          )} */}
         </li>
         <li className="flex gap-x-2 gap-y-1 mb-2 items-center">
           <Icons.Link blue /> {source} link 1 - Company Link:
