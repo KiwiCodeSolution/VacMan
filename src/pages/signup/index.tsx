@@ -9,7 +9,7 @@ import './styles.css';
 import { useAppSelector } from 'hooks/reduxHooks';
 
 // для имитации письма подтверждения имейла
-const verificationCode = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTA4NTI5ZjFiNjk5YjQyYTdiZTY2NyIsImlhdCI6MTY3OTQwOTk4NH0.27aw8XADqcqxwUoWLGnnrdBJeyVHy698v97APunYe1I';
+const verificationCode = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTA4NTI5ZjFiNjk5YjQyYTdiZTY2NyIsImlhdCI6MTY3OTQ2NzkyNX0.cnCtUxJSlLUa_82JRqoJQNxxRXDHjf4vkNerBB0y46Y';
 
 export default function SignUpPage() {
   const googleAuth = useGoogleAuth();
@@ -37,7 +37,7 @@ export default function SignUpPage() {
         </div>
       </div>
       <h2 className="mt-20">Имитация письма с сылкой подтверждения..</h2>
-      <a className="border p-1" href={`http://localhost:5173/confirmEmail?verificationCode=${verificationCode}`}>
+      <a className="border p-1" href={`https://localhost:5137/confirmEmail?verificationCode=${verificationCode}`}>
         Подтвердить email
       </a>
     </div>

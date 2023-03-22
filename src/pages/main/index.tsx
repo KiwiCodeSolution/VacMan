@@ -35,13 +35,14 @@ export default function Main() {
       <div className="container mx-auto px-4">
         <Header />
         <hr />
-        <button className="p-2" type="button" onClick={() => dispatch(logOut(false))}>
+        <button className="p-2" type="button" onClick={() => dispatch(logOut())}>
           LogOUT
         </button>
         <hr />
         {isLoading ? <Loader active /> :
           (isError ? <h2>ERROR</h2> :
-            (response ? response.data.map(vacancy => <><p>{vacancy.companyName}</p><br /></>) :
+            // eslint-disable-next-line no-underscore-dangle
+            (response ? response.data.map(vacancy => <div key={vacancy._id}><p>{vacancy.companyName}</p><br /></div>) :
               (<div className="flex items-center justify-items-center">
               <Icons.Todos />
               </div>)

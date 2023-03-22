@@ -24,7 +24,7 @@ const initialState = {
   lang: "eng",
   currProfile: '',
   profile: {} as IProfile,
-  message: '' 
+  message: ''
 };
 
 const userSlice = createSlice({
@@ -68,25 +68,32 @@ const userSlice = createSlice({
         state.email = payload.email;
         state.profile = payload.profile;
         state.token = payload.token;
+        state.currProfile = '';
       })
-      .addCase(logIn.rejected, (state) => state)
+      .addCase(logIn.rejected, (state, { payload }) => {
+        if (payload) state.message = payload;
+      })
       .addCase(logOut.pending, (state) => state)
-      .addCase(logOut.fulfilled, (state, action) => {
-        state.isAuth = action.payload;
+      .addCase(logOut.fulfilled, (state, { payload }) => {
+        state.isAuth = payload;
         state.token = '';
         state.email = '';
         state.currProfile = '';
         state.profile = {} as IProfile;
         state.showStartingPage = true;
       })
-      .addCase(logOut.rejected, (state) => state)
+      .addCase(logOut.rejected, (state, { payload }) => {
+        if (typeof(payload) === 'string') state.message = payload;
+      })
       .addCase(currentUser.pending, (state) => state)
       .addCase(currentUser.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
         state.email = payload.email;
         state.profile = payload.profile;
         state.token = payload.token;
       })
-      .addCase(currentUser.rejected, (state) => state)
+      .addCase(currentUser.rejected, (state, { payload }) => {
+        if (payload) state.message = payload;
+      })
       .addCase(emailVerify.pending, (state) => state)
       .addCase(emailVerify.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
         state.email = payload.email;

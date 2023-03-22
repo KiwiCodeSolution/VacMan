@@ -21,9 +21,8 @@ export const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-export const registration = createAsyncThunk<string, { message: string, verificationCode: string}, { rejectValue: string | undefined }>(
+export const registration = createAsyncThunk<string, { email: string; password: string }, { rejectValue: string | undefined }>(
   'user/registration',
-  // eslint-disable-next-line consistent-return
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post('/auth/register', credentials);
@@ -31,14 +30,14 @@ export const registration = createAsyncThunk<string, { message: string, verifica
       return response.data.message;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        // console.log(error);
         return rejectWithValue(error.response?.data?.message);
       }
+      return error;
     }
   }
 );
 
-export const logIn = createAsyncThunk<IUser, { email: string; password: string }, { rejectValue: string }>(
+export const logIn = createAsyncThunk<IUser, { email: string; password: string }, { rejectValue: string | undefined }>(
   'user/login',
   async (credentials, { rejectWithValue }) => {
     try {
@@ -48,23 +47,28 @@ export const logIn = createAsyncThunk<IUser, { email: string; password: string }
       console.log(data.user);
       return data.user;
     } catch (error) {
-      console.log((error as Error).message);
-      return rejectWithValue("Can't register. Server error.");
+      if (axios.isAxiosError(error)) {
+        // console.log('AxiosError:', error);
+        return rejectWithValue(error.response?.data?.message);
+      }
+      return error;
     }
   }
 );
 
-export const logOut = createAsyncThunk<boolean, boolean, { rejectValue: string }>(
+export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string }>(
   'user/logout',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get('/auth/logout');
-      console.log(response);
+      console.log('AxiosResponse:', response);
       clearAuthHeader();
-      return false;
+      return true;
     } catch (error) {
-      console.log((error as Error).message);
-      return rejectWithValue('Server error.');
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data.message);
+      }
+      return error;
     }
   }
 );
@@ -77,11 +81,11 @@ export const currentUser = createAsyncThunk<IUser, undefined, { rejectValue: str
       const persistedToken = user.token;
       setAuthHeader(persistedToken);
       const { data } = await axios.get(`/auth/current?currProfile=${user.currProfile}`);
-      console.log('currentUser:', data);
+      // console.log('currentUser:', data);
       return data;
     } catch (error) {
-      console.log((error as Error).message);
-      return rejectWithValue('Server error.');
+      if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
+      return error;
     }
   }
 );
@@ -95,8 +99,8 @@ export const emailVerify = createAsyncThunk<IUser, { verificationCode: string },
       console.log(data);
       return data.user;
     } catch (error) {
-      console.log((error as Error).message);
-      return rejectWithValue('Server error.');
+      if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
+      return error;
     }
   }
 );
