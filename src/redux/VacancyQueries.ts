@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 

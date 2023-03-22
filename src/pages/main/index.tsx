@@ -46,6 +46,7 @@ export default function Main() {
         ) : // eslint-disable-next-line no-underscore-dangle
         response ? (
           response.data.map((vacancy) => (
+            // eslint-disable-next-line no-underscore-dangle
             <div key={vacancy._id}>
               <p>{vacancy.companyName}</p>
               <br />
