@@ -8,8 +8,9 @@ interface INote {
 }
 interface IAction {
   name: string;
-  deadline: number;
+  deadline: string;
 }
+
 export interface IVacancy {
   _id: string;
   companyName: string;
@@ -22,7 +23,7 @@ export interface IVacancy {
   notes?: INote[];
   actions?: IAction[];
   status?: string;
-  userRank?: number;
+  userRank: number;
   archived?: boolean;
   cardColor: string;
   // | 'app-red'

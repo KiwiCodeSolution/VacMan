@@ -5,9 +5,9 @@ import Stars from 'components/ui/stars';
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { setIsOpenFullNotice, setNoteId } from 'redux/noticeSlice';
 
-interface IAction {
+export interface IAction {
   name: string;
-  deadline: number;
+  deadline: string;
 }
 
 interface IVacancy {
@@ -17,35 +17,34 @@ interface IVacancy {
   salary: number | undefined;
   status: string | undefined;
   color: string;
-  active: number | undefined;
+  active: number;
   actions: IAction[] | undefined;
   archived: boolean | undefined;
 }
 
-interface IColor {
+export interface IColor {
   [key: string]: string | undefined;
 }
 
-const ShortNote = ({ _id, companyName, position, salary, status, color, active = 5, actions, archived }: IVacancy) => {
-  console.log(color);
+export const colorVariants = {
+  red: 'bg-app-red',
+  blue: 'bg-app-blue',
+  green: 'bg-app-green',
+  pink: 'bg-app-pink',
+  smoke: 'bg-app-smoke',
+  grey: 'bg-app-grey',
+  yellow: 'bg-app-yellow',
+  mustard: 'bg-app-mustard',
+  orange: 'bg-app-orange',
+} as IColor;
+
+const ShortNote = ({ _id, companyName, position, salary, status, color, active, actions, archived }: IVacancy) => {
   const dispatch = useAppDispatch();
 
   function openFullNotice() {
     dispatch(setIsOpenFullNotice(true));
     dispatch(setNoteId(_id));
   }
-
-  const colorVariants = {
-    red: 'bg-app-red',
-    blue: 'bg-app-blue',
-    green: 'bg-app-green',
-    pink: 'bg-app-pink',
-    smoke: 'bg-app-smoke',
-    grey: 'bg-app-grey',
-    yellow: 'bg-app-yellow',
-    mustard: 'bg-app-mustard',
-    orange: 'bg-app-orange',
-  } as IColor;
 
   return (
     <div>

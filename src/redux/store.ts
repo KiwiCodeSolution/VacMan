@@ -14,6 +14,7 @@ const store = configureStore({
     [vacancyAPI.reducerPath]: vacancyAPI.reducer,
     notice: noticeSlice,
   },
+  // eslint-disable-next-line prettier/prettier
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
