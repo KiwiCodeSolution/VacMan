@@ -22,7 +22,7 @@ const useGoogleAuth = () => {
   const dispatch = useAppDispatch();
 
   return useGoogleLogin({
-    onSuccess: async (resp) => {
+    onSuccess: async resp => {
       const userData = await getGoogleUserData(resp.access_token);
       const { data } = await axios.post(`${serverURL}/auth/googleAuth`, { userData });
       setAuthHeader(data.token);
@@ -30,7 +30,7 @@ const useGoogleAuth = () => {
       dispatch(setUser(data));
       dispatch(setIsAuth(true));
     },
-    onError: (err) => console.log('error:', err),
+    onError: err => console.log('error:', err),
   });
 };
 

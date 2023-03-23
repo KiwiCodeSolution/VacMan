@@ -39,7 +39,7 @@ export default function Main() {
       {!isOpenFullNote && (
         <>
           <Header /> <hr />
-          <button className="p-2" type="button" onClick={() => dispatch(logOut(false))}>
+          <button className="p-2" type="button" onClick={() => dispatch(logOut())}>
             LogOUT
           </button>
           <hr />
