@@ -21,9 +21,8 @@ const initialState = {
   onBoarding: true,
   isLoading: false,
   showStartingPage: true,
-  lang: 'eng',
   currProfile: '',
-  profile: {} as IProfile,
+  profile: {avatar: "", phoneNumber: "", position: "", lang: 'eng', theme: ""} as IProfile,
   message: '',
 };
 
@@ -44,7 +43,10 @@ const userSlice = createSlice({
       state.showStartingPage = payload;
     },
     setLang(state, { payload }: PayloadAction<'eng' | 'ru' | 'ukr'>) {
-      state.lang = payload;
+      state.profile.lang = payload;
+    },
+    setMessage(state, { payload }: {payload: string}) {
+      state.message = payload;
     },
     setUser(state, { payload }: PayloadAction<IUser>) {
       state.email = payload.email;
@@ -70,6 +72,7 @@ const userSlice = createSlice({
         state.profile = payload.profile;
         state.token = payload.token;
         state.currProfile = '';
+        state.message = '';
       })
       .addCase(logIn.rejected, (state, { payload }) => {
         if (payload) state.message = payload;
@@ -106,5 +109,5 @@ const userSlice = createSlice({
 });
 
 export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>
-export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setLang, setUser } = userSlice.actions;
+export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setLang, setUser, setMessage } = userSlice.actions;
 export default userSlice.reducer;

@@ -10,6 +10,7 @@ import Header from 'components/Header';
 import Loader from 'components/ui/loader';
 import ListNotes from 'components/notices/ListNotices';
 import FullNote from 'components/notices/FullNotice';
+import { setMessage } from 'redux/userSlice';
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -29,9 +30,12 @@ export default function Main() {
       position: `FullStack ${Math.floor(Math.random() * 98 + 1)}`,
       salary: Math.floor(Math.random() * 10 + 5) * 100,
       userRank: Math.floor(Math.random() * 4 + 1),
-      cardColor: `${colors[Math.floor(Math.random() * 6 + 1)]}`,
+      cardColor: `${colors[Math.floor(Math.random() * 6)]}`,
     };
-    addVacancy(vacancy);
+    addVacancy(vacancy)
+      .unwrap()
+      .then(payload => dispatch(setMessage(payload.message)))
+      .catch(error => dispatch(setMessage(error.data.message)));
   };
 
   return (

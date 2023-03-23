@@ -81,15 +81,15 @@ export const vacancyAPI = createApi({
     //   query: id => ({ url: `vacancy/${id}`, method: 'GET' }),
     //   providesTags: ['vacancies'],
     // }),
-    addVacancy: builder.mutation<IVacancy, Partial<IVacancy>>({
+    addVacancy: builder.mutation<{message: string, data: IVacancy}, Partial<IVacancy>>({
       query: (data) => ({ url: 'vacancy', method: 'POST', data }),
       invalidatesTags: ['vacancies'],
     }),
-    updateVacancy: builder.mutation<IVacancy, Partial<IVacancy>>({
+    updateVacancy: builder.mutation<{message: string, data: IVacancy}, Partial<IVacancy>>({
       query: (data) => ({ url: `vacancy`, method: 'PUT', data }),
       invalidatesTags: ['vacancies'],
     }),
-    deleteVacancy: builder.mutation({
+    deleteVacancy: builder.mutation<{message: string}, {_id: string}>({
       query: (_id) => ({ url: `vacancy/${_id}`, method: 'DELETE' }),
       invalidatesTags: ['vacancies'],
     }),
