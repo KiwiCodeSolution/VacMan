@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useAppDispatch } from './reduxHooks';
 import { setIsAuth, setUser } from '../redux/userSlice';
 import { useGoogleLogin } from '@react-oauth/google';

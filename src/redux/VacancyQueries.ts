@@ -10,7 +10,7 @@ interface IAction {
   name: string;
   deadline: number;
 }
-interface IVacancy {
+export interface IVacancy {
   _id: string;
   companyName: string;
   companyURL?: string;
