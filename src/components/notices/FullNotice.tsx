@@ -3,7 +3,7 @@ import Button from 'components/ui/button';
 
 import Stars from 'components/ui/stars';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
-import { setIsOpenFullNotice } from 'redux/noticeSlice';
+import { setIsOpenFullNotice, setNoteId } from 'redux/noticeSlice';
 import { useGetVacanciesQuery, useDeleteVacancyMutation } from 'redux/VacancyQueries';
 import Actions from './Actions';
 import { colorVariants } from './ShortNotice';
@@ -44,7 +44,6 @@ const FullNote = () => {
 
   // eslint-disable-next-line no-underscore-dangle, prettier/prettier
   const currentVacansy = vacancies?.find((vacansy) => vacansy._id === noteId) as IVacancy;
-  console.log(currentVacansy);
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { _id, companyName, position, salary, status, notes, userRank, actions, cardColor, source, sourceURL } =
@@ -55,15 +54,17 @@ const FullNote = () => {
     dispatch(setIsOpenFullNotice(false));
   };
 
+  const onClose = () => {
+    dispatch(setIsOpenFullNotice(false));
+    dispatch(setNoteId(''));
+  };
+
   return (
     <div
       className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]`}
     >
       <div className="flex mb-10">
-        <button
-          className="flex-none hover:scale-110 focus:scale-110"
-          onClick={() => dispatch(setIsOpenFullNotice(false))}
-        >
+        <button className="flex-none hover:scale-110 focus:scale-110" onClick={onClose}>
           <Icons.ArrowBack />
         </button>
         <span className="grow text-center font-bold text-2xl">{position}</span>
