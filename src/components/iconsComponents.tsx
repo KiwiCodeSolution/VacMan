@@ -2,18 +2,18 @@
 
 const colors = {
   main: '#5b5b69',
-  white: '#ffffff',
+  white: '#fffdf4',
   grey: '#d9d9d9',
   black: '#040c0c',
+  orange: '#f0be6c',
   link: '#3ca4ec',
 };
 
 export const Rubber = () => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill={colors.main} xmlns="http://www.w3.org/2000/svg">
       <path
         d="M14.2277 15.2279L9.9847 10.9849L4.3277 16.6419L6.4497 18.7629C7.01228 19.3254 7.77521 19.6413 8.5707 19.6413C9.36619 19.6413 10.1291 19.3254 10.6917 18.7629L14.2277 15.2279ZM12.7837 19.4999H15.4997C15.7649 19.4999 16.0193 19.6053 16.2068 19.7928C16.3943 19.9804 16.4997 20.2347 16.4997 20.4999C16.4997 20.7652 16.3943 21.0195 16.2068 21.2071C16.0193 21.3946 15.7649 21.4999 15.4997 21.4999H4.4997C4.24617 21.4997 4.00218 21.4032 3.81711 21.2299C3.63203 21.0567 3.51968 20.8196 3.50278 20.5666C3.48588 20.3136 3.5657 20.0637 3.72609 19.8673C3.88647 19.671 4.11545 19.5429 4.3667 19.5089L2.9137 18.0559C2.53876 17.6809 2.32812 17.1723 2.32812 16.6419C2.32812 16.1116 2.53876 15.603 2.9137 15.2279L14.2277 3.91394C14.6028 3.539 15.1114 3.32837 15.6417 3.32837C16.172 3.32837 16.6806 3.539 17.0557 3.91394L21.2997 8.15694C21.6746 8.532 21.8853 9.04061 21.8853 9.57094C21.8853 10.1013 21.6746 10.6099 21.2997 10.9849L12.7837 19.4999Z"
-        fill="#5B5B69"
       />
     </svg>
   );
@@ -203,7 +203,7 @@ export const Funnel = () => (
   </svg>
 );
 export const FalseInCircle = () => (
-  <svg width="140" height="140" viewBox="0 0 140 140" fill="#F0BE6C" xmlns="http://www.w3.org/2000/svg">
+  <svg width="140" height="140" viewBox="0 0 140 140" fill={colors.orange} xmlns="http://www.w3.org/2000/svg">
     <path d="M126 70C126 100.928 100.928 126 70 126C39.0721 126 14 100.928 14 70C14 39.0721 39.0721 14 70 14C100.928 14 126 39.0721 126 70ZM22.4 70C22.4 96.2888 43.7112 117.6 70 117.6C96.2888 117.6 117.6 96.2888 117.6 70C117.6 43.7112 96.2888 22.4 70 22.4C43.7112 22.4 22.4 43.7112 22.4 70Z" />
     <path d="M63.5312 52.1875L69.9688 63.4062L76.5312 52.1875H84.8125L74.5625 68.7812L85.2188 86H76.9375L70.0625 74.3125L63.1875 86H54.875L65.5 68.7812L55.2812 52.1875H63.5312Z" />
   </svg>
@@ -214,7 +214,7 @@ export const OkInCircle = () => (
     height="138"
     viewBox="0 0 138 138"
     fill="none"
-    stroke="#F0BE6C"
+    stroke={colors.orange}
     strokeWidth="8"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -258,7 +258,7 @@ export const ArrowBack = ({ white }: { white?: boolean }) => (
     width="32"
     height="32"
     viewBox="0 0 32 32"
-    fill={white ? '#FFFDF4' : '#040C0C'}
+    fill={white ? colors.white : colors.black}
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M18.4396 25.3334C18.2404 25.3341 18.0436 25.2901 17.8636 25.2047C17.6836 25.1193 17.5251 24.9947 17.3996 24.84L10.9596 16.84C10.7635 16.6015 10.6562 16.3022 10.6562 15.9934C10.6562 15.6845 10.7635 15.3853 10.9596 15.1467L17.6262 7.14671C17.8526 6.87442 18.1778 6.70319 18.5303 6.67068C18.8829 6.63817 19.2339 6.74706 19.5062 6.97338C19.7785 7.19969 19.9498 7.52491 19.9823 7.87748C20.0148 8.23005 19.9059 8.58109 19.6796 8.85338L13.7196 16L19.4796 23.1467C19.6426 23.3424 19.7462 23.5807 19.778 23.8335C19.8099 24.0862 19.7686 24.3428 19.6592 24.5728C19.5498 24.8028 19.3768 24.9967 19.1607 25.1315C18.9445 25.2663 18.6943 25.3364 18.4396 25.3334Z" />
@@ -269,7 +269,7 @@ export const ArrowForward = ({ white }: { white?: boolean }) => (
     width="10"
     height="19"
     viewBox="0 0 10 19"
-    fill={white ? '#FFFDF4' : '#040C0C'}
+    fill={white ? colors.white : colors.black}
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M2.21668 0.331663C2.41588 0.330986 2.61269 0.374949 2.79266 0.46032C2.97263 0.545692 3.13119 0.670303 3.25668 0.824997L9.69668 8.825C9.89279 9.06357 10 9.36283 10 9.67166C10 9.9805 9.89279 10.2798 9.69668 10.5183L3.03002 18.5183C2.8037 18.7906 2.47848 18.9619 2.12592 18.9944C1.77335 19.0269 1.42231 18.918 1.15002 18.6917C0.877728 18.4653 0.706496 18.1401 0.673989 17.7876C0.641483 17.435 0.750365 17.084 0.976684 16.8117L6.93668 9.665L1.17668 2.51833C1.01364 2.32262 0.91007 2.0843 0.878231 1.83156C0.846392 1.57883 0.887614 1.32227 0.997022 1.09223C1.10643 0.862192 1.27944 0.668312 1.49559 0.533524C1.71174 0.398737 1.96197 0.328688 2.21668 0.331663Z" />
@@ -305,7 +305,7 @@ export const MenuHome = ({ active }: { active?: boolean }) => (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M3 15.9998L14.9393 4.06043C15.5251 3.47465 16.4749 3.47465 17.0607 4.06043L29 15.9998M6 12.9998V26.4998C6 27.3282 6.67157 27.9998 7.5 27.9998H13V21.4998C13 20.6713 13.6716 19.9998 14.5 19.9998H17.5C18.3284 19.9998 19 20.6713 19 21.4998V27.9998H24.5C25.3284 27.9998 26 27.3282 26 26.4998V12.9998M11 27.9998H22"
-      stroke={active ? '#ffffff' : '#5B5B69'}
+      stroke={active ? colors.white : colors.main}
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -338,7 +338,7 @@ export const MenuCalendar = ({ active }: { active?: boolean }) => (
     height="32"
     viewBox="0 0 32 32"
     fill="none"
-    stroke={active ? 'white' : '#5B5B69'}
+    stroke={active ? colors.white : colors.main}
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
@@ -355,7 +355,7 @@ export const MenuSettings = ({ active }: { active?: boolean }) => (
     height="32"
     viewBox="0 0 32 32"
     fill="none"
-    stroke={active ? 'white' : '#5B5B69'}
+    stroke={active ? colors.white : colors.main}
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -367,17 +367,17 @@ export const MenuSettings = ({ active }: { active?: boolean }) => (
 );
 
 export const Plus = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill={colors.white} xmlns="http://www.w3.org/2000/svg">
     <path d="M19 12.998H13V18.998H11V12.998H5V10.998H11V4.99805H13V10.998H19V12.998Z" />
   </svg>
 );
 
 //      Profile
 export const Avatar = () => (
-  <svg width="59" height="59" viewBox="0 0 59 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="29.7586" cy="29.7586" r="28.4828" fill={colors.main} strokeWidth="1.44828" />
+  <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="30" cy="30" r="30" fill={colors.main} strokeWidth="1.5" />
     <mask id="mask0_832_53770" maskUnits="userSpaceOnUse" x="2" y="2" width="56" height="56">
-      <circle cx="29.7586" cy="29.7586" r="27.7586" fill="#94A3B8" />
+      <circle cx="30" cy="30" r="28" fill="#94A3B8" />
     </mask>
     <g mask="url(#mask0_832_53770)">
       <path
@@ -388,7 +388,7 @@ export const Avatar = () => (
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="29.9968" cy="23.7273" r="12.7273" fill={colors.grey} />
+      <circle cx="30" cy="24" r="13" fill={colors.grey} />
     </g>
   </svg>
 );
@@ -397,14 +397,14 @@ export const Camera = () => (
     <circle cx="16" cy="16" r="16" />
     <path
       d="M9 11H10C10.5304 11 11.0391 10.7893 11.4142 10.4142C11.7893 10.0391 12 9.53043 12 9C12 8.73478 12.1054 8.48043 12.2929 8.29289C12.4804 8.10536 12.7348 8 13 8H19C19.2652 8 19.5196 8.10536 19.7071 8.29289C19.8946 8.48043 20 8.73478 20 9C20 9.53043 20.2107 10.0391 20.5858 10.4142C20.9609 10.7893 21.4696 11 22 11H23C23.5304 11 24.0391 11.2107 24.4142 11.5858C24.7893 11.9609 25 12.4696 25 13V22C25 22.5304 24.7893 23.0391 24.4142 23.4142C24.0391 23.7893 23.5304 24 23 24H9C8.46957 24 7.96086 23.7893 7.58579 23.4142C7.21071 23.0391 7 22.5304 7 22V13C7 12.4696 7.21071 11.9609 7.58579 11.5858C7.96086 11.2107 8.46957 11 9 11Z"
-      stroke="white"
+      stroke={colors.white}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M16 20C17.6569 20 19 18.6569 19 17C19 15.3431 17.6569 14 16 14C14.3431 14 13 15.3431 13 17C13 18.6569 14.3431 20 16 20Z"
-      stroke="white"
+      stroke={colors.white}
       strokeWidth="2.75"
       strokeLinecap="round"
       strokeLinejoin="round"

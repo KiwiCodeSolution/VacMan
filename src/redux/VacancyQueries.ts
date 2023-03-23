@@ -10,21 +10,21 @@ interface IAction {
   name: string;
   deadline: number;
 }
-interface IVacancy {
+export interface IVacancy {
   _id: string;
   companyName: string;
-  companyURL?: string;
-  source?: string;
-  sourceURL?: string;
-  position?: string;
-  salary?: number;
-  currency?: string;
-  notes?: INote[];
-  actions?: IAction[];
-  status?: string;
-  userRank?: number;
-  archived?: boolean;
-  cardColor?: string;
+  companyURL: string;
+  source: string;
+  sourceURL: string;
+  position: string;
+  salary: number;
+  currency: string;
+  notes: INote[];
+  actions: IAction[];
+  status: string;
+  userRank: number;
+  archived: boolean;
+  cardColor: string;
   // | 'app-red'
   // | 'app-blue'
   // | 'app-green'
@@ -90,7 +90,7 @@ export const vacancyAPI = createApi({
       invalidatesTags: ['vacancies'],
     }),
     deleteVacancy: builder.mutation({
-      query: (_id) => ({ url: `vacancy/${_id}`, method: 'PUT' }),
+      query: (_id) => ({ url: `vacancy/${_id}`, method: 'DELETE' }),
       invalidatesTags: ['vacancies'],
     }),
   }),
