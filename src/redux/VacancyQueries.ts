@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 
@@ -36,7 +37,10 @@ interface IVacancy {
 }
 
 // eslint-disable-next-line prettier/prettier
-const axiosBaseQuery = ({ baseUrl }: { baseUrl: string } = {baseUrl: ''}): BaseQueryFn<
+const axiosBaseQuery =
+  (
+    { baseUrl }: { baseUrl: string } = { baseUrl: '' }
+  ): BaseQueryFn<
     {
       url: string;
       method: AxiosRequestConfig['method'];
@@ -67,7 +71,7 @@ export const vacancyAPI = createApi({
   reducerPath: 'vacancies',
   baseQuery: axiosBaseQuery({ baseUrl }),
   tagTypes: ['vacancies'],
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getVacancies: builder.query<{ data: IVacancy[] }, void>({
       query: () => ({ url: 'vacancy', method: 'GET' }),
       // keepUnusedDataFor: 3,
@@ -78,15 +82,15 @@ export const vacancyAPI = createApi({
     //   providesTags: ['vacancies'],
     // }),
     addVacancy: builder.mutation<IVacancy, Partial<IVacancy>>({
-      query: data => ({ url: 'vacancy', method: 'POST', data }),
+      query: (data) => ({ url: 'vacancy', method: 'POST', data }),
       invalidatesTags: ['vacancies'],
     }),
     updateVacancy: builder.mutation<IVacancy, Partial<IVacancy>>({
-      query: data => ({ url: `vacancy`, method: 'PUT', data }),
+      query: (data) => ({ url: `vacancy`, method: 'PUT', data }),
       invalidatesTags: ['vacancies'],
     }),
     deleteVacancy: builder.mutation({
-      query: _id => ({ url: `vacancy/${_id}`, method: 'PUT' }),
+      query: (_id) => ({ url: `vacancy/${_id}`, method: 'PUT' }),
       invalidatesTags: ['vacancies'],
     }),
   }),

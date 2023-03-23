@@ -21,21 +21,22 @@ export const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-export const registration = createAsyncThunk<string, { email: string; password: string }, { rejectValue: string | undefined }>(
-  'user/registration',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const response = await axios.post('/auth/register', credentials);
-      console.log('AsyncThunk: Congratulations! You are registered!');
-      return response.data.message;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(error.response?.data?.message);
-      }
-      return error;
+export const registration = createAsyncThunk<
+  string,
+  { email: string; password: string },
+  { rejectValue: string | undefined }
+>('user/registration', async (credentials, { rejectWithValue }) => {
+  try {
+    const response = await axios.post('/auth/register', credentials);
+    console.log('AsyncThunk: Congratulations! You are registered!');
+    return response.data.message;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue(error.response?.data?.message);
     }
+    return error;
   }
-);
+});
 
 export const logIn = createAsyncThunk<IUser, { email: string; password: string }, { rejectValue: string | undefined }>(
   'user/login',
@@ -61,7 +62,7 @@ export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string
   async (_, { rejectWithValue }) => {
     const response = await axios.get('/auth/logout');
     if (response.status !== 200) {
-      return rejectWithValue(response.data.message)
+      return rejectWithValue(response.data.message);
     }
     clearAuthHeader();
     return false;

@@ -13,7 +13,7 @@ const verificationCode = ''; // в кавычки вставьте свой то
 
 export default function SignUpPage() {
   const googleAuth = useGoogleAuth();
-  const { isLoading } = useAppSelector(state => state.user);
+  const { isLoading } = useAppSelector((state) => state.user);
 
   return (
     <div className="container flex flex-col mx-auto px-4 py-5 h-screen">

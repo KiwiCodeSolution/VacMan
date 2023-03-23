@@ -23,8 +23,8 @@ module.exports = {
       'app-grey': '#9c9c9c',
       'app-yellow': '#fcfca4',
       'app-mustard': '#e1e433',
-      'app-orange': '#f0be6c'
-    }
+      'app-orange': '#f0be6c',
+    },
   },
   plugins: [],
 };

@@ -21,10 +21,10 @@ const initialState = {
   onBoarding: true,
   isLoading: false,
   showStartingPage: true,
-  lang: "eng",
+  lang: 'eng',
   currProfile: '',
   profile: {} as IProfile,
-  message: ''
+  message: '',
 };
 
 const userSlice = createSlice({
@@ -43,7 +43,7 @@ const userSlice = createSlice({
     setShowStartingPage(state, { payload }: PayloadAction<boolean>) {
       state.showStartingPage = payload;
     },
-    setLang(state, { payload }: PayloadAction<"eng" | "ru" | "ukr">) {
+    setLang(state, { payload }: PayloadAction<'eng' | 'ru' | 'ukr'>) {
       state.lang = payload;
     },
     setUser(state, { payload }: PayloadAction<IUser>) {
@@ -65,6 +65,7 @@ const userSlice = createSlice({
       })
       .addCase(logIn.pending, (state) => state)
       .addCase(logIn.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
+        state.isAuth = true;
         state.email = payload.email;
         state.profile = payload.profile;
         state.token = payload.token;
