@@ -5,13 +5,13 @@ import ShortNote from './ShortNotice';
 // eslint-disable-next-line prettier/prettier
 const ListNotes = () => {
   const { data: response } = useGetVacanciesQuery();
-  const vacansies = response?.data;
+  const vacancies = response?.data;
 
   return (
     <div className="container mx-auto">
-      {vacansies ? (
+      {vacancies ? (
         <div>
-          {vacansies.map(({ _id, companyName, position, salary, status, cardColor, actions, archived, userRank }) => (
+          {vacancies.map(({ _id, companyName, position, salary, status, cardColor, actions, archived, userRank }) => (
             <ShortNote
               key={_id}
               _id={_id}

@@ -40,14 +40,15 @@ const FullNote = () => {
   const { data: response } = useGetVacanciesQuery();
   // eslint-disable-next-line prettier/prettier
   const { noteId } = useAppSelector((state) => state.notice);
-  const vacansies = response?.data;
+  const vacancies = response?.data;
 
   // eslint-disable-next-line no-underscore-dangle, prettier/prettier
-  const currentVacansy = vacansies?.filter((vacansy) => vacansy._id === noteId) as IVacancy[];
+  const currentVacansy = vacancies?.find((vacansy) => vacansy._id === noteId) as IVacancy;
+  console.log(currentVacansy);
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { _id, companyName, position, salary, status, notes, userRank, actions, cardColor, source, sourceURL } =
-    currentVacansy[0];
+    currentVacansy;
 
   const onArchive = () => {
     deleteVacancy(_id);
