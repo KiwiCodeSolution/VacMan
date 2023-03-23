@@ -10,7 +10,7 @@ export interface IAction {
   deadline: number;
 }
 
-interface IVacancy {
+interface IShortVacancy {
   _id: string;
   companyName: string;
   position: string;
@@ -38,7 +38,7 @@ export const colorVariants = {
   orange: 'bg-app-orange',
 } as IColor;
 
-const ShortNote = ({ _id, companyName, position, salary, status, color, active, actions, archived }: IVacancy) => {
+const ShortNote = ({ _id, companyName, position, salary, status, color, active, actions, archived }: IShortVacancy) => {
   const dispatch = useAppDispatch();
 
   function openFullNotice() {

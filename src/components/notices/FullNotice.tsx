@@ -4,38 +4,13 @@ import Button from 'components/ui/button';
 import Stars from 'components/ui/stars';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { setIsOpenFullNotice, setNoteId } from 'redux/noticeSlice';
-import { useGetVacanciesQuery, useDeleteVacancyMutation } from 'redux/VacancyQueries';
+import { IVacancy, useGetVacanciesQuery, useUpdateVacancyMutation } from 'redux/VacancyQueries';
 import Actions from './Actions';
 import { colorVariants } from './ShortNotice';
 
-interface INote {
-  data: number;
-  text: string;
-}
-interface IAction {
-  name: string;
-  deadline: number;
-}
-interface IVacancy {
-  _id: string;
-  companyName: string;
-  companyURL: string;
-  source: string;
-  sourceURL?: string;
-  position?: string;
-  salary?: number;
-  currency?: string;
-  notes?: INote[];
-  actions: IAction[];
-  status?: string;
-  userRank: number;
-  archived?: boolean;
-  cardColor: string;
-}
-
 const FullNote = () => {
   const dispatch = useAppDispatch();
-  const [deleteVacancy] = useDeleteVacancyMutation();
+  const [updateVacancy] = useUpdateVacancyMutation();
 
   const { data: response } = useGetVacanciesQuery();
   // eslint-disable-next-line prettier/prettier
@@ -46,15 +21,27 @@ const FullNote = () => {
   const currentVacansy = vacancies?.find((vacansy) => vacansy._id === noteId) as IVacancy;
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { _id, companyName, position, salary, status, notes, userRank, actions, cardColor, source, sourceURL } =
-    currentVacansy;
-
+  const {
+    _id,
+    companyName,
+    position,
+    salary,
+    status,
+    notes,
+    userRank,
+    actions,
+    cardColor,
+    source,
+    sourceURL,
+    // archived,
+    // companyURL,
+  } = currentVacansy;
   const onArchive = () => {
-    deleteVacancy(_id);
+    updateVacancy({ _id, actions });
     dispatch(setIsOpenFullNotice(false));
   };
 
-  const onClose = () => {
+  const closeFullNotice = () => {
     dispatch(setIsOpenFullNotice(false));
     dispatch(setNoteId(''));
   };
@@ -64,7 +51,7 @@ const FullNote = () => {
       className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]`}
     >
       <div className="flex mb-10">
-        <button className="flex-none hover:scale-110 focus:scale-110" onClick={onClose}>
+        <button className="flex-none hover:scale-110 focus:scale-110" onClick={closeFullNotice}>
           <Icons.ArrowBack />
         </button>
         <span className="grow text-center font-bold text-2xl">{position}</span>
