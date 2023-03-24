@@ -39,7 +39,7 @@ const FullNote = () => {
   } = currentVacancy;
 
   const onArchive = () => {
-    updateVacancy({ ...currentVacancy, archived: true });
+    updateVacancy({ _id, archived: true });
     dispatch(setIsOpenFullNotice(false));
   };
 
