@@ -4,20 +4,11 @@ import Stars from 'components/ui/stars';
 
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { setIsOpenFullNotice, setNoteId } from 'redux/noticeSlice';
-import { IAction } from 'redux/VacancyQueries';
+import { IVacancy } from 'redux/VacancyQueries';
 
-interface IShortVacancy {
-  _id: string;
-  companyName: string;
-  position: string;
-  salary: number;
-  status: string;
-  color: string;
-  active: number;
-  actions: IAction[];
-  archived: boolean;
-  companyURL?: string;
-}
+type VacancyProps = {
+  shortVacancy: IVacancy;
+};
 
 export interface IColor {
   [key: string]: string;
@@ -35,19 +26,12 @@ export const colorVariants = {
   orange: 'bg-app-orange',
 } as IColor;
 
-const ShortNote = ({
-  _id,
-  companyName,
-  position,
-  salary,
-  status,
-  color,
-  active,
-  actions,
-  archived,
-  companyURL,
-}: IShortVacancy) => {
+const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const dispatch = useAppDispatch();
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { _id, companyName, position, salary, status, cardColor, userRank, actions, archived, companyURL } =
+    shortVacancy;
 
   function openFullNotice() {
     dispatch(setIsOpenFullNotice(true));
@@ -58,7 +42,7 @@ const ShortNote = ({
     <div>
       {!archived ? (
         <ul
-          className={`shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] min-w-[328px] rounded-xl py-4 pr-4 pl-2 gap-y-1 flex flex-col relative mt-4 ${colorVariants[color]}`}
+          className={`shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] min-w-[328px] rounded-xl py-4 pr-4 pl-2 gap-y-1 flex flex-col relative mt-4 ${colorVariants[cardColor]}`}
         >
           <button className="absolute top-2 right-[14px] hover:scale-110 focus:scale-110" onClick={openFullNotice}>
             <Icons.Eye />
@@ -94,7 +78,7 @@ const ShortNote = ({
             <p>{salary}$</p>
           </li>
           <li className="absolute bottom-2 right-[14px]">
-            <Stars amount={5} active={active} />
+            <Stars amount={5} active={userRank} />
           </li>
         </ul>
       ) : null}
