@@ -85,9 +85,8 @@ export const vacancyAPI = createApi({
       query: (data) => ({ url: 'vacancy', method: 'POST', data }),
       invalidatesTags: ['vacancies'],
     }),
-    updateVacancy: builder.mutation<IVacancy, Partial<IVacancy>>({
-      // eslint-disable-next-line no-sequences
-      query: (data) => (console.log(data), { url: `vacancy`, method: 'PUT', data }),
+    updateVacancy: builder.mutation<{ message: string; data: IVacancy }, Partial<IVacancy>>({
+      query: (data) => ({ url: `vacancy`, method: 'PUT', data }),
       invalidatesTags: ['vacancies'],
     }),
     deleteVacancy: builder.mutation({
