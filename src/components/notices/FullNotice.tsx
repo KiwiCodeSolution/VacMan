@@ -19,7 +19,7 @@ const FullNote = () => {
   const vacancies = response?.data;
 
   // eslint-disable-next-line no-underscore-dangle, prettier/prettier
-  const currentVacansy = vacancies?.find((vacansy) => vacansy._id === noteId) as IVacancy;
+  const currentVacancy = vacancies?.find((vacancy) => vacancy._id === noteId) as IVacancy;
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const {
@@ -36,10 +36,10 @@ const FullNote = () => {
     notes,
     userRank,
     cardColor,
-  } = currentVacansy;
+  } = currentVacancy;
 
   const onArchive = () => {
-    updateVacancy({ ...currentVacansy, archived: true });
+    updateVacancy({ ...currentVacancy, archived: true });
     dispatch(setIsOpenFullNotice(false));
   };
 
