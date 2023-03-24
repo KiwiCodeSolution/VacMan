@@ -6,14 +6,25 @@ import type { IVacancy } from 'redux/VacancyQueries';
 // eslint-disable-next-line prettier/prettier
 const ListNotes = () => {
   const { data: response } = useGetVacanciesQuery();
-  const vacansies = response?.data;
+  const vacancies = response?.data;
 
   return (
     <div className="container mx-auto">
-      {vacansies ? (
+      {vacancies ? (
         <div>
-          {vacansies.map(
-            ({ _id, companyName, position, salary, status, cardColor, actions, archived, userRank }: IVacancy) => (
+          {vacancies.map(
+            ({
+              _id,
+              companyName,
+              position,
+              salary,
+              status,
+              cardColor,
+              actions,
+              archived,
+              userRank,
+              companyURL,
+            }: IVacancy) => (
               <ShortNote
                 key={_id}
                 _id={_id}
@@ -25,6 +36,7 @@ const ListNotes = () => {
                 status={status}
                 actions={actions}
                 archived={archived}
+                companyURL={companyURL}
               />
             )
           )}

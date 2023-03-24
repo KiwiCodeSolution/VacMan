@@ -1,4 +1,4 @@
-import { IAction } from './ShortNotice';
+import { IAction } from 'redux/VacancyQueries';
 
 const Actions = ({ name, deadline }: IAction) => {
   const deadlineFormat = new Date(deadline);

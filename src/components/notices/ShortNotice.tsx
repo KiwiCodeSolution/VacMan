@@ -4,11 +4,7 @@ import Stars from 'components/ui/stars';
 
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { setIsOpenFullNotice, setNoteId } from 'redux/noticeSlice';
-
-export interface IAction {
-  name: string;
-  deadline: number;
-}
+import { IAction } from 'redux/VacancyQueries';
 
 interface IShortVacancy {
   _id: string;
@@ -20,6 +16,7 @@ interface IShortVacancy {
   active: number;
   actions: IAction[];
   archived: boolean;
+  companyURL?: string;
 }
 
 export interface IColor {
@@ -38,7 +35,18 @@ export const colorVariants = {
   orange: 'bg-app-orange',
 } as IColor;
 
-const ShortNote = ({ _id, companyName, position, salary, status, color, active, actions, archived }: IShortVacancy) => {
+const ShortNote = ({
+  _id,
+  companyName,
+  position,
+  salary,
+  status,
+  color,
+  active,
+  actions,
+  archived,
+  companyURL,
+}: IShortVacancy) => {
   const dispatch = useAppDispatch();
 
   function openFullNotice() {
@@ -57,7 +65,13 @@ const ShortNote = ({ _id, companyName, position, salary, status, color, active, 
           </button>
           <li className="flex gap-x-2 gap-y-1 font-bold">
             <Icons.CompanyName />
-            <p>{companyName}</p>
+            {companyURL ? (
+              <a href={companyURL} target="_blank" rel="noreferrer">
+                {companyName}
+              </a>
+            ) : (
+              <p>{companyName}</p>
+            )}
           </li>
           <li className="flex gap-x-2 gap-y-1">
             <Icons.Position large />
@@ -65,7 +79,11 @@ const ShortNote = ({ _id, companyName, position, salary, status, color, active, 
           </li>
           <li className="flex gap-x-2 gap-y-1">
             <Icons.Action />
-            {actions?.join(', ')}
+            {actions ? (
+              actions.map(({ name, deadline }) => <span key={deadline}>{name}, </span>)
+            ) : (
+              <p>You have no action</p>
+            )}
           </li>
           <li className="flex gap-x-2 gap-y-1">
             <Icons.Stage />

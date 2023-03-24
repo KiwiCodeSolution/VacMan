@@ -6,7 +6,7 @@ interface INote {
   data: number;
   text: string;
 }
-interface IAction {
+export interface IAction {
   name: string;
   deadline: number;
 }
@@ -86,7 +86,8 @@ export const vacancyAPI = createApi({
       invalidatesTags: ['vacancies'],
     }),
     updateVacancy: builder.mutation<IVacancy, Partial<IVacancy>>({
-      query: (data) => ({ url: `vacancy`, method: 'PUT', data }),
+      // eslint-disable-next-line no-sequences
+      query: (data) => (console.log(data), { url: `vacancy`, method: 'PUT', data }),
       invalidatesTags: ['vacancies'],
     }),
     deleteVacancy: builder.mutation({

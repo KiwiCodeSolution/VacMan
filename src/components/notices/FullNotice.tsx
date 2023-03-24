@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as Icons from 'components/iconsComponents';
 import Button from 'components/ui/button';
 
@@ -22,22 +23,23 @@ const FullNote = () => {
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     _id,
     companyName,
+    companyURL,
+    source,
+    sourceURL,
     position,
     salary,
     status,
+    actions,
     notes,
     userRank,
-    actions,
     cardColor,
-    source,
-    sourceURL,
-    // archived,
-    // companyURL,
   } = currentVacansy;
+
   const onArchive = () => {
-    updateVacancy({ _id, actions });
+    updateVacancy({ ...currentVacansy, archived: true });
     dispatch(setIsOpenFullNotice(false));
   };
 
@@ -62,7 +64,13 @@ const FullNote = () => {
       <ul>
         <li className="flex justify-between mb-[35px]">
           <div>
-            <p className="mb-2 font-bold text-xl">{companyName}</p>
+            {companyURL ? (
+              <a href={companyURL} className="mb-2 font-bold text-xl" target="_blank" rel="noreferrer">
+                {companyName}
+              </a>
+            ) : (
+              <p className="mb-2 font-bold text-xl">{companyName}</p>
+            )}
             <Stars amount={5} active={userRank} />
           </div>
           <div>
@@ -89,9 +97,11 @@ const FullNote = () => {
               <p className="font-medium mb-2">Deadline</p>
             </div>
           </div>
-          {actions.map(({ name, deadline }) => (
-            <Actions key={deadline} name={name} deadline={deadline} />
-          ))}
+          {actions ? (
+            actions.map(({ name, deadline }) => <Actions key={deadline} name={name} deadline={deadline} />)
+          ) : (
+            <p>You have no action</p>
+          )}
         </li>
         <li className="flex gap-x-2 gap-y-1 mb-2 items-center text-txt-link text-base font-semibold">
           <Icons.Link blue />
@@ -111,8 +121,8 @@ const FullNote = () => {
         </li>
         <li className="mb-[35px]">
           <div className="border-solid border-2 w-full rounded-xl h-[156px] border-bg-grey p-2">
-            {notes !== undefined && notes?.length > 0 ? (
-              notes?.join(', ')
+            {notes.length > 0 ? (
+              notes.map(({ data, text }) => <span key={data}>{text}</span>)
             ) : (
               <p className="text-txt-main text-base">You do not have any posts for this vacancy yet</p>
             )}
