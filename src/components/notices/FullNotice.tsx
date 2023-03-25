@@ -1,57 +1,51 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as Icons from 'components/iconsComponents';
 import Button from 'components/ui/button';
 
 import Stars from 'components/ui/stars';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
-import { setIsOpenFullNotice } from 'redux/noticeSlice';
-import { useGetVacanciesQuery, useDeleteVacancyMutation } from 'redux/VacancyQueries';
+import { setIsOpenFullNotice, setNoteId } from 'redux/noticeSlice';
+import { IVacancy, useGetVacanciesQuery, useUpdateVacancyMutation } from 'redux/VacancyQueries';
 import Actions from './Actions';
 import { colorVariants } from './ShortNotice';
 
-interface INote {
-  data: number;
-  text: string;
-}
-interface IAction {
-  name: string;
-  deadline: number;
-}
-interface IVacancy {
-  _id: string;
-  companyName: string;
-  companyURL: string;
-  source: string;
-  sourceURL?: string;
-  position?: string;
-  salary?: number;
-  currency?: string;
-  notes?: INote[];
-  actions: IAction[];
-  status?: string;
-  userRank: number;
-  archived?: boolean;
-  cardColor: string;
-}
-
 const FullNote = () => {
   const dispatch = useAppDispatch();
-  const [deleteVacancy] = useDeleteVacancyMutation();
+  const [updateVacancy] = useUpdateVacancyMutation();
 
   const { data: response } = useGetVacanciesQuery();
   // eslint-disable-next-line prettier/prettier
   const { noteId } = useAppSelector((state) => state.notice);
-  const vacansies = response?.data;
+  const vacancies = response?.data;
 
   // eslint-disable-next-line no-underscore-dangle, prettier/prettier
-  const currentVacansy = vacansies?.filter((vacansy) => vacansy._id === noteId) as IVacancy[];
+  const currentVacancy = vacancies?.find((vacancy) => vacancy._id === noteId) as IVacancy;
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { _id, companyName, position, salary, status, notes, userRank, actions, cardColor, source, sourceURL } =
-    currentVacansy[0];
+  const {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    _id,
+    companyName,
+    companyURL,
+    source,
+    sourceURL,
+    position,
+    salary,
+    status,
+    actions,
+    notes,
+    userRank,
+    cardColor,
+  } = currentVacancy;
 
   const onArchive = () => {
-    deleteVacancy(_id);
+    updateVacancy({ _id, archived: true });
     dispatch(setIsOpenFullNotice(false));
+  };
+
+  const closeFullNotice = () => {
+    dispatch(setIsOpenFullNotice(false));
+    dispatch(setNoteId(''));
   };
 
   return (
@@ -59,10 +53,7 @@ const FullNote = () => {
       className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]`}
     >
       <div className="flex mb-10">
-        <button
-          className="flex-none hover:scale-110 focus:scale-110"
-          onClick={() => dispatch(setIsOpenFullNotice(false))}
-        >
+        <button className="flex-none hover:scale-110 focus:scale-110" onClick={closeFullNotice}>
           <Icons.ArrowBack />
         </button>
         <span className="grow text-center font-bold text-2xl">{position}</span>
@@ -73,7 +64,13 @@ const FullNote = () => {
       <ul>
         <li className="flex justify-between mb-[35px]">
           <div>
-            <p className="mb-2 font-bold text-xl">{companyName}</p>
+            {companyURL ? (
+              <a href={companyURL} className="mb-2 font-bold text-xl" target="_blank" rel="noreferrer">
+                {companyName}
+              </a>
+            ) : (
+              <p className="mb-2 font-bold text-xl">{companyName}</p>
+            )}
             <Stars amount={5} active={userRank} />
           </div>
           <div>
@@ -100,9 +97,11 @@ const FullNote = () => {
               <p className="font-medium mb-2">Deadline</p>
             </div>
           </div>
-          {actions.map(({ name, deadline }) => (
-            <Actions key={deadline} name={name} deadline={deadline} />
-          ))}
+          {actions ? (
+            actions.map(({ name, deadline }) => <Actions key={deadline} name={name} deadline={deadline} />)
+          ) : (
+            <p>You have no action</p>
+          )}
         </li>
         <li className="flex gap-x-2 gap-y-1 mb-2 items-center text-txt-link text-base font-semibold">
           <Icons.Link blue />
@@ -122,8 +121,8 @@ const FullNote = () => {
         </li>
         <li className="mb-[35px]">
           <div className="border-solid border-2 w-full rounded-xl h-[156px] border-bg-grey p-2">
-            {notes !== undefined && notes?.length > 0 ? (
-              notes?.join(', ')
+            {notes.length > 0 ? (
+              notes.map(({ data, text }) => <span key={data}>{text}</span>)
             ) : (
               <p className="text-txt-main text-base">You do not have any posts for this vacancy yet</p>
             )}

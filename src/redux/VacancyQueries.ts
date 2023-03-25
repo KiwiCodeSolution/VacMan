@@ -6,7 +6,7 @@ interface INote {
   data: number;
   text: string;
 }
-interface IAction {
+export interface IAction {
   name: string;
   deadline: number;
 }
