@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { IUser } from './userSlice';
@@ -6,12 +5,6 @@ import type { IUser } from './userSlice';
 // axios.defaults.baseURL = 'http://localhost:3030';
 // axios.defaults.baseURL = 'http://kiwicode.tech:5000';
 axios.defaults.baseURL = 'https://vacmanserver-production.up.railway.app';
-
-// interface IUser {
-//   email: string;
-//   token: string;
-//   profile: { [key: string]: string };
-// }
 
 export const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
