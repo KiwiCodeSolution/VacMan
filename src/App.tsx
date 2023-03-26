@@ -20,7 +20,7 @@ const App = () => {
   const { token, showStartingPage } = useAppSelector(state => state.user);
 
   useEffect(() => {
-    if (token) dispatch(currentUser());
+    dispatch(currentUser());
     setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
   }, [dispatch, token])
 

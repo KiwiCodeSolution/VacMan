@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 
@@ -5,12 +6,12 @@ interface INote {
   data: number;
   text: string;
 }
-interface IAction {
+export interface IAction {
   name: string;
   deadline: number;
 }
-interface IVacancy {
-  id: string;
+export interface IVacancy {
+  _id: string;
   companyName: string;
   companyURL: string;
   source: string;
@@ -23,10 +24,23 @@ interface IVacancy {
   status: string;
   userRank: number;
   archived: boolean;
+  cardColor: string;
+  // | 'app-red'
+  // | 'app-blue'
+  // | 'app-green'
+  // | 'app-pink'
+  // | 'app-smoke'
+  // | 'app-grey'
+  // | 'app-yellow'
+  // | 'app-mustard'
+  // | 'app-orange';
 }
 
 // eslint-disable-next-line prettier/prettier
-const axiosBaseQuery = ({ baseUrl }: { baseUrl: string } = {baseUrl: ''}): BaseQueryFn<
+const axiosBaseQuery =
+  (
+    { baseUrl }: { baseUrl: string } = { baseUrl: '' }
+  ): BaseQueryFn<
     {
       url: string;
       method: AxiosRequestConfig['method'];
@@ -38,7 +52,6 @@ const axiosBaseQuery = ({ baseUrl }: { baseUrl: string } = {baseUrl: ''}): BaseQ
   > =>
   async ({ url, method, data, params }) => {
     try {
-      // console.log('Header auth:', axios.defaults.headers.common.Authorization);
       const result = await axios({ url: baseUrl + url, method, data, params });
       return { data: result.data };
     } catch (axiosError) {
@@ -58,8 +71,8 @@ export const vacancyAPI = createApi({
   reducerPath: 'vacancies',
   baseQuery: axiosBaseQuery({ baseUrl }),
   tagTypes: ['vacancies'],
-  endpoints: builder => ({
-    getVacancies: builder.query<IVacancy[], void>({
+  endpoints: (builder) => ({
+    getVacancies: builder.query<{ data: IVacancy[] }, void>({
       query: () => ({ url: 'vacancy', method: 'GET' }),
       // keepUnusedDataFor: 3,
       providesTags: ['vacancies'],
@@ -68,16 +81,16 @@ export const vacancyAPI = createApi({
     //   query: id => ({ url: `vacancy/${id}`, method: 'GET' }),
     //   providesTags: ['vacancies'],
     // }),
-    addVacancy: builder.mutation<IVacancy, void>({
-      query: data => ({ url: 'vacancy', method: 'POST', body: data }),
+    addVacancy: builder.mutation<{message: string, data: IVacancy}, Partial<IVacancy>>({
+      query: (data) => ({ url: 'vacancy', method: 'POST', data }),
       invalidatesTags: ['vacancies'],
     }),
-    updateVacancy: builder.mutation<IVacancy, { data: Partial<IVacancy> }>({
-      query: data => ({ url: `vacancy`, method: 'PUT', body: data }),
+    updateVacancy: builder.mutation<{message: string, data: IVacancy}, Partial<IVacancy>>({
+      query: (data) => ({ url: `vacancy`, method: 'PUT', data }),
       invalidatesTags: ['vacancies'],
     }),
-    deleteVacancy: builder.mutation({
-      query: id => ({ url: `vacancy/${id}`, method: 'PUT' }),
+    deleteVacancy: builder.mutation<{message: string}, {_id: string}>({
+      query: (_id) => ({ url: `vacancy/${_id}`, method: 'DELETE' }),
       invalidatesTags: ['vacancies'],
     }),
   }),

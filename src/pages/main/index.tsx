@@ -1,84 +1,72 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-nested-ternary */
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import * as Icons from 'components/iconsComponents';
 import AddBtn from 'components/addBtn';
 import { logOut, setAuthHeader } from 'redux/userOperations';
-import { useGetVacanciesQuery } from 'redux/VacancyQueries';
+import { useGetVacanciesQuery, useAddVacancyMutation } from 'redux/VacancyQueries';
+import Header from 'components/Header';
+import Loader from 'components/ui/loader';
+import ListNotes from 'components/notices/ListNotices';
+import FullNote from 'components/notices/FullNotice';
+import { setMessage } from 'redux/userSlice';
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector(state => state.user);
+  const { token } = useAppSelector((state) => state.user);
+  const { isOpenFullNote } = useAppSelector((state) => state.notice);
   setAuthHeader(token);
 
-  const { data } = useGetVacanciesQuery();
-  console.log('Vacancies:', data);
+  const { data: response, isLoading, isError } = useGetVacanciesQuery();
+  console.log('Vacancies:', response?.data);
+  const [addVacancy] = useAddVacancyMutation();
+
+  // Временное решение
+  const colors = ['red', 'blue', 'green', 'pink', 'smoke', 'grey', 'yellow'];
+  const generateVacancy = () => {
+    const vacancy = {
+      companyName: `company ${Math.floor(Math.random() * 98 + 1)}`,
+      position: `FullStack ${Math.floor(Math.random() * 98 + 1)}`,
+      salary: Math.floor(Math.random() * 10 + 5) * 100,
+      userRank: Math.floor(Math.random() * 4 + 1),
+      cardColor: `${colors[Math.floor(Math.random() * 6)]}`,
+    };
+    addVacancy(vacancy)
+      .unwrap()
+      .then(payload => dispatch(setMessage(payload.message)))
+      .catch(error => dispatch(setMessage(error.data.message)));
+  };
 
   return (
     <div className="container mx-auto px-4">
-      <h1 className="text-2xl mb-4">User Main Page</h1>
-      <ul className="flex ml-10">
-        <li className="flex odd:bg-gray-200 even:bg-orange-200 last:ml-20">
-          <h2 className="p-2">Hello user!</h2>
-        </li>
-        <li className="flex odd:bg-gray-200 even:bg-orange-200 last:ml-20">
-          <button className="p-2" type="button" onClick={() => dispatch(logOut(false))}>
+      {!isOpenFullNote && (
+        <>
+          <Header /> <hr />
+          <button className="p-2" type="button" onClick={() => dispatch(logOut())}>
             LogOUT
           </button>
-        </li>
-      </ul>
-      <p className="mt-4">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem corporis quas incidunt eaque laboriosam
-        vitae corrupti esse assumenda sunt, labore culpa enim non tempore nulla quam distinctio praesentium doloremque!
-        Harum!
-      </p>
-      <div className="flex bg-gray-200">
-        <Icons.Todos />
-        <Icons.Funnel />
-        <Icons.Bell />
-        <Icons.ArrowBack />
-        <Icons.ArrowBack white />
-        <Icons.ArrowForward />
-        <Icons.ArrowForward white />
-        <Icons.Star fill />
-        <Icons.Star />
-        <Icons.Question />
-        <Icons.Clock />
-        <Icons.MenuHome />
-        <Icons.MenuHome active />
-        <Icons.MenuTask />
-        <Icons.MenuTask active />
-        <Icons.MenuCalendar />
-        <Icons.MenuCalendar active />
-        <Icons.MenuSettings />
-        <Icons.MenuSettings active />
-      </div>
-      <br />
-      <div className="flex">
-        <Icons.FalseInCircle />
-        <Icons.OkInCircle />
-        <Icons.Phone />
-        <Icons.Position />
-        <Icons.Location />
-        <Icons.LinkedIn />
-        <Icons.Telegram />
-        <Icons.Facebook />
-        <Icons.Instagram />
-        <Icons.CompanyName />
-        <Icons.CompanyName archived />
-        <Icons.Position large />
-        <Icons.Position large archived />
-        <Icons.Stage />
-        <Icons.Stage archived />
-        <Icons.Salary />
-        <Icons.Salary archived />
-        <Icons.Star large />
-        <Icons.Star large fill />
-        <Icons.Color />
-        <Icons.Review />
-        <Icons.Notebook />
-        <Icons.Link />
-        <Icons.Link blue />
-      </div>
-      <AddBtn />
+          <hr />
+        </>
+      )}
+      {isLoading ? (
+        <Loader active />
+      ) : isError ? (
+        <h2>ERROR</h2>
+      ) : !response ? (
+        <div className="flex items-center justify-items-center">
+          <Icons.Todos />
+        </div>
+      ) : response && !isOpenFullNote ? (
+        <>
+          <ListNotes />
+          <div className="flex mx-4 justify-end sticky bottom-2 right-2">
+            <AddBtn clickFn={generateVacancy} />
+          </div>
+        </>
+      ) : (
+        <FullNote />
+      )}
     </div>
   );
 }
