@@ -1,6 +1,8 @@
 import { ReactElement, useState } from 'react';
 import { useField, FieldHookConfig } from 'formik';
 
+import { Rubber, Eye } from '../iconsComponents';
+
 type CustomInputProps = FieldHookConfig<string> & {
   label: string;
 };
@@ -22,11 +24,14 @@ function CustomInput(props: CustomInputProps): ReactElement {
   }
 
   const isPasswordField: boolean = type === 'password';
+  const hasError = error && touched;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <label htmlFor={id}>{label}</label>
-      <div style={{ display: 'flex' }}>
+    <div className="text-txt-main">
+      <label htmlFor={id} className="text-base ">
+        {label}
+      </label>
+      <div className="relative w-full h-12">
         <input
           name={name}
           type={isPasswordShown ? 'text' : type}
@@ -36,23 +41,31 @@ function CustomInput(props: CustomInputProps): ReactElement {
           onChange={onChange}
           placeholder={placeholder}
           autoComplete="off"
-          style={{ border: '1px solid black' }}
+          className={`px-4 w-full h-full rounded-md  border ${
+            hasError ? 'border-app-red' : 'border-text-main'
+          } bg-txt-white focus:outline-none focus:border-app-blue`}
         />
         {isPasswordField ? (
           <button
+            className="absolute bottom-1/2 right-2 translate-y-1/2"
             type="button"
             onClick={(): void => togglePasswordShow()}
-            style={{ border: '1px solid black', marginLeft: '10px' }}
+            aria-label="show/hide password button"
           >
-            {isPasswordShown ? 'hide' : 'show'}
+            <Eye cross={!isPasswordShown} />
           </button>
         ) : (
-          <button type="button" onClick={clearField} style={{ border: '1px solid black', marginLeft: '10px' }}>
-            clear
+          <button
+            type="button"
+            className="absolute bottom-1/2 right-2 translate-y-1/2"
+            onClick={clearField}
+            aria-label="clear field button"
+          >
+            <Rubber />
           </button>
         )}
+        {hasError && <p className="absolute left-0 top-full -translate-y-[15%] text-app-red">{error}</p>}
       </div>
-      {error && touched && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }

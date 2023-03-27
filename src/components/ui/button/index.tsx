@@ -1,19 +1,19 @@
-import './styles.css';
-
 interface IButton {
-  children: string;
-  variant?: 'dark' | 'orange';
+  children: string | JSX.Element | JSX.Element[];
+  variant?: 'black' | 'white';
   btnType?: 'submit' | 'button' | 'reset' | undefined;
   clickFn?: (() => void) | undefined;
 }
 
+// eslint-disable-next-line prettier/prettier
+const button =
+  'flex bg-black rounded-xl mx-auto  py-3 h-12 w-11/12 justify-center text-base items-center font-bold hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] focus:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]';
+
 export default function Button({ children, variant, btnType, clickFn }: IButton) {
-  const currentStyle = variant ? `btn btn_${variant}` : `btn`;
-  const handleClick = () => {
-    if (clickFn) {
-      clickFn();
-    }
-  };
+  const currentStyle = variant
+    ? `${button} text-txt-${variant === 'black' ? 'white' : 'main'} bg-bg-${variant}`
+    : button;
+  const handleClick = () => (clickFn ? clickFn() : null);
   return (
     <button type={btnType || 'button'} className={currentStyle} onClick={handleClick}>
       {children}
