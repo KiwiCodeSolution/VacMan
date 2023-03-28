@@ -10,7 +10,6 @@ import Loader from 'components/ui/loader';
 import ListNotes from 'components/notices/ListNotices';
 import FullNote from 'components/notices/FullNotice';
 import { setMessage } from 'redux/userSlice';
-import AddUserInfoForm from 'components/forms/AddUserInfoForm';
 
 export default function Main() {
   const dispatch = useAppDispatch();

@@ -55,7 +55,7 @@ function CustomInput(props: CustomInputProps): ReactElement {
             onClick={(): void => togglePasswordShow()}
             aria-label="show/hide password button"
           >
-            <Eye cross={!isPasswordShown} />
+            <Eye crossed={!isPasswordShown} />
           </button>
         ) : (
           <button
