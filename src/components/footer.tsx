@@ -3,7 +3,7 @@ import * as Icons from './iconsComponents';
 
 const Footer = () => {
   return (
-    <div>
+    <div className="flex sticky justify-evenly items-center bg-bg-black pt-6 pb-10 px-4 rounded-t-3xl">
       <Link to="/">
         <Icons.MenuHome />
       </Link>
