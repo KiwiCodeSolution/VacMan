@@ -42,7 +42,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
     <div>
       {!archived ? (
         <ul
-          className={`shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] min-w-[328px] rounded-xl p-4 gap-y-1 flex flex-col relative mt-4 ${colorVariants[cardColor]}`}
+          className={`shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] min-w-[328px] rounded-xl py-4 pr-4 pl-2 gap-y-1 flex flex-col relative mt-4 ${colorVariants[cardColor]}`}
         >
           <button className="absolute top-2 right-[14px] hover:scale-110 focus:scale-110" onClick={openFullNotice}>
             <Icons.Eye />
