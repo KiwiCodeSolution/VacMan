@@ -1,8 +1,4 @@
 const SettingsPage = () => {
-  return (
-    <div className="h-screen">
-      <h2>Settings page</h2>
-    </div>
-  );
+  return <h2>Settings page</h2>;
 };
 export default SettingsPage;

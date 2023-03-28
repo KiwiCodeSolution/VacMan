@@ -1,8 +1,4 @@
 const Reminder = () => {
-  return (
-    <div className="h-screen">
-      <h2>Reminder page</h2>
-    </div>
-  );
+  return <h2>Reminder page</h2>;
 };
 export default Reminder;
