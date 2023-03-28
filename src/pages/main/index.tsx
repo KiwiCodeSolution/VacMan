@@ -13,8 +13,8 @@ import { setMessage } from 'redux/userSlice';
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector((state) => state.user);
-  const { isOpenFullNote } = useAppSelector((state) => state.notice);
+  const { token } = useAppSelector(state => state.user);
+  const { isOpenFullNote } = useAppSelector(state => state.notice);
   setAuthHeader(token);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
@@ -38,7 +38,7 @@ export default function Main() {
   };
 
   return (
-    <div className="container h-[screen-60px-96px] mx-auto px-4">
+    <div className="container mx-auto">
       {isLoading ? (
         <Loader active />
       ) : isError ? (
@@ -50,7 +50,7 @@ export default function Main() {
       ) : response && !isOpenFullNote ? (
         <>
           <ListNotes />
-          <div className="flex mx-4 justify-end sticky bottom-2 right-2">
+          <div className="flex justify-end sticky bottom-32">
             <AddBtn clickFn={generateVacancy} />
           </div>
         </>
