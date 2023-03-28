@@ -50,7 +50,7 @@ export default function Main() {
       ) : response && !isOpenFullNote ? (
         <>
           <ListNotes />
-          <div className="flex justify-end sticky bottom-32">
+          <div className="flex justify-end mx-2 sticky bottom-32">
             <AddBtn clickFn={generateVacancy} />
           </div>
         </>
