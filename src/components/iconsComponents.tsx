@@ -513,7 +513,7 @@ export const MenuCalendar = (props: IIconWithActiveStateProps) => {
       height={size || height}
       viewBox="0 0 32 32"
       fill={fill}
-      stroke={active ? colors.white : colors.main}
+      stroke={active ? colors.white : stroke}
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
