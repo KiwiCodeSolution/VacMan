@@ -12,7 +12,7 @@ const Entrance = () => {
   ) : (
     <>
       <Header />
-      <Outlet />;
+      <Outlet />
       <Footer />
     </>
   );

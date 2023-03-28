@@ -1,4 +1,8 @@
 const Calendar = () => {
-  return <h2>Calendar page</h2>;
+  return (
+    <div className="h-screen">
+      <h2>Calendar page</h2>
+    </div>
+  );
 };
 export default Calendar;
