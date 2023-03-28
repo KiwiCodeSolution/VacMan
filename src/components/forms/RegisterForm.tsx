@@ -2,12 +2,12 @@ import { FC, ReactElement } from 'react';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import { InferType } from 'yup';
 
-import registerSchema from '../../validationSchemas/registerShema';
-import { useAppDispatch } from '../../hooks/reduxHooks';
+import registerSchema from 'validationSchemas/registerShema';
+import { useAppDispatch } from 'hooks/reduxHooks';
 
-import CustomInput from './CustomInput';
-import { registration } from '../../redux/userOperations';
-import Button from '../ui/button';
+import CustomInput from 'components/forms/CustomInput';
+import { registration } from 'redux/userOperations';
+import Button from 'components/ui/button';
 
 type Values = InferType<typeof registerSchema>;
 

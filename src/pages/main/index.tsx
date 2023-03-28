@@ -11,6 +11,7 @@ import Loader from 'components/ui/loader';
 import ListNotes from 'components/notices/ListNotices';
 import FullNote from 'components/notices/FullNotice';
 import { setMessage } from 'redux/userSlice';
+import AddUserInfoForm from 'components/forms/AddUserInfoForm';
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -34,8 +35,8 @@ export default function Main() {
     };
     addVacancy(vacancy)
       .unwrap()
-      .then(payload => dispatch(setMessage(payload.message)))
-      .catch(error => dispatch(setMessage(error.data.message)));
+      .then((payload) => dispatch(setMessage(payload.message)))
+      .catch((error) => dispatch(setMessage(error.data.message)));
   };
 
   return (
@@ -43,6 +44,7 @@ export default function Main() {
       {!isOpenFullNote && (
         <>
           <Header /> <hr />
+          <AddUserInfoForm />
           <button className="p-2" type="button" onClick={() => dispatch(logOut())}>
             LogOUT
           </button>
