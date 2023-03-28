@@ -4,9 +4,8 @@
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import * as Icons from 'components/iconsComponents';
 import AddBtn from 'components/addBtn';
-import { logOut, setAuthHeader } from 'redux/userOperations';
+import { setAuthHeader } from 'redux/userOperations';
 import { useGetVacanciesQuery, useAddVacancyMutation } from 'redux/VacancyQueries';
-import Header from 'components/Header';
 import Loader from 'components/ui/loader';
 import ListNotes from 'components/notices/ListNotices';
 import FullNote from 'components/notices/FullNotice';
@@ -40,17 +39,7 @@ export default function Main() {
   };
 
   return (
-    <div className="container mx-auto px-4">
-      {!isOpenFullNote && (
-        <>
-          <Header /> <hr />
-          <AddUserInfoForm />
-          <button className="p-2" type="button" onClick={() => dispatch(logOut())}>
-            LogOUT
-          </button>
-          <hr />
-        </>
-      )}
+    <div className="container h-[screen-60px-96px] mx-auto px-4">
       {isLoading ? (
         <Loader active />
       ) : isError ? (
@@ -62,7 +51,7 @@ export default function Main() {
       ) : response && !isOpenFullNote ? (
         <>
           <ListNotes />
-          <div className="flex mx-4 justify-end sticky bottom-2 right-2">
+          <div className="flex justify-end mx-2 sticky bottom-32">
             <AddBtn clickFn={generateVacancy} />
           </div>
         </>
