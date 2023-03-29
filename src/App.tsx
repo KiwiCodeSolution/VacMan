@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
