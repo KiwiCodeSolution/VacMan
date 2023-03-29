@@ -1,4 +1,4 @@
-import { FC, ReactElement } from "react";
+// import { FC, ReactElement } from "react";
 import { Formik, FormikHelpers, FormikProps } from "formik";
 import { InferType } from "yup";
 
@@ -7,13 +7,14 @@ import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
 
 import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
+import { IIconProps } from "components/iconsComponents";
 
 type Values = InferType<typeof addUserInfoSchema>;
 
 type Fields = {
   name: string;
   label: string;
-  labelIcon?: () => JSX.Element;
+  labelIcon?: (props: IIconProps) => JSX.Element;
   type: string;
 };
 
@@ -24,7 +25,7 @@ const formFields: Array<Fields> = [
   { name: "instagram", label: "Instagram", labelIcon: icons.Instagram, type: "text" },
   { name: "facebook", label: "Facebook", labelIcon: icons.Facebook, type: "text" },
   { name: "linkedin", label: "LinkedIn", labelIcon: icons.LinkedIn, type: "text" },
-  { name: "telegram", label: "Telegram", labelIcon: icons.TelegramSmall, type: "text" },
+  { name: "telegram", label: "Telegram", labelIcon: icons.Telegram, type: "text" },
 ];
 
 const initialValues: Values = {
@@ -37,7 +38,7 @@ const initialValues: Values = {
   telegram: "",
 };
 
-const AddUserInfoForm: FC = (): ReactElement => {
+const AddUserInfoForm = () => {
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     console.log("Form was submitted.");
     console.log("values: ", values);

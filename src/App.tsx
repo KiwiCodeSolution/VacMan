@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
@@ -6,21 +5,21 @@ import { setShowStartingPage } from "./redux/userSlice";
 
 // pages & components
 import StartingPage from "./pages/starting";
-import ConfirmEmailPage from "./pages/confirmEmailPage";
-import Entrance from "./pages/entrance";
-import LogInPage from "./pages/login";
-import SignUpPage from "./pages/signup";
-import RestorePassPage from "./pages/restorePass";
-import ConfirmPassPage from "./pages/confirmPass";
-import Home from "./pages/main";
-import Reminder from "pages/reminder";
-import Calendar from "pages/calendar";
-import ProfilePage from "pages/profilePage";
-import SettingsPage from "pages/settingsPage";
-import Card from "pages/vacancyCard";
-import AddVacancy from "pages/addVacancy";
-import EditVacancy from "pages/editVacancy";
-import NotFound from "./pages/notfound";
+import ConfirmEmailPage from "./pages/Pub/confirmEmailPage";
+import Entrance from "./pages/Private/entrance";
+import LogInPage from "./pages/Pub/login";
+import SignUpPage from "./pages/Pub/signup";
+import RestorePassPage from "./pages/Pub/recoverPass";
+import ConfirmPassPage from "./pages/Private/confirmPass";
+import Home from "./components/main";
+import Reminder from "pages/Private/reminder";
+import Calendar from "pages/Private/calendar";
+import ProfilePage from "pages/Private/profilePage";
+import SettingsPage from "pages/Private/settingsPage";
+import Card from "pages/Private/vacancyCard";
+import AddVacancy from "pages/Private/addVacancy";
+import EditVacancy from "pages/Private/editVacancy";
+import NotFound from "./pages/notFound";
 import { PrivateRoute, RedirectRoute } from "./hocs/PrivateRoute";
 import { currentUser } from "redux/userOperations";
 import FullNote from "components/notices/FullNotice";

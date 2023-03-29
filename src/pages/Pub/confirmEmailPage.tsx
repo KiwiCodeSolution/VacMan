@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { emailVerify } from "../redux/userOperations";
-import { useAppDispatch } from "../hooks/reduxHooks";
-import { setIsAuth } from "../redux/userSlice";
+import { emailVerify } from "../../redux/userOperations";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { setIsAuth } from "../../redux/userSlice";
 
 const ConfirmEmailPage = () => {
   const [searchParams] = useSearchParams();
