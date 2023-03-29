@@ -1,20 +1,20 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import * as Icons from 'components/iconsComponents';
-import Button from 'components/ui/button';
+import { Link, useParams, useNavigate } from "react-router-dom";
+import * as Icons from "components/iconsComponents";
+import Button from "components/ui/button";
 
-import Stars from 'components/ui/stars';
+import Stars from "components/ui/stars";
 import {
   IVacancy,
   useDeleteVacancyMutation,
   useGetVacanciesQuery,
   useUpdateVacancyMutation,
-} from 'redux/VacancyQueries';
-import Actions from './Actions';
-import { colorVariants } from './ShortNotice';
-import { useAppSelector } from 'hooks/reduxHooks';
+} from "redux/VacancyQueries";
+import Actions from "./Actions";
+import { colorVariants } from "./ShortNotice";
+import { useAppSelector } from "hooks/reduxHooks";
 
 const FullNote = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const FullNote = () => {
 
   function handleArchive(): void {
     updateVacancy({ _id, archived: !onArchive });
-    navigate('/', { replace: true });
+    navigate("/", { replace: true });
   }
 
   // function removeVacancy(): void {

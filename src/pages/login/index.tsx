@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 
-import { Link } from 'react-router-dom';
-import { useAppSelector } from 'hooks/reduxHooks';
-import LoginForm from 'components/forms/LoginForm';
-import useGoogleAuth from 'hooks/googleAuth';
-import Button from 'components/ui/button';
-import GoogleLogo from 'img/images/image 259.png';
-import Logo from 'components/ui/loader';
-import './styles.css';
+import { Link } from "react-router-dom";
+import { useAppSelector } from "hooks/reduxHooks";
+import LoginForm from "components/forms/LoginForm";
+import useGoogleAuth from "hooks/googleAuth";
+import Button from "components/ui/button";
+import GoogleLogo from "img/images/image 259.png";
+import Logo from "components/ui/loader";
+import "./styles.css";
 
 export default function LogInPage() {
   const googleAuth = useGoogleAuth();

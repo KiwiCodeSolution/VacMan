@@ -28,15 +28,19 @@
       }
     ],
     "react/button-has-type": 0,
-    "react/require-default-props": [0, {
-      "ignoreFunctionalComponent": true
-    }],
-    "no-param-reassign": ["error", {
-      "props": true,
-      "ignorePropertyModificationsFor": [
-        "state"
-      ]
-    }],
+    "react/require-default-props": [
+      0,
+      {
+        "ignoreFunctionalComponent": true
+      }
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
     "import/order": 0,
     "react/react-in-jsx-scope": "off",
     "comma-dangle": "off",

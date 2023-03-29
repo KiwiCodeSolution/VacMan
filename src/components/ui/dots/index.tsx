@@ -1,4 +1,4 @@
-import './styles.css';
+import "./styles.css";
 
 interface IDotsProps {
   amount: number;
@@ -10,7 +10,7 @@ export default function Dots({ amount, activeIndex }: IDotsProps) {
   return (
     <div className="dots">
       {dots.map((item, index) => (
-        <div key={item} className={`dots__item${index === activeIndex ? ' dots__item_active' : ''}`} />
+        <div key={item} className={`dots__item${index === activeIndex ? " dots__item_active" : ""}`} />
       ))}
     </div>
   );

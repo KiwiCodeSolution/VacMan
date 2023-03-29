@@ -1,17 +1,17 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
-import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
-import * as Icons from 'components/iconsComponents';
-import AddBtn from 'components/addBtn';
-import { setAuthHeader } from 'redux/userOperations';
-import { useGetVacanciesQuery, useAddVacancyMutation, IVacancy } from 'redux/VacancyQueries';
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
+import * as Icons from "components/iconsComponents";
+import AddBtn from "components/addBtn";
+import { setAuthHeader } from "redux/userOperations";
+import { useGetVacanciesQuery, useAddVacancyMutation, IVacancy } from "redux/VacancyQueries";
 
-import Loader from 'components/ui/loader';
-import ShortNote from 'components/notices/ShortNotice';
-import { setMessage } from 'redux/userSlice';
-import Button from 'components/ui/button';
-import { setOnArchive } from 'redux/noticeSlice';
+import Loader from "components/ui/loader";
+import ShortNote from "components/notices/ShortNotice";
+import { setMessage } from "redux/userSlice";
+import Button from "components/ui/button";
+import { setOnArchive } from "redux/noticeSlice";
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -21,14 +21,14 @@ export default function Main() {
   // console.log(onArchive);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
-  console.log('Vacancies:', response?.data);
+  console.log("Vacancies:", response?.data);
 
   const vacancies = response?.data?.filter(vacancy => vacancy.archived === onArchive) as IVacancy[];
 
   const [addVacancy] = useAddVacancyMutation();
 
   // Временное решение
-  const colors = ['red', 'blue', 'green', 'pink', 'smoke', 'grey', 'yellow'];
+  const colors = ["red", "blue", "green", "pink", "smoke", "grey", "yellow"];
   const generateVacancy = () => {
     const vacancy = {
       companyName: `company ${Math.floor(Math.random() * 98 + 1)}`,
@@ -39,8 +39,8 @@ export default function Main() {
     };
     addVacancy(vacancy)
       .unwrap()
-      .then((payload) => dispatch(setMessage(payload.message)))
-      .catch((error) => dispatch(setMessage(error.data.message)));
+      .then(payload => dispatch(setMessage(payload.message)))
+      .catch(error => dispatch(setMessage(error.data.message)));
   };
 
   return (
@@ -62,7 +62,7 @@ export default function Main() {
           </div>
           <div className="fixed bottom-32 left-8 w-24 ">
             <Button btnType="button" variant="black" clickFn={() => dispatch(setOnArchive(!onArchive))}>
-              {onArchive ? 'Active' : 'Archive'}
+              {onArchive ? "Active" : "Archive"}
             </Button>
           </div>
 

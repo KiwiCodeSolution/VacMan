@@ -1,4 +1,4 @@
-import * as Icons from './iconsComponents';
+import * as Icons from "./iconsComponents";
 
 const AddBtn = ({ clickFn }: { clickFn: () => void }) => (
   <button className="relative flex h-14 w-14" onClick={() => clickFn()}>

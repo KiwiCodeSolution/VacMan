@@ -1,21 +1,21 @@
 /* eslint-disable prettier/prettier */
-import { Link } from 'react-router-dom';
-import useGoogleAuth from 'hooks/googleAuth';
-import RegisterForm from 'components/forms/RegisterForm';
-import Button from 'components/ui/button';
-import GoogleLogo from 'img/images/image 259.png';
-import Logo from 'components/ui/loader';
-import './styles.css';
-import { useAppSelector } from 'hooks/reduxHooks';
+import { Link } from "react-router-dom";
+import useGoogleAuth from "hooks/googleAuth";
+import RegisterForm from "components/forms/RegisterForm";
+import Button from "components/ui/button";
+import GoogleLogo from "img/images/image 259.png";
+import Logo from "components/ui/loader";
+import "./styles.css";
+import { useAppSelector } from "hooks/reduxHooks";
 
 // const token = '1677595510238';
 
 // для имитации письма подтверждения имейла
-const verificationCode = ''; // в кавычки вставьте свой токен
+const verificationCode = ""; // в кавычки вставьте свой токен
 
 export default function SignUpPage() {
   const googleAuth = useGoogleAuth();
-  const { isLoading } = useAppSelector((state) => state.user);
+  const { isLoading } = useAppSelector(state => state.user);
 
   return (
     <div className="container flex flex-col mx-auto px-4 py-5 h-screen">

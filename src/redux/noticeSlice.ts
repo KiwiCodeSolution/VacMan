@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface INotice {
   isOpenFullNote: boolean;
@@ -9,12 +9,12 @@ export interface INotice {
 
 const initialState = {
   isOpenFullNote: false,
-  noteId: '',
+  noteId: "",
   onArchive: false,
 };
 
 const noticeSlice = createSlice({
-  name: 'notice',
+  name: "notice",
   initialState,
   reducers: {
     setIsOpenFullNotice(state, { payload }: PayloadAction<boolean>) {

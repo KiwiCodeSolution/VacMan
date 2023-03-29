@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import * as Icons from 'components/iconsComponents';
-import Stars from 'components/ui/stars';
-import { IVacancy, useDeleteVacancyMutation, useUpdateVacancyMutation } from 'redux/VacancyQueries';
+import * as Icons from "components/iconsComponents";
+import Stars from "components/ui/stars";
+import { IVacancy, useDeleteVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
 
 type VacancyProps = {
   shortVacancy: IVacancy;
@@ -14,15 +14,15 @@ export interface IColor {
 }
 
 export const colorVariants = {
-  red: 'bg-app-red',
-  blue: 'bg-app-blue',
-  green: 'bg-app-green',
-  pink: 'bg-app-pink',
-  smoke: 'bg-app-smoke',
-  grey: 'bg-app-grey',
-  yellow: 'bg-app-yellow',
-  mustard: 'bg-app-mustard',
-  orange: 'bg-app-orange',
+  red: "bg-app-red",
+  blue: "bg-app-blue",
+  green: "bg-app-green",
+  pink: "bg-app-pink",
+  smoke: "bg-app-smoke",
+  grey: "bg-app-grey",
+  yellow: "bg-app-yellow",
+  mustard: "bg-app-mustard",
+  orange: "bg-app-orange",
 } as IColor;
 
 const ShortNote = ({ shortVacancy }: VacancyProps) => {

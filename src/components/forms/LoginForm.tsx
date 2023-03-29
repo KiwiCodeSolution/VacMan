@@ -1,27 +1,27 @@
-import { FC, ReactElement } from 'react';
-import { Formik, FormikHelpers, FormikProps } from 'formik';
-import { InferType } from 'yup';
+import { FC, ReactElement } from "react";
+import { Formik, FormikHelpers, FormikProps } from "formik";
+import { InferType } from "yup";
 
-import { useAppDispatch } from 'hooks/reduxHooks';
-import loginSchema from 'validationSchemas/loginSchema';
+import { useAppDispatch } from "hooks/reduxHooks";
+import loginSchema from "validationSchemas/loginSchema";
 
-import CustomInput from 'components/forms/CustomInput';
-import { logIn } from 'redux/userOperations';
-import Button from 'components/ui/button';
+import CustomInput from "components/forms/CustomInput";
+import { logIn } from "redux/userOperations";
+import Button from "components/ui/button";
 
 type Values = InferType<typeof loginSchema>;
 
 const initialValues: Values = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
 };
 
 const LoginForm: FC = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
-    console.log('Form was submitted.');
-    console.log('values: ', values);
+    console.log("Form was submitted.");
+    console.log("values: ", values);
 
     dispatch(logIn(values));
     resetForm();

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from './store';
-import { currentUser, emailVerify, logIn, logOut, registration } from './userOperations';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "./store";
+import { currentUser, emailVerify, logIn, logOut, registration } from "./userOperations";
 
 interface IProfile {
   [key: string]: string;
@@ -15,19 +15,19 @@ export interface IUser {
 }
 
 const initialState = {
-  email: '',
-  token: '',
+  email: "",
+  token: "",
   isAuth: false,
   onBoarding: true,
   isLoading: false,
   showStartingPage: true,
-  currProfile: '',
-  profile: {avatar: "", phoneNumber: "", position: "", lang: 'eng', theme: ""} as IProfile,
-  message: '',
+  currProfile: "",
+  profile: { avatar: "", phoneNumber: "", position: "", lang: "eng", theme: "" } as IProfile,
+  message: "",
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     setIsAuth(state, { payload }: PayloadAction<boolean>) {
@@ -42,7 +42,7 @@ const userSlice = createSlice({
     setShowStartingPage(state, { payload }: PayloadAction<boolean>) {
       state.showStartingPage = payload;
     },
-    setLang(state, { payload }: PayloadAction<'eng' | 'ru' | 'ukr'>) {
+    setLang(state, { payload }: PayloadAction<"eng" | "ru" | "ukr">) {
       state.profile.lang = payload;
     },
     setMessage(state, { payload }: { payload: string }) {
@@ -52,7 +52,7 @@ const userSlice = createSlice({
       state.email = payload.email;
       state.token = payload.token;
       state.profile = payload.profile;
-      state.currProfile = payload.currProfile || '';
+      state.currProfile = payload.currProfile || "";
     },
   },
 
@@ -77,8 +77,8 @@ const userSlice = createSlice({
         state.email = payload.email;
         state.profile = payload.profile;
         state.token = payload.token;
-        state.currProfile = '';
-        state.message = '';
+        state.currProfile = "";
+        state.message = "";
         state.isLoading = false;
       })
       .addCase(logIn.rejected, (state, { payload }) => {
@@ -90,9 +90,9 @@ const userSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state, { payload }) => {
         state.isAuth = payload;
-        state.token = '';
-        state.email = '';
-        state.currProfile = '';
+        state.token = "";
+        state.email = "";
+        state.currProfile = "";
         state.profile = {} as IProfile;
         state.showStartingPage = true;
         state.isLoading = false;
@@ -101,7 +101,7 @@ const userSlice = createSlice({
         if (payload) state.message = payload;
         state.isLoading = false;
       })
-      .addCase(currentUser.pending, (state) => {
+      .addCase(currentUser.pending, state => {
         state.isLoading = true;
       })
       .addCase(currentUser.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
@@ -113,10 +113,10 @@ const userSlice = createSlice({
       .addCase(currentUser.rejected, (state, { payload }) => {
         if (payload) state.message = payload;
         state.isAuth = false;
-        state.token = '';
-        state.email = '';
-        state.currProfile = '';
-        state.profile = {} as IProfile;        
+        state.token = "";
+        state.email = "";
+        state.currProfile = "";
+        state.profile = {} as IProfile;
         state.isLoading = false;
       })
       .addCase(emailVerify.pending, state => {
@@ -135,5 +135,6 @@ const userSlice = createSlice({
 });
 
 export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>
-export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setLang, setUser, setMessage } = userSlice.actions;
+export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setLang, setUser, setMessage } =
+  userSlice.actions;
 export default userSlice.reducer;

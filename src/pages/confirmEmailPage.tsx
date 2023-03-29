@@ -1,19 +1,19 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { emailVerify } from '../redux/userOperations';
-import { useAppDispatch } from '../hooks/reduxHooks';
-import { setIsAuth } from '../redux/userSlice';
+import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { emailVerify } from "../redux/userOperations";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { setIsAuth } from "../redux/userSlice";
 
 const ConfirmEmailPage = () => {
   const [searchParams] = useSearchParams();
-  const verificationCode = searchParams.get('verificationCode');
+  const verificationCode = searchParams.get("verificationCode");
   const [confirmed, setConfirmed] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const goToHomePage = () => {
     dispatch(setIsAuth(true));
-    navigate('/');
+    navigate("/");
   };
 
   // send request on server with code

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import { useGetVacanciesQuery } from 'redux/VacancyQueries';
-import ShortNote from './ShortNotice';
+import { useGetVacanciesQuery } from "redux/VacancyQueries";
+import ShortNote from "./ShortNotice";
 
 const ListNotes = () => {
   const { data: response } = useGetVacanciesQuery();

@@ -1,12 +1,12 @@
-import { FC, ReactElement } from 'react';
-import { Formik, FormikHelpers, FormikProps } from 'formik';
-import { InferType } from 'yup';
+import { FC, ReactElement } from "react";
+import { Formik, FormikHelpers, FormikProps } from "formik";
+import { InferType } from "yup";
 
-import CustomInput from './CustomInput';
-import * as icons from 'components/iconsComponents';
-import Button from 'components/ui/button';
+import CustomInput from "./CustomInput";
+import * as icons from "components/iconsComponents";
+import Button from "components/ui/button";
 
-import addUserInfoSchema from 'validationSchemas/addUserInfoSchema';
+import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
 
 type Values = InferType<typeof addUserInfoSchema>;
 
@@ -18,29 +18,29 @@ type Fields = {
 };
 
 const formFields: Array<Fields> = [
-  { name: 'phone', label: 'Phone number', labelIcon: icons.Phone16, type: 'phone' },
-  { name: 'position', label: 'Position', labelIcon: icons.Position, type: 'text' },
-  { name: 'location', label: 'Location', labelIcon: icons.Location, type: 'text' },
-  { name: 'instagram', label: 'Instagram', labelIcon: icons.Instagram, type: 'text' },
-  { name: 'facebook', label: 'Facebook', labelIcon: icons.Facebook, type: 'text' },
-  { name: 'linkedin', label: 'LinkedIn', labelIcon: icons.LinkedIn, type: 'text' },
-  { name: 'telegram', label: 'Telegram', labelIcon: icons.TelegramSmall, type: 'text' },
+  { name: "phone", label: "Phone number", labelIcon: icons.Phone16, type: "phone" },
+  { name: "position", label: "Position", labelIcon: icons.Position, type: "text" },
+  { name: "location", label: "Location", labelIcon: icons.Location, type: "text" },
+  { name: "instagram", label: "Instagram", labelIcon: icons.Instagram, type: "text" },
+  { name: "facebook", label: "Facebook", labelIcon: icons.Facebook, type: "text" },
+  { name: "linkedin", label: "LinkedIn", labelIcon: icons.LinkedIn, type: "text" },
+  { name: "telegram", label: "Telegram", labelIcon: icons.TelegramSmall, type: "text" },
 ];
 
 const initialValues: Values = {
-  phone: '',
-  position: '',
-  location: '',
-  instagram: '',
-  facebook: '',
-  linkedin: '',
-  telegram: '',
+  phone: "",
+  position: "",
+  location: "",
+  instagram: "",
+  facebook: "",
+  linkedin: "",
+  telegram: "",
 };
 
 const AddUserInfoForm: FC = (): ReactElement => {
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
-    console.log('Form was submitted.');
-    console.log('values: ', values);
+    console.log("Form was submitted.");
+    console.log("values: ", values);
     resetForm();
   };
 
