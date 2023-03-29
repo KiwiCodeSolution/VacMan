@@ -9,7 +9,7 @@ const colors = {
   link: "#3ca4ec",
 };
 
-interface IIconProps {
+export interface IIconProps {
   size?: string;
   width?: string;
   height?: string;

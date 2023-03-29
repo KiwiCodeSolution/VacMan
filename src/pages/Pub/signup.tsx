@@ -1,11 +1,9 @@
-/* eslint-disable prettier/prettier */
 import { Link } from "react-router-dom";
 import useGoogleAuth from "hooks/googleAuth";
 import RegisterForm from "components/forms/RegisterForm";
 import Button from "components/ui/button";
 import GoogleLogo from "img/images/image 259.png";
 import Logo from "components/ui/loader";
-import "./styles.css";
 import { useAppSelector } from "hooks/reduxHooks";
 
 // const token = '1677595510238';

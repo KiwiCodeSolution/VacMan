@@ -1,11 +1,12 @@
+/* eslint-disable prettier/prettier */
 import { ReactElement, useState } from "react";
 import { useField, FieldHookConfig } from "formik";
 
-import { Rubber, Eye } from "components/iconsComponents";
+import { Rubber, Eye, IIconProps } from "components/iconsComponents";
 
 type CustomInputProps = FieldHookConfig<string> & {
   label: string;
-  LabelIcon?: () => JSX.Element;
+  LabelIcon?: (props: IIconProps) => JSX.Element;
 };
 
 function CustomInput(props: CustomInputProps): ReactElement {
@@ -44,9 +45,8 @@ function CustomInput(props: CustomInputProps): ReactElement {
           onChange={onChange}
           placeholder={placeholder}
           autoComplete="off"
-          className={`px-4 w-full h-full rounded-md  border ${
-            hasError ? "border-app-red" : "border-text-main"
-          } bg-txt-white focus:outline-none focus:border-app-blue`}
+          className={`px-4 w-full h-full rounded-md  border ${hasError ? "border-app-red" : "border-text-main"
+            } bg-txt-white focus:outline-none focus:border-app-blue`}
         />
         {isPasswordField ? (
           <button
