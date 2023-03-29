@@ -5,20 +5,26 @@ import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import * as Icons from 'components/iconsComponents';
 import AddBtn from 'components/addBtn';
 import { setAuthHeader } from 'redux/userOperations';
-import { useGetVacanciesQuery, useAddVacancyMutation } from 'redux/VacancyQueries';
+import { useGetVacanciesQuery, useAddVacancyMutation, IVacancy } from 'redux/VacancyQueries';
+
 import Loader from 'components/ui/loader';
-import ListNotes from 'components/notices/ListNotices';
-import FullNote from 'components/notices/FullNotice';
+import ShortNote from 'components/notices/ShortNotice';
 import { setMessage } from 'redux/userSlice';
+import Button from 'components/ui/button';
+import { setOnArchive } from 'redux/noticeSlice';
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector((state) => state.user);
-  const { isOpenFullNote } = useAppSelector((state) => state.notice);
+  const { token } = useAppSelector(state => state.user);
+  const { onArchive } = useAppSelector(state => state.notice);
   setAuthHeader(token);
+  console.log(onArchive);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
   console.log('Vacancies:', response?.data);
+
+  const vacancies = response?.data?.filter(vacancy => vacancy.archived === onArchive) as IVacancy[];
+
   const [addVacancy] = useAddVacancyMutation();
 
   // Временное решение
@@ -38,7 +44,7 @@ export default function Main() {
   };
 
   return (
-    <div className="container h-[screen-60px-96px] mx-auto px-4">
+    <div className="container mx-auto">
       {isLoading ? (
         <Loader active />
       ) : isError ? (
@@ -47,15 +53,23 @@ export default function Main() {
         <div className="flex items-center justify-items-center">
           <Icons.Todos />
         </div>
-      ) : response && !isOpenFullNote ? (
+      ) : (
         <>
-          <ListNotes />
-          <div className="flex justify-end mx-2 sticky bottom-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-28 mt-5 items-center gap-4">
+            {vacancies.map(vacancy => (
+              <ShortNote key={vacancy._id} shortVacancy={vacancy} />
+            ))}
+          </div>
+          <div className="fixed bottom-32 left-8 w-24 ">
+            <Button btnType="button" variant="black" clickFn={() => dispatch(setOnArchive(!onArchive))}>
+              {onArchive ? 'Active' : 'Archive'}
+            </Button>
+          </div>
+
+          <div className="flex justify-end mx-2 fixed bottom-32 right-8">
             <AddBtn clickFn={generateVacancy} />
           </div>
         </>
-      ) : (
-        <FullNote />
       )}
     </div>
   );

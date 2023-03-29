@@ -1204,6 +1204,7 @@ export const SettingsPolicy = (props: IIconProps) => {
 };
 
 //    Archive
+
 export const Trash = (props: IIconProps) => {
   const { size, width = 24, height = 24, fill = 'none', stroke = colors.black, className } = props;
 

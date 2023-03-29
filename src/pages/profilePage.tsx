@@ -1,8 +1,4 @@
 const ProfilePage = () => {
-  return (
-    <div className="h-screen">
-      <h2>Profile page</h2>
-    </div>
-  );
+  return <h2>Profile page</h2>;
 };
 export default ProfilePage;
