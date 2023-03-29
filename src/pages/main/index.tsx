@@ -18,7 +18,7 @@ export default function Main() {
   const { token } = useAppSelector(state => state.user);
   const { onArchive } = useAppSelector(state => state.notice);
   setAuthHeader(token);
-  console.log(onArchive);
+  // console.log(onArchive);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
   console.log('Vacancies:', response?.data);

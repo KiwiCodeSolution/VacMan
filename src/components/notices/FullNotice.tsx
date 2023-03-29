@@ -115,19 +115,19 @@ const FullNote = () => {
             )}
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 items-center text-txt-link text-base font-semibold">
-            <Icons.Link blue />
+            <Icons.Link linked />
             <a href={source} target="_blank" rel="noreferrer">
               {source}
             </a>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-6  items-center text-txt-link text-base font-semibold">
-            <Icons.Link blue />
+            <Icons.Link linked />
             <a href={sourceURL} target="_blank" rel="noreferrer">
               {sourceURL}
             </a>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
-            <Icons.Notebook large stroke />
+            <Icons.Notebook size="24" />
             <p>Notebook</p>
           </li>
           <li className="mb-[35px]">

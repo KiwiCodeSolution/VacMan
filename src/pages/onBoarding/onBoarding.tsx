@@ -44,7 +44,8 @@ const OnBoarding = () => {
     >
       <div className="flex justify-between py-5 px-4">
         <button type="button" onClick={goBack}>
-          <Icons.ArrowBack white />
+          {/* <Icons.ArrowBack white /> */}
+          <Icons.ArrowBack stroke="#FFFFFF" />
         </button>
         {onBoardingPage < 4 ? (
           <button
@@ -52,7 +53,8 @@ const OnBoarding = () => {
             className="flex gap-px justify-between items-center"
             onClick={() => dispatch(setOnBoarding(false))}
           >
-            <span className="font-semibold text-base text-txt-white ">Skip</span> <Icons.ArrowForward white />
+            <span className="font-semibold text-base text-txt-white ">Skip</span> {/* <Icons.ArrowBack white /> */}
+            <Icons.ArrowForward stroke="#FFFFFF" />
           </button>
         ) : null}
       </div>

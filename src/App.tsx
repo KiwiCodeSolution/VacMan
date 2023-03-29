@@ -39,132 +39,27 @@ const App = () => {
   ) : (
     <Routes>
       {/* Private Routes */}
-      <Route
-        path="/"
-        element={
-          <PrivateRoute>
-            <Entrance />
-          </PrivateRoute>
-        }
-      >
+      <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>}>
         {/* with Header & Menu */}
-        <Route
-          index
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="reminder"
-          element={
-            <PrivateRoute>
-              <Reminder />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="calendar"
-          element={
-            <PrivateRoute>
-              <Calendar />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="settings"
-          element={
-            <PrivateRoute>
-              <SettingsPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="profile"
-          element={
-            <PrivateRoute>
-              <ProfilePage />
-            </PrivateRoute>
-          }
-        />
+        <Route index element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path="reminder" element={<PrivateRoute><Reminder /></PrivateRoute>} />
+        <Route path="calendar" element={<PrivateRoute><Calendar /></PrivateRoute>} />
+        <Route path="settings" element={<PrivateRoute><SettingsPage /></PrivateRoute>} />
+        <Route path="profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
       </Route>
-      <Route
-        path=":_id"
-        element={
-          <PrivateRoute>
-            <Card />
-          </PrivateRoute>
-        }
-      >
-        {/* with ArrowBack */}
-        <Route
-          path="details"
-          element={
-            <PrivateRoute>
-              <FullNote />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="add"
-          element={
-            <PrivateRoute>
-              <AddVacancy />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="edit"
-          element={
-            <PrivateRoute>
-              <EditVacancy />
-            </PrivateRoute>
-          }
-        />
+      <Route path=":_id" element={<PrivateRoute><Card /></PrivateRoute>}>
+        {/* No Header & Menu */}
+        <Route path="details" element={<PrivateRoute><FullNote /></PrivateRoute>} />
+        <Route path="add" element={<PrivateRoute><AddVacancy /></PrivateRoute>} />
+        <Route path="edit" element={<PrivateRoute><EditVacancy /></PrivateRoute>} />
       </Route>
 
       {/* Public Routes */}
-      <Route
-        path="login"
-        element={
-          <RedirectRoute>
-            <LogInPage />
-          </RedirectRoute>
-        }
-      />
-      <Route
-        path="signup"
-        element={
-          <RedirectRoute>
-            <SignUpPage />
-          </RedirectRoute>
-        }
-      />
-      <Route
-        path="restorePass"
-        element={
-          <RedirectRoute>
-            <RestorePassPage />
-          </RedirectRoute>
-        }
-      />
-      <Route
-        path="confirmPass"
-        element={
-          <RedirectRoute>
-            <ConfirmPassPage />
-          </RedirectRoute>
-        }
-      />
-      <Route
-        path="confirmEmail"
-        element={
-          <RedirectRoute>
-            <ConfirmEmailPage />
-          </RedirectRoute>
-        }
-      />
+      <Route path="login" element={<RedirectRoute><LogInPage /></RedirectRoute>} />
+      <Route path="signup" element={<RedirectRoute><SignUpPage /></RedirectRoute>} />
+      <Route path="restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
+      <Route path="confirmPass" element={<RedirectRoute><ConfirmPassPage /></RedirectRoute>} />
+      <Route path="confirmEmail" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

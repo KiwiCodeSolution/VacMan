@@ -1,5 +1,5 @@
-import { Link, Outlet } from 'react-router-dom';
-import * as Icons from 'components/iconsComponents';
+import { Outlet } from 'react-router-dom';
+// import * as Icons from 'components/iconsComponents';
 
 const Card = () => {
   return (
