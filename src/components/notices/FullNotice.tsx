@@ -6,31 +6,58 @@ import * as Icons from 'components/iconsComponents';
 import Button from 'components/ui/button';
 
 import Stars from 'components/ui/stars';
-import { IVacancy, useGetVacanciesQuery, useUpdateVacancyMutation } from 'redux/VacancyQueries';
+import {
+  IVacancy,
+  useDeleteVacancyMutation,
+  useGetVacanciesQuery,
+  useUpdateVacancyMutation,
+} from 'redux/VacancyQueries';
 import Actions from './Actions';
 import { colorVariants } from './ShortNotice';
+import { useAppSelector } from 'hooks/reduxHooks';
 
 const FullNote = () => {
-  const [updateVacancy] = useUpdateVacancyMutation();
   const navigate = useNavigate();
   const { _id } = useParams();
+  const [updateVacancy] = useUpdateVacancyMutation();
+  const [deleteVacancy] = useDeleteVacancyMutation();
   const { data: response } = useGetVacanciesQuery();
+  const { onArchive } = useAppSelector(state => state.notice);
   const vacancies = response?.data;
 
   const currentVacancy = vacancies?.find(vacancy => vacancy._id === _id) as IVacancy;
 
-  const { companyName, companyURL, source, sourceURL, position, salary, status, actions, notes, userRank, cardColor } =
-    currentVacancy;
+  const {
+    companyName,
+    companyURL,
+    source,
+    sourceURL,
+    position,
+    salary,
+    status,
+    actions,
+    notes,
+    userRank,
+    cardColor,
+    archived,
+  } = currentVacancy;
 
-  const onArchive = () => {
-    updateVacancy({ _id, archived: true });
+  function handleArchive(): void {
+    updateVacancy({ _id, archived: !onArchive });
     navigate('/', { replace: true });
-  };
+  }
+
+  // function removeVacancy(): void {
+  //   deleteVacancy({ _id });
+  //   navigate('/', { replace: true });
+  // }
 
   return (
     <div className="container mx-auto px-4">
       <div
-        className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]`}
+        className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${
+          archived ? `text-txt-main` : `text-txt-black`
+        } shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]`}
       >
         <div className="flex mb-10">
           <button className="flex-none hover:scale-110 focus:scale-110">
@@ -59,13 +86,13 @@ const FullNote = () => {
             </div>
             <div>
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-                <Icons.Salary /> <p className="text-base">Salary</p>
+                {archived ? <Icons.Salary archived /> : <Icons.Salary />} <p className="text-base">Salary</p>
               </span>
               <p className="text-[32px]">{salary}$</p>
             </div>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-            <Icons.Stage />
+            {archived ? <Icons.Stage archived /> : <Icons.Stage />}
             <p>Stage</p>
           </li>
           <li className="mb-4 text-txt-main">{status}</li>
@@ -73,7 +100,7 @@ const FullNote = () => {
             <div className="flex justify-between">
               <div>
                 <div className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-                  <Icons.Action />
+                  {archived ? <Icons.Action archived /> : <Icons.Action />}
                   <p>Action</p>
                 </div>
               </div>
@@ -113,7 +140,21 @@ const FullNote = () => {
             </div>
           </li>
         </ul>
-        <Button variant="black" clickFn={onArchive}>
+        {/* {!archived ? (
+          <Button variant="black" clickFn={() => handleArchive()}>
+            Archive
+          </Button>
+        ) : (
+          <div>
+            <Button variant="black" clickFn={() => handleArchive()}>
+              Active
+            </Button>
+            <Button variant="black" clickFn={() => removeVacancy()}>
+              Remove
+            </Button>
+          </div>
+        )} */}
+        <Button variant="black" clickFn={() => handleArchive()}>
           Archive
         </Button>
       </div>

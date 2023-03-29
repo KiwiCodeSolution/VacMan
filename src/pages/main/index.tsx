@@ -9,15 +9,16 @@ import { useGetVacanciesQuery, useAddVacancyMutation, IVacancy } from 'redux/Vac
 
 import Loader from 'components/ui/loader';
 import ShortNote from 'components/notices/ShortNotice';
-import { useState } from 'react';
 import { setMessage } from 'redux/userSlice';
 import Button from 'components/ui/button';
+import { setOnArchive } from 'redux/noticeSlice';
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const [onArchive, setOnArchive] = useState(false);
   const { token } = useAppSelector(state => state.user);
+  const { onArchive } = useAppSelector(state => state.notice);
   setAuthHeader(token);
+  console.log(onArchive);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
   console.log('Vacancies:', response?.data);
@@ -60,7 +61,7 @@ export default function Main() {
             ))}
           </div>
           <div className="fixed bottom-32 left-8 w-24 ">
-            <Button btnType="button" variant="black" clickFn={() => setOnArchive(!onArchive)}>
+            <Button btnType="button" variant="black" clickFn={() => dispatch(setOnArchive(!onArchive))}>
               {onArchive ? 'Active' : 'Archive'}
             </Button>
           </div>

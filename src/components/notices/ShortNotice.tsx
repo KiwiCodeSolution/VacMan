@@ -35,15 +35,12 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
   return (
     <div>
       <ul
-        className={`shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] min-w-[328px] rounded-xl p-4 gap-y-1 flex flex-col relative ${
+        className={`relative flex flex-col gap-y-1 min-w-[328px] rounded-xl p-4 shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] ${
           colorVariants[cardColor]
         } ${archived ? `text-txt-main` : `text-txt-black`} hover:scale-105 focus:scale-105`}
       >
         <button className="absolute top-4 right-[14px] hover:scale-110 focus:scale-110">
-          <Link to={`${_id}/details`}>
-            {archived ? <Icons.Eye stroke /> : <Icons.Eye />}
-            {/* <Icons.Eye  /> */}
-          </Link>
+          <Link to={`${_id}/details`}>{archived ? <Icons.Eye stroke /> : <Icons.Eye />}</Link>
         </button>
         <li className="flex gap-x-2 gap-y-1 font-bold">
           {archived ? <Icons.CompanyName archived /> : <Icons.CompanyName />}
