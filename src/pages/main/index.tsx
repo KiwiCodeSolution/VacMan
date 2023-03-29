@@ -24,8 +24,6 @@ export default function Main() {
 
   const vacancies = response?.data?.filter(vacancy => vacancy.archived === onArchive) as IVacancy[];
 
-  console.log(vacancies);
-
   const [addVacancy] = useAddVacancyMutation();
 
   // Временное решение

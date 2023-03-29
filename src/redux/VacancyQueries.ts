@@ -71,7 +71,7 @@ export const vacancyAPI = createApi({
   reducerPath: 'vacancies',
   baseQuery: axiosBaseQuery({ baseUrl }),
   tagTypes: ['vacancies'],
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getVacancies: builder.query<{ data: IVacancy[] }, void>({
       query: () => ({ url: 'vacancy', method: 'GET' }),
       // keepUnusedDataFor: 3,
@@ -81,16 +81,16 @@ export const vacancyAPI = createApi({
     //   query: id => ({ url: `vacancy/${id}`, method: 'GET' }),
     //   providesTags: ['vacancies'],
     // }),
-    addVacancy: builder.mutation<{message: string, data: IVacancy}, Partial<IVacancy>>({
-      query: (data) => ({ url: 'vacancy', method: 'POST', data }),
+    addVacancy: builder.mutation<{ message: string; data: IVacancy }, Partial<IVacancy>>({
+      query: data => ({ url: 'vacancy', method: 'POST', data }),
       invalidatesTags: ['vacancies'],
     }),
-    updateVacancy: builder.mutation<{message: string, data: IVacancy}, Partial<IVacancy>>({
-      query: (data) => ({ url: `vacancy`, method: 'PUT', data }),
+    updateVacancy: builder.mutation<{ message: string; data: IVacancy }, Partial<IVacancy>>({
+      query: data => ({ url: `vacancy`, method: 'PUT', data }),
       invalidatesTags: ['vacancies'],
     }),
-    deleteVacancy: builder.mutation<{message: string}, {_id: string}>({
-      query: (_id) => ({ url: `vacancy/${_id}`, method: 'DELETE' }),
+    deleteVacancy: builder.mutation<{ message: string }, { _id: string }>({
+      query: ({ _id }) => ({ url: `vacancy/${_id}`, method: 'DELETE' }),
       invalidatesTags: ['vacancies'],
     }),
   }),

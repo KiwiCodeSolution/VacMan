@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import * as Icons from 'components/iconsComponents';
@@ -11,14 +13,10 @@ import { colorVariants } from './ShortNotice';
 const FullNote = () => {
   const [updateVacancy] = useUpdateVacancyMutation();
   const navigate = useNavigate();
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { _id } = useParams();
-  console.log(_id);
-
   const { data: response } = useGetVacanciesQuery();
   const vacancies = response?.data;
 
-  // eslint-disable-next-line no-underscore-dangle, prettier/prettier
   const currentVacancy = vacancies?.find(vacancy => vacancy._id === _id) as IVacancy;
 
   const { companyName, companyURL, source, sourceURL, position, salary, status, actions, notes, userRank, cardColor } =
@@ -42,7 +40,9 @@ const FullNote = () => {
           </button>
           <span className="grow text-center font-bold text-2xl">{position}</span>
           <button className="flex-none hover:scale-110 focus:scale-110">
-            <Icons.Edit />
+            <Link to={`/${_id}/edit`}>
+              <Icons.Edit />
+            </Link>
           </button>
         </div>
         <ul>

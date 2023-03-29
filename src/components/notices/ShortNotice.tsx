@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import * as Icons from 'components/iconsComponents';
 import Stars from 'components/ui/stars';
-import { IVacancy } from 'redux/VacancyQueries';
+import { IVacancy, useDeleteVacancyMutation, useUpdateVacancyMutation } from 'redux/VacancyQueries';
 
 type VacancyProps = {
   shortVacancy: IVacancy;
@@ -26,6 +26,8 @@ export const colorVariants = {
 } as IColor;
 
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
+  const [updateVacancy] = useUpdateVacancyMutation();
+  const [deleteVacancy] = useDeleteVacancyMutation();
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { _id, companyName, position, salary, status, cardColor, userRank, actions, companyURL, archived } =
     shortVacancy;
@@ -38,8 +40,9 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         } ${archived ? `text-txt-main` : `text-txt-black`} hover:scale-105 focus:scale-105`}
       >
         <button className="absolute top-4 right-[14px] hover:scale-110 focus:scale-110">
-          <Link to={_id}>
-            <Icons.Eye />
+          <Link to={`${_id}/details`}>
+            {archived ? <Icons.Eye stroke /> : <Icons.Eye />}
+            {/* <Icons.Eye  /> */}
           </Link>
         </button>
         <li className="flex gap-x-2 gap-y-1 font-bold">
@@ -73,7 +76,29 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
           <p>{salary}$</p>
         </li>
         <li className="absolute bottom-2 right-[14px]">
-          <Stars amount={5} active={userRank} />
+          {!archived ? (
+            <Stars amount={5} active={userRank} />
+          ) : (
+            <div className="flex gap-1">
+              <button
+                type="button"
+                onClick={() => {
+                  deleteVacancy({ _id });
+                }}
+              >
+                <Icons.Trash />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  updateVacancy({ _id, archived: false });
+                }}
+              >
+                <Icons.Recover />
+              </button>
+            </div>
+          )}
         </li>
       </ul>
     </div>
