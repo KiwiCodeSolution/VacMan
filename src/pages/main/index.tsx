@@ -39,8 +39,8 @@ export default function Main() {
     };
     addVacancy(vacancy)
       .unwrap()
-      .then(payload => dispatch(setMessage(payload.message)))
-      .catch(error => dispatch(setMessage(error.data.message)));
+      .then((payload) => dispatch(setMessage(payload.message)))
+      .catch((error) => dispatch(setMessage(error.data.message)));
   };
 
   return (

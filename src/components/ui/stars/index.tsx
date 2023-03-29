@@ -14,12 +14,12 @@ export default function Stars({ amount, active, large }: IStarsProps) {
     <ul className="flex gap-x-0.5">
       {starsActive.map((itemActive) => (
         <li key={itemActive}>
-          <Icons.Star fill large={!!large} />
+          <Icons.Star size={large ? '40' : '14'} className="fill-txt-black" />
         </li>
       ))}
       {stars.map((item) => (
         <li key={item}>
-          <Icons.Star large={!!large} />
+          <Icons.Star size={large ? '40' : '14'} />
         </li>
       ))}
     </ul>

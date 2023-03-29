@@ -8,6 +8,8 @@ import Logo from 'components/ui/loader';
 import './styles.css';
 import { useAppSelector } from 'hooks/reduxHooks';
 
+// const token = '1677595510238';
+
 // для имитации письма подтверждения имейла
 const verificationCode = ''; // в кавычки вставьте свой токен
 

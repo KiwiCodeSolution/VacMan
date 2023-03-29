@@ -2,12 +2,12 @@ import { FC, ReactElement } from 'react';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import { InferType } from 'yup';
 
-import { useAppDispatch } from '../../hooks/reduxHooks';
-import loginSchema from '../../validationSchemas/loginSchema';
+import { useAppDispatch } from 'hooks/reduxHooks';
+import loginSchema from 'validationSchemas/loginSchema';
 
-import CustomInput from './CustomInput';
-import { logIn } from '../../redux/userOperations';
-import Button from '../ui/button';
+import CustomInput from 'components/forms/CustomInput';
+import { logIn } from 'redux/userOperations';
+import Button from 'components/ui/button';
 
 type Values = InferType<typeof loginSchema>;
 
