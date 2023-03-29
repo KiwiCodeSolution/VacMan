@@ -9,7 +9,7 @@ import ConfirmEmailPage from "./pages/Pub/confirmEmailPage";
 import Entrance from "./pages/Private/entrance";
 import LogInPage from "./pages/Pub/login";
 import SignUpPage from "./pages/Pub/signup";
-import RestorePassPage from "./pages/restorePass";
+import RestorePassPage from "./pages/Pub/recoverPass";
 import ConfirmPassPage from "./pages/Private/confirmPass";
 import Home from "./components/main";
 import Reminder from "pages/Private/reminder";
