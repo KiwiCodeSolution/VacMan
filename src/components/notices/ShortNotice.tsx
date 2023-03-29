@@ -58,7 +58,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
             )}
           </li>
           <li className="flex gap-x-2 gap-y-1">
-            <Icons.Position large />
+            <Icons.Position />
             <p>{position}</p>
           </li>
           <li className="flex gap-x-2 gap-y-1">

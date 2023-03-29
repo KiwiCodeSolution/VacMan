@@ -1,17 +1,18 @@
 import { ReactElement, useState } from 'react';
 import { useField, FieldHookConfig } from 'formik';
 
-import { Rubber, Eye } from '../iconsComponents';
+import { Rubber, Eye } from 'components/iconsComponents';
 
 type CustomInputProps = FieldHookConfig<string> & {
   label: string;
+  LabelIcon?: () => JSX.Element;
 };
 
 function CustomInput(props: CustomInputProps): ReactElement {
   const [field, meta, helpers] = useField(props);
   const [isPasswordShown, setIsPasswordShown] = useState(false);
 
-  const { name, id, placeholder, type, label } = props;
+  const { name, id, placeholder, type, label, LabelIcon } = props;
   const { value, onBlur, onChange } = field;
   const { touched, error } = meta;
 
@@ -24,17 +25,19 @@ function CustomInput(props: CustomInputProps): ReactElement {
   }
 
   const isPasswordField: boolean = type === 'password';
+  const notAPasswordType = !isPasswordField ? type : 'text';
   const hasError = error && touched;
 
   return (
-    <div className="text-txt-main">
-      <label htmlFor={id} className="text-base ">
+    <div className="text-txt-main ">
+      <label htmlFor={id} className="flex items-center gap-1 text-base ">
+        {LabelIcon && <LabelIcon />}
         {label}
       </label>
       <div className="relative w-full h-12">
         <input
           name={name}
-          type={isPasswordShown ? 'text' : type}
+          type={isPasswordShown ? notAPasswordType : 'password'}
           id={id}
           value={value}
           onBlur={onBlur}
@@ -52,7 +55,7 @@ function CustomInput(props: CustomInputProps): ReactElement {
             onClick={(): void => togglePasswordShow()}
             aria-label="show/hide password button"
           >
-            <Eye cross={!isPasswordShown} />
+            <Eye crossed={!isPasswordShown} />
           </button>
         ) : (
           <button
