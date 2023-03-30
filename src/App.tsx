@@ -59,7 +59,7 @@ const App = () => {
       <Route path="restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
       <Route path="confirmPass" element={<RedirectRoute><ConfirmPassPage /></RedirectRoute>} />
       <Route path="confirmEmail" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
-        <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
