@@ -1,5 +1,5 @@
-import Logo from '../components/ui/loader';
-import quotes from '../components/quotes';
+import Logo from "../components/ui/loader";
+import quotes from "../components/quotes";
 
 const StartingPage = () => {
   const idx: number = Math.floor(Math.random() * quotes.length);

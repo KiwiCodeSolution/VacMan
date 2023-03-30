@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { ReactElement } from 'react';
-import { useField, FieldHookConfig } from 'formik';
+import { ReactElement } from "react";
+import { useField, FieldHookConfig } from "formik";
 
-import { Star } from 'components/iconsComponents';
+import { Star } from "components/iconsComponents";
 
 type StarRadioBtnProps = FieldHookConfig<string> & {
   btnId: number;
@@ -40,7 +40,7 @@ const StarRadioBtn = (props: StarRadioBtnProps): ReactElement => {
         htmlFor={name + value}
         className="block cursor-pointer peer-focus:scale-125 transition-transform ease-in-out duration-300"
       >
-        <Star className={`w-10 h-10 ${filled ? 'fill-txt-black' : 'fill-none'} transition-colors `} />
+        <Star className={`w-10 h-10 ${filled ? "fill-txt-black" : "fill-none"} transition-colors `} />
       </label>
     </div>
   );

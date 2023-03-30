@@ -1,7 +1,7 @@
-import { ReactElement, useState } from 'react';
-import { FieldHookConfig } from 'formik';
+import { ReactElement, useState } from "react";
+import { FieldHookConfig } from "formik";
 
-import StarRadioBtn from 'components/forms/StarRadioBtn';
+import StarRadioBtn from "components/forms/StarRadioBtn";
 
 type StarRadionBtnsGroupProps = FieldHookConfig<string> & {
   values: Array<string>;

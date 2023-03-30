@@ -1,7 +1,7 @@
-import { ReactElement, useState } from 'react';
-import { useField, FieldHookConfig } from 'formik';
+import { ReactElement, useState } from "react";
+import { useField, FieldHookConfig } from "formik";
 
-import { IIconProps, Rubber, Eye } from 'components/iconsComponents';
+import { IIconProps, Rubber, Eye } from "components/iconsComponents";
 
 type CustomInputProps = FieldHookConfig<string> & {
   label: string;
@@ -21,10 +21,10 @@ function CustomInput(props: CustomInputProps): ReactElement {
   }
 
   function clearField(): void {
-    helpers.setValue('', false);
+    helpers.setValue("", false);
   }
 
-  const isPasswordField = type === 'password';
+  const isPasswordField = type === "password";
   const hasError = error && touched;
 
   return (
@@ -37,7 +37,7 @@ function CustomInput(props: CustomInputProps): ReactElement {
       <div className="relative w-full h-12">
         <input
           name={name}
-          type={isPasswordShown ? 'text' : type}
+          type={isPasswordShown ? "text" : type}
           id={id}
           value={value}
           onBlur={onBlur}
@@ -45,7 +45,7 @@ function CustomInput(props: CustomInputProps): ReactElement {
           placeholder={placeholder}
           autoComplete="off"
           className={`px-4 w-full h-full rounded-md  border ${
-            hasError ? 'border-app-red' : 'border-text-main'
+            hasError ? "border-app-red" : "border-text-main"
           } bg-txt-white focus:outline-none focus:border-app-blue`}
         />
 

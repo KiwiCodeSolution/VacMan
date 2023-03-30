@@ -3,3 +3,4 @@ tailwind.config.cjs
 postcss.config.cjs
 
 dist/*
+app.tsx

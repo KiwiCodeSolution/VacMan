@@ -1,9 +1,9 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement } from "react";
 
-import { Formik, FormikHelpers, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from "formik";
 
-import Button from 'components/ui/button';
-import StarRadioBtnsGroup from 'components/forms/StarRadioBtnsGroup';
+import Button from "components/ui/button";
+import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 
 type Values = {
   companyName: string;
@@ -19,24 +19,24 @@ type Values = {
 };
 
 const initialValues: Values = {
-  companyName: '',
-  companyLink: '',
-  source: '',
-  position: '',
-  salary: '',
-  stage: '',
-  action: '',
-  color: '',
-  userReview: '',
-  notebook: '',
+  companyName: "",
+  companyLink: "",
+  source: "",
+  position: "",
+  salary: "",
+  stage: "",
+  action: "",
+  color: "",
+  userReview: "",
+  notebook: "",
 };
 
-const RATING_VALUES = ['1', '2', '3', '4', '5'];
+const RATING_VALUES = ["1", "2", "3", "4", "5"];
 
 const AddVacancyForm: FC = (): ReactElement => {
   const handleFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
-    console.log('Form was submitted');
-    console.log('values: ', values);
+    console.log("Form was submitted");
+    console.log("values: ", values);
     resetForm();
   };
 

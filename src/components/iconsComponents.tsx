@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 
 const colors = {
-  main: '#5b5b69',
-  white: '#fffdf4',
-  grey: '#d9d9d9',
-  black: '#040c0c',
-  orange: '#f0be6c',
-  link: '#3ca4ec',
+  main: "#5b5b69",
+  white: "#fffdf4",
+  grey: "#d9d9d9",
+  black: "#040c0c",
+  orange: "#f0be6c",
+  link: "#3ca4ec",
 };
 
 export interface IIconProps {
@@ -35,7 +35,7 @@ interface IIconWithLinkedStateProps extends IIconProps {
 }
 
 export const Rubber = (props: IIconProps) => {
-  const { size = 24, width = 24, height = 24, fill = colors.main, stroke = 'none', className } = props;
+  const { size = 24, width = 24, height = 24, fill = colors.main, stroke = "none", className } = props;
 
   return (
     <svg
@@ -52,7 +52,7 @@ export const Rubber = (props: IIconProps) => {
   );
 };
 export const Eye = (props: IEyeIconProps) => {
-  const { size, width = 24, height = 24, fill = 'none', stroke = colors.main, crossed, className } = props;
+  const { size, width = 24, height = 24, fill = "none", stroke = colors.main, crossed, className } = props;
 
   return (
     <svg
@@ -75,7 +75,7 @@ export const Eye = (props: IEyeIconProps) => {
 };
 
 export const Rectangle = (props: IIconProps) => {
-  const { size, width = 360, height = 248, fill = colors.black, stroke = 'none', className } = props;
+  const { size, width = 360, height = 248, fill = colors.black, stroke = "none", className } = props;
 
   return (
     <svg
@@ -93,7 +93,7 @@ export const Rectangle = (props: IIconProps) => {
 };
 
 export const Todos = (props: IIconProps) => {
-  const { size, width = 270, height = 230, fill = '#E6E6E6', stroke = 'none', className } = props;
+  const { size, width = 270, height = 230, fill = "#E6E6E6", stroke = "none", className } = props;
 
   return (
     <svg
@@ -252,7 +252,7 @@ export const Todos = (props: IIconProps) => {
 };
 
 export const Funnel = (props: IIconProps) => {
-  const { size, width = 24, height = 24, fill = 'none', stroke = '#0F172A', className } = props;
+  const { size, width = 24, height = 24, fill = "none", stroke = "#0F172A", className } = props;
 
   return (
     <svg
@@ -275,7 +275,7 @@ export const Funnel = (props: IIconProps) => {
 };
 
 export const FalseInCircle = (props: IIconProps) => {
-  const { size, width = 140, height = 140, fill = colors.orange, stroke = 'none', className } = props;
+  const { size, width = 140, height = 140, fill = colors.orange, stroke = "none", className } = props;
 
   return (
     <svg
@@ -294,7 +294,7 @@ export const FalseInCircle = (props: IIconProps) => {
 };
 
 export const OkInCircle = (props: IIconProps) => {
-  const { size, width = 138, height = 138, fill = 'none', stroke = colors.orange, className } = props;
+  const { size, width = 138, height = 138, fill = "none", stroke = colors.orange, className } = props;
 
   return (
     <svg
@@ -315,7 +315,7 @@ export const OkInCircle = (props: IIconProps) => {
 };
 
 export const Bell = (props: IIconProps) => {
-  const { size, width = 32, height = 32, fill = 'none', stroke = colors.main, className } = props;
+  const { size, width = 32, height = 32, fill = "none", stroke = colors.main, className } = props;
 
   return (
     <svg
@@ -336,7 +336,7 @@ export const Bell = (props: IIconProps) => {
 };
 
 export const BellSmall = (props: IIconProps) => {
-  const { size, width = 32, height = 32, fill = 'none', stroke = colors.main, className } = props;
+  const { size, width = 32, height = 32, fill = "none", stroke = colors.main, className } = props;
 
   return (
     <svg
@@ -357,7 +357,7 @@ export const BellSmall = (props: IIconProps) => {
 };
 
 export const ArrowBack = (props: IIconProps) => {
-  const { size, width = 32, height = 32, fill = colors.black, stroke = 'none', className } = props;
+  const { size, width = 32, height = 32, fill = colors.black, stroke = "none", className } = props;
 
   return (
     <svg
@@ -376,7 +376,7 @@ export const ArrowBack = (props: IIconProps) => {
 };
 
 export const ArrowForward = (props: IIconProps) => {
-  const { size, width = 10, height = 19, fill = colors.black, stroke = 'none', className } = props;
+  const { size, width = 10, height = 19, fill = colors.black, stroke = "none", className } = props;
 
   return (
     <svg
@@ -395,7 +395,7 @@ export const ArrowForward = (props: IIconProps) => {
 };
 
 export const Star = (props: IIconProps) => {
-  const { size, width = 14, height = 14, fill = 'none', stroke = colors.black, className } = props;
+  const { size, width = 14, height = 14, fill = "none", stroke = colors.black, className } = props;
 
   return (
     <svg
@@ -418,7 +418,7 @@ export const Star = (props: IIconProps) => {
 };
 
 export const Question = (props: IIconProps) => {
-  const { size, width = 24, height = 24, fill = colors.black, stroke = 'none', className } = props;
+  const { size, width = 24, height = 24, fill = colors.black, stroke = "none", className } = props;
 
   return (
     <svg
@@ -436,7 +436,7 @@ export const Question = (props: IIconProps) => {
 };
 
 export const Clock = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = colors.main, stroke = 'none', className } = props;
+  const { size, width = 16, height = 16, fill = colors.main, stroke = "none", className } = props;
 
   return (
     <svg
@@ -455,7 +455,7 @@ export const Clock = (props: IIconProps) => {
 
 //      Menu
 export const MenuHome = (props: IIconWithActiveStateProps) => {
-  const { size, width = 32, height = 32, fill = 'none', stroke = colors.main, active = false, className } = props;
+  const { size, width = 32, height = 32, fill = "none", stroke = colors.main, active = false, className } = props;
 
   return (
     <svg
@@ -479,7 +479,7 @@ export const MenuHome = (props: IIconWithActiveStateProps) => {
 };
 
 export const MenuTask = (props: IIconWithActiveStateProps) => {
-  const { size, width = 32, height = 32, fill = 'none', stroke = colors.main, active = false, className } = props;
+  const { size, width = 32, height = 32, fill = "none", stroke = colors.main, active = false, className } = props;
 
   return (
     <svg
@@ -505,7 +505,7 @@ export const MenuTask = (props: IIconWithActiveStateProps) => {
 };
 
 export const MenuCalendar = (props: IIconWithActiveStateProps) => {
-  const { size, width = 32, height = 32, fill = 'none', stroke = colors.main, active = false, className } = props;
+  const { size, width = 32, height = 32, fill = "none", stroke = colors.main, active = false, className } = props;
 
   return (
     <svg
@@ -528,7 +528,7 @@ export const MenuCalendar = (props: IIconWithActiveStateProps) => {
 };
 
 export const MenuSettings = (props: IIconWithActiveStateProps) => {
-  const { size, width = 32, height = 32, fill = 'none', stroke = colors.main, active = false, className } = props;
+  const { size, width = 32, height = 32, fill = "none", stroke = colors.main, active = false, className } = props;
 
   return (
     <svg
@@ -557,7 +557,7 @@ export const Plus = () => (
 
 //      Profile
 export const Avatar = (props: IIconProps) => {
-  const { size, width = 60, height = 60, fill = colors.main, stroke = 'none', className } = props;
+  const { size, width = 60, height = 60, fill = colors.main, stroke = "none", className } = props;
 
   return (
     <svg
@@ -621,7 +621,7 @@ export const Camera = (props: IIconProps) => {
 };
 
 export const Envelope = (props: IIconProps) => {
-  const { size, width = 32, height = 32, fill = 'none', stroke = colors.black, className } = props;
+  const { size, width = 32, height = 32, fill = "none", stroke = colors.black, className } = props;
 
   return (
     <svg
@@ -641,7 +641,7 @@ export const Envelope = (props: IIconProps) => {
 };
 
 export const Phone16 = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = 'none', stroke = colors.main, className } = props;
+  const { size, width = 16, height = 16, fill = "none", stroke = colors.main, className } = props;
 
   return (
     <svg
@@ -662,7 +662,7 @@ export const Phone16 = (props: IIconProps) => {
 };
 
 export const Position = (props: IIconWithArchivedStateProps) => {
-  const { size, width = 24, height = 24, fill = colors.main, stroke = 'none', archived = false, className } = props;
+  const { size, width = 24, height = 24, fill = colors.main, stroke = "none", archived = false, className } = props;
 
   return (
     <svg
@@ -686,7 +686,7 @@ export const Position = (props: IIconWithArchivedStateProps) => {
 };
 
 export const LinkedIn = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = 'none', stroke = colors.main, className } = props;
+  const { size, width = 16, height = 16, fill = "none", stroke = colors.main, className } = props;
 
   return (
     <svg
@@ -731,7 +731,7 @@ export const LinkedIn = (props: IIconProps) => {
 // );
 
 export const Telegram = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = 'none', stroke = colors.main, className } = props;
+  const { size, width = 16, height = 16, fill = "none", stroke = colors.main, className } = props;
 
   return (
     <svg
@@ -769,7 +769,7 @@ export const Telegram = (props: IIconProps) => {
 // );
 
 export const Location = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = 'none', stroke = colors.main, className } = props;
+  const { size, width = 16, height = 16, fill = "none", stroke = colors.main, className } = props;
 
   return (
     <svg
@@ -792,7 +792,7 @@ export const Location = (props: IIconProps) => {
 };
 
 export const Facebook = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = 'none', stroke = colors.main, className } = props;
+  const { size, width = 16, height = 16, fill = "none", stroke = colors.main, className } = props;
 
   return (
     <svg
@@ -830,7 +830,7 @@ export const Facebook = (props: IIconProps) => {
 // );
 
 export const Instagram = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = 'none', stroke = colors.main, className } = props;
+  const { size, width = 16, height = 16, fill = "none", stroke = colors.main, className } = props;
 
   return (
     <svg
@@ -858,7 +858,7 @@ export const Instagram = (props: IIconProps) => {
 
 //      Cards
 export const CompanyName = (props: IIconWithArchivedStateProps) => {
-  const { size, width = 24, height = 24, fill = colors.black, stroke = 'none', archived = false, className } = props;
+  const { size, width = 24, height = 24, fill = colors.black, stroke = "none", archived = false, className } = props;
 
   return (
     <svg
@@ -939,7 +939,7 @@ export const Stage = (props: IIconWithArchivedStateProps) => {
 };
 
 export const Salary = (props: IIconWithArchivedStateProps) => {
-  const { size, width = 24, height = 24, fill = 'none', stroke = colors.black, archived = false, className } = props;
+  const { size, width = 24, height = 24, fill = "none", stroke = colors.black, archived = false, className } = props;
 
   return (
     <svg
@@ -967,7 +967,7 @@ export const Salary = (props: IIconWithArchivedStateProps) => {
 };
 
 export const Color = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = colors.main, stroke = 'none', className } = props;
+  const { size, width = 16, height = 16, fill = colors.main, stroke = "none", className } = props;
 
   return (
     <svg
@@ -989,7 +989,7 @@ export const Color = (props: IIconProps) => {
 };
 
 export const Review = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = colors.main, stroke = 'none', className } = props;
+  const { size, width = 16, height = 16, fill = colors.main, stroke = "none", className } = props;
 
   return (
     <svg
@@ -1008,7 +1008,7 @@ export const Review = (props: IIconProps) => {
 };
 
 export const Notebook = (props: IIconProps) => {
-  const { size, width = 16, height = 16, fill = 'none', stroke = colors.black, className } = props;
+  const { size, width = 16, height = 16, fill = "none", stroke = colors.black, className } = props;
 
   return (
     <svg
@@ -1031,7 +1031,7 @@ export const Notebook = (props: IIconProps) => {
 };
 
 export const Link = (props: IIconWithLinkedStateProps) => {
-  const { size, width = 16, height = 16, fill = colors.main, stroke = 'none', linked = false, className } = props;
+  const { size, width = 16, height = 16, fill = colors.main, stroke = "none", linked = false, className } = props;
 
   return (
     <svg
@@ -1051,7 +1051,7 @@ export const Link = (props: IIconWithLinkedStateProps) => {
 };
 
 export const Edit = (props: IIconProps) => {
-  const { size, width = 24, height = 24, fill = colors.black, stroke = 'none', className } = props;
+  const { size, width = 24, height = 24, fill = colors.black, stroke = "none", className } = props;
 
   return (
     <svg
@@ -1070,7 +1070,7 @@ export const Edit = (props: IIconProps) => {
 
 // Reminder
 export const Checked = (props: IIconProps) => {
-  const { size, width = 32, height = 32, fill = colors.main, stroke = 'none', className } = props;
+  const { size, width = 32, height = 32, fill = colors.main, stroke = "none", className } = props;
 
   return (
     <svg
@@ -1089,7 +1089,7 @@ export const Checked = (props: IIconProps) => {
 
 // Settings
 export const SettingsLang = (props: IIconProps) => {
-  const { size, width = 24, height = 24, fill = colors.black, stroke = 'none', className } = props;
+  const { size, width = 24, height = 24, fill = colors.black, stroke = "none", className } = props;
 
   return (
     <svg
@@ -1130,7 +1130,7 @@ export const SettingsNotification = (props: IIconProps) => {
 };
 
 export const SettingsHelp = (props: IIconProps) => {
-  const { size, width = 24, height = 24, fill = 'none', stroke = colors.black, className } = props;
+  const { size, width = 24, height = 24, fill = "none", stroke = colors.black, className } = props;
 
   return (
     <svg
@@ -1153,7 +1153,7 @@ export const SettingsHelp = (props: IIconProps) => {
 };
 
 export const SettingsArchive = (props: IIconProps) => {
-  const { size, width = 24, height = 24, fill = 'none', stroke = colors.black, className } = props;
+  const { size, width = 24, height = 24, fill = "none", stroke = colors.black, className } = props;
 
   return (
     <svg
@@ -1174,7 +1174,7 @@ export const SettingsArchive = (props: IIconProps) => {
 };
 
 export const SettingsPolicy = (props: IIconProps) => {
-  const { size, width = 24, height = 24, fill = 'none', stroke = 'none', className } = props;
+  const { size, width = 24, height = 24, fill = "none", stroke = "none", className } = props;
 
   return (
     <svg
@@ -1204,8 +1204,9 @@ export const SettingsPolicy = (props: IIconProps) => {
 };
 
 //    Archive
+
 export const Trash = (props: IIconProps) => {
-  const { size, width = 24, height = 24, fill = 'none', stroke = colors.black, className } = props;
+  const { size, width = 24, height = 24, fill = "none", stroke = colors.black, className } = props;
 
   return (
     <svg
@@ -1228,7 +1229,7 @@ export const Trash = (props: IIconProps) => {
 };
 
 export const Recover = (props: IIconProps) => {
-  const { size, width = 32, height = 32, fill = 'none', stroke = colors.black, className } = props;
+  const { size, width = 32, height = 32, fill = "none", stroke = colors.black, className } = props;
 
   return (
     <svg

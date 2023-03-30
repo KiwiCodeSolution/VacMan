@@ -1,5 +1,5 @@
-import { Navigate } from 'react-router-dom';
-import { useAppSelector } from '../hooks/reduxHooks';
+import { Navigate } from "react-router-dom";
+import { useAppSelector } from "../hooks/reduxHooks";
 
 interface IPrivateRoute {
   children: JSX.Element;

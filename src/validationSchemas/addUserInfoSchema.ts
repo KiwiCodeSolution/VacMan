@@ -1,6 +1,6 @@
-import * as yup from 'yup';
+import * as yup from "yup";
 
-const fieldNames: Array<string> = ['phone', 'position', 'location', 'instagram', 'facebook', 'linkedin', 'telegram'];
+const fieldNames: Array<string> = ["phone", "position", "location", "instagram", "facebook", "linkedin", "telegram"];
 const schema: { [key: string]: ReturnType<typeof yup.string> } = {};
 
 fieldNames.forEach((fieldName: string) => {
