@@ -42,37 +42,33 @@ const FullNote = () => {
     archived,
   } = currentVacancy;
 
-  const effect = `hover:scale-110 focus:scale-110`;
-  const archival = `${archived ? `#5b5b69` : `#040c0c`}`;
-  const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
-
   function handleArchive(): void {
     updateVacancy({ _id, archived: !onArchive });
     navigate("/", { replace: true });
   }
 
-  function removeVacancy(): void {
-    if (_id) {
-      deleteVacancy({ _id });
-      navigate("/", { replace: true });
-    }
-  }
+  // function removeVacancy(): void {
+  //   deleteVacancy({ _id });
+  //   navigate('/', { replace: true });
+  // }
 
   return (
-    <div className="container mx-auto px-4 mt-11">
+    <div className="container mx-auto px-4">
       <div
-        className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${archivalText} shadow-xl`}
+        className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${
+          archived ? `text-txt-main` : `text-txt-black`
+        } shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]`}
       >
         <div className="flex mb-10">
-          <button className={`flex-none ${effect}`}>
+          <button className="flex-none hover:scale-110 focus:scale-110">
             <Link to="/">
-              <Icons.ArrowBack fill={archival} />
+              <Icons.ArrowBack />
             </Link>
           </button>
           <span className="grow text-center font-bold text-2xl">{position}</span>
-          <button className={`flex-none ${effect}`}>
+          <button className="flex-none hover:scale-110 focus:scale-110">
             <Link to={`/${_id}/edit`}>
-              <Icons.Edit fill={archival} />
+              <Icons.Edit />
             </Link>
           </button>
         </div>
@@ -86,25 +82,25 @@ const FullNote = () => {
               ) : (
                 <p className="mb-2 font-bold text-xl">{companyName}</p>
               )}
-              <Stars amount={5} active={userRank} archived={archived} />
+              <Stars amount={5} active={userRank} />
             </div>
             <div>
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-                <Icons.Salary stroke={archival} /> <p className="text-base">Salary</p>
+                {archived ? <Icons.Salary archived /> : <Icons.Salary />} <p className="text-base">Salary</p>
               </span>
               <p className="text-[32px]">{salary}$</p>
             </div>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-            <Icons.Stage stroke={archival} fill={archival} />
+            {archived ? <Icons.Stage archived /> : <Icons.Stage />}
             <p>Stage</p>
           </li>
-          <li className="mb-4">{status}</li>
+          <li className="mb-4 text-txt-main">{status}</li>
           <li className="mb-4">
             <div className="flex justify-between">
               <div>
                 <div className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-                  <Icons.Action stroke={archival} />
+                  {archived ? <Icons.Action archived /> : <Icons.Action />}
                   <p>Action</p>
                 </div>
               </div>
@@ -131,7 +127,7 @@ const FullNote = () => {
             </a>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
-            <Icons.Notebook size="24" stroke={archival} />
+            <Icons.Notebook size="24" />
             <p>Notebook</p>
           </li>
           <li className="mb-[35px]">
@@ -144,12 +140,12 @@ const FullNote = () => {
             </div>
           </li>
         </ul>
-        {!archived ? (
+        {/* {!archived ? (
           <Button variant="black" clickFn={() => handleArchive()}>
             Archive
           </Button>
         ) : (
-          <div className="flex gap-2">
+          <div>
             <Button variant="black" clickFn={() => handleArchive()}>
               Active
             </Button>
@@ -157,7 +153,10 @@ const FullNote = () => {
               Remove
             </Button>
           </div>
-        )}
+        )} */}
+        <Button variant="black" clickFn={() => handleArchive()}>
+          Archive
+        </Button>
       </div>
     </div>
   );
