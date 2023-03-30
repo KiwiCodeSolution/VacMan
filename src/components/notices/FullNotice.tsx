@@ -43,8 +43,8 @@ const FullNote = () => {
   } = currentVacancy;
 
   const effect = `hover:scale-110 focus:scale-110`;
-  const archival = `${archived ? `#5b5b69` : `#040c0c`}`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
+  const archival = `${archived ? `#5b5b69` : `#040c0c`}`;
 
   function handleArchive(): void {
     updateVacancy({ _id, archived: !onArchive });

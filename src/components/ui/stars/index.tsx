@@ -17,8 +17,8 @@ export default function Stars({ amount, active, large, archived }: IStarsProps) 
         <li key={itemActive}>
           <Icons.Star
             size={large ? "40" : "14"}
-            stroke={archived ? `#5b5b69` : `#040c0c`}
             fill={archived ? `#5b5b69` : `#040c0c`}
+            stroke={archived ? `#5b5b69` : `#040c0c`}
           />
         </li>
       ))}

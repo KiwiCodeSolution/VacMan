@@ -7,12 +7,12 @@ const EditVacancy = () => {
 
   return (
     <>
+      <h2>Edit Vacancy page</h2>
       <button className="flex-none hover:scale-110 focus:scale-110">
         <Link to={`/${id}/details`}>
           <Icons.ArrowBack />
         </Link>
       </button>
-      <h2>Edit Vacancy page</h2>
     </>
   );
 };
