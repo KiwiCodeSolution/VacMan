@@ -9,7 +9,7 @@ const colors = {
   link: '#3ca4ec',
 };
 
-interface IIconProps {
+export interface IIconProps {
   size?: string;
   width?: string;
   height?: string;
@@ -662,7 +662,7 @@ export const Phone16 = (props: IIconProps) => {
 };
 
 export const Position = (props: IIconWithArchivedStateProps) => {
-  const { size, width = 24, height = 24, fill = colors.black, stroke = 'none', archived = false, className } = props;
+  const { size, width = 24, height = 24, fill = colors.main, stroke = 'none', archived = false, className } = props;
 
   return (
     <svg

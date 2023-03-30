@@ -13,7 +13,7 @@ type Values = InferType<typeof addUserInfoSchema>;
 type Fields = {
   name: string;
   label: string;
-  labelIcon?: () => JSX.Element;
+  labelIcon?: (props: icons.IIconProps) => JSX.Element;
   type: string;
 };
 
@@ -24,7 +24,7 @@ const formFields: Array<Fields> = [
   { name: 'instagram', label: 'Instagram', labelIcon: icons.Instagram, type: 'text' },
   { name: 'facebook', label: 'Facebook', labelIcon: icons.Facebook, type: 'text' },
   { name: 'linkedin', label: 'LinkedIn', labelIcon: icons.LinkedIn, type: 'text' },
-  { name: 'telegram', label: 'Telegram', labelIcon: icons.TelegramSmall, type: 'text' },
+  { name: 'telegram', label: 'Telegram', labelIcon: icons.Telegram, type: 'text' },
 ];
 
 const initialValues: Values = {
