@@ -6,12 +6,7 @@ import * as Icons from "components/iconsComponents";
 import Button from "components/ui/button";
 
 import Stars from "components/ui/stars";
-import {
-  IVacancy,
-  useDeleteVacancyMutation,
-  useGetVacanciesQuery,
-  useUpdateVacancyMutation,
-} from "redux/VacancyQueries";
+import { useDeleteVacancyMutation, useGetVacanciesQuery, useUpdateVacancyMutation } from "redux/VacancyQueries";
 import Actions from "./Actions";
 import { colorVariants } from "./ShortNotice";
 import { useAppSelector } from "hooks/reduxHooks";
@@ -24,9 +19,10 @@ const FullNote = () => {
   const { data: response } = useGetVacanciesQuery();
   const { onArchive } = useAppSelector(state => state.notice);
   const vacancies = response?.data;
+  if (!vacancies) return <h2>Vacancies data have been lost</h2>;
 
-  const currentVacancy = vacancies?.find(vacancy => vacancy._id === _id) as IVacancy;
-
+  const currentVacancy = vacancies.find(vacancy => vacancy._id === _id);
+  if (!currentVacancy) return <h2>No Vacancy data with id:{_id}</h2>;
   const {
     companyName,
     companyURL,
@@ -34,6 +30,7 @@ const FullNote = () => {
     sourceURL,
     position,
     salary,
+    currency,
     status,
     actions,
     notes,
@@ -42,33 +39,37 @@ const FullNote = () => {
     archived,
   } = currentVacancy;
 
+  const effect = `hover:scale-110 focus:scale-110`;
+  const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
+  const archival = `${archived ? `#5b5b69` : `#040c0c`}`;
+
   function handleArchive(): void {
     updateVacancy({ _id, archived: !onArchive });
     navigate("/", { replace: true });
   }
 
-  // function removeVacancy(): void {
-  //   deleteVacancy({ _id });
-  //   navigate('/', { replace: true });
-  // }
+  function removeVacancy(): void {
+    if (_id) {
+      deleteVacancy({ _id });
+      navigate("/", { replace: true });
+    }
+  }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 mt-11">
       <div
-        className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${
-          archived ? `text-txt-main` : `text-txt-black`
-        } shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]`}
+        className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${archivalText} shadow-xl`}
       >
         <div className="flex mb-10">
-          <button className="flex-none hover:scale-110 focus:scale-110">
+          <button className={`flex-none ${effect}`}>
             <Link to="/">
-              <Icons.ArrowBack />
+              <Icons.ArrowBack fill={archival} />
             </Link>
           </button>
           <span className="grow text-center font-bold text-2xl">{position}</span>
-          <button className="flex-none hover:scale-110 focus:scale-110">
+          <button className={`flex-none ${effect}`}>
             <Link to={`/${_id}/edit`}>
-              <Icons.Edit />
+              <Icons.Edit fill={archival} />
             </Link>
           </button>
         </div>
@@ -82,25 +83,28 @@ const FullNote = () => {
               ) : (
                 <p className="mb-2 font-bold text-xl">{companyName}</p>
               )}
-              <Stars amount={5} active={userRank} />
+              <Stars amount={5} active={userRank} archived={archived} />
             </div>
             <div>
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-                {archived ? <Icons.Salary archived /> : <Icons.Salary />} <p className="text-base">Salary</p>
+                <Icons.Salary stroke={archival} /> <p className="text-base">Salary</p>
               </span>
-              <p className="text-[32px]">{salary}$</p>
+              <p className="text-[32px]">
+                {salary}
+                {currency}
+              </p>
             </div>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-            {archived ? <Icons.Stage archived /> : <Icons.Stage />}
+            <Icons.Stage stroke={archival} fill={archival} />
             <p>Stage</p>
           </li>
-          <li className="mb-4 text-txt-main">{status}</li>
+          <li className="mb-4">{status}</li>
           <li className="mb-4">
             <div className="flex justify-between">
               <div>
                 <div className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-                  {archived ? <Icons.Action archived /> : <Icons.Action />}
+                  <Icons.Action stroke={archival} />
                   <p>Action</p>
                 </div>
               </div>
@@ -127,7 +131,7 @@ const FullNote = () => {
             </a>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
-            <Icons.Notebook size="24" />
+            <Icons.Notebook size="24" stroke={archival} />
             <p>Notebook</p>
           </li>
           <li className="mb-[35px]">
@@ -140,12 +144,12 @@ const FullNote = () => {
             </div>
           </li>
         </ul>
-        {/* {!archived ? (
+        {!archived ? (
           <Button variant="black" clickFn={() => handleArchive()}>
             Archive
           </Button>
         ) : (
-          <div>
+          <div className="flex gap-2">
             <Button variant="black" clickFn={() => handleArchive()}>
               Active
             </Button>
@@ -153,10 +157,7 @@ const FullNote = () => {
               Remove
             </Button>
           </div>
-        )} */}
-        <Button variant="black" clickFn={() => handleArchive()}>
-          Archive
-        </Button>
+        )}
       </div>
     </div>
   );

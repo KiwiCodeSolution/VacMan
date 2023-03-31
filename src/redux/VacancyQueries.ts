@@ -25,15 +25,6 @@ export interface IVacancy {
   userRank: number;
   archived: boolean;
   cardColor: string;
-  // | 'app-red'
-  // | 'app-blue'
-  // | 'app-green'
-  // | 'app-pink'
-  // | 'app-smoke'
-  // | 'app-grey'
-  // | 'app-yellow'
-  // | 'app-mustard'
-  // | 'app-orange';
 }
 
 // eslint-disable-next-line prettier/prettier

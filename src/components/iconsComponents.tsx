@@ -1051,7 +1051,7 @@ export const Link = (props: IIconWithLinkedStateProps) => {
 };
 
 export const Edit = (props: IIconProps) => {
-  const { size, width = 24, height = 24, fill = colors.black, stroke = "none", className } = props;
+  const { size, width = 24, height = 24, stroke = "none", fill = colors.black, className } = props;
 
   return (
     <svg
