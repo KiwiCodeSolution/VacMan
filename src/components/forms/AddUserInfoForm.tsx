@@ -2,19 +2,18 @@
 import { Formik, FormikHelpers, FormikProps } from "formik";
 import { InferType } from "yup";
 
-import CustomInput from "./CustomInput";
+import CustomInput from "components/forms/CustomInput";
 import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
 
 import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
-import { IIconProps } from "components/iconsComponents";
 
 type Values = InferType<typeof addUserInfoSchema>;
 
 type Fields = {
   name: string;
   label: string;
-  labelIcon?: (props: IIconProps) => JSX.Element;
+  labelIcon?: (props: icons.IIconProps) => JSX.Element;
   type: string;
 };
 

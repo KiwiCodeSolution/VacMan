@@ -1,8 +1,7 @@
-/* eslint-disable prettier/prettier */
 import { ReactElement, useState } from "react";
 import { useField, FieldHookConfig } from "formik";
 
-import { Rubber, Eye, IIconProps } from "components/iconsComponents";
+import { IIconProps, Rubber, Eye } from "components/iconsComponents";
 
 type CustomInputProps = FieldHookConfig<string> & {
   label: string;
@@ -25,29 +24,31 @@ function CustomInput(props: CustomInputProps): ReactElement {
     helpers.setValue("", false);
   }
 
-  const isPasswordField: boolean = type === "password";
-  const notAPasswordType = !isPasswordField ? type : "text";
+  const isPasswordField = type === "password";
   const hasError = error && touched;
 
   return (
     <div className="text-txt-main ">
       <label htmlFor={id} className="flex items-center gap-1 text-base ">
-        {LabelIcon && <LabelIcon />}
+        {LabelIcon && <LabelIcon size="16" className="stroke-txt-main" />}
         {label}
       </label>
+
       <div className="relative w-full h-12">
         <input
           name={name}
-          type={isPasswordShown ? notAPasswordType : "password"}
+          type={isPasswordShown ? "text" : type}
           id={id}
           value={value}
           onBlur={onBlur}
           onChange={onChange}
           placeholder={placeholder}
           autoComplete="off"
-          className={`px-4 w-full h-full rounded-md  border ${hasError ? "border-app-red" : "border-text-main"
-            } bg-txt-white focus:outline-none focus:border-app-blue`}
+          className={`px-4 w-full h-full rounded-md  border ${
+            hasError ? "border-app-red" : "border-text-main"
+          } bg-txt-white focus:outline-none focus:border-app-blue`}
         />
+
         {isPasswordField ? (
           <button
             className="absolute bottom-1/2 right-2 translate-y-1/2"
@@ -67,6 +68,7 @@ function CustomInput(props: CustomInputProps): ReactElement {
             <Rubber />
           </button>
         )}
+
         {hasError && <p className="absolute left-0 top-full -translate-y-[15%] text-app-red">{error}</p>}
       </div>
     </div>
