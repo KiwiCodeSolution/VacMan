@@ -1,17 +1,19 @@
-import { ReactElement, useState } from 'react';
-import { useField, FieldHookConfig } from 'formik';
+/* eslint-disable prettier/prettier */
+import { ReactElement, useState } from "react";
+import { useField, FieldHookConfig } from "formik";
 
-import { Rubber, Eye } from '../iconsComponents';
+import { Rubber, Eye, IIconProps } from "components/iconsComponents";
 
 type CustomInputProps = FieldHookConfig<string> & {
   label: string;
+  LabelIcon?: (props: IIconProps) => JSX.Element;
 };
 
 function CustomInput(props: CustomInputProps): ReactElement {
   const [field, meta, helpers] = useField(props);
   const [isPasswordShown, setIsPasswordShown] = useState(false);
 
-  const { name, id, placeholder, type, label } = props;
+  const { name, id, placeholder, type, label, LabelIcon } = props;
   const { value, onBlur, onChange } = field;
   const { touched, error } = meta;
 
@@ -20,30 +22,31 @@ function CustomInput(props: CustomInputProps): ReactElement {
   }
 
   function clearField(): void {
-    helpers.setValue('', false);
+    helpers.setValue("", false);
   }
 
-  const isPasswordField: boolean = type === 'password';
+  const isPasswordField: boolean = type === "password";
+  const notAPasswordType = !isPasswordField ? type : "text";
   const hasError = error && touched;
 
   return (
-    <div className="text-txt-main">
-      <label htmlFor={id} className="text-base ">
+    <div className="text-txt-main ">
+      <label htmlFor={id} className="flex items-center gap-1 text-base ">
+        {LabelIcon && <LabelIcon />}
         {label}
       </label>
       <div className="relative w-full h-12">
         <input
           name={name}
-          type={isPasswordShown ? 'text' : type}
+          type={isPasswordShown ? notAPasswordType : "password"}
           id={id}
           value={value}
           onBlur={onBlur}
           onChange={onChange}
           placeholder={placeholder}
           autoComplete="off"
-          className={`px-4 w-full h-full rounded-md  border ${
-            hasError ? 'border-app-red' : 'border-text-main'
-          } bg-txt-white focus:outline-none focus:border-app-blue`}
+          className={`px-4 w-full h-full rounded-md  border ${hasError ? "border-app-red" : "border-text-main"
+            } bg-txt-white focus:outline-none focus:border-app-blue`}
         />
         {isPasswordField ? (
           <button
@@ -52,7 +55,7 @@ function CustomInput(props: CustomInputProps): ReactElement {
             onClick={(): void => togglePasswordShow()}
             aria-label="show/hide password button"
           >
-            <Eye cross={!isPasswordShown} />
+            <Eye crossed={!isPasswordShown} />
           </button>
         ) : (
           <button

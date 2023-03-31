@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 
 interface INote {
   data: number;
@@ -25,27 +25,18 @@ export interface IVacancy {
   userRank: number;
   archived: boolean;
   cardColor: string;
-  // | 'app-red'
-  // | 'app-blue'
-  // | 'app-green'
-  // | 'app-pink'
-  // | 'app-smoke'
-  // | 'app-grey'
-  // | 'app-yellow'
-  // | 'app-mustard'
-  // | 'app-orange';
 }
 
 // eslint-disable-next-line prettier/prettier
 const axiosBaseQuery =
   (
-    { baseUrl }: { baseUrl: string } = { baseUrl: '' }
+    { baseUrl }: { baseUrl: string } = { baseUrl: "" }
   ): BaseQueryFn<
     {
       url: string;
-      method: AxiosRequestConfig['method'];
-      data?: AxiosRequestConfig['data'];
-      params?: AxiosRequestConfig['params'];
+      method: AxiosRequestConfig["method"];
+      data?: AxiosRequestConfig["data"];
+      params?: AxiosRequestConfig["params"];
     },
     unknown,
     unknown
@@ -64,34 +55,34 @@ const axiosBaseQuery =
       };
     }
   };
-const baseUrl = 'https://vacmanserver-production.up.railway.app/';
+const baseUrl = "https://vacmanserver-production.up.railway.app/";
 // const baseUrl = 'http://localhost:3030/';
 
 export const vacancyAPI = createApi({
-  reducerPath: 'vacancies',
+  reducerPath: "vacancies",
   baseQuery: axiosBaseQuery({ baseUrl }),
-  tagTypes: ['vacancies'],
-  endpoints: (builder) => ({
+  tagTypes: ["vacancies"],
+  endpoints: builder => ({
     getVacancies: builder.query<{ data: IVacancy[] }, void>({
-      query: () => ({ url: 'vacancy', method: 'GET' }),
+      query: () => ({ url: "vacancy", method: "GET" }),
       // keepUnusedDataFor: 3,
-      providesTags: ['vacancies'],
+      providesTags: ["vacancies"],
     }),
     // getVacancyById: builder.query<IVacancy, string>({
     //   query: id => ({ url: `vacancy/${id}`, method: 'GET' }),
     //   providesTags: ['vacancies'],
     // }),
-    addVacancy: builder.mutation<{message: string, data: IVacancy}, Partial<IVacancy>>({
-      query: (data) => ({ url: 'vacancy', method: 'POST', data }),
-      invalidatesTags: ['vacancies'],
+    addVacancy: builder.mutation<{ message: string; data: IVacancy }, Partial<IVacancy>>({
+      query: data => ({ url: "vacancy", method: "POST", data }),
+      invalidatesTags: ["vacancies"],
     }),
-    updateVacancy: builder.mutation<{message: string, data: IVacancy}, Partial<IVacancy>>({
-      query: (data) => ({ url: `vacancy`, method: 'PUT', data }),
-      invalidatesTags: ['vacancies'],
+    updateVacancy: builder.mutation<{ message: string; data: IVacancy }, Partial<IVacancy>>({
+      query: data => ({ url: `vacancy`, method: "PUT", data }),
+      invalidatesTags: ["vacancies"],
     }),
-    deleteVacancy: builder.mutation<{message: string}, {_id: string}>({
-      query: (_id) => ({ url: `vacancy/${_id}`, method: 'DELETE' }),
-      invalidatesTags: ['vacancies'],
+    deleteVacancy: builder.mutation<{ message: string }, { _id: string }>({
+      query: ({ _id }) => ({ url: `vacancy/${_id}`, method: "DELETE" }),
+      invalidatesTags: ["vacancies"],
     }),
   }),
 });
