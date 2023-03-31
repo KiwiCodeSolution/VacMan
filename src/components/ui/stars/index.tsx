@@ -1,25 +1,30 @@
 /* eslint-disable prettier/prettier */
-import * as Icons from 'components/iconsComponents';
+import * as Icons from "components/iconsComponents";
 
 interface IStarsProps {
   amount: number;
   active: number;
   large?: boolean;
+  archived?: boolean;
 }
 
-export default function Stars({ amount, active, large }: IStarsProps) {
+export default function Stars({ amount, active, large, archived }: IStarsProps) {
   const stars = Array.from({ length: amount - active }, (v, i) => i);
   const starsActive = Array.from({ length: active }, (v, i) => i);
   return (
     <ul className="flex gap-x-0.5">
-      {starsActive.map((itemActive) => (
+      {starsActive.map(itemActive => (
         <li key={itemActive}>
-          <Icons.Star fill large={!!large} />
+          <Icons.Star
+            size={large ? "40" : "14"}
+            fill={archived ? `#5b5b69` : `#040c0c`}
+            stroke={archived ? `#5b5b69` : `#040c0c`}
+          />
         </li>
       ))}
-      {stars.map((item) => (
+      {stars.map(item => (
         <li key={item}>
-          <Icons.Star large={!!large} />
+          <Icons.Star size={large ? "40" : "14"} stroke={archived ? `#5b5b69` : `#040c0c`} />
         </li>
       ))}
     </ul>

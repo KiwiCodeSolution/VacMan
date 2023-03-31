@@ -1,27 +1,27 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { IUser } from './userSlice';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import type { IUser } from "./userSlice";
 
 // axios.defaults.baseURL = 'http://localhost:3030';
 // axios.defaults.baseURL = 'http://kiwicode.tech:5000';
-axios.defaults.baseURL = 'https://vacmanserver-production.up.railway.app';
+axios.defaults.baseURL = "https://vacmanserver-production.up.railway.app";
 
 export const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 export const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
+  axios.defaults.headers.common.Authorization = "";
 };
 
 export const registration = createAsyncThunk<
   string,
   { email: string; password: string },
   { rejectValue: string | undefined }
->('user/registration', async (credentials, { rejectWithValue }) => {
+>("user/registration", async (credentials, { rejectWithValue }) => {
   try {
-    const response = await axios.post('/auth/register', credentials);
-    console.log('AsyncThunk: Congratulations! You are registered!');
+    const response = await axios.post("/auth/register", credentials);
+    console.log("AsyncThunk: Congratulations! You are registered!");
     return response.data.message;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -32,12 +32,12 @@ export const registration = createAsyncThunk<
 });
 
 export const logIn = createAsyncThunk<IUser, { email: string; password: string }, { rejectValue: string | undefined }>(
-  'user/login',
+  "user/login",
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/auth/login', credentials);
+      const { data } = await axios.post("/auth/login", credentials);
       setAuthHeader(data.user.token);
-      console.log('Congratulations! You are logined!');
+      console.log("Congratulations! You are logined!");
       console.log(data.user);
       return data.user;
     } catch (error) {
@@ -51,9 +51,9 @@ export const logIn = createAsyncThunk<IUser, { email: string; password: string }
 );
 
 export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string }>(
-  'user/logout',
+  "user/logout",
   async (_, { rejectWithValue }) => {
-    const response = await axios.get('/auth/logout');
+    const response = await axios.get("/auth/logout");
     if (response.status !== 200) {
       return rejectWithValue(response.data.message);
     }
@@ -63,7 +63,7 @@ export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string
 );
 
 export const currentUser = createAsyncThunk<IUser, undefined, { rejectValue: string }>(
-  'user/current',
+  "user/current",
   async (_, { rejectWithValue, getState }) => {
     try {
       const { user } = getState() as { user: IUser };
@@ -79,7 +79,7 @@ export const currentUser = createAsyncThunk<IUser, undefined, { rejectValue: str
 );
 
 export const emailVerify = createAsyncThunk<IUser, { verificationCode: string }, { rejectValue: string }>(
-  'user/emailVerify',
+  "user/emailVerify",
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/auth/emailVerify?verificationCode=${credentials.verificationCode}`);

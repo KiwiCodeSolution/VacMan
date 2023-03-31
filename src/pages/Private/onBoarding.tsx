@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useAppDispatch } from '../../hooks/reduxHooks';
-import { setOnBoarding } from '../../redux/userSlice';
-import * as Icons from '../../components/iconsComponents';
-import Dots from '../../components/ui/dots';
+import { useState } from "react";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { setOnBoarding } from "../../redux/userSlice";
+import * as Icons from "../../components/iconsComponents";
+import Dots from "../../components/ui/dots";
 
 interface IimageUrl {
   [key: number]: string;
@@ -16,10 +16,10 @@ const imageUrls: IimageUrl = {
 };
 
 const text = [
-  'We can help you organize your job search',
-  'We will complete all the necessary tasks on time',
-  'We will track your progress on the way to meeting your goals',
-  'Stop reading it, Do it !',
+  "We can help you organize your job search",
+  "We will complete all the necessary tasks on time",
+  "We will track your progress on the way to meeting your goals",
+  "Stop reading it, Do it !",
 ];
 
 const OnBoarding = () => {
@@ -44,7 +44,8 @@ const OnBoarding = () => {
     >
       <div className="flex justify-between py-5 px-4">
         <button type="button" onClick={goBack}>
-          <Icons.ArrowBack white />
+          {/* <Icons.ArrowBack white /> */}
+          <Icons.ArrowBack stroke="#FFFFFF" fill="#FFFFFF" />
         </button>
         {onBoardingPage < 4 ? (
           <button
@@ -52,7 +53,8 @@ const OnBoarding = () => {
             className="flex gap-px justify-between items-center"
             onClick={() => dispatch(setOnBoarding(false))}
           >
-            <span className="font-semibold text-base text-txt-white ">Skip</span> <Icons.ArrowForward white />
+            <span className="font-semibold text-base text-txt-white ">Skip</span> {/* <Icons.ArrowBack white /> */}
+            <Icons.ArrowForward stroke="#FFFFFF" fill="#FFFFFF" />
           </button>
         ) : null}
       </div>
