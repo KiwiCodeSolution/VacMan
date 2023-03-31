@@ -16,6 +16,7 @@ import Reminder from "pages/Private/reminder";
 import Calendar from "pages/Private/calendar";
 import ProfilePage from "pages/Private/profilePage";
 import SettingsPage from "pages/Private/settingsPage";
+import Archived from "pages/Private/archived";
 import Card from "pages/Private/vacancyCard";
 import AddVacancy from "pages/Private/addVacancy";
 import EditVacancy from "pages/Private/editVacancy";
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="calendar" element={<PrivateRoute><Calendar /></PrivateRoute>} />
         <Route path="settings" element={<PrivateRoute><SettingsPage /></PrivateRoute>} />
         <Route path="profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+        <Route path="archived" element={<PrivateRoute><Archived /></PrivateRoute>} />
       </Route>
       <Route path=":_id" element={<PrivateRoute><Card /></PrivateRoute>}>
         {/* No Header & Menu */}

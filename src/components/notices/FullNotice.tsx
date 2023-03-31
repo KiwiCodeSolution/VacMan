@@ -6,12 +6,7 @@ import * as Icons from "components/iconsComponents";
 import Button from "components/ui/button";
 
 import Stars from "components/ui/stars";
-import {
-  IVacancy,
-  useDeleteVacancyMutation,
-  useGetVacanciesQuery,
-  useUpdateVacancyMutation,
-} from "redux/VacancyQueries";
+import { useDeleteVacancyMutation, useGetVacanciesQuery, useUpdateVacancyMutation } from "redux/VacancyQueries";
 import Actions from "./Actions";
 import { colorVariants } from "./ShortNotice";
 import { useAppSelector } from "hooks/reduxHooks";
@@ -24,9 +19,10 @@ const FullNote = () => {
   const { data: response } = useGetVacanciesQuery();
   const { onArchive } = useAppSelector(state => state.notice);
   const vacancies = response?.data;
+  if (!vacancies) return <h2>Vacancies data have been lost</h2>;
 
-  const currentVacancy = vacancies?.find(vacancy => vacancy._id === _id) as IVacancy;
-
+  const currentVacancy = vacancies.find(vacancy => vacancy._id === _id);
+  if (!currentVacancy) return <h2>No Vacancy data with id:{_id}</h2>;
   const {
     companyName,
     companyURL,
@@ -34,6 +30,7 @@ const FullNote = () => {
     sourceURL,
     position,
     salary,
+    currency,
     status,
     actions,
     notes,
@@ -92,7 +89,10 @@ const FullNote = () => {
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
                 <Icons.Salary stroke={archival} /> <p className="text-base">Salary</p>
               </span>
-              <p className="text-[32px]">{salary}$</p>
+              <p className="text-[32px]">
+                {salary}
+                {currency}
+              </p>
             </div>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium">
