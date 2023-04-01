@@ -18,7 +18,7 @@ export default function LogInPage() {
       </div>
       <LoginForm />
       <div className="mt-auto">
-        <Button variant="white" clickFn={() => googleAuth()}>
+        <Button variant="white" clickFn={googleAuth}>
           <div className="flex flex-row items-center">
             <img className="mr-4" src={GoogleLogo} alt="google-logo" />
             Use Google
