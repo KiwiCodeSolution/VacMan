@@ -2,6 +2,7 @@
 import { useField, FieldHookConfig } from "formik";
 
 import { Star } from "components/iconsComponents";
+import { useEffect } from "react";
 
 type StarRadioBtnProps = FieldHookConfig<string> & {
   btnId: number;
@@ -15,12 +16,19 @@ const StarRadioBtn = (props: StarRadioBtnProps) => {
   const [field] = useField(props);
 
   const { name, value, btnId, hoveredBtnId, selectedBtnId, onBtnHover, onBtnSelect } = props;
-  const { onChange, onBlur } = field;
+  const { value: fieldValue, onChange, onBlur } = field;
 
   const handleStarRadioBtnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     onBtnSelect(btnId);
     onChange(e);
   };
+
+  useEffect(() => {
+    if (fieldValue === value) {
+      onBtnSelect(btnId);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const filled = btnId <= hoveredBtnId || btnId <= selectedBtnId;
 
@@ -33,6 +41,7 @@ const StarRadioBtn = (props: StarRadioBtnProps) => {
         type="radio"
         value={value}
         id={name + value}
+        checked={fieldValue === value}
         className="sr-only peer"
       />
       <label

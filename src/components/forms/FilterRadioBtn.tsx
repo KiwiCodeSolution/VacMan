@@ -6,7 +6,7 @@ const FilterRadioBtn = (props: FieldHookConfig<string>) => {
   const [field] = useField(props);
 
   const { name, value } = props;
-  const { onChange, onBlur } = field;
+  const { value: fieldValue, onChange, onBlur } = field;
 
   return (
     <div className="flex ">
@@ -17,6 +17,7 @@ const FilterRadioBtn = (props: FieldHookConfig<string>) => {
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        checked={fieldValue === value}
         className="sr-only peer"
       />
       <label

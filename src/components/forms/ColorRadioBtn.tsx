@@ -4,7 +4,7 @@ const ColorRadioBtn = (props: FieldHookConfig<string>) => {
   const [field] = useField(props);
 
   const { name, value } = props;
-  const { onChange, onBlur } = field;
+  const { value: fieldValue, onChange, onBlur } = field;
 
   return (
     <div className="relative">
@@ -15,6 +15,7 @@ const ColorRadioBtn = (props: FieldHookConfig<string>) => {
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        checked={fieldValue === value}
         className="sr-only peer"
       />
       <label

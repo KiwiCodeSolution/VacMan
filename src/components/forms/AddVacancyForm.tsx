@@ -7,7 +7,7 @@ import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
 
-const initialValues = {
+const defaultInitialValues = {
   companyName: "",
   companyLink: "",
   source: "",
@@ -20,7 +20,7 @@ const initialValues = {
   notebook: "",
 };
 
-type Values = typeof initialValues;
+type Values = typeof defaultInitialValues;
 
 const STAGES = [
   "Waiting for answer",
@@ -48,7 +48,7 @@ const RATING_VALUES = ["1", "2", "3", "4", "5"];
 
 const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "red", "mustard"];
 
-const AddVacancyForm = () => {
+const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
   const handleFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     console.log("Form was submitted");
     console.log("values: ", values);
@@ -56,7 +56,7 @@ const AddVacancyForm = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleFormSubmit}>
+    <Formik initialValues={initialValues || defaultInitialValues} onSubmit={handleFormSubmit}>
       {({ handleSubmit }: FormikProps<Values>) => (
         <form onSubmit={handleSubmit}>
           <ul className="flex flex-col gap-y-3">
