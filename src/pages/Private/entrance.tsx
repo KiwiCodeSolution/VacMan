@@ -9,11 +9,13 @@ const Entrance = () => {
   return onBoarding ? (
     <OnBoarding />
   ) : (
-    <div className="px-4">
+    <>
       <Header />
-      <Outlet />
+      <div className="px-4">
+        <Outlet />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
