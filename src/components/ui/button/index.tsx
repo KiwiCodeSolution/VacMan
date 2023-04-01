@@ -14,6 +14,7 @@ export default function Button({ children, variant, btnType, clickFn }: IButton)
     ? `${button} text-txt-${variant === "black" ? "white" : "main"} bg-bg-${variant}`
     : button;
   const handleClick = () => (clickFn ? clickFn() : null);
+  console.log("handleClick");
   return (
     <button type={btnType || "button"} className={currentStyle} onClick={handleClick}>
       {children}
