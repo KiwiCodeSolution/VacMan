@@ -1,4 +1,6 @@
+import NavHeader from "components/navHeader";
+
 const ProfilePage = () => {
-  return <h2>Profile page</h2>;
+  return <NavHeader prevAddress="/" text="Reminder" />;
 };
 export default ProfilePage;

@@ -1,4 +1,6 @@
+import NavHeader from "components/navHeader";
+
 const SettingsPage = () => {
-  return <h2>Settings page</h2>;
+  return <NavHeader prevAddress="/" text="Settings" />;
 };
 export default SettingsPage;

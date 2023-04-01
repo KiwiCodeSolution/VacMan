@@ -10,12 +10,14 @@ interface IProps {
 const NavHeader = ({ prevAddress, text, ref, nextAddress }: IProps) => {
   return (
     <div className="flex justify-between items-center border-b border-txt-grey">
-      {prevAddress && (
+      {prevAddress ? (
         <button className="flex-none hover:scale-110 focus:scale-110">
           <Link to={prevAddress}>
             <Icons.ArrowBack />
           </Link>
         </button>
+      ) : (
+        <p> </p>
       )}
 
       {ref ? <a href={ref}>{text}</a> : <p className="text-center text-2xl">{text}</p>}

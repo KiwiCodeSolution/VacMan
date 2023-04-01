@@ -1,4 +1,6 @@
+import NavHeader from "components/navHeader";
+
 const Calendar = () => {
-  return <h2>Calendar page</h2>;
+  return <NavHeader prevAddress="/" text="Calendar" />;
 };
 export default Calendar;
