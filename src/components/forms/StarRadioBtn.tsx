@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { ReactElement } from "react";
 import { useField, FieldHookConfig } from "formik";
 
 import { Star } from "components/iconsComponents";
@@ -12,7 +11,7 @@ type StarRadioBtnProps = FieldHookConfig<string> & {
   onBtnSelect: (id: number) => void;
 };
 
-const StarRadioBtn = (props: StarRadioBtnProps): ReactElement => {
+const StarRadioBtn = (props: StarRadioBtnProps) => {
   const [field] = useField(props);
 
   const { name, value, btnId, hoveredBtnId, selectedBtnId, onBtnHover, onBtnSelect } = props;

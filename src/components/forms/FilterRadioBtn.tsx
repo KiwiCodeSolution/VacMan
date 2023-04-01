@@ -1,9 +1,8 @@
-import { ReactElement } from "react";
 import { useField, FieldHookConfig } from "formik";
 
 // type FilterRadioBtnProps = FieldHookConfig<string> & {};
 
-const FilterRadioBtn = (props: FieldHookConfig<string>): ReactElement => {
+const FilterRadioBtn = (props: FieldHookConfig<string>) => {
   const [field] = useField(props);
 
   const { name, value } = props;

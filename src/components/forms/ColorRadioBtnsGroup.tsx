@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { FieldHookConfig } from "formik";
 
 import { IIconProps } from "components/iconsComponents";
@@ -10,7 +9,7 @@ type ColorRadioBtnsGroupProps = FieldHookConfig<string> & {
   LabelIcon?: (props: IIconProps) => JSX.Element;
 };
 
-const ColorRadioBtnsGroup = ({ name, values, label, LabelIcon }: ColorRadioBtnsGroupProps): ReactElement => {
+const ColorRadioBtnsGroup = ({ name, values, label, LabelIcon }: ColorRadioBtnsGroupProps) => {
   return (
     <div>
       <div className="flex gap-1 justify-start items-center  text-txt">
