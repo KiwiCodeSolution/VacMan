@@ -5,7 +5,7 @@ const Footer = () => {
   const { pathname } = useLocation();
 
   return (
-    <div className="flex justify-evenly items-center fixed bottom-0 w-full bg-bg-black pt-6 pb-10 px-4 rounded-t-3xl">
+    <div className="flex justify-evenly items-center fixed bottom-0 w-full bg-bg-black pt-6 pb-10 rounded-t-3xl">
       <Link to="/">
         <Icons.MenuHome active={pathname === "/"} />
       </Link>

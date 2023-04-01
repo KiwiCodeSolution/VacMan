@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useAppDispatch } from "../../hooks/reduxHooks";
-import { setOnBoarding } from "../../redux/userSlice";
-import * as Icons from "../../components/iconsComponents";
-import Dots from "../../components/ui/dots";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { setOnBoarding } from "redux/userSlice";
+import * as Icons from "components/iconsComponents";
+import Dots from "components/ui/dots";
+import { Link } from "react-router-dom";
 
 interface IimageUrl {
   [key: number]: string;
@@ -45,17 +46,19 @@ const OnBoarding = () => {
       <div className="flex justify-between py-5 px-4">
         <button type="button" onClick={goBack}>
           {/* <Icons.ArrowBack white /> */}
-          <Icons.ArrowBack stroke="#FFFFFF" fill="#FFFFFF" />
+          <Icons.ArrowBack className="fill-txt-white stroke-txt-black" />
         </button>
         {onBoardingPage < 4 ? (
-          <button
-            type="button"
-            className="flex gap-px justify-between items-center"
-            onClick={() => dispatch(setOnBoarding(false))}
-          >
-            <span className="font-semibold text-base text-txt-white ">Skip</span> {/* <Icons.ArrowBack white /> */}
-            <Icons.ArrowForward stroke="#FFFFFF" fill="#FFFFFF" />
-          </button>
+          <Link to="addUserData">
+            <button
+              type="button"
+              className="flex gap-px justify-between items-center"
+              onClick={() => dispatch(setOnBoarding(false))}
+            >
+              <span className="font-semibold text-base text-txt-white ">Skip</span>
+              <Icons.ArrowForward className="fill-txt-white stroke-txt-black" />
+            </button>
+          </Link>
         ) : null}
       </div>
       <div className={`px-4 w-[100%] h-[22rem] pt-16 pb-[72px] bottom-0 ${currentBackground}`}>

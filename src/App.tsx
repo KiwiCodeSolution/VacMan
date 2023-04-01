@@ -24,6 +24,7 @@ import NotFound from "./pages/notFound";
 import { PrivateRoute, RedirectRoute } from "./hocs/PrivateRoute";
 import { currentUser } from "redux/userOperations";
 import FullNote from "components/notices/FullNotice";
+import AddUserData from "pages/Private/addUserData";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ const App = () => {
       <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>}>
         {/* with Header & Menu */}
         <Route index element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path="addUserData" element={<PrivateRoute><AddUserData /></PrivateRoute>} />
         <Route path="reminder" element={<PrivateRoute><Reminder /></PrivateRoute>} />
         <Route path="calendar" element={<PrivateRoute><Calendar /></PrivateRoute>} />
         <Route path="settings" element={<PrivateRoute><SettingsPage /></PrivateRoute>} />
