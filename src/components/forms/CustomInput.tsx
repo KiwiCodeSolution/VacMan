@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { useState } from "react";
 import { useField, FieldHookConfig } from "formik";
 
 import { IIconProps, Rubber, Eye } from "components/iconsComponents";
@@ -8,7 +8,7 @@ type CustomInputProps = FieldHookConfig<string> & {
   LabelIcon?: (props: IIconProps) => JSX.Element;
 };
 
-function CustomInput(props: CustomInputProps): ReactElement {
+function CustomInput(props: CustomInputProps) {
   const [field, meta, helpers] = useField(props);
   const [isPasswordShown, setIsPasswordShown] = useState(false);
 

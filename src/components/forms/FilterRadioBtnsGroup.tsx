@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { FieldHookConfig } from "formik";
 
 import { IIconProps } from "components/iconsComponents";
@@ -10,7 +9,7 @@ type FilterRadioBtnsGroupProps = FieldHookConfig<string> & {
   LabelIcon?: (props: IIconProps) => JSX.Element;
 };
 
-const FilterRadioBtnsGroup = ({ name, values, label, LabelIcon }: FilterRadioBtnsGroupProps): ReactElement => {
+const FilterRadioBtnsGroup = ({ name, values, label, LabelIcon }: FilterRadioBtnsGroupProps) => {
   return (
     <div>
       <div className="flex flex-wrap gap-1 justify-start items-center  text-txt">

@@ -1,8 +1,7 @@
-import Footer from "components/footer";
-import Header from "components/Header";
 import { Outlet } from "react-router-dom";
 import { useAppSelector } from "hooks/reduxHooks";
 import OnBoarding from "./onBoarding";
+import Footer from "components/footer";
 
 const Entrance = () => {
   const { onBoarding } = useAppSelector(state => state.user);
@@ -10,7 +9,6 @@ const Entrance = () => {
     <OnBoarding />
   ) : (
     <>
-      <Header />
       <Outlet />
       <Footer />
     </>
