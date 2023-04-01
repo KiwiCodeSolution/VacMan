@@ -1,4 +1,3 @@
-import { FC, ReactElement } from "react";
 import { Formik, FormikHelpers, FormikProps } from "formik";
 import { InferType } from "yup";
 
@@ -17,7 +16,7 @@ const initialValues: Values = {
   confirmPassword: "",
 };
 
-const RegisterForm: FC = (): ReactElement => {
+const RegisterForm = () => {
   const dispatch = useAppDispatch();
 
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {

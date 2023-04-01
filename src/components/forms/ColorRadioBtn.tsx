@@ -1,7 +1,6 @@
-import { ReactElement } from "react";
 import { useField, FieldHookConfig } from "formik";
 
-const ColorRadioBtn = (props: FieldHookConfig<string>): ReactElement => {
+const ColorRadioBtn = (props: FieldHookConfig<string>) => {
   const [field] = useField(props);
 
   const { name, value } = props;

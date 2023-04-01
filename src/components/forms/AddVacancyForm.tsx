@@ -1,4 +1,3 @@
-import { FC, ReactElement } from "react";
 import { Formik, FormikHelpers, FormikProps } from "formik";
 
 import * as icons from "components/iconsComponents";
@@ -8,20 +7,7 @@ import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
 
-type Values = {
-  companyName: string;
-  companyLink: string;
-  source: string;
-  position: string;
-  salary: string;
-  stage: string;
-  action: string;
-  color: string;
-  userReview: string;
-  notebook: string;
-};
-
-const initialValues: Values = {
+const initialValues = {
   companyName: "",
   companyLink: "",
   source: "",
@@ -34,7 +20,9 @@ const initialValues: Values = {
   notebook: "",
 };
 
-const STAGES: Array<string> = [
+type Values = typeof initialValues;
+
+const STAGES = [
   "Waiting for answer",
   "Doing a test",
   "Got rejected",
@@ -45,7 +33,7 @@ const STAGES: Array<string> = [
   "Another",
 ];
 
-const ACTIONS: Array<string> = [
+const ACTIONS = [
   "Send resume",
   "Politely decline",
   "An interview with an eichar",
@@ -56,11 +44,11 @@ const ACTIONS: Array<string> = [
   "Second act",
 ];
 
-const RATING_VALUES: Array<string> = ["1", "2", "3", "4", "5"];
+const RATING_VALUES = ["1", "2", "3", "4", "5"];
 
-const COLORS: Array<string> = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "red", "mustard"];
+const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "red", "mustard"];
 
-const AddVacancyForm: FC = (): ReactElement => {
+const AddVacancyForm = () => {
   const handleFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     console.log("Form was submitted");
     console.log("values: ", values);

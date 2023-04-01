@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { useState } from "react";
 import { FieldHookConfig } from "formik";
 
 import StarRadioBtn from "components/forms/StarRadioBtn";
@@ -10,7 +10,7 @@ type StarRadionBtnsGroupProps = FieldHookConfig<string> & {
   LabelIcon?: (props: IIconProps) => JSX.Element;
 };
 
-const StarRadioBtnsGroup = ({ name, values, label, LabelIcon }: StarRadionBtnsGroupProps): ReactElement => {
+const StarRadioBtnsGroup = ({ name, values, label, LabelIcon }: StarRadionBtnsGroupProps) => {
   const [hoveredBtnId, setHoveredBtnId] = useState(0);
   const [selectedBtnId, setSelectedBtnId] = useState(0);
 
