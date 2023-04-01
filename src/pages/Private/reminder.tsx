@@ -1,4 +1,6 @@
+import NavHeader from "components/navHeader";
+
 const Reminder = () => {
-  return <h2>Reminder page</h2>;
+  return <NavHeader prevAddress="/" text="Reminder" />;
 };
 export default Reminder;
