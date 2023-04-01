@@ -12,7 +12,6 @@ import ShortNote from "components/notices/ShortNotice";
 import { setMessage } from "redux/userSlice";
 import Button from "components/ui/button";
 import { setOnArchive } from "redux/noticeSlice";
-import Header from "./Header";
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -51,15 +50,11 @@ export default function Main() {
       ) : isError ? (
         <h2>ERROR</h2>
       ) : !response ? (
-        <>
-          <Header />
-          <div className="flex items-center justify-items-center">
-            <Icons.Todos />
-          </div>
-        </>
+        <div className="flex items-center justify-items-center">
+          <Icons.Todos />
+        </div>
       ) : (
         <>
-          <Header />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-28 mt-5 items-center gap-4">
             {vacancies.map(vacancy => (
               <ShortNote key={vacancy._id} shortVacancy={vacancy} />
