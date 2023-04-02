@@ -1,3 +1,4 @@
+// colorRadioBtnsGroup;
 import { FieldHookConfig } from "formik";
 
 import { IIconProps } from "components/iconsComponents";
