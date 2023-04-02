@@ -1,6 +1,9 @@
 import NavHeader from "components/navHeader";
+import { useLocation } from "react-router-dom";
 
 const Calendar = () => {
-  return <NavHeader prevAddress="/" text="Calendar" link="http://" />;
+  const location = useLocation();
+  // console.log(location?.state?.from);
+  return <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} text="Calendar" link="http://" />;
 };
 export default Calendar;
