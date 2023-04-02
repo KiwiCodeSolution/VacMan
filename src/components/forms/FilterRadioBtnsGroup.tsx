@@ -1,7 +1,7 @@
 import { FieldHookConfig } from "formik";
 
 import { IIconProps } from "components/iconsComponents";
-import FilterRadioBtn from "components/forms/FilterRadioBtn";
+import FilterRadioBtn from "components/forms/filterRadioBtn";
 
 type FilterRadioBtnsGroupProps = FieldHookConfig<string> & {
   values: Array<string>;

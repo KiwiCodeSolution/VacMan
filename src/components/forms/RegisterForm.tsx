@@ -4,7 +4,7 @@ import { InferType } from "yup";
 import registerSchema from "validationSchemas/registerShema";
 import { useAppDispatch } from "hooks/reduxHooks";
 
-import CustomInput from "components/forms/CustomInput";
+import CustomInput from "components/forms/customInput";
 import { registration } from "redux/userOperations";
 import Button from "components/ui/button";
 

@@ -1,8 +1,7 @@
-// import { FC, ReactElement } from "react";
 import { Formik, FormikHelpers, FormikProps } from "formik";
 import { InferType } from "yup";
 
-import CustomInput from "components/forms/CustomInput";
+import CustomInput from "components/forms/customInput";
 import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
 

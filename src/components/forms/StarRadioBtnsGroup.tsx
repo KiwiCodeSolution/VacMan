@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FieldHookConfig } from "formik";
 
-import StarRadioBtn from "components/forms/StarRadioBtn";
+import StarRadioBtn from "components/forms/starRadioBtn";
 import { IIconProps } from "components/iconsComponents";
 
 type StarRadionBtnsGroupProps = FieldHookConfig<string> & {

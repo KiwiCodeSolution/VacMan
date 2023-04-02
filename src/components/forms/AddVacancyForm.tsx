@@ -2,10 +2,11 @@ import { Formik, FormikHelpers, FormikProps } from "formik";
 
 import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
-import CustomInput from "components/forms/CustomInput";
-import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
-import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
-import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
+import CustomInput from "components/forms/customInput";
+import CurrencyRadioBtnsGroup from "components/forms/currencyRadioBtnsGroup";
+import StarRadioBtnsGroup from "components/forms/starRadioBtnsGroup";
+import FilterRadioBtnsGroup from "components/forms/filterRadioBtnsGroup";
+import ColorRadioBtnsGroup from "components/forms/colorRadioBtnsGroup";
 
 const defaultInitialValues = {
   companyName: "",
@@ -13,6 +14,7 @@ const defaultInitialValues = {
   source: "",
   position: "",
   salary: "",
+  currency: "Hryvnia",
   stage: "",
   action: "",
   color: "",
@@ -42,6 +44,12 @@ const ACTIONS = [
   "Make a test",
   "Wait for a reply",
   "Second act",
+];
+
+const CURRENCY = [
+  { name: "US Dollar", sign: "$" },
+  { name: "Euro", sign: "€" },
+  { name: "Hryvnia", sign: "₴" },
 ];
 
 const RATING_VALUES = ["1", "2", "3", "4", "5"];
@@ -84,19 +92,23 @@ const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
             <li>
               <CustomInput name="position" id="position" type="text" label="Position" LabelIcon={icons.Position} />
             </li>
-            <li>
+            <li className="flex gap-2 items-end">
               <CustomInput name="salary" id="salary" type="text" label="Salary" LabelIcon={icons.Salary} />
+              <CurrencyRadioBtnsGroup name="currency" values={CURRENCY} />
             </li>
-            <li>
+          </ul>
+
+          <ul className="mt-3">
+            <li className="py-4 border-t border-txt-main">
               <FilterRadioBtnsGroup name="stage" values={STAGES} label="Stage" LabelIcon={icons.Stage} />
             </li>
-            <li>
+            <li className="py-4 border-t border-txt-main">
               <FilterRadioBtnsGroup name="action" values={ACTIONS} label="Action" LabelIcon={icons.Action} />
             </li>
-            <li>
+            <li className="py-4 border-t border-txt-main">
               <ColorRadioBtnsGroup name="color" values={COLORS} label="Color" LabelIcon={icons.Color} />
             </li>
-            <li>
+            <li className="py-4 border-y border-txt-main">
               <StarRadioBtnsGroup
                 name="userReview"
                 values={RATING_VALUES}
@@ -104,10 +116,11 @@ const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
                 LabelIcon={icons.Review}
               />
             </li>
-            <li>
-              <CustomInput name="notebook" id="notebook" type="text" label="Notebook" LabelIcon={icons.Notebook} />
-            </li>
           </ul>
+
+          <div className="mt-4">
+            <CustomInput name="notebook" id="notebook" type="text" label="Notebook" LabelIcon={icons.Notebook} />
+          </div>
 
           <div className="mt-24">
             <Button btnType="submit" variant="black">

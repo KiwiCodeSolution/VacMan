@@ -28,7 +28,7 @@ function CustomInput(props: CustomInputProps) {
   const hasError = error && touched;
 
   return (
-    <div className="text-txt-main ">
+    <div className=" grow text-txt-main ">
       <label htmlFor={id} className="flex items-center gap-1 text-base ">
         {LabelIcon && <LabelIcon size="16" className="stroke-txt-main" />}
         {label}
