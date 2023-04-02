@@ -56,7 +56,7 @@ const axiosBaseQuery =
     }
   };
 const baseUrl = "https://vacmanserver-production.up.railway.app/";
-// const baseUrl = 'http://localhost:3030/';
+// const baseUrl = "http://localhost:3030/";
 
 export const vacancyAPI = createApi({
   reducerPath: "vacancies",

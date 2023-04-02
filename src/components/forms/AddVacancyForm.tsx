@@ -5,17 +5,20 @@ import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
 import CustomInput from "components/forms/customInput";
 import CurrencyRadioBtnsGroup from "components/forms/currencyRadioBtnsGroup";
-import StarRadioBtnsGroup from "components/forms/starRadioBtnsGroup";
-import FilterRadioBtnsGroup from "components/forms/filterRadioBtnsGroup";
-import ColorRadioBtnsGroup from "components/forms/colorRadioBtnsGroup";
+import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
+import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
+import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
+import { useAddVacancyMutation } from "redux/VacancyQueries";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { setMessage } from "redux/userSlice";
 
 const defaultInitialValues = {
   companyName: "",
-  companyLink: "",
+  companyURL: "",
   source: "",
   position: "",
   salary: "",
-  currency: "Hryvnia",
+  currency: "$",
   stage: "",
   action: "",
   color: "",
@@ -48,9 +51,9 @@ const ACTIONS = [
 ];
 
 const CURRENCY = [
-  { name: "US Dollar", sign: "$" },
-  { name: "Euro", sign: "€" },
-  { name: "Hryvnia", sign: "₴" },
+  { name: "$", sign: "$" },
+  { name: "€", sign: "€" },
+  { name: "local", sign: "₴" },
 ];
 
 const RATING_VALUES = ["1", "2", "3", "4", "5"];
@@ -58,10 +61,19 @@ const RATING_VALUES = ["1", "2", "3", "4", "5"];
 const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "red", "mustard"];
 
 const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
+  const dispatch = useAppDispatch();
+  const [addVacancy] = useAddVacancyMutation();
+
   const handleFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     console.log("Form was submitted");
     console.log("values: ", values);
-    resetForm();
+    const data = { ...values, userRank: +values.userReview, salary: +values.salary, companyLink: undefined };
+    console.log("data: ", data);
+    addVacancy(data)
+      .unwrap()
+      .then(payload => dispatch(setMessage(payload.message)))
+      .catch(error => dispatch(setMessage(error.data.message)));
+    // resetForm();
   };
 
   return (
@@ -79,13 +91,7 @@ const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
               />
             </li>
             <li>
-              <CustomInput
-                name="companyLink"
-                id="companyLink"
-                type="text"
-                label="Company Link"
-                LabelIcon={icons.Link}
-              />
+              <CustomInput name="companyURL" id="companyURL" type="text" label="Company Link" LabelIcon={icons.Link} />
             </li>
             <li>
               <CustomInput name="source" id="source" type="text" label="Source" LabelIcon={icons.Link} />
