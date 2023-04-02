@@ -3,12 +3,14 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 
 interface INote {
-  data: number;
+  date: number;
   text: string;
 }
 export interface IAction {
+  date: number;
   name: string;
-  deadline: number;
+  deadline?: number;
+  fulfilled?: boolean;
 }
 export interface IVacancy {
   _id: string;

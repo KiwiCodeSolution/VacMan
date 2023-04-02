@@ -64,16 +64,32 @@ const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
   const dispatch = useAppDispatch();
   const [addVacancy] = useAddVacancyMutation();
 
-  const handleFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
-    console.log("Form was submitted");
-    console.log("values: ", values);
-    const data = { ...values, userRank: +values.userReview, salary: +values.salary, companyLink: undefined };
+  const handleFormSubmit = (
+    { companyName, companyURL, source, position, salary, currency, stage, action, color, userReview, notebook }: Values,
+    { resetForm }: FormikHelpers<Values>
+  ): void => {
+    const actions = action ? [{ date: Date.now(), name: action }] : [];
+    const notes = notebook ? [{ date: Date.now(), text: notebook }] : [];
+    const data = {
+      companyName,
+      companyURL,
+      source,
+      position,
+      salary: +salary,
+      currency,
+      stage,
+      actions,
+      cardColor: color,
+      userRank: +userReview,
+      notes,
+    };
     console.log("data: ", data);
+
     addVacancy(data)
       .unwrap()
       .then(payload => dispatch(setMessage(payload.message)))
       .catch(error => dispatch(setMessage(error.data.message)));
-    // resetForm();
+    resetForm();
   };
 
   return (
