@@ -5,11 +5,10 @@ import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import * as Icons from "components/iconsComponents";
 import AddBtn from "components/addBtn";
 import { setAuthHeader } from "redux/userOperations";
-import { useGetVacanciesQuery, useAddVacancyMutation } from "redux/VacancyQueries";
+import { useGetVacanciesQuery } from "redux/VacancyQueries";
 
 import Loader from "components/ui/loader";
 import ShortNote from "components/notices/ShortNotice";
-import { setMessage } from "redux/userSlice";
 import Button from "components/ui/button";
 import { setOnArchive } from "redux/noticeSlice";
 import Header from "./Header";
@@ -22,27 +21,8 @@ export default function Main() {
   // console.log(onArchive);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
-  // console.log("Vacancies:", response?.data);
 
   const vacancies = response?.data?.filter(vacancy => vacancy.archived === onArchive);
-
-  const [addVacancy] = useAddVacancyMutation();
-
-  // Временное решение
-  // const colors = ["red", "blue", "green", "pink", "smoke", "grey", "yellow"];
-  // const generateVacancy = () => {
-  //   const vacancy = {
-  //     companyName: `company ${Math.floor(Math.random() * 98 + 1)}`,
-  //     position: `FullStack ${Math.floor(Math.random() * 98 + 1)}`,
-  //     salary: Math.floor(Math.random() * 10 + 5) * 100,
-  //     userRank: Math.floor(Math.random() * 4 + 1),
-  //     cardColor: `${colors[Math.floor(Math.random() * 6)]}`,
-  //   };
-  //   addVacancy(vacancy)
-  //     .unwrap()
-  //     .then(payload => dispatch(setMessage(payload.message)))
-  //     .catch(error => dispatch(setMessage(error.data.message)));
-  // };
 
   return (
     <div className="container mx-auto">

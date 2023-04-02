@@ -4,12 +4,16 @@ import * as Icons from "components/iconsComponents";
 interface IProps {
   prevAddress?: string;
   text: string;
-  ref?: string;
+  link?: string;
   nextAddress?: string;
+  bg?: "bg-light";
 }
-const NavHeader = ({ prevAddress, text, ref, nextAddress }: IProps) => {
+const NavHeader = ({ bg, prevAddress, text, link, nextAddress }: IProps) => {
+  const bgColor = bg ? `bg-${bg}` : "bg-transparent";
   return (
-    <div className="flex justify-between items-center border-b border-txt-grey">
+    <div
+      className={`flex sticky top-0 z-10 pt-6 pb-4 justify-between bg-[bgColor] items-center ${bgColor} border-b border-txt-grey`}
+    >
       {prevAddress ? (
         <button className="flex-none hover:scale-110 focus:scale-110">
           <Link to={prevAddress}>
@@ -20,7 +24,12 @@ const NavHeader = ({ prevAddress, text, ref, nextAddress }: IProps) => {
         <p> </p>
       )}
 
-      {ref ? <a href={ref}>{text}</a> : <p className="text-center text-2xl">{text}</p>}
+      {link ? (
+        // eslint-disable-next-line prettier/prettier
+        <a href={link} className="text-txt-link text-2xl font-medium">{text}</a>
+      ) : (
+        <p className="text-center text-2xl font-medium">{text}</p>
+      )}
 
       {nextAddress ? (
         <Link to={nextAddress}>
