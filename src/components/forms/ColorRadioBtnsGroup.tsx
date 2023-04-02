@@ -1,7 +1,7 @@
 import { FieldHookConfig } from "formik";
 
 import { IIconProps } from "components/iconsComponents";
-import ColorRadioBtn from "components/forms/ColorRadioBtn";
+import ColorRadioBtn from "components/forms/colorRadioBtn";
 
 type ColorRadioBtnsGroupProps = FieldHookConfig<string> & {
   values: Array<string>;

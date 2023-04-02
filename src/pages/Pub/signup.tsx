@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import useGoogleAuth from "hooks/googleAuth";
-import RegisterForm from "components/forms/RegisterForm";
+import RegisterForm from "components/forms/registerForm";
 import Button from "components/ui/button";
 import GoogleLogo from "img/images/image 259.png";
 import Logo from "components/ui/loader";

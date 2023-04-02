@@ -1,4 +1,4 @@
-import AddUserInfoForm from "components/forms/AddUserInfoForm";
+import AddUserInfoForm from "components/forms/addUserInfoForm";
 import NavHeader from "components/navHeader";
 
 const AddUserData = () => {
