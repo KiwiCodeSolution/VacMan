@@ -33,18 +33,20 @@ export default function Main() {
       ) : !response ? (
         <>
           <Header />
-          <div className="flex items-center justify-items-center">
+          <div className="flex items-center justify-items-center px-4">
             <Icons.Todos />
           </div>
         </>
       ) : (
         <>
           <Header />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-28 mt-5 items-center gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-28 mt-5 items-center gap-4 px-4">
             {vacancies && vacancies.map(vacancy => (
               <ShortNote key={vacancy._id} shortVacancy={vacancy} />
             ))}
           </div>
+
+          {/* кнопка в Архив - временно */}
           <div className="fixed bottom-32 left-8 w-24 ">
             <Button btnType="button" variant="black" clickFn={() => dispatch(setOnArchive(!onArchive))}>
               {onArchive ? "Active" : "Archive"}
@@ -53,7 +55,6 @@ export default function Main() {
 
           <div className="flex justify-end mx-2 fixed bottom-32 right-8">
             <AddBtn />
-            {/* <AddBtn clickFn={generateVacancy} /> */}
           </div>
         </>
       )}
