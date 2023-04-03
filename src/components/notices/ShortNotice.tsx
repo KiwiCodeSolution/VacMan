@@ -26,7 +26,7 @@ export const colorVariants = {
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const [updateVacancy] = useUpdateVacancyMutation();
   const [deleteVacancy] = useDeleteVacancyMutation();
-  const { _id, companyName, position, salary, currency, status, cardColor, userRank, actions, companyURL, archived } =
+  const { _id, companyName, position, salary, currency, stage, cardColor, userRank, actions, companyURL, archived } =
     shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
@@ -65,7 +65,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Stage size={24} />
-          <p>{status}</p>
+          <p>{stage}</p>
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Salary size={24} />

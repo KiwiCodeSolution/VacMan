@@ -5,7 +5,7 @@ const AddUserData = () => {
   return (
     <>
       <NavHeader text="User information" nextAddress="/" />
-      <AddUserInfoForm />;
+      <AddUserInfoForm />
     </>
   );
 };
