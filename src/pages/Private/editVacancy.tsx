@@ -1,6 +1,6 @@
 import AddVacancyForm from "components/forms/AddVacancyForm";
 import NavHeader from "components/navHeader";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const EditVacancy = () => {
   const location = useLocation();

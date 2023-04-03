@@ -8,7 +8,7 @@ import CurrencyRadioBtnsGroup from "components/forms/currencyRadioBtnsGroup";
 import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
-import { useAddVacancyMutation } from "redux/VacancyQueries";
+import { useAddVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { setMessage } from "redux/userSlice";
 
@@ -60,9 +60,18 @@ const RATING_VALUES = ["1", "2", "3", "4", "5"];
 
 const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "red", "mustard"];
 
-const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
+const AddVacancyForm = ({
+  initialValues,
+  operation,
+  id,
+}: {
+  initialValues?: Values;
+  operation?: "create | save";
+  id?: string;
+}) => {
   const dispatch = useAppDispatch();
   const [addVacancy] = useAddVacancyMutation();
+  const [editVacancy] = useUpdateVacancyMutation();
 
   const handleFormSubmit = (
     { companyName, companyURL, source, position, salary, currency, stage, action, color, userReview, notebook }: Values,
