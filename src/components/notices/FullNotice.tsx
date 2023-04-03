@@ -41,7 +41,7 @@ const FullNote = () => {
 
   const effect = `hover:scale-110 focus:scale-110`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
-  const archival = `${archived ? `#5b5b69` : `#040c0c`}`;
+  // const archival = `${archived ? `#5b5b69` : `#040c0c`}`;
 
   function handleArchive(): void {
     updateVacancy({ _id, archived: !onArchive });
@@ -63,13 +63,13 @@ const FullNote = () => {
         <div className="flex mb-10">
           <button className={`flex-none ${effect}`}>
             <Link to="/">
-              <Icons.ArrowBack fill={archival} />
+              <Icons.ArrowBack size={32} />
             </Link>
           </button>
           <span className="grow text-center font-bold text-2xl">{position}</span>
           <button className={`flex-none ${effect}`}>
             <Link to={`/${_id}/edit`}>
-              <Icons.Edit fill={archival} />
+              <Icons.Edit size={24} />
             </Link>
           </button>
         </div>
@@ -87,7 +87,7 @@ const FullNote = () => {
             </div>
             <div>
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-                <Icons.Salary stroke={archival} /> <p className="text-base">Salary</p>
+                <Icons.Salary size={24} /> <p className="text-base">Salary</p>
               </span>
               <p className="text-[32px]">
                 {salary}
@@ -96,7 +96,7 @@ const FullNote = () => {
             </div>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-            <Icons.Stage stroke={archival} fill={archival} />
+            <Icons.Stage size={24} />
             <p>Stage</p>
           </li>
           <li className="mb-4">{status}</li>
@@ -104,7 +104,7 @@ const FullNote = () => {
             <div className="flex justify-between">
               <div>
                 <div className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-                  <Icons.Action stroke={archival} />
+                  <Icons.Action size={24} />
                   <p>Action</p>
                 </div>
               </div>
@@ -119,19 +119,19 @@ const FullNote = () => {
             )}
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 items-center text-txt-link text-base font-semibold">
-            <Icons.Link linked />
+            <Icons.Link size={24} />
             <a href={source} target="_blank" rel="noreferrer">
               {source}
             </a>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-6  items-center text-txt-link text-base font-semibold">
-            <Icons.Link linked />
+            <Icons.Link size={24} />
             <a href={sourceURL} target="_blank" rel="noreferrer">
               {sourceURL}
             </a>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
-            <Icons.Notebook size="24" stroke={archival} />
+            <Icons.Notebook size="24" />
             <p>Notebook</p>
           </li>
           <li className="mb-[35px]">

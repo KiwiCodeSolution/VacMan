@@ -31,9 +31,9 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { _id, companyName, position, salary, status, cardColor, userRank, actions, companyURL, archived } =
     shortVacancy;
-  const effect = `hover:scale-110 focus:scale-110`;
+  const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
-  const archival = `${archived ? `#5b5b69` : `#040c0c`}`;
+  // const archival = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
   return (
     <div>
@@ -42,11 +42,11 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
       >
         <button className={`absolute top-4 right-[14px] ${effect}`}>
           <Link to={`${_id}/details`}>
-            <Icons.Eye stroke={archival} />
+            <Icons.Eye size={32} />
           </Link>
         </button>
         <li className="flex gap-x-2 gap-y-1 font-bold">
-          <Icons.CompanyName fill={archival} />
+          <Icons.CompanyName size={24} />
           {companyURL ? (
             <a href={companyURL} target="_blank" rel="noreferrer">
               {companyName}
@@ -56,11 +56,11 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
           )}
         </li>
         <li className="flex gap-x-2 gap-y-1">
-          <Icons.Position fill={archival} />
+          <Icons.Position size={24} />
           <p>{position}</p>
         </li>
         <li className="flex gap-x-2 gap-y-1">
-          <Icons.Action stroke={archival} />
+          <Icons.Action size={24} />
           {actions ? (
             actions.map(({ name, deadline }) => <span key={deadline}>{name}, </span>)
           ) : (
@@ -68,11 +68,11 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
           )}
         </li>
         <li className="flex gap-x-2 gap-y-1">
-          <Icons.Stage stroke={archival} fill={archival} />
+          <Icons.Stage size={24} />
           <p>{status}</p>
         </li>
         <li className="flex gap-x-2 gap-y-1">
-          <Icons.Salary stroke={archival} />
+          <Icons.Salary size={24} />
           <p>{salary}$</p>
         </li>
         <li className="absolute bottom-2 right-[14px]">
@@ -87,7 +87,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
                 }}
                 className={`${effect}`}
               >
-                <Icons.Trash stroke={archival} size="30" />
+                <Icons.Trash size="30" />
               </button>
 
               <button
@@ -97,7 +97,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
                 }}
                 className={`${effect}`}
               >
-                <Icons.Recover stroke={archival} />
+                <Icons.Recover size="32" />
               </button>
             </div>
           )}

@@ -22,7 +22,7 @@ const defaultInitialValues = {
   stage: "",
   action: "",
   color: "",
-  userReview: "",
+  userReview: "1",
   notebook: "",
 };
 
