@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -32,13 +33,12 @@ const FullNote = () => {
     position,
     salary,
     currency,
-    status,
+    stage,
     actions,
     notes,
     userRank,
     cardColor,
     archived,
-    stage,
   } = currentVacancy;
 
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
@@ -56,56 +56,60 @@ const FullNote = () => {
   }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto">
       <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} bg="bg-light" />
       <div
         className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${archivalText} shadow-xl`}
       >
         <ul>
-          <li className="flex justify-between mb-[35px]">
+          <li className="flex justify-between">
             <div className="flex flex-col justify-between">
               <Stars amount={5} active={userRank} archived={archived} />
-              <a href={sourceURL} className="font-bold text-xl" target="_blank" rel="noreferrer">
-                {source}
-              </a>
+              {source ? (
+                <a href={sourceURL} className="font-bold text-xl mt-2" target="_blank" rel="noreferrer">
+                  {source}
+                </a>
+              ) : (
+                <p className="py-3" />
+              )}
+              <div className="flex gap-x-2 gap-y-1 mt-2 mb-4 font-medium">
+                <Icons.Position size={24} />
+                <span className="font-bold">{position}</span>
+              </div>
             </div>
 
             <div>
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
                 <Icons.Salary size={24} /> <p className="text-base">Salary</p>
               </span>
-              <p className="text-[32px]">
-                {salary}
-                {currency}
-              </p>
+              <p className="text-[32px]">{salary} {currency}</p>
             </div>
           </li>
-          <li className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-            <Icons.Position size={24} />
-            <span className="mb-4">{position}</span>
+
+          <li className="mb-4">
+            <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
+              <Icons.Stage size={24} />
+              <span>Stage</span>
+            </div>
+            <p className="text-txt-main">{stage}</p>
           </li>
-          <li className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-            <Icons.Stage size={24} />
-            <span className="mb-4">{stage}</span>
-          </li>
+
           <li className="mb-4">
             <div className="flex justify-between">
-              <div>
-                <div className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-                  <Icons.Action size={24} />
-                  <p>Action</p>
-                </div>
+              <div className="flex gap-x-2 gap-y-1 mb-2 font-medium">
+                <Icons.Action size={24} />
+                <p>Action</p>
               </div>
               <div>
                 <p className="font-medium mb-2">Deadline</p>
               </div>
             </div>
-            {actions ? (
+            {actions.length ? (
               actions.map(({ name, deadline }) => (
                 <Actions key={deadline} name={name} deadline={deadline} date={Date.now()} />
               ))
             ) : (
-              <p>You have no action</p>
+              <p className="text-txt-main">You have no action</p>
             )}
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
@@ -113,7 +117,7 @@ const FullNote = () => {
             <p>Notebook</p>
           </li>
           <li className="mb-[35px]">
-            <div className="border-solid border-2 w-full rounded-xl h-[156px] border-bg-grey p-2">
+            <div className="border-solid border-2 w-full rounded-xl h-[156px] bg-bg-light border-bg-grey p-2">
               {notes.length > 0 ? (
                 notes.map(({ date, text }) => <span key={date}>{text}</span>)
               ) : (
