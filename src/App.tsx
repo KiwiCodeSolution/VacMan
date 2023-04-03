@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";import { ReactNotifications } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+
+
 import { setShowStartingPage } from "./redux/userSlice";
 
 // pages & components
@@ -38,6 +41,8 @@ const App = () => {
   return showStartingPage ? (
     <StartingPage />
   ) : (
+    <>
+    <ReactNotifications />
     <Routes>
       {/* Private Routes */}
       <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>}>
@@ -64,7 +69,7 @@ const App = () => {
       <Route path="confirmPass" element={<RedirectRoute><ConfirmPassPage /></RedirectRoute>} />
       <Route path="confirmEmail" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
       <Route path="*" element={<NotFound />} />
-    </Routes>
+    </Routes></>
   );
 };
 

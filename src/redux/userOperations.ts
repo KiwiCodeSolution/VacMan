@@ -54,6 +54,7 @@ export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string
   "user/logout",
   async (_, { rejectWithValue }) => {
     const response = await axios.get("/auth/logout");
+    console.log(response);
     if (response.status !== 200) {
       return rejectWithValue(response.data.message);
     }
