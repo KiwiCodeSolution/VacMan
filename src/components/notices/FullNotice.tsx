@@ -10,6 +10,7 @@ import { useDeleteVacancyMutation, useGetVacanciesQuery, useUpdateVacancyMutatio
 import Actions from "./Actions";
 import { colorVariants } from "./ShortNotice";
 import { useAppSelector } from "hooks/reduxHooks";
+import NavHeader from "components/navHeader";
 
 const FullNote = () => {
   const navigate = useNavigate();
@@ -37,11 +38,12 @@ const FullNote = () => {
     userRank,
     cardColor,
     archived,
+    stage,
   } = currentVacancy;
 
-  const effect = `hover:scale-110 focus:scale-110`;
+  console.log(currentVacancy);
+
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
-  // const archival = `${archived ? `#5b5b69` : `#040c0c`}`;
 
   function handleArchive(): void {
     updateVacancy({ _id, archived: !onArchive });
@@ -56,35 +58,20 @@ const FullNote = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 mt-11">
+    <div className="container mx-auto px-4">
+      <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} />
       <div
         className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${archivalText} shadow-xl`}
       >
-        <div className="flex mb-10">
-          <button className={`flex-none ${effect}`}>
-            <Link to="/">
-              <Icons.ArrowBack size={32} />
-            </Link>
-          </button>
-          <span className="grow text-center font-bold text-2xl">{position}</span>
-          <button className={`flex-none ${effect}`}>
-            <Link to={`/${_id}/edit`}>
-              <Icons.Edit size={24} />
-            </Link>
-          </button>
-        </div>
         <ul>
           <li className="flex justify-between mb-[35px]">
-            <div>
-              {companyURL ? (
-                <a href={companyURL} className="mb-2 font-bold text-xl" target="_blank" rel="noreferrer">
-                  {companyName}
-                </a>
-              ) : (
-                <p className="mb-2 font-bold text-xl">{companyName}</p>
-              )}
+            <div className="flex flex-col justify-between">
               <Stars amount={5} active={userRank} archived={archived} />
+              <a href={sourceURL} className="font-bold text-xl" target="_blank" rel="noreferrer">
+                {source}
+              </a>
             </div>
+
             <div>
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
                 <Icons.Salary size={24} /> <p className="text-base">Salary</p>
@@ -96,10 +83,13 @@ const FullNote = () => {
             </div>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium">
-            <Icons.Stage size={24} />
-            <p>Stage</p>
+            <Icons.Position size={24} />
+            <span className="mb-4">{position}</span>
           </li>
-          <li className="mb-4">{status}</li>
+          <li className="flex gap-x-2 gap-y-1 mb-2 font-medium">
+            <Icons.Stage size={24} />
+            <span className="mb-4">{stage}</span>
+          </li>
           <li className="mb-4">
             <div className="flex justify-between">
               <div>
@@ -119,18 +109,6 @@ const FullNote = () => {
             ) : (
               <p>You have no action</p>
             )}
-          </li>
-          <li className="flex gap-x-2 gap-y-1 mb-2 items-center text-txt-link text-base font-semibold">
-            <Icons.Link size={24} />
-            <a href={source} target="_blank" rel="noreferrer">
-              {source}
-            </a>
-          </li>
-          <li className="flex gap-x-2 gap-y-1 mb-6  items-center text-txt-link text-base font-semibold">
-            <Icons.Link size={24} />
-            <a href={sourceURL} target="_blank" rel="noreferrer">
-              {sourceURL}
-            </a>
           </li>
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
             <Icons.Notebook size="24" />
