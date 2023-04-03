@@ -41,8 +41,6 @@ const FullNote = () => {
     stage,
   } = currentVacancy;
 
-  console.log(currentVacancy);
-
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
   function handleArchive(): void {
@@ -59,7 +57,7 @@ const FullNote = () => {
 
   return (
     <div className="container mx-auto px-4">
-      <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} />
+      <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} bg="bg-light" />
       <div
         className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${archivalText} shadow-xl`}
       >
