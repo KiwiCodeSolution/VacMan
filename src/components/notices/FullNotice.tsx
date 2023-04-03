@@ -113,7 +113,9 @@ const FullNote = () => {
               </div>
             </div>
             {actions ? (
-              actions.map(({ name, deadline }) => <Actions key={deadline} name={name} deadline={deadline} />)
+              actions.map(({ name, deadline }) => (
+                <Actions key={deadline} name={name} deadline={deadline} date={Date.now()} />
+              ))
             ) : (
               <p>You have no action</p>
             )}
@@ -137,7 +139,7 @@ const FullNote = () => {
           <li className="mb-[35px]">
             <div className="border-solid border-2 w-full rounded-xl h-[156px] border-bg-grey p-2">
               {notes.length > 0 ? (
-                notes.map(({ data, text }) => <span key={data}>{text}</span>)
+                notes.map(({ date, text }) => <span key={date}>{text}</span>)
               ) : (
                 <p className="text-txt-main text-base">You do not have any posts for this vacancy yet</p>
               )}

@@ -1,18 +1,16 @@
-import * as Icons from "components/iconsComponents";
+import AddVacancyForm from "components/forms/AddVacancyForm";
+import NavHeader from "components/navHeader";
 import { Link, useLocation } from "react-router-dom";
 
 const EditVacancy = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[1];
+  console.log("card id:", id);
 
   return (
     <>
-      <h2>Edit Vacancy page</h2>
-      <button className="flex-none hover:scale-110 focus:scale-110">
-        <Link to={`/${id}/details`}>
-          <Icons.ArrowBack />
-        </Link>
-      </button>
+      <NavHeader text="Edit vacancy" prevAddress={`/${id}/details`} />
+      <AddVacancyForm />
     </>
   );
 };
