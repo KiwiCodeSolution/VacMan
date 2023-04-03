@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { Link } from "react-router-dom";
-
 import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
 import { IVacancy, useDeleteVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
@@ -28,7 +26,6 @@ export const colorVariants = {
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const [updateVacancy] = useUpdateVacancyMutation();
   const [deleteVacancy] = useDeleteVacancyMutation();
-
   const { _id, companyName, position, salary, currency, status, cardColor, userRank, actions, companyURL, archived } =
     shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
