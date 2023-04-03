@@ -19,7 +19,7 @@ const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress }: IPro
       {prevAddress ? (
         <button className="flex-none hover:scale-110 focus:scale-110">
           <Link to={prevAddress}>
-            <Icons.ArrowBack />
+            <Icons.ArrowBack size={32} />
           </Link>
         </button>
       ) : (
@@ -37,7 +37,7 @@ const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress }: IPro
         <Link to={nextAddress}>
           <button type="button" className="flex gap-px justify-between items-center hover:scale-110 focus:scale-110">
             <span className="font-semibold text-base text-txt-main mx-3">Skip </span>
-            <Icons.ArrowForward className="fill-txt-main stroke-txt-main" />
+            <Icons.ArrowForward size={32} className="fill-txt-main stroke-txt-main" />
           </button>
         </Link>
       ) : (
