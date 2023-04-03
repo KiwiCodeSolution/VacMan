@@ -27,6 +27,7 @@ export interface IVacancy {
   userRank: number;
   archived: boolean;
   cardColor: string;
+  stage: string;
 }
 
 // eslint-disable-next-line prettier/prettier
