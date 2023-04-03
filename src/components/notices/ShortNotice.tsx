@@ -29,9 +29,8 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const [updateVacancy] = useUpdateVacancyMutation();
   const [deleteVacancy] = useDeleteVacancyMutation();
 
-  // eslint-disable-next-line prettier/prettier
-  const { _id, companyName, position, salary, currency, status, cardColor, userRank, actions, companyURL, archived
-  } = shortVacancy;
+  const { _id, companyName, position, salary, currency, status, cardColor, userRank, actions, companyURL, archived } =
+    shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
