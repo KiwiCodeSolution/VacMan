@@ -4,7 +4,7 @@ import NavHeader from "components/navHeader";
 const AddVacancy = () => {
   return (
     <>
-      <NavHeader prevAddress="/" text="Add Vacancy" />
+      <NavHeader prevAddress="/" text="Add Vacancy" bg="bg-light" />
       <AddVacancyForm />
     </>
   );
