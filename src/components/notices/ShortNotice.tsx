@@ -28,9 +28,10 @@ export const colorVariants = {
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const [updateVacancy] = useUpdateVacancyMutation();
   const [deleteVacancy] = useDeleteVacancyMutation();
-  // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/no-unused-vars
-  const { _id, companyName, position, salary, status, cardColor, userRank, actions, companyURL, archived, stage } =
-    shortVacancy;
+
+  // eslint-disable-next-line prettier/prettier
+  const { _id, companyName, position, salary, currency, status, cardColor, userRank, actions, companyURL, archived
+  } = shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
@@ -68,11 +69,14 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Stage size={24} />
-          <p>{stage}</p>
+          <p>{status}</p>
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Salary size={24} />
-          <p>{salary}$</p>
+          <p>
+            {salary}
+            {currency}
+          </p>
         </li>
         <li className="absolute bottom-2 right-[14px]">
           {!archived ? (
