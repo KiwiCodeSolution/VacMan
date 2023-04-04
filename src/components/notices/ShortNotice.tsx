@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { Link } from "react-router-dom";
-
 import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
 import { IVacancy, useDeleteVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
@@ -28,12 +26,10 @@ export const colorVariants = {
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const [updateVacancy] = useUpdateVacancyMutation();
   const [deleteVacancy] = useDeleteVacancyMutation();
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { _id, companyName, position, salary, status, cardColor, userRank, actions, companyURL, archived } =
+  const { _id, companyName, position, salary, currency, stage, cardColor, userRank, actions, companyURL, archived } =
     shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
-  // const archival = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
   return (
     <div>
@@ -69,11 +65,14 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Stage size={24} />
-          <p>{status}</p>
+          <p>{stage}</p>
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Salary size={24} />
-          <p>{salary}$</p>
+          <p>
+            {salary}
+            {currency}
+          </p>
         </li>
         <li className="absolute bottom-2 right-[14px]">
           {!archived ? (

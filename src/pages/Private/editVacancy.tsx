@@ -6,16 +6,12 @@ import { useGetVacanciesQuery } from "redux/VacancyQueries";
 const EditVacancy = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[1];
-  console.log("Edit card id:", id);
   const { data } = useGetVacanciesQuery();
-  let vacancy;
-  // eslint-disable-next-line no-underscore-dangle
-  if (data) vacancy = data.data.find(el => el._id === id);
 
   return (
     <>
-      <NavHeader bg="bg-light" text="Edit vacancy" prevAddress={`/${id}/details`} />
-      <AddVacancyForm initialVacancy={vacancy} />
+      <NavHeader bg="bg-light" prevAddress={`/${id}/details`} text="Edit vacancy" />
+      <AddVacancyForm initialVacancy={data && data.data.find(el => el._id === id)} />
     </>
   );
 };

@@ -11,6 +11,7 @@ import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
 import { IVacancy, useAddVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { setMessage } from "redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
 // const defaultInitialValues = {
 //   companyName: "",
@@ -51,8 +52,8 @@ const ACTIONS = [
 ];
 
 const CURRENCY = [
-  { name: "$", sign: "$" },
-  { name: "€", sign: "€" },
+  { name: "USD", sign: "$" },
+  { name: "Euro", sign: "€" },
   { name: "local", sign: "₴" },
 ];
 
@@ -64,6 +65,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   const dispatch = useAppDispatch();
   const [addVacancy] = useAddVacancyMutation();
   const [editVacancy] = useUpdateVacancyMutation();
+  const navigate = useNavigate();
 
   const initialValues = {
     companyName: initialVacancy?.companyName || "",
@@ -72,14 +74,14 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     position: initialVacancy?.position || "",
     salary: `${initialVacancy?.salary}` || "",
     currency: initialVacancy?.currency || "$",
-    stage: initialVacancy?.status || "",
+    stage: initialVacancy?.stage || "new",
     action: initialVacancy?.actions[0]?.name || "",
     color: initialVacancy?.cardColor || "",
     userReview: `${initialVacancy?.userRank}` || "1",
     notebook: initialVacancy?.notes[0]?.text || "",
   };
   type Values = typeof initialValues;
-
+  console.log("currency:", initialVacancy?.currency);
   const handleFormSubmit = (
     { companyName, companyURL, source, position, salary, currency, stage, action, color, userReview, notebook }: Values,
     { resetForm }: FormikHelpers<Values>
@@ -111,7 +113,11 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
       // eslint-disable-next-line no-underscore-dangle
       editVacancy({ ...data, _id: initialVacancy._id })
         .unwrap()
-        .then(payload => dispatch(setMessage(payload.message)))
+        .then(payload => {
+          dispatch(setMessage(payload.message));
+          // redirect(`/${initialVacancy._id}/details`);
+          navigate(-1);
+        })
         .catch(error => dispatch(setMessage(error.data.message)));
     }
   };
