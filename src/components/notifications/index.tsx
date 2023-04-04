@@ -1,5 +1,6 @@
 import * as Icons from "components/iconsComponents";
-// import { Store } from 'react-notifications-component';
+import { useAppSelector } from "hooks/reduxHooks";
+import { Store } from "react-notifications-component";
 
 interface IimageUrl {
   [key: number]: string;
@@ -13,18 +14,21 @@ const imageUrls: IimageUrl = {
 };
 
 const ErrorNotification = () => {
+  const { message } = useAppSelector(state => state.user);
+  console.log(message);
+
   return (
     <div className="flex justify-between m-10 relative">
       <div
         className={`flex flex-col w-52 h-56 rounded-2xl p-2.5 ${imageUrls[1]} bg-no-repeat border-app-red border-2 bg-contain bg-bottom shadow-[0_35px_60px_-15px_rgba(242,139,130,0.5)]  bg-txt-white`}
       >
-        <div className="mt-4 ml-14 rounded-fdivl bg-contain">
-          <Icons.ErrorIcon />
+        <div className="mt-4 rounded-fdivl bg-contain mx-auto">
+          <Icons.Alert />
         </div>
-        <span className="mt-16 text-center font-medium text-base text-txt-white">Attention! It`s error!</span>
+        <span className="mt-16 text-center font-medium text-base text-txt-white">{message}</span>
       </div>
 
-      <div
+      {/* <div
         className={`flex flex-col w-52 h-56 rounded-2xl p-2.5 ${imageUrls[2]} bg-no-repeat border-app-blue border-2 bg-contain bg-bottom shadow-[0_35px_60px_-15px_rgba(169,226,240,0.5)]  bg-txt-white`}
       >
         <div className="mt-4 ml-14 rounded-full bg-contain ">
@@ -52,7 +56,7 @@ const ErrorNotification = () => {
         <span className="mt-16 text-center font-medium text-base text-txt-white">
           Congratulations! Everything is fine!
         </span>
-      </div>
+      </div> */}
       {/* <button className="p-2" type="button" onClick={displayMsgCustom}>
         displayMsgCustom
       </button> */}
@@ -60,33 +64,31 @@ const ErrorNotification = () => {
   );
 };
 
-// function MyNotify() {
-//   return (
-//     <div
-//       className={`flex flex-col w-52 h-56 rounded-2xl p-2.5 ${imageUrls[1]} bg-no-repeat border-app-blue border-2 bg-contain bg-bottom shadow-[0_35px_60px_-15px_rgba(169, 226, 240,0.5)] absolute left-[70px] bg-txt-white`}
-//     >
-//       <div className="mt-4 ml-14 rounded-full bg-contain ">
-//         <Icons.InfoIcon />
-//       </div>
-//       <span className="mt-12 text-center font-medium text-base text-txt-white">
-//         Sorry! Server error. Please try again later.
-//       </span>
-//     </div>
-//   );
-// }
+function MyNotify() {
+  const { message } = useAppSelector(state => state.user);
+  console.log(message);
+  return (
+    <div
+      className={`flex flex-col w-52 h-56 rounded-2xl p-2.5 ${imageUrls[1]} bg-no-repeat border-app-red border-2 bg-contain bg-bottom shadow-[0_35px_60px_-15px_rgba(242,139,130,0.5)]  bg-txt-white`}
+    >
+      <div className="mt-4 rounded-fdivl bg-contain mx-auto">
+        <Icons.Alert />
+      </div>
+      <span className="mt-16 text-center font-medium text-base text-txt-white">{message}</span>
+    </div>
+  );
+}
 // eslint-disable-next-line import/prefer-default-export
 export default ErrorNotification;
 
-// export const displayMsgCustom = () => {
-//   console.log('displayMsgCustom');
-//   Store.addNotification({
-//     content: MyNotify,
-//     type: 'success',
-//     insert: 'top',
-//     container: 'top-right',
-//     dismiss: {
-//       duration: 5000,
-//       onScreen: true,
-//     },
-//   });
-// };
+export const displayMsgCustom = () => {
+  console.log("displayMsgCustom");
+  Store.addNotification({
+    content: MyNotify,
+    width: 210,
+    container: "center",
+    dismiss: {
+      duration: 2000,
+    },
+  });
+};

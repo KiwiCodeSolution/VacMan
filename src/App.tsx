@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";import { ReactNotifications } from 'react-notifications-component';
+import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
+import { ReactNotifications } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 
 
