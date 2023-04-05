@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
-import { ReactNotifications } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
-
 
 import { setShowStartingPage } from "./redux/userSlice";
 
@@ -29,21 +26,33 @@ import { PrivateRoute, RedirectRoute } from "./hocs/PrivateRoute";
 import { currentUser } from "redux/userOperations";
 import FullNote from "components/notices/FullNotice";
 import AddUserData from "pages/Private/addUserData";
+import { setShowNotification } from "redux/notificationsSlice";
+import Notification from "components/notifications";
 
 const App = () => {
   const dispatch = useAppDispatch();
   const { token, showStartingPage } = useAppSelector(state => state.user);
+  const { showNotification } = useAppSelector(state => state.notification);
 
   useEffect(() => {
     dispatch(currentUser());
     setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
   }, [dispatch, token]);
+  
+  useEffect(() => {
+    // Hide notification after 3 seconds
+    const time = setTimeout(() => {
+      dispatch(setShowNotification(false));
+    }, 3000);
+
+    return () => clearTimeout(time);
+  }, [dispatch, showNotification]);
 
   return showStartingPage ? (
     <StartingPage />
   ) : (
     <>
-    <ReactNotifications />
+    {showNotification && <Notification />}
     <Routes>
       {/* Private Routes */}
       <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>}>
