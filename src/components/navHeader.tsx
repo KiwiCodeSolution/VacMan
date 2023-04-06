@@ -46,9 +46,7 @@ const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAd
             <Icons.Edit size={24} className="fill-txt-black stroke-txt-black" />
           </Link>
         </button>
-      ) : (
-        <p> </p>
-      )}
+      ) : null}
     </div>
   );
 };
