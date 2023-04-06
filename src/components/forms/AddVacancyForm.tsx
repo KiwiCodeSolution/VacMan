@@ -73,7 +73,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     source: initialVacancy?.source || "",
     position: initialVacancy?.position || "",
     salary: `${initialVacancy?.salary}` || "",
-    currency: initialVacancy?.currency || "$",
+    currency: initialVacancy?.currency || "USD",
     stage: initialVacancy?.stage || "new",
     action: initialVacancy?.actions[0]?.name || "",
     color: initialVacancy?.cardColor || "",
@@ -81,7 +81,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     notebook: initialVacancy?.notes[0]?.text || "",
   };
   type Values = typeof initialValues;
-  console.log("currency:", initialVacancy?.currency);
+
   const handleFormSubmit = (
     { companyName, companyURL, source, position, salary, currency, stage, action, color, userReview, notebook }: Values,
     { resetForm }: FormikHelpers<Values>
@@ -101,24 +101,24 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
       userRank: +userReview,
       notes,
     };
-    console.log("data: ", data);
+    console.log("Handle submit data: ", data);
 
     if (!initialVacancy) {
       addVacancy(data)
         .unwrap()
-        .then(payload => dispatch(setMessage(payload.message)))
-        .catch(error => dispatch(setMessage(error.data.message)));
+        .then((payload: { message: string }) => dispatch(setMessage(payload.message)))
+        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)));
       resetForm();
     } else {
       // eslint-disable-next-line no-underscore-dangle
       editVacancy({ ...data, _id: initialVacancy._id })
         .unwrap()
-        .then(payload => {
+        .then((payload: { message: string }) => {
           dispatch(setMessage(payload.message));
           // redirect(`/${initialVacancy._id}/details`);
           navigate(-1);
         })
-        .catch(error => dispatch(setMessage(error.data.message)));
+        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)));
     }
   };
 

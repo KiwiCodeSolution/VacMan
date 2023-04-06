@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
 import { IVacancy, useDeleteVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
+import currencyList from "assets/currencyList";
 
 type VacancyProps = {
   shortVacancy: IVacancy;
@@ -57,7 +58,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Action size={24} />
-          {actions ? (
+          {actions.length ? (
             actions.map(({ name, deadline }) => <span key={deadline}>{name}, </span>)
           ) : (
             <p>You have no action</p>
@@ -71,7 +72,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
           <Icons.Salary size={24} />
           <p>
             {salary}
-            {currency}
+            {currencyList[currency]}
           </p>
         </li>
         <li className="absolute bottom-2 right-[14px]">
