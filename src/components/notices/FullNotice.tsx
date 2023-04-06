@@ -97,12 +97,12 @@ const FullNote = () => {
 
           <li className="mb-4">
             <div className="flex justify-between">
-              <div className="flex gap-x-2 gap-y-1 mb-2 font-medium">
+              <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
                 <Icons.Action size={24} />
                 <p>Action</p>
               </div>
               <div>
-                <p className="font-medium mb-2">Deadline</p>
+                <p className="font-semibold mb-2">Deadline</p>
               </div>
             </div>
             {actions.length ? (
@@ -113,6 +113,7 @@ const FullNote = () => {
               <p className="text-txt-main">You have no action</p>
             )}
           </li>
+
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
             <Icons.Notebook size="24" />
             <p>Notebook</p>
@@ -127,6 +128,7 @@ const FullNote = () => {
             </div>
           </li>
         </ul>
+
         {!archived ? (
           <Button variant="black" clickFn={() => handleArchive()}>
             Archive

@@ -12,25 +12,23 @@ interface IProps {
 }
 const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAddress }: IProps) => {
   const bgColor = bg ? `bg-${bg}` : "bg-transparent";
-  const textColor = textWhite ? "text-txt-white" : null;
+  const textColor = textWhite ? "text-txt-white" : undefined;
   return (
     <div className={`flex sticky top-0 z-10 pt-6 pb-4 bg-[bgColor] items-center ${bgColor} border-b border-txt-grey`}>
       {prevAddress ? (
         <button className="hover:scale-110 focus:scale-110">
           <Link to={prevAddress}>
-            <Icons.ArrowBack size={32} />
+            <Icons.ArrowBack size={32} className={textColor} />
           </Link>
         </button>
-      ) : (
-        <p> </p>
-      )}
+      ) : null}
 
       {link ? (
-        <a href={link} className="text-txt-link text-2xl font-medium grow text-center">
+        <a href={link} className="text-txt-link text-2xl font-semibold grow text-center">
           {text}
         </a>
       ) : (
-        <p className={`text-center text-2xl font-medium ${textColor} grow`}>{text}</p>
+        <p className={`text-center text-2xl font-semibold ${textColor} grow`}>{text}</p>
       )}
 
       {nextAddress ? (
@@ -40,9 +38,7 @@ const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAd
             <Icons.ArrowForward size={32} className="fill-txt-main stroke-txt-main" />
           </button>
         </Link>
-      ) : (
-        <p> </p>
-      )}
+      ) : null}
 
       {editAddress ? (
         <button type="button" className="hover:scale-110 focus:scale-110">
