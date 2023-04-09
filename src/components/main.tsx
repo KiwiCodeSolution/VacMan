@@ -25,9 +25,9 @@ export default function Main() {
   const vacancies = response?.data?.filter(vacancy => vacancy.archived === onArchive);
 
   return (
-    <div className="container mx-auto bg-bg-light">
+    <div className="container absolute mx-auto bg-bg-light">
       {isLoading ? (
-        <Loader active />
+        <Loader active absolute />
       ) : isError ? (
         <h2>ERROR</h2>
       ) : !response ? (

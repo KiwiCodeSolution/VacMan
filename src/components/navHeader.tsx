@@ -3,18 +3,20 @@ import * as Icons from "components/iconsComponents";
 
 interface IProps {
   prevAddress?: string;
-  text: string;
+  text?: string;
   textWhite?: boolean;
   link?: string;
   nextAddress?: string;
   editAddress?: string;
   bg?: "bg-light" | "bg-grey" | "bg-black";
+  underlined?: boolean;
 }
-const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAddress }: IProps) => {
+const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAddress, underlined }: IProps) => {
   const bgColor = bg ? `bg-${bg}` : "bg-transparent";
   const textColor = textWhite ? "text-txt-white" : undefined;
+  const border = underlined ? "border-b border-txt-grey" : null;
   return (
-    <div className={`flex sticky top-0 z-10 pt-6 pb-4 bg-[bgColor] items-center ${bgColor} border-b border-txt-grey`}>
+    <div className={`flex sticky top-0 z-10 pt-6 pb-4 bg-[bgColor] items-center ${bgColor} ${border}`}>
       {prevAddress ? (
         <button className="hover:scale-110 focus:scale-110">
           <Link to={prevAddress}>

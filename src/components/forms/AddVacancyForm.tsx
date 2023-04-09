@@ -3,7 +3,7 @@ import { Formik, FormikHelpers, FormikProps } from "formik";
 
 import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
-import CustomInput from "components/forms/customInput";
+import CustomInput from "components/forms/CustomInput";
 import CurrencyRadioBtnsGroup from "components/forms/currencyRadioBtnsGroup";
 import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
@@ -72,12 +72,12 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     companyURL: initialVacancy?.companyURL || "",
     source: initialVacancy?.source || "",
     position: initialVacancy?.position || "",
-    salary: `${initialVacancy?.salary}` || "",
+    salary: `${initialVacancy?.salary || 100}`,
     currency: initialVacancy?.currency || "USD",
     stage: initialVacancy?.stage || "new",
     action: initialVacancy?.actions[0]?.name || "",
     color: initialVacancy?.cardColor || "",
-    userReview: `${initialVacancy?.userRank}` || "1",
+    userReview: `${initialVacancy?.userRank || "1"}`,
     notebook: initialVacancy?.notes[0]?.text || "",
   };
   type Values = typeof initialValues;

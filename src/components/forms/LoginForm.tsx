@@ -5,9 +5,10 @@ import { InferType } from "yup";
 import { useAppDispatch } from "hooks/reduxHooks";
 import loginSchema from "validationSchemas/loginSchema";
 
-import CustomInput from "components/forms/customInput";
+import CustomInput from "components/forms/CustomInput";
 import { logIn } from "redux/userOperations";
 import Button from "components/ui/button";
+import { Link } from "react-router-dom";
 
 type Values = InferType<typeof loginSchema>;
 
@@ -43,9 +44,13 @@ const LoginForm = () => {
             </li>
             <li>
               <CustomInput name="password" label="Password" placeholder="Type password" id="password" type="password" />
+              <div className="text-right">
+                <Link to="/restorePass">
+                  <span className="text-txt-main text-decoration-line: underline">Forgot Password</span>
+                </Link>
+              </div>
             </li>
           </ul>
-
           <div className="mt-auto">
             <Button variant="black" btnType="submit">
               LOGIN
