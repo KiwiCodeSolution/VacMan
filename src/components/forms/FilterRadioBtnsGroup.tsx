@@ -1,3 +1,4 @@
+// filterRadioBtnsGroup;
 import { FieldHookConfig } from "formik";
 
 import { IIconProps } from "components/iconsComponents";
@@ -13,7 +14,7 @@ const FilterRadioBtnsGroup = ({ name, values, label, LabelIcon }: FilterRadioBtn
   return (
     <div>
       <div className="flex flex-wrap gap-1 justify-start items-center  text-txt">
-        {LabelIcon && <LabelIcon size="16" className="fill-txt-main" />}
+        {LabelIcon && <LabelIcon size="16" className="text-txt-main" />}
         {label && <p className="text-base text-txt-main">{label}</p>}
       </div>
 

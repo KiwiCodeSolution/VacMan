@@ -1,26 +1,33 @@
+// addVacancyForm;
 import { Formik, FormikHelpers, FormikProps } from "formik";
 
 import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
-import CustomInput from "components/forms/CustomInput";
+import CustomInput from "components/forms/customInput";
+import CurrencyRadioBtnsGroup from "components/forms/currencyRadioBtnsGroup";
 import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
+import { IVacancy, useAddVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { setMessage } from "redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
-const defaultInitialValues = {
-  companyName: "",
-  companyLink: "",
-  source: "",
-  position: "",
-  salary: "",
-  stage: "",
-  action: "",
-  color: "",
-  userReview: "",
-  notebook: "",
-};
+// const defaultInitialValues = {
+//   companyName: "",
+//   companyURL: "",
+//   source: "",
+//   position: "",
+//   salary: "",
+//   currency: "$",
+//   stage: "",
+//   action: "",
+//   color: "",
+//   userReview: "1",
+//   notebook: "",
+// };
 
-type Values = typeof defaultInitialValues;
+// type Values = typeof defaultInitialValues;
 
 const STAGES = [
   "Waiting for answer",
@@ -44,19 +51,79 @@ const ACTIONS = [
   "Second act",
 ];
 
+const CURRENCY = [
+  { name: "USD", sign: "$" },
+  { name: "Euro", sign: "€" },
+  { name: "local", sign: "₴" },
+];
+
 const RATING_VALUES = ["1", "2", "3", "4", "5"];
 
 const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "red", "mustard"];
 
-const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
-  const handleFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
-    console.log("Form was submitted");
-    console.log("values: ", values);
-    resetForm();
+const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
+  const dispatch = useAppDispatch();
+  const [addVacancy] = useAddVacancyMutation();
+  const [editVacancy] = useUpdateVacancyMutation();
+  const navigate = useNavigate();
+
+  const initialValues = {
+    companyName: initialVacancy?.companyName || "",
+    companyURL: initialVacancy?.companyURL || "",
+    source: initialVacancy?.source || "",
+    position: initialVacancy?.position || "",
+    salary: `${initialVacancy?.salary}` || "",
+    currency: initialVacancy?.currency || "USD",
+    stage: initialVacancy?.stage || "new",
+    action: initialVacancy?.actions[0]?.name || "",
+    color: initialVacancy?.cardColor || "",
+    userReview: `${initialVacancy?.userRank}` || "1",
+    notebook: initialVacancy?.notes[0]?.text || "",
+  };
+  type Values = typeof initialValues;
+
+  const handleFormSubmit = (
+    { companyName, companyURL, source, position, salary, currency, stage, action, color, userReview, notebook }: Values,
+    { resetForm }: FormikHelpers<Values>
+  ): void => {
+    const actions = action ? [{ date: Date.now(), name: action }] : [];
+    const notes = notebook ? [{ date: Date.now(), text: notebook }] : [];
+    const data = {
+      companyName,
+      companyURL,
+      source,
+      position,
+      salary: +salary,
+      currency,
+      stage,
+      actions,
+      cardColor: color,
+      userRank: +userReview,
+      notes,
+    };
+    console.log("Handle submit data: ", data);
+
+    if (!initialVacancy) {
+      addVacancy(data)
+        .unwrap()
+        .then((payload: { message: string }) => dispatch(setMessage(payload.message)))
+        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)));
+      resetForm();
+    } else {
+      // eslint-disable-next-line no-underscore-dangle
+      editVacancy({ ...data, _id: initialVacancy._id })
+        .unwrap()
+        .then((payload: { message: string }) => {
+          dispatch(setMessage(payload.message));
+          // redirect(`/${initialVacancy._id}/details`);
+          navigate(-1);
+        })
+        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)));
+    }
   };
 
   return (
-    <Formik initialValues={initialValues || defaultInitialValues} onSubmit={handleFormSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handleFormSubmit}>
       {({ handleSubmit }: FormikProps<Values>) => (
         <form onSubmit={handleSubmit}>
           <ul className="flex flex-col gap-y-3">
@@ -70,13 +137,7 @@ const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
               />
             </li>
             <li>
-              <CustomInput
-                name="companyLink"
-                id="companyLink"
-                type="text"
-                label="Company Link"
-                LabelIcon={icons.Link}
-              />
+              <CustomInput name="companyURL" id="companyURL" type="text" label="Company Link" LabelIcon={icons.Link} />
             </li>
             <li>
               <CustomInput name="source" id="source" type="text" label="Source" LabelIcon={icons.Link} />
@@ -84,19 +145,23 @@ const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
             <li>
               <CustomInput name="position" id="position" type="text" label="Position" LabelIcon={icons.Position} />
             </li>
-            <li>
+            <li className="flex gap-2 items-end">
               <CustomInput name="salary" id="salary" type="text" label="Salary" LabelIcon={icons.Salary} />
+              <CurrencyRadioBtnsGroup name="currency" values={CURRENCY} />
             </li>
-            <li>
+          </ul>
+
+          <ul className="mt-3">
+            <li className="py-4 border-t border-txt-main">
               <FilterRadioBtnsGroup name="stage" values={STAGES} label="Stage" LabelIcon={icons.Stage} />
             </li>
-            <li>
+            <li className="py-4 border-t border-txt-main">
               <FilterRadioBtnsGroup name="action" values={ACTIONS} label="Action" LabelIcon={icons.Action} />
             </li>
-            <li>
+            <li className="py-4 border-t border-txt-main">
               <ColorRadioBtnsGroup name="color" values={COLORS} label="Color" LabelIcon={icons.Color} />
             </li>
-            <li>
+            <li className="py-4 border-y border-txt-main">
               <StarRadioBtnsGroup
                 name="userReview"
                 values={RATING_VALUES}
@@ -104,14 +169,15 @@ const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
                 LabelIcon={icons.Review}
               />
             </li>
-            <li>
-              <CustomInput name="notebook" id="notebook" type="text" label="Notebook" LabelIcon={icons.Notebook} />
-            </li>
           </ul>
+
+          <div className="mt-4">
+            <CustomInput name="notebook" id="notebook" type="text" label="Notebook" LabelIcon={icons.Notebook} />
+          </div>
 
           <div className="mt-24">
             <Button btnType="submit" variant="black">
-              Create
+              {initialVacancy ? "save vacancy" : "create"}
             </Button>
           </div>
         </form>

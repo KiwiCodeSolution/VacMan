@@ -1,4 +1,12 @@
+import AddVacancyForm from "components/forms/AddVacancyForm";
+import NavHeader from "components/navHeader";
+
 const AddVacancy = () => {
-  return <h2>Add Vacancy page</h2>;
+  return (
+    <>
+      <NavHeader prevAddress="/" text="Add Vacancy" bg="bg-light" />
+      <AddVacancyForm />
+    </>
+  );
 };
 export default AddVacancy;

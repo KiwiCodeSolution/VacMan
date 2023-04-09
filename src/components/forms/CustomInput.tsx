@@ -1,3 +1,4 @@
+// customInput;
 import { useState } from "react";
 import { useField, FieldHookConfig } from "formik";
 
@@ -28,9 +29,9 @@ function CustomInput(props: CustomInputProps) {
   const hasError = error && touched;
 
   return (
-    <div className="text-txt-main ">
+    <div className=" grow text-txt-main ">
       <label htmlFor={id} className="flex items-center gap-1 text-base ">
-        {LabelIcon && <LabelIcon size="16" className="stroke-txt-main" />}
+        {LabelIcon && <LabelIcon size="16" className="text-txt-main" />}
         {label}
       </label>
 
@@ -56,7 +57,7 @@ function CustomInput(props: CustomInputProps) {
             onClick={(): void => togglePasswordShow()}
             aria-label="show/hide password button"
           >
-            <Eye crossed={!isPasswordShown} />
+            <Eye size={24} crossed={!isPasswordShown} className="text-txt-main" />
           </button>
         ) : (
           <button
@@ -65,7 +66,7 @@ function CustomInput(props: CustomInputProps) {
             onClick={clearField}
             aria-label="clear field button"
           >
-            <Rubber />
+            <Rubber size={24} className="text-txt-main" />
           </button>
         )}
 

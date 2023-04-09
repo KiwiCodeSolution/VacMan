@@ -3,12 +3,14 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 
 interface INote {
-  data: number;
+  date: number;
   text: string;
 }
 export interface IAction {
+  date: number;
   name: string;
-  deadline: number;
+  deadline?: number;
+  fulfilled?: boolean;
 }
 export interface IVacancy {
   _id: string;
@@ -18,13 +20,14 @@ export interface IVacancy {
   sourceURL: string;
   position: string;
   salary: number;
-  currency: string;
+  currency: "USD" | "Euro" | "Hrn";
   notes: INote[];
   actions: IAction[];
   status: string;
   userRank: number;
   archived: boolean;
   cardColor: string;
+  stage: string;
 }
 
 // eslint-disable-next-line prettier/prettier
@@ -56,7 +59,7 @@ const axiosBaseQuery =
     }
   };
 const baseUrl = "https://vacmanserver-production.up.railway.app/";
-// const baseUrl = 'http://localhost:3030/';
+// const baseUrl = "http://localhost:3030/";
 
 export const vacancyAPI = createApi({
   reducerPath: "vacancies",

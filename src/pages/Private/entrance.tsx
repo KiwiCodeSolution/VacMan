@@ -9,7 +9,9 @@ const Entrance = () => {
     <OnBoarding />
   ) : (
     <>
-      <Outlet />
+      <div className="container mx-auto">
+        <Outlet />
+      </div>
       <Footer />
     </>
   );
