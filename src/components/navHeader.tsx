@@ -8,10 +8,11 @@ interface IProps {
   link?: string;
   nextAddress?: string;
   editAddress?: string;
+  skip?: string;
   bg?: "bg-light" | "bg-grey" | "bg-black";
   underlined?: boolean;
 }
-const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAddress, underlined }: IProps) => {
+const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAddress, skip, underlined }: IProps) => {
   const bgColor = bg ? `bg-${bg}` : "bg-transparent";
   const textColor = textWhite ? "text-txt-white" : undefined;
   const border = underlined ? "border-b border-txt-grey" : null;
@@ -46,6 +47,17 @@ const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAd
         <button type="button" className="hover:scale-110 focus:scale-110">
           <Link to={editAddress}>
             <Icons.Edit size={24} className="fill-txt-black stroke-txt-black" />
+          </Link>
+        </button>
+      ) : null}
+
+      {skip ? (
+        <button type="button" className="hover:scale-110 focus:scale-110">
+          <Link to={skip}>
+            <span className="flex flex-raw">
+              Skip
+              <Icons.ArrowForward size={24} className="fill-txt-black stroke-txt-black" />
+            </span>
           </Link>
         </button>
       ) : null}

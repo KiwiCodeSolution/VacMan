@@ -4,7 +4,7 @@ import NavHeader from "components/navHeader";
 const AddUserData = () => {
   return (
     <>
-      <NavHeader text="User information" nextAddress="/" />
+      <NavHeader bg="bg-light" text="User information" skip="/" underlined />
       <AddUserInfoForm />
     </>
   );

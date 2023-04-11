@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";

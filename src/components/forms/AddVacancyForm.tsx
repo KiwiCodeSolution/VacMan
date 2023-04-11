@@ -10,7 +10,7 @@ import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
 import { IVacancy, useAddVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { setMessage } from "redux/userSlice";
+import { setIsLoading, setMessage } from "redux/userSlice";
 import { useNavigate } from "react-router-dom";
 
 // const defaultInitialValues = {
@@ -86,6 +86,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     { companyName, companyURL, source, position, salary, currency, stage, action, color, userReview, notebook }: Values,
     { resetForm }: FormikHelpers<Values>
   ): void => {
+    dispatch(setIsLoading(true));
     const actions = action ? [{ date: Date.now(), name: action }] : [];
     const notes = notebook ? [{ date: Date.now(), text: notebook }] : [];
     const data = {
@@ -107,18 +108,18 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
       addVacancy(data)
         .unwrap()
         .then((payload: { message: string }) => dispatch(setMessage(payload.message)))
-        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)));
+        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)))
+        .finally(() => dispatch(setIsLoading(false)));
       resetForm();
     } else {
-      // eslint-disable-next-line no-underscore-dangle
       editVacancy({ ...data, _id: initialVacancy._id })
         .unwrap()
         .then((payload: { message: string }) => {
           dispatch(setMessage(payload.message));
-          // redirect(`/${initialVacancy._id}/details`);
           navigate(-1);
         })
-        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)));
+        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)))
+        .finally(() => dispatch(setIsLoading(false)));
     }
   };
 

@@ -10,7 +10,7 @@ const EditVacancy = () => {
 
   return (
     <>
-      <NavHeader bg="bg-light" prevAddress={`/${id}/details`} text="Edit vacancy" />
+      <NavHeader bg="bg-light" prevAddress={`/${id}/details`} text="Edit vacancy" underlined />
       <AddVacancyForm initialVacancy={data && data.data.find(el => el._id === id)} />
     </>
   );
