@@ -5,7 +5,9 @@ const AddUserData = () => {
   return (
     <>
       <NavHeader bg="bg-light" text="User information" skip="/" underlined />
-      <AddUserInfoForm />
+      <div className="container mx-auto px-4">
+        <AddUserInfoForm />
+      </div>
     </>
   );
 };
