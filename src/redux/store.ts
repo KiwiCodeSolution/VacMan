@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import noticeSlice from "./noticeSlice";
 import user from "./userSlice";
 import { vacancyAPI } from "./VacancyQueries";
+import notificationsSlice from "./notificationsSlice";
 
 const persistConfig = { key: "user", storage };
 const persistedUserReducer = persistReducer(persistConfig, user);
@@ -13,6 +14,7 @@ const store = configureStore({
     user: persistedUserReducer,
     [vacancyAPI.reducerPath]: vacancyAPI.reducer,
     notice: noticeSlice,
+    notification: notificationsSlice,
   },
   // eslint-disable-next-line prettier/prettier
   middleware: getDefaultMiddleware =>

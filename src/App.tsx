@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
+
 import { setShowStartingPage } from "./redux/userSlice";
 
 // pages & components
@@ -25,19 +26,33 @@ import { PrivateRoute, RedirectRoute } from "./hocs/PrivateRoute";
 import { currentUser } from "redux/userOperations";
 import FullNote from "components/notices/FullNotice";
 import AddUserData from "pages/Private/addUserData";
+import { setShowNotification } from "redux/notificationsSlice";
+import Notification from "components/notifications";
 
 const App = () => {
   const dispatch = useAppDispatch();
   const { token, showStartingPage } = useAppSelector(state => state.user);
+  const { showNotification } = useAppSelector(state => state.notification);
 
   useEffect(() => {
     dispatch(currentUser());
     setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
   }, [dispatch, token]);
+  
+  // notification
+  useEffect(() => {
+    const time = setTimeout(() => {
+      dispatch(setShowNotification(false));
+    }, 3000);
+    return () => clearTimeout(time);
+  }, [dispatch, showNotification]);
+
 
   return showStartingPage ? (
     <StartingPage />
   ) : (
+    <>
+    {showNotification && <Notification />}
     <Routes>
       {/* Private Routes */}
       <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>}>
@@ -64,7 +79,7 @@ const App = () => {
       <Route path="confirmPass" element={<RedirectRoute><ConfirmPassPage /></RedirectRoute>} />
       <Route path="confirmEmail" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
       <Route path="*" element={<NotFound />} />
-    </Routes>
+    </Routes></>
   );
 };
 

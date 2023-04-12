@@ -7,6 +7,8 @@ const colors = {
   black: "#040c0c",
   orange: "#f0be6c",
   link: "#3ca4ec",
+  red: "#f28b82",
+  green: "#68efac",
 };
 
 export type IIconProps = {
@@ -801,5 +803,30 @@ export const Recover = ({ size = 16, className }: IIconProps) => (
     className={className}
   >
     <path d="M20 15L16 11M16 11L12 15M16 11L16 21M28 16C28 22.6274 22.6274 28 16 28C9.37258 28 4 22.6274 4 16C4 9.37258 9.37258 4 16 4C22.6274 4 28 9.37258 28 16Z" />
+  </svg>
+);
+
+// Notifications
+export const Alert = ({ size = 68, className }: IIconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={colors.orange} stroke="none" className={className}>
+    <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+  </svg>
+);
+
+export const Info = ({ size = 68, className }: IIconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={colors.link} stroke="none" className={className}>
+    <path d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+  </svg>
+);
+
+export const Success = ({ size = 68, className }: IIconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={colors.green} stroke="none" className={className}>
+    <path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+  </svg>
+);
+
+export const Error = ({ size = 68, className }: IIconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={colors.red} stroke="none" className={className}>
+    <path d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
   </svg>
 );
