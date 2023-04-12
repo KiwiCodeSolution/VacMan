@@ -4,7 +4,7 @@ import triangle from "assets/icons/triangle.svg";
 
 export default function Loader({ active, absolute }: { active?: boolean; absolute?: boolean }) {
   // console.log("Spinner active:", active);
-  const position = absolute && "absolute top-2/4  left-2/4 -translate-x-1/2 -translate-y-1/2";
+  const position = absolute && "absolute m-auto left-0 right-0";
   return (
     <div className="relative">
       <div className={`w-36 h-36 ${position}`}>

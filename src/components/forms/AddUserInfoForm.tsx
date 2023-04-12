@@ -59,7 +59,7 @@ const AddUserInfoForm = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={handelFormSubmit}>
       {({ handleSubmit }: FormikProps<Values>) => (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-y-6 grow mt-14 pb-6" noValidate>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-y-6 grow mt-4 pb-6" noValidate>
           <ul className="flex flex-col gap-y-6">
             {formFields.map(({ name, label, labelIcon, type }) => (
               <li key={name}>
