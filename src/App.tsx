@@ -39,14 +39,14 @@ const App = () => {
     setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
   }, [dispatch, token]);
   
+  // notification
   useEffect(() => {
-    // Hide notification after 3 seconds
     const time = setTimeout(() => {
       dispatch(setShowNotification(false));
     }, 3000);
-
     return () => clearTimeout(time);
   }, [dispatch, showNotification]);
+
 
   return showStartingPage ? (
     <StartingPage />

@@ -11,7 +11,6 @@ import ShortNote from "components/notices/ShortNotice";
 import Button from "components/ui/button";
 import { setOnArchive } from "redux/noticeSlice";
 import Header from "./Header";
-import { setShowNotification } from "redux/notificationsSlice";
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -22,10 +21,6 @@ export default function Main() {
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
 
   const vacancies = response?.data?.filter(vacancy => vacancy.archived === onArchive);
-
-  function handle() {
-    dispatch(setShowNotification(true));
-  }
 
   return (
     <div className="container mx-auto bg-bg-light">
@@ -45,9 +40,6 @@ export default function Main() {
       ) : (
         <>
           <Header />
-          <button type="button" onClick={() => handle()}>
-            Click
-          </button>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-28 mt-5 items-center gap-4 px-4">
             {vacancies && vacancies.map(vacancy => <ShortNote key={vacancy._id} shortVacancy={vacancy} />)}
           </div>
