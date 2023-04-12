@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { setOnBoarding } from "redux/userSlice";
 import * as Icons from "components/iconsComponents";
 import Dots from "components/ui/dots";
-import { Link } from "react-router-dom";
 
 interface IimageUrl {
   [key: number]: string;
@@ -26,12 +26,17 @@ const text = [
 const OnBoarding = () => {
   const [onBoardingPage, setOnBoardingPage] = useState<number>(1);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const goBack = () => {
     if (onBoardingPage > 1) setOnBoardingPage(onBoardingPage - 1);
   };
   const goNext = () => {
     if (onBoardingPage < 4) setOnBoardingPage(onBoardingPage + 1);
+  };
+  const start = () => {
+    dispatch(setOnBoarding(false));
+    navigate("/addUserData");
   };
 
   const currentBackground =
@@ -46,7 +51,7 @@ const OnBoarding = () => {
       <div className="flex justify-between py-5 px-4">
         <button type="button" onClick={goBack}>
           {/* <Icons.ArrowBack white /> */}
-          <Icons.ArrowBack className="fill-txt-white stroke-txt-black" />
+          <Icons.ArrowBack size="32" className="fill-txt-white stroke-txt-black" />
         </button>
         {onBoardingPage < 4 ? (
           <Link to="addUserData">
@@ -56,7 +61,7 @@ const OnBoarding = () => {
               onClick={() => dispatch(setOnBoarding(false))}
             >
               <span className="font-semibold text-base text-txt-white ">Skip</span>
-              <Icons.ArrowForward className="fill-txt-white stroke-txt-black" />
+              <Icons.ArrowForward size="32" className="fill-txt-white stroke-txt-black" />
             </button>
           </Link>
         ) : null}
@@ -74,11 +79,7 @@ const OnBoarding = () => {
           </div>
         ) : (
           <div className="flex mt-20 justify-end">
-            <button
-              type="button"
-              className="w-36 h-12 bg-btn-black rounded-xl"
-              onClick={() => dispatch(setOnBoarding(false))}
-            >
+            <button type="button" className="w-36 h-12 bg-btn-black rounded-xl" onClick={start}>
               <p className="font-medium text-base text-txt-white">Lets Start</p>
             </button>
           </div>

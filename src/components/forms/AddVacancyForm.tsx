@@ -3,30 +3,31 @@ import { Formik, FormikHelpers, FormikProps } from "formik";
 
 import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
-import CustomInput from "components/forms/customInput";
+import CustomInput from "components/forms/CustomInput";
 import CurrencyRadioBtnsGroup from "components/forms/currencyRadioBtnsGroup";
 import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
-import { useAddVacancyMutation } from "redux/VacancyQueries";
+import { IVacancy, useAddVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { setMessage } from "redux/userSlice";
+import { setIsLoading, setMessage } from "redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
-const defaultInitialValues = {
-  companyName: "",
-  companyURL: "",
-  source: "",
-  position: "",
-  salary: "",
-  currency: "$",
-  stage: "",
-  action: "",
-  color: "",
-  userReview: "1",
-  notebook: "",
-};
+// const defaultInitialValues = {
+//   companyName: "",
+//   companyURL: "",
+//   source: "",
+//   position: "",
+//   salary: "",
+//   currency: "$",
+//   stage: "",
+//   action: "",
+//   color: "",
+//   userReview: "1",
+//   notebook: "",
+// };
 
-type Values = typeof defaultInitialValues;
+// type Values = typeof defaultInitialValues;
 
 const STAGES = [
   "Waiting for answer",
@@ -51,8 +52,8 @@ const ACTIONS = [
 ];
 
 const CURRENCY = [
-  { name: "$", sign: "$" },
-  { name: "€", sign: "€" },
+  { name: "USD", sign: "$" },
+  { name: "Euro", sign: "€" },
   { name: "local", sign: "₴" },
 ];
 
@@ -60,14 +61,32 @@ const RATING_VALUES = ["1", "2", "3", "4", "5"];
 
 const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "red", "mustard"];
 
-const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
+const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   const dispatch = useAppDispatch();
   const [addVacancy] = useAddVacancyMutation();
+  const [editVacancy] = useUpdateVacancyMutation();
+  const navigate = useNavigate();
+
+  const initialValues = {
+    companyName: initialVacancy?.companyName || "",
+    companyURL: initialVacancy?.companyURL || "",
+    source: initialVacancy?.source || "",
+    position: initialVacancy?.position || "",
+    salary: `${initialVacancy?.salary || 100}`,
+    currency: initialVacancy?.currency || "USD",
+    stage: initialVacancy?.stage || "new",
+    action: initialVacancy?.actions[0]?.name || "",
+    color: initialVacancy?.cardColor || "",
+    userReview: `${initialVacancy?.userRank || "1"}`,
+    notebook: initialVacancy?.notes[0]?.text || "",
+  };
+  type Values = typeof initialValues;
 
   const handleFormSubmit = (
     { companyName, companyURL, source, position, salary, currency, stage, action, color, userReview, notebook }: Values,
     { resetForm }: FormikHelpers<Values>
   ): void => {
+    dispatch(setIsLoading(true));
     const actions = action ? [{ date: Date.now(), name: action }] : [];
     const notes = notebook ? [{ date: Date.now(), text: notebook }] : [];
     const data = {
@@ -83,17 +102,29 @@ const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
       userRank: +userReview,
       notes,
     };
-    console.log("data: ", data);
+    console.log("Handle submit data: ", data);
 
-    addVacancy(data)
-      .unwrap()
-      .then(payload => dispatch(setMessage(payload.message)))
-      .catch(error => dispatch(setMessage(error.data.message)));
-    resetForm();
+    if (!initialVacancy) {
+      addVacancy(data)
+        .unwrap()
+        .then((payload: { message: string }) => dispatch(setMessage(payload.message)))
+        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)))
+        .finally(() => dispatch(setIsLoading(false)));
+      resetForm();
+    } else {
+      editVacancy({ ...data, _id: initialVacancy._id })
+        .unwrap()
+        .then((payload: { message: string }) => {
+          dispatch(setMessage(payload.message));
+          navigate(-1);
+        })
+        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)))
+        .finally(() => dispatch(setIsLoading(false)));
+    }
   };
 
   return (
-    <Formik initialValues={initialValues || defaultInitialValues} onSubmit={handleFormSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handleFormSubmit}>
       {({ handleSubmit }: FormikProps<Values>) => (
         <form onSubmit={handleSubmit}>
           <ul className="flex flex-col gap-y-3">
@@ -147,7 +178,7 @@ const AddVacancyForm = ({ initialValues }: { initialValues?: Values }) => {
 
           <div className="mt-24">
             <Button btnType="submit" variant="black">
-              Create
+              {initialVacancy ? "save vacancy" : "create"}
             </Button>
           </div>
         </form>

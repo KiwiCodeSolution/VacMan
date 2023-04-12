@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
@@ -25,9 +24,11 @@ export default function Main() {
   const vacancies = response?.data?.filter(vacancy => vacancy.archived === onArchive);
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto bg-bg-light">
       {isLoading ? (
-        <Loader active />
+        <div className="mt-48">
+          <Loader active absolute />
+        </div>
       ) : isError ? (
         <h2>ERROR</h2>
       ) : !response ? (

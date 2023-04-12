@@ -20,13 +20,14 @@ export interface IVacancy {
   sourceURL: string;
   position: string;
   salary: number;
-  currency: string;
+  currency: "USD" | "Euro" | "Hrn";
   notes: INote[];
   actions: IAction[];
   status: string;
   userRank: number;
   archived: boolean;
   cardColor: string;
+  stage: string;
 }
 
 // eslint-disable-next-line prettier/prettier
