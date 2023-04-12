@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { IUser } from "./userSlice";
+// import { displayMsgCustom } from "components/notifications";
 
 // axios.defaults.baseURL = 'http://localhost:3030';
 // axios.defaults.baseURL = 'http://kiwicode.tech:5000';
@@ -54,6 +55,8 @@ export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string
   "user/logout",
   async (_, { rejectWithValue }) => {
     const response = await axios.get("/auth/logout");
+    console.log(response);
+
     if (response.status !== 200) {
       return rejectWithValue(response.data.message);
     }
