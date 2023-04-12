@@ -3,15 +3,21 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 import { currentUser, emailVerify, logIn, logOut, registration } from "./userOperations";
 
-interface IProfile {
+export interface IProfile {
   [key: string]: string;
 }
-
+export interface ISettings {
+  lang: "eng" | "ukr" | "ru";
+  theme: "light" | "dark";
+  localCurrency: "";
+  notification: "";
+}
 export interface IUser {
   email: string;
   token: string;
   currProfile?: string;
   profile: IProfile;
+  settings: ISettings;
 }
 
 const initialState = {
@@ -22,7 +28,8 @@ const initialState = {
   isLoading: false,
   showStartingPage: true,
   currProfile: "",
-  profile: { avatar: "", phoneNumber: "", position: "", lang: "eng", theme: "" } as IProfile,
+  profile: { avatar: "", phoneNumber: "", position: "" } as IProfile,
+  settings: {lang: "eng", theme: "light", localCurrency: "", notification: ""} as ISettings,
   message: "",
 };
 
@@ -42,8 +49,11 @@ const userSlice = createSlice({
     setShowStartingPage(state, { payload }: PayloadAction<boolean>) {
       state.showStartingPage = payload;
     },
-    setLang(state, { payload }: PayloadAction<"eng" | "ru" | "ukr">) {
-      state.profile.lang = payload;
+    setSettings(state, { payload }: PayloadAction<ISettings>) {
+      state.settings = payload;
+    },
+    setProfile(state, { payload }: { payload: IProfile }) {
+      state.profile = payload;
     },
     setMessage(state, { payload }: { payload: string }) {
       state.message = payload;
@@ -52,6 +62,7 @@ const userSlice = createSlice({
       state.email = payload.email;
       state.token = payload.token;
       state.profile = payload.profile;
+      state.settings = payload.settings;
       state.currProfile = payload.currProfile || "";
     },
   },
@@ -94,6 +105,7 @@ const userSlice = createSlice({
         state.email = "";
         state.currProfile = "";
         state.profile = {} as IProfile;
+        state.settings = {} as ISettings;
         state.showStartingPage = true;
         state.isLoading = false;
       })
@@ -135,6 +147,6 @@ const userSlice = createSlice({
 });
 
 export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>
-export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setLang, setUser, setMessage } =
+export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setProfile, setSettings, setUser, setMessage } =
   userSlice.actions;
 export default userSlice.reducer;

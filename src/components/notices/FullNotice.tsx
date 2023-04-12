@@ -1,17 +1,16 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link, useParams, useNavigate } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Button from "components/ui/button";
-
+import NavHeader from "components/navHeader";
+import currencyList from "assets/currencyList";
 import Stars from "components/ui/stars";
 import { useDeleteVacancyMutation, useGetVacanciesQuery, useUpdateVacancyMutation } from "redux/VacancyQueries";
 import Actions from "./Actions";
 import { colorVariants } from "./ShortNotice";
 import { useAppSelector } from "hooks/reduxHooks";
-import NavHeader from "components/navHeader";
+
 
 const FullNote = () => {
   const navigate = useNavigate();
@@ -57,14 +56,15 @@ const FullNote = () => {
 
   return (
     <div className="container mx-auto">
-      <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} bg="bg-light" />
+      <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} bg="bg-light" underlined />
       <div
-        className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${archivalText} shadow-xl`}
+        className={`container mx-auto rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${archivalText} shadow-xl`}
       >
         <ul>
           <li className="flex justify-between">
             <div className="flex flex-col justify-between">
               <Stars amount={5} active={userRank} archived={archived} />
+
               {source ? (
                 <a href={sourceURL} className="font-bold text-xl mt-2" target="_blank" rel="noreferrer">
                   {source}
@@ -72,6 +72,7 @@ const FullNote = () => {
               ) : (
                 <p className="py-3" />
               )}
+
               <div className="flex gap-x-2 gap-y-1 mt-2 mb-4 font-medium">
                 <Icons.Position size={24} />
                 <span className="font-bold">{position}</span>
@@ -82,7 +83,7 @@ const FullNote = () => {
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
                 <Icons.Salary size={24} /> <p className="text-base">Salary</p>
               </span>
-              <p className="text-[32px]">{salary} {currency}</p>
+              <p className="text-[32px]">{salary} {currencyList[currency]}</p>
             </div>
           </li>
 
@@ -96,12 +97,12 @@ const FullNote = () => {
 
           <li className="mb-4">
             <div className="flex justify-between">
-              <div className="flex gap-x-2 gap-y-1 mb-2 font-medium">
+              <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
                 <Icons.Action size={24} />
                 <p>Action</p>
               </div>
               <div>
-                <p className="font-medium mb-2">Deadline</p>
+                <p className="font-semibold mb-2">Deadline</p>
               </div>
             </div>
             {actions.length ? (
@@ -112,6 +113,7 @@ const FullNote = () => {
               <p className="text-txt-main">You have no action</p>
             )}
           </li>
+
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
             <Icons.Notebook size="24" />
             <p>Notebook</p>
@@ -126,6 +128,7 @@ const FullNote = () => {
             </div>
           </li>
         </ul>
+
         {!archived ? (
           <Button variant="black" clickFn={() => handleArchive()}>
             Archive
