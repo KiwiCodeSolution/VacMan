@@ -9,16 +9,18 @@ import Stars from "components/ui/stars";
 import { useDeleteVacancyMutation, useGetVacanciesQuery, useUpdateVacancyMutation } from "redux/VacancyQueries";
 import Actions from "./Actions";
 import { colorVariants } from "./ShortNotice";
-import { useAppSelector } from "hooks/reduxHooks";
-
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
+import { setMessage, setShowNotification, setType } from "redux/notificationsSlice";
 
 const FullNote = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { _id } = useParams();
-  const [updateVacancy] = useUpdateVacancyMutation();
-  const [deleteVacancy] = useDeleteVacancyMutation();
+  const [updateVacancy, updateResponse] = useUpdateVacancyMutation();
+  const [deleteVacancy, deleteResponse] = useDeleteVacancyMutation();
   const { data: response } = useGetVacanciesQuery();
   const { onArchive } = useAppSelector(state => state.notice);
+
   const vacancies = response?.data;
   if (!vacancies) return <h2>Vacancies data have been lost</h2>;
 
@@ -43,13 +45,31 @@ const FullNote = () => {
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
   function handleArchive(): void {
-    updateVacancy({ _id, archived: !onArchive });
+    updateVacancy({ _id, archived: !onArchive }).unwrap()
+      .then(res => {
+        dispatch(setMessage(res.message));
+        dispatch(setType("success"));
+      })
+      .catch((res) => {
+        dispatch(setMessage(res.message));
+        dispatch(setType("error"));
+      })
+      .finally(() => dispatch(setShowNotification(true)));
     navigate("/", { replace: true });
   }
 
   function removeVacancy(): void {
     if (_id) {
-      deleteVacancy({ _id });
+      deleteVacancy({ _id }).unwrap()
+        .then(res => {
+          dispatch(setMessage(res.message));
+          dispatch(setType("success"));
+        })
+        .catch((res) => {
+          dispatch(setMessage(res.message));
+          dispatch(setType("error"));
+        })
+        .finally(() => dispatch(setShowNotification(true)));
       navigate("/", { replace: true });
     }
   }

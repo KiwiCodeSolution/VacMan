@@ -3,9 +3,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { currentUser, emailVerify, logIn, logOut, registration } from "./userOperations";
 
+type Ttype = "error" | "success" | "warning" | "info";
+
 export interface INotification {
   message: string;
-  type: string;
+  type: Ttype;
   showNotification: boolean;
 }
 
@@ -21,6 +23,12 @@ const notificationSlice = createSlice({
   reducers: {
     setShowNotification(state, { payload }: PayloadAction<boolean>) {
       state.showNotification = payload;
+    },
+    setMessage(state, { payload }: { payload: string }) {
+      state.message = payload;
+    },
+    setType(state, { payload }: { payload: Ttype }) {
+      state.type = payload;
     },
   },
 
@@ -62,5 +70,5 @@ const notificationSlice = createSlice({
       .addCase(emailVerify.rejected, state => {}),
 });
 
-export const { setShowNotification } = notificationSlice.actions;
+export const { setShowNotification, setMessage, setType } = notificationSlice.actions;
 export default notificationSlice.reducer;

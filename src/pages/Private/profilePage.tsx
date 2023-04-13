@@ -28,8 +28,10 @@ const ProfilePage = () => {
           </button>
         </div>
       </div>
+
       <p className="text-xl text-center">{profile.name}</p>
       <p className="text-center">position: {profile.position}</p>
+
       <ul className="container mx-auto px-4">
         {elements.map(el => (
           <li key={el.name} className="flex flex-row items-center ml-2 py-3">

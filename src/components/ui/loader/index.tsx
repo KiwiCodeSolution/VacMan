@@ -7,7 +7,7 @@ export default function Loader({ active, absolute }: { active?: boolean; absolut
   const position = absolute && "absolute m-auto left-0 right-0";
   return (
     <div className="relative">
-      <div className={`w-36 h-36 ${position}`}>
+      <div className={`w-36 h-36 my-40 ${position}`}>
         <img
           src={circle}
           className={

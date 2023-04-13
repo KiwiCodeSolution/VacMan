@@ -5,7 +5,7 @@ import * as Icons from "./iconsComponents";
 const Header = () => {
   const { profile } = useAppSelector(state => state.user);
   return (
-    <div className="flex sticky top-0 items-center px-4 pb-2 z-10 bg-bg-light border-b border-txt-grey">
+    <div className="flex sticky top-0 items-center px-4 py-2 z-10 bg-bg-light border-b border-txt-grey">
       <Link to="/profile">
         {profile.avatar ? (
           <img src={profile.avatar} className="w-14 h-14 rounded-full" alt="avatar" />

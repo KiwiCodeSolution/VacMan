@@ -10,8 +10,9 @@ import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
 import { IVacancy, useAddVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { setIsLoading, setMessage } from "redux/userSlice";
+import { setIsLoading } from "redux/userSlice";
 import { useNavigate } from "react-router-dom";
+import { setShowNotification, setType, setMessage } from "redux/notificationsSlice";
 
 // const defaultInitialValues = {
 //   companyName: "",
@@ -107,19 +108,35 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     if (!initialVacancy) {
       addVacancy(data)
         .unwrap()
-        .then((payload: { message: string }) => dispatch(setMessage(payload.message)))
-        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)))
-        .finally(() => dispatch(setIsLoading(false)));
+        .then(payload => {
+          dispatch(setMessage(payload.message));
+          dispatch(setType("success"));
+        })
+        .catch(error => {
+          dispatch(setMessage(error.data.message));
+          dispatch(setType("error"));
+        })
+        .finally(() => {
+          dispatch(setIsLoading(false));
+          dispatch(setShowNotification(true));
+        });
       resetForm();
     } else {
       editVacancy({ ...data, _id: initialVacancy._id })
         .unwrap()
-        .then((payload: { message: string }) => {
+        .then(payload => {
           dispatch(setMessage(payload.message));
+          dispatch(setType("success"));
           navigate(-1);
         })
-        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)))
-        .finally(() => dispatch(setIsLoading(false)));
+        .catch(error => {
+          dispatch(setMessage(error.data.message));
+          dispatch(setType("error"));
+        })
+        .finally(() => {
+          dispatch(setIsLoading(false));
+          dispatch(setShowNotification(true));
+        });
     }
   };
 

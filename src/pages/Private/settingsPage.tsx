@@ -33,8 +33,10 @@ const SettingsPage = () => {
           </button>
         </div>
       </div>
+
       <p className="text-xl text-center">{profile.name}</p>
       <p className="text-center">position: {profile.position}</p>
+
       <div className="mx-auto w-24 pt-4 pb-7">
         <Link to="/profile" state={{ from: location }}>
           <Button btnType="button" variant="black">
@@ -42,6 +44,7 @@ const SettingsPage = () => {
           </Button>
         </Link>
       </div>
+
       <ul className="container mx-auto px-4">
         {elements.map(el => (
           <li key={el.name} className="flex flex-row items-center ml-2 py-3">
