@@ -2,14 +2,13 @@ import NavHeader from "components/navHeader";
 import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { logOut } from "redux/userOperations";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
   const { profile, settings } = useAppSelector(state => state.user);
   const location = useLocation();
-  const navigate = useNavigate();
 
   const elements = [
     { icon: Icons.SettingsLang, name: "Language", value: settings.lang, btn: Icons.ArrowForward, btnSize: 24 },
@@ -25,11 +24,11 @@ const SettingsPage = () => {
       <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-black" text="Settings" textWhite />
       <div className="sticky w-full h-[136px] ">
         <Icons.Rectangle className="w-full h-full text-txt-black" />
-        <div className="absolute w-[120px] h-[120px] bottom-0  left-1/2 -translate-x-1/2   rounded-full ">
+        <div className="absolute w-[120px] h-[120px] bottom-0 left-1/2 -translate-x-1/2 rounded-full ">
           <div className="w-full h-full flex justify-center items-center rounded-full bg-gradient-to-b from-[#C4C4D4] to-[#141415]">
-            <Icons.Avatar className="w-[95%] h-[95%] text-txt-main " />
+            <Icons.Avatar className="w-[95%] h-[95%] text-txt-main" />
           </div>
-          <button className="absolute w-8 h-8 bottom-0 right-0  flex justify-center items-center rounded-full bg-txt-black ">
+          <button className="absolute w-8 h-8 bottom-0 right-0 flex justify-center items-center rounded-full bg-txt-black">
             <Icons.Camera size="100%" className="" />
           </button>
         </div>
