@@ -8,6 +8,7 @@ module.exports = {
         "txt-black": "#040c0c",
         "txt-white": "#ffffff",
         "txt-grey": "#d9d9d9",
+        "txt-darkgrey": "#646464",
         "txt-link": "#3ca4ec",
         "bg-light": "#fffdf4",
         "bg-grey": "#646464",
