@@ -2,7 +2,7 @@ import NavHeader from "components/navHeader";
 import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logOut } from "redux/userOperations";
 
 const SettingsPage = () => {
@@ -37,9 +37,11 @@ const SettingsPage = () => {
       <p className="text-xl text-center">{profile.name}</p>
       <p className="text-center">position: {profile.position}</p>
       <div className="mx-auto w-24 pt-4 pb-7">
-        <Button btnType="button" variant="black" clickFn={() => navigate("/profile")}>
-          Profile
-        </Button>
+        <Link to="/profile" state={{ from: location }}>
+          <Button btnType="button" variant="black">
+            Profile
+          </Button>
+        </Link>
       </div>
       <ul className="container mx-auto px-4">
         {elements.map(el => (
