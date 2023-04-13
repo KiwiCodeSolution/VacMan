@@ -17,9 +17,9 @@ const ProfilePage = () => {
   return (
     <>
       <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
-      <div className="sticky w-full h-[136px]">
-        <Icons.Triangle className="w-full h-full text-txt-darkgrey" />
-        <div className="absolute w-[120px] h-[120px] top-1/2  left-1/2 -translate-x-1/2 -translate-y-1/2  rounded-full ">
+      <div className="sticky w-full h-[136px] ">
+        <Icons.Rectangle className="w-full h-full text-txt-darkgrey" />
+        <div className="absolute w-[120px] h-[120px] bottom-0  left-1/2 -translate-x-1/2 rounded-full">
           <div className="w-full h-full flex justify-center items-center rounded-full bg-gradient-to-b from-[#C4C4D4] to-[#141415]">
             <Icons.Avatar className="w-[95%] h-[95%] text-txt-main " />
           </div>

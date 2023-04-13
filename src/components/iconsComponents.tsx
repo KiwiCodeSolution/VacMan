@@ -37,30 +37,30 @@ export const Eye = ({ size = 16, className, crossed }: IIconProps & { crossed?: 
   </svg>
 );
 
-export const Rectangle = ({ size = 16, className }: IIconProps) => (
-  <svg width={size} height={size} viewBox="0 0 360 248" fill="currentColor" stroke="none" className={className}>
-    <path d="M0 0H360V158.372L0 248V0Z" />
-  </svg>
-);
+// export const Rectangle = ({ size = 16, className }: IIconProps) => (
+//   <svg width={size} height={size} viewBox="0 0 360 248" fill="currentColor" stroke="none" className={className}>
+//     <path d="M0 0H360V158.372L0 248V0Z" />
+//   </svg>
+// );
 
-export const Triangle = ({
-  size,
-  width = 200,
-  height = 200,
-  className,
-}: IIconProps & { width?: string | number; height?: string | number }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size || width}
-    height={size || height}
-    fill="currentColor"
-    viewBox="0 0 200 200"
-    preserveAspectRatio="none"
-    className={className}
-  >
-    <polygon points="0 0 0 200 200 0 0 0" />
-  </svg>
-);
+// export const Triangle = ({
+//   size,
+//   width = 200,
+//   height = 200,
+//   className,
+// }: IIconProps & { width?: string | number; height?: string | number }) => (
+//   <svg
+//     xmlns="http://www.w3.org/2000/svg"
+//     width={size || width}
+//     height={size || height}
+//     fill="currentColor"
+//     viewBox="0 0 200 200"
+//     preserveAspectRatio="none"
+//     className={className}
+//   >
+//     <polygon points="0 0 0 200 200 0 0 0" />
+//   </svg>
+// );
 
 export const Todos = ({ size = 16, className }: IIconProps) => (
   <svg width={size} height={size} viewBox="0 0 270 230" fill="#E6E6E6" stroke="none" className={className}>
@@ -847,5 +847,29 @@ export const Success = ({ size = 68, className }: IIconProps) => (
 export const Error = ({ size = 68, className }: IIconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill={colors.red} stroke="none" className={className}>
     <path d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+  </svg>
+);
+
+// BACKGROUND SVG
+
+export const Rectangle = ({
+  width = 360,
+  height = 136,
+  className,
+}: {
+  width?: string | number;
+  height?: string | number;
+  className?: string;
+}) => (
+  <svg
+    width={width}
+    height={height}
+    viewBox="0 0 360 136"
+    fill="currentColor"
+    stroke="none"
+    preserveAspectRatio="none"
+    className={className}
+  >
+    <polygon points="0,0 0,136 360,46 360,0 " />
   </svg>
 );
