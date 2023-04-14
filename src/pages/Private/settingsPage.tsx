@@ -2,20 +2,21 @@ import NavHeader from "components/navHeader";
 import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logOut } from "redux/userOperations";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
   const { profile, settings } = useAppSelector(state => state.user);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const elements = [
     { icon: Icons.SettingsLang, name: "Language", value: settings.lang, btn: Icons.ArrowForward, btnSize: 24 },
     { icon: Icons.SettingsNotification, name: "Notification", value: settings.notification, btn: Icons.ArrowForward },
     { icon: Icons.SettingsHelp, name: "Theme", value: settings.theme, btn: Icons.ArrowForward },
     { icon: Icons.Salary, name: "Local currency", value: settings.localCurrency, btn: Icons.ArrowForward },
-    { icon: Icons.SettingsArchive, name: "Archive", btn: Icons.ArrowForward },
+    { icon: Icons.SettingsArchive, name: "Archive", btn: Icons.ArrowForward, onClickFn: () => navigate("/archived") },
     { icon: Icons.SettingsPolicy, name: "Policy", btn: Icons.ArrowForward },
   ];
 
@@ -53,9 +54,9 @@ const SettingsPage = () => {
             </div>
             <p className="pl-4 font-semibold">{el.name}</p>
             <p className="text-txt-main ml-auto">{el.value}</p>
-            <div className="w-8 h-8 ml-auto hover:scale-110 focus:scale-110">
+            <button className="w-8 h-8 ml-auto hover:scale-110 focus:scale-110" onClick={el.onClickFn}>
               <el.btn size={24} />
-            </div>
+            </button>
           </li>
         ))}
       </ul>

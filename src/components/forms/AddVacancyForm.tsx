@@ -8,27 +8,10 @@ import CurrencyRadioBtnsGroup from "components/forms/currencyRadioBtnsGroup";
 import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
-import { IVacancy, useAddVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
+import { IVacancy } from "redux/VacancyQueries";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { setIsLoading } from "redux/userSlice";
-import { useNavigate } from "react-router-dom";
-import { setShowNotification, setType, setMessage } from "redux/notificationsSlice";
-
-// const defaultInitialValues = {
-//   companyName: "",
-//   companyURL: "",
-//   source: "",
-//   position: "",
-//   salary: "",
-//   currency: "$",
-//   stage: "",
-//   action: "",
-//   color: "",
-//   userReview: "1",
-//   notebook: "",
-// };
-
-// type Values = typeof defaultInitialValues;
+import useHandleVacancy from "hooks/handleVacancy";
 
 const STAGES = [
   "Waiting for answer",
@@ -64,9 +47,7 @@ const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "r
 
 const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   const dispatch = useAppDispatch();
-  const [addVacancy] = useAddVacancyMutation();
-  const [editVacancy] = useUpdateVacancyMutation();
-  const navigate = useNavigate();
+  const { addNewVacancy, editVacancy } = useHandleVacancy();
 
   const initialValues = {
     companyName: initialVacancy?.companyName || "",
@@ -106,37 +87,9 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     console.log("Handle submit data: ", data);
 
     if (!initialVacancy) {
-      addVacancy(data)
-        .unwrap()
-        .then(payload => {
-          dispatch(setMessage(payload.message));
-          dispatch(setType("success"));
-        })
-        .catch(error => {
-          dispatch(setMessage(error.data.message));
-          dispatch(setType("error"));
-        })
-        .finally(() => {
-          dispatch(setIsLoading(false));
-          dispatch(setShowNotification(true));
-        });
-      resetForm();
+      addNewVacancy(data);
     } else {
-      editVacancy({ ...data, _id: initialVacancy._id })
-        .unwrap()
-        .then(payload => {
-          dispatch(setMessage(payload.message));
-          dispatch(setType("success"));
-          navigate(-1);
-        })
-        .catch(error => {
-          dispatch(setMessage(error.data.message));
-          dispatch(setType("error"));
-        })
-        .finally(() => {
-          dispatch(setIsLoading(false));
-          dispatch(setShowNotification(true));
-        });
+      editVacancy({ data, _id: initialVacancy._id });
     }
   };
 

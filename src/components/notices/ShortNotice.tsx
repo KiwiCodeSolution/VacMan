@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
+/* eslint-disable prettier/prettier */
+import { Link, useNavigate } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
-import { IVacancy, useDeleteVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
+import { IVacancy, useDeleteVacancyMutation } from "redux/VacancyQueries";
 import currencyList from "assets/currencyList";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { setMessage, setType, setShowNotification } from "redux/notificationsSlice";
+import useHandleVacancy from "hooks/handleVacancy";
 
 type VacancyProps = {
   shortVacancy: IVacancy;
@@ -25,12 +29,32 @@ export const colorVariants = {
 } as IColor;
 
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
-  const [updateVacancy] = useUpdateVacancyMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [deleteVacancy] = useDeleteVacancyMutation();
+  const { handleArchive } = useHandleVacancy();
+
   const { _id, companyName, position, salary, currency, stage, cardColor, userRank, actions, companyURL, archived } =
     shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
+
+  function removeVacancy(): void {
+    if (_id) {
+      deleteVacancy({ _id })
+        .unwrap()
+        .then(res => {
+          dispatch(setMessage(res.message));
+          dispatch(setType("success"));
+        })
+        .catch(res => {
+          dispatch(setMessage(res.message));
+          dispatch(setType("error"));
+        })
+        .finally(() => dispatch(setShowNotification(true)));
+      navigate("/");
+    }
+  }
 
   return (
     <div>
@@ -80,21 +104,11 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
             <Stars amount={5} active={userRank} />
           ) : (
             <div className="flex gap-1">
-              <button
-                type="button"
-                onClick={() => {
-                  deleteVacancy({ _id });
-                }}
-                className={`${effect}`}
-              >
+              <button type="button" onClick={removeVacancy} className={`${effect}`}>
                 <Icons.Trash size="30" />
               </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  updateVacancy({ _id, archived: false });
-                }}
+              <button type="button" onClick={() => handleArchive(_id, false)}
                 className={`${effect}`}
               >
                 <Icons.Recover size="32" />
@@ -103,7 +117,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
           )}
         </li>
       </ul>
-    </div>
+    </div >
   );
 };
 
