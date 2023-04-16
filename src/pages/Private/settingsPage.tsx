@@ -21,7 +21,7 @@ const SettingsPage = () => {
   ];
 
   return (
-    <>
+    <div className="mb-28">
       <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-black" text="Settings" textWhite />
       <div className="sticky w-full h-[136px] ">
         <Icons.Rectangle className="w-full h-full text-txt-black" />
@@ -63,7 +63,7 @@ const SettingsPage = () => {
       <Button variant="black" clickFn={() => dispatch(logOut())}>
         Log Out
       </Button>
-    </>
+    </div>
   );
 };
 export default SettingsPage;

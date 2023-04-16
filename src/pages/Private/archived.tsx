@@ -6,19 +6,18 @@ import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import ShortNote from "components/notices/ShortNotice";
 
 const Archived = () => {
-  const { data: response, isLoading } = useGetVacanciesQuery();
-  if (!response) return <h2 className="text-2xl text-txt-main text-center">ERROR</h2>;
+  const { data: response } = useGetVacanciesQuery();
   const archivedVacancies = response?.data?.filter(vacancy => vacancy.archived === true);
 
   return (
     <>
-      {isLoading ? (
+      {!response ? (
         <div className="mt-48">
           <Loader active absolute />
         </div>
-      ) : !archivedVacancies.length ? (
+      ) : !archivedVacancies || !archivedVacancies.length ? (
         <>
-          <NavHeader prevAddress="/settings" text="Archive" underlined />
+          <NavHeader prevAddress="/settings" text="Archive" bg="bg-light" underlined />
           <div className="mt-20 text-2xl text-txt-main text-center">No archived vacancy</div>
         </>
       ) : (

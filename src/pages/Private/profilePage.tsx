@@ -15,7 +15,7 @@ const ProfilePage = () => {
     { icon: Icons.Facebook, name: profile.facebook, btn: Icons.ArrowForward },
   ];
   return (
-    <>
+    <div className="mb-28">
       <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
       <div className="sticky w-full h-[136px] ">
         <Icons.Rectangle className="w-full h-full text-txt-darkgrey" />
@@ -49,7 +49,7 @@ const ProfilePage = () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 export default ProfilePage;
