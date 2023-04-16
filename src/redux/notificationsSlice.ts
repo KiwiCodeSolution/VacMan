@@ -35,9 +35,10 @@ const notificationSlice = createSlice({
   extraReducers: builder =>
     builder
       .addCase(registration.pending, state => {})
-      .addCase(registration.fulfilled, (state, action) => {
-        state.message = action.payload;
+      .addCase(registration.fulfilled, (state, { payload }) => {
+        state.message = payload;
         state.type = "success";
+        state.showNotification = true;
       })
       .addCase(registration.rejected, (state, { payload }) => {
         if (payload) state.message = payload;
@@ -45,7 +46,7 @@ const notificationSlice = createSlice({
         state.showNotification = true;
       })
       .addCase(logIn.pending, state => {})
-      .addCase(logIn.fulfilled, (state, { payload }) => {
+      .addCase(logIn.fulfilled, (state) => {
         state.message = "";
       })
       .addCase(logIn.rejected, (state, { payload }) => {
@@ -54,7 +55,7 @@ const notificationSlice = createSlice({
         state.showNotification = true;
       })
       .addCase(logOut.pending, state => {})
-      .addCase(logOut.fulfilled, (state, { payload }) => {})
+      .addCase(logOut.fulfilled, state => {})
       .addCase(logOut.rejected, (state, { payload }) => {
         if (payload) state.message = payload;
         state.type = "error";
