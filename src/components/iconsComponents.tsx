@@ -7,6 +7,8 @@ const colors = {
   black: "#040c0c",
   orange: "#f0be6c",
   link: "#3ca4ec",
+  red: "#f28b82",
+  green: "#68efac",
 };
 
 export type IIconProps = {
@@ -35,11 +37,30 @@ export const Eye = ({ size = 16, className, crossed }: IIconProps & { crossed?: 
   </svg>
 );
 
-export const Rectangle = ({ size = 16, className }: IIconProps) => (
-  <svg width={size} height={size} viewBox="0 0 360 248" fill="currentColor" stroke="none" className={className}>
-    <path d="M0 0H360V158.372L0 248V0Z" />
-  </svg>
-);
+// export const Rectangle = ({ size = 16, className }: IIconProps) => (
+//   <svg width={size} height={size} viewBox="0 0 360 248" fill="currentColor" stroke="none" className={className}>
+//     <path d="M0 0H360V158.372L0 248V0Z" />
+//   </svg>
+// );
+
+// export const Triangle = ({
+//   size,
+//   width = 200,
+//   height = 200,
+//   className,
+// }: IIconProps & { width?: string | number; height?: string | number }) => (
+//   <svg
+//     xmlns="http://www.w3.org/2000/svg"
+//     width={size || width}
+//     height={size || height}
+//     fill="currentColor"
+//     viewBox="0 0 200 200"
+//     preserveAspectRatio="none"
+//     className={className}
+//   >
+//     <polygon points="0 0 0 200 200 0 0 0" />
+//   </svg>
+// );
 
 export const Todos = ({ size = 16, className }: IIconProps) => (
   <svg width={size} height={size} viewBox="0 0 270 230" fill="#E6E6E6" stroke="none" className={className}>
@@ -386,27 +407,27 @@ export const Avatar = ({ size = 60, className }: IIconProps) => (
     className={className}
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="30" cy="30" r="30" fill="currentColor" strokeWidth="1.5" />
+    <circle cx="30" cy="30" r="30" fill="#CDD0DC" strokeWidth="1.5" />
     <mask id="mask0_832_53770" maskUnits="userSpaceOnUse" x="2" y="2" width="56" height="56">
       <circle cx="30" cy="30" r="28" fill={colors.white} />
     </mask>
     <g mask="url(#mask0_832_53770)">
       <path
         d="M10 54.3331V60.9998H50V54.3331C50 50.7969 48.5952 47.4055 46.0948 44.905C43.5943 42.4045 40.9091 40.9998 37.2727 42.818C33.6364 44.6361 27.5758 44.6361 23.6364 42.818C19.697 40.9998 16.4057 42.4045 13.9052 44.905C11.4048 47.4055 10 50.7969 10 54.3331Z"
-        fill="#D9D9D9"
-        stroke="#D9D9D9"
+        fill="currentColor"
+        stroke="currentColor"
         strokeWidth="2.75"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="30" cy="24" r="13" fill={colors.grey} />
+      <circle cx="30" cy="24" r="13" fill="currentColor" />
     </g>
   </svg>
 );
 
 export const Camera = ({ size = 16, className }: IIconProps) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="currentColor" stroke={colors.white} className={className}>
-    <circle cx="16" cy="16" r="16" />
+    {/* <circle cx="16" cy="16" r="16" /> */}
     <path
       d="M9 11H10C10.5304 11 11.0391 10.7893 11.4142 10.4142C11.7893 10.0391 12 9.53043 12 9C12 8.73478 12.1054 8.48043 12.2929 8.29289C12.4804 8.10536 12.7348 8 13 8H19C19.2652 8 19.5196 8.10536 19.7071 8.29289C19.8946 8.48043 20 8.73478 20 9C20 9.53043 20.2107 10.0391 20.5858 10.4142C20.9609 10.7893 21.4696 11 22 11H23C23.5304 11 24.0391 11.2107 24.4142 11.5858C24.7893 11.9609 25 12.4696 25 13V22C25 22.5304 24.7893 23.0391 24.4142 23.4142C24.0391 23.7893 23.5304 24 23 24H9C8.46957 24 7.96086 23.7893 7.58579 23.4142C7.21071 23.0391 7 22.5304 7 22V13C7 12.4696 7.21071 11.9609 7.58579 11.5858C7.96086 11.2107 8.46957 11 9 11Z"
       strokeWidth="2"
@@ -801,5 +822,54 @@ export const Recover = ({ size = 16, className }: IIconProps) => (
     className={className}
   >
     <path d="M20 15L16 11M16 11L12 15M16 11L16 21M28 16C28 22.6274 22.6274 28 16 28C9.37258 28 4 22.6274 4 16C4 9.37258 9.37258 4 16 4C22.6274 4 28 9.37258 28 16Z" />
+  </svg>
+);
+
+// Notifications
+export const Alert = ({ size = 68, className }: IIconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={colors.orange} stroke="none" className={className}>
+    <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+  </svg>
+);
+
+export const Info = ({ size = 68, className }: IIconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={colors.link} stroke="none" className={className}>
+    <path d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+  </svg>
+);
+
+export const Success = ({ size = 68, className }: IIconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={colors.green} stroke="none" className={className}>
+    <path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+  </svg>
+);
+
+export const Error = ({ size = 68, className }: IIconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={colors.red} stroke="none" className={className}>
+    <path d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+  </svg>
+);
+
+// BACKGROUND SVG
+
+export const Rectangle = ({
+  width = 360,
+  height = 136,
+  className,
+}: {
+  width?: string | number;
+  height?: string | number;
+  className?: string;
+}) => (
+  <svg
+    width={width}
+    height={height}
+    viewBox="0 0 360 136"
+    fill="currentColor"
+    stroke="none"
+    preserveAspectRatio="none"
+    className={className}
+  >
+    <polygon points="0,0 0,136 360,46 360,0 " />
   </svg>
 );

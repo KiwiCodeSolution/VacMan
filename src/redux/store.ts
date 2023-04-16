@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import noticeSlice from "./noticeSlice";
 import user from "./userSlice";
 import { vacancyAPI } from "./VacancyQueries";
+import notificationsSlice from "./notificationsSlice";
 
 const persistConfig = { key: "user", storage };
 const persistedUserReducer = persistReducer(persistConfig, user);
@@ -12,7 +12,7 @@ const store = configureStore({
   reducer: {
     user: persistedUserReducer,
     [vacancyAPI.reducerPath]: vacancyAPI.reducer,
-    notice: noticeSlice,
+    notification: notificationsSlice,
   },
   // eslint-disable-next-line prettier/prettier
   middleware: getDefaultMiddleware =>

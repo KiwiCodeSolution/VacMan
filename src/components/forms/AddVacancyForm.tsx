@@ -3,31 +3,15 @@ import { Formik, FormikHelpers, FormikProps } from "formik";
 
 import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
-import CustomInput from "components/forms/customInput";
+import CustomInput from "components/forms/CustomInput";
 import CurrencyRadioBtnsGroup from "components/forms/currencyRadioBtnsGroup";
 import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
-import { IVacancy, useAddVacancyMutation, useUpdateVacancyMutation } from "redux/VacancyQueries";
+import { IVacancy } from "redux/VacancyQueries";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { setMessage } from "redux/userSlice";
-import { useNavigate } from "react-router-dom";
-
-// const defaultInitialValues = {
-//   companyName: "",
-//   companyURL: "",
-//   source: "",
-//   position: "",
-//   salary: "",
-//   currency: "$",
-//   stage: "",
-//   action: "",
-//   color: "",
-//   userReview: "1",
-//   notebook: "",
-// };
-
-// type Values = typeof defaultInitialValues;
+import { setIsLoading } from "redux/userSlice";
+import useHandleVacancy from "hooks/handleVacancy";
 
 const STAGES = [
   "Waiting for answer",
@@ -63,21 +47,19 @@ const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "r
 
 const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   const dispatch = useAppDispatch();
-  const [addVacancy] = useAddVacancyMutation();
-  const [editVacancy] = useUpdateVacancyMutation();
-  const navigate = useNavigate();
+  const { addNewVacancy, editVacancy } = useHandleVacancy();
 
   const initialValues = {
     companyName: initialVacancy?.companyName || "",
     companyURL: initialVacancy?.companyURL || "",
     source: initialVacancy?.source || "",
     position: initialVacancy?.position || "",
-    salary: `${initialVacancy?.salary}` || "",
+    salary: `${initialVacancy?.salary || 100}`,
     currency: initialVacancy?.currency || "USD",
     stage: initialVacancy?.stage || "new",
     action: initialVacancy?.actions[0]?.name || "",
     color: initialVacancy?.cardColor || "",
-    userReview: `${initialVacancy?.userRank}` || "1",
+    userReview: `${initialVacancy?.userRank || "1"}`,
     notebook: initialVacancy?.notes[0]?.text || "",
   };
   type Values = typeof initialValues;
@@ -86,6 +68,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     { companyName, companyURL, source, position, salary, currency, stage, action, color, userReview, notebook }: Values,
     { resetForm }: FormikHelpers<Values>
   ): void => {
+    dispatch(setIsLoading(true));
     const actions = action ? [{ date: Date.now(), name: action }] : [];
     const notes = notebook ? [{ date: Date.now(), text: notebook }] : [];
     const data = {
@@ -104,21 +87,9 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     console.log("Handle submit data: ", data);
 
     if (!initialVacancy) {
-      addVacancy(data)
-        .unwrap()
-        .then((payload: { message: string }) => dispatch(setMessage(payload.message)))
-        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)));
-      resetForm();
+      addNewVacancy(data);
     } else {
-      // eslint-disable-next-line no-underscore-dangle
-      editVacancy({ ...data, _id: initialVacancy._id })
-        .unwrap()
-        .then((payload: { message: string }) => {
-          dispatch(setMessage(payload.message));
-          // redirect(`/${initialVacancy._id}/details`);
-          navigate(-1);
-        })
-        .catch((error: { data: { message: string } }) => dispatch(setMessage(error.data.message)));
+      editVacancy({ data, _id: initialVacancy._id });
     }
   };
 

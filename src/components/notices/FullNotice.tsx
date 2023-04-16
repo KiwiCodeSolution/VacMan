@@ -1,24 +1,21 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Button from "components/ui/button";
 import NavHeader from "components/navHeader";
 import currencyList from "assets/currencyList";
 import Stars from "components/ui/stars";
-import { useDeleteVacancyMutation, useGetVacanciesQuery, useUpdateVacancyMutation } from "redux/VacancyQueries";
+import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import Actions from "./Actions";
 import { colorVariants } from "./ShortNotice";
-import { useAppSelector } from "hooks/reduxHooks";
-
+import useHandleVacancy from "hooks/handleVacancy";
 
 const FullNote = () => {
-  const navigate = useNavigate();
   const { _id } = useParams();
-  const [updateVacancy] = useUpdateVacancyMutation();
-  const [deleteVacancy] = useDeleteVacancyMutation();
   const { data: response } = useGetVacanciesQuery();
-  const { onArchive } = useAppSelector(state => state.notice);
+  const { handleArchive } = useHandleVacancy();
+
+  if (!_id) return <h2>Error, id is required</h2>;
   const vacancies = response?.data;
   if (!vacancies) return <h2>Vacancies data have been lost</h2>;
 
@@ -40,25 +37,11 @@ const FullNote = () => {
     archived,
   } = currentVacancy;
 
-  const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
-
-  function handleArchive(): void {
-    updateVacancy({ _id, archived: !onArchive });
-    navigate("/", { replace: true });
-  }
-
-  function removeVacancy(): void {
-    if (_id) {
-      deleteVacancy({ _id });
-      navigate("/", { replace: true });
-    }
-  }
-
   return (
     <div className="container mx-auto">
-      <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} bg="bg-light" />
+      <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} bg="bg-light" underlined />
       <div
-        className={`container mx-auto mt-2 rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base ${archivalText} shadow-xl`}
+        className={`container mx-auto rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-xl`}
       >
         <ul>
           <li className="flex justify-between">
@@ -129,20 +112,7 @@ const FullNote = () => {
           </li>
         </ul>
 
-        {!archived ? (
-          <Button variant="black" clickFn={() => handleArchive()}>
-            Archive
-          </Button>
-        ) : (
-          <div className="flex gap-2">
-            <Button variant="black" clickFn={() => handleArchive()}>
-              Active
-            </Button>
-            <Button variant="black" clickFn={() => removeVacancy()}>
-              Remove
-            </Button>
-          </div>
-        )}
+        <Button variant="black" clickFn={() => handleArchive(_id, true)}>Archive</Button>
       </div>
     </div>
   );

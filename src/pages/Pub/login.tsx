@@ -12,7 +12,7 @@ export default function LogInPage() {
 
   return (
     <div className="container flex flex-col mx-auto px-4 py-5 h-screen">
-      <div className="flex flex-col gap-y-6 items-center">
+      <div className="flex flex-col gap-y-6 items-center pt-16">
         <Logo active={isLoading} />
         <h1 className="text-2xl">Login</h1>
       </div>

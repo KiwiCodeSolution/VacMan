@@ -1,5 +1,5 @@
 import { useAppDispatch } from "./reduxHooks";
-import { setIsAuth, setUser } from "../redux/userSlice";
+import { setIsAuth, setIsLoading, setUser } from "../redux/userSlice";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { setAuthHeader } from "redux/userOperations";
@@ -22,12 +22,14 @@ const useGoogleAuth = () => {
 
   return useGoogleLogin({
     onSuccess: async resp => {
+      dispatch(setIsLoading(true));
       const userData = await getGoogleUserData(resp.access_token);
       const { data } = await axios.post(`${serverURL}/auth/googleAuth`, { userData });
       setAuthHeader(data.token);
       data.currProfile = "google";
       dispatch(setUser(data));
       dispatch(setIsAuth(true));
+      dispatch(setIsLoading(false));
     },
     onError: err => console.log("error:", err),
   });
