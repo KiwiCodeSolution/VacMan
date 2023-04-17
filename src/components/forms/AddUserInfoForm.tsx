@@ -33,7 +33,7 @@ const formFields = [
 
 const initialValues = {
   name: "",
-  phone: "",
+  phoneNumber: "",
   position: "",
   location: "",
   instagram: "",
