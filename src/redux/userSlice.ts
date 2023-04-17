@@ -25,7 +25,7 @@ const initialState = {
   token: "",
   isAuth: false,
   emailConfirmed: false,
-  passCodeVerifyed: false,
+  passCodeVerified: false,
   onBoarding: true,
   isLoading: false,
   showStartingPage: true,
@@ -87,9 +87,10 @@ const userSlice = createSlice({
       })
       .addCase(logIn.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
         state.isAuth = true;
+        state.token = payload.token;
         state.email = payload.email;
         state.profile = payload.profile;
-        state.token = payload.token;
+        state.settings = payload.settings;
         state.currProfile = "";
         state.message = "";
         state.isLoading = false;
@@ -119,9 +120,10 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(currentUser.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
+        state.token = payload.token;
         state.email = payload.email;
         state.profile = payload.profile;
-        state.token = payload.token;
+        state.settings = payload.settings;
         state.isLoading = false;
       })
       .addCase(currentUser.rejected, (state, { payload }) => {
@@ -131,6 +133,7 @@ const userSlice = createSlice({
         state.email = "";
         state.currProfile = "";
         state.profile = {} as IProfile;
+        state.settings = {} as ISettings;
         state.isLoading = false;
       })
       .addCase(emailVerify.pending, state => {
@@ -139,6 +142,7 @@ const userSlice = createSlice({
       .addCase(emailVerify.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
         state.email = payload.email;
         state.profile = payload.profile;
+        state.settings = payload.settings;
         state.token = payload.token;
         state.onBoarding = true;
         state.emailConfirmed = true;
@@ -153,10 +157,10 @@ const userSlice = createSlice({
       .addCase(passCodeVerify.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
         state.email = payload.email;
         state.profile = payload.profile;
+        state.settings = payload.settings;
         state.token = payload.token;
         state.onBoarding = true;
-        state.passCodeVerifyed = true;
-        state.isAuth = true;
+        state.passCodeVerified = true;
         state.isLoading = false;
       })
       .addCase(passCodeVerify.rejected, state => {

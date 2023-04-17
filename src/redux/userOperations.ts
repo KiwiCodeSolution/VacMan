@@ -113,7 +113,7 @@ export const passCodeVerify = createAsyncThunk<IUser, { verificationCode: string
   async ({ verificationCode }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/auth/pathCodeVerify?verificationCode=${verificationCode}`);
-      setAuthHeader(data.user.token);
+      if (data) setAuthHeader(data.user.token);
       // console.log(data);
       return data.user;
     } catch (error) {

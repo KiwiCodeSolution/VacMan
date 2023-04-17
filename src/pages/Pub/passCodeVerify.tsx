@@ -7,7 +7,7 @@ const PassCodeVerifyPage = () => {
   const [searchParams] = useSearchParams();
   const verificationCode = searchParams.get("PassRestoreCode");
   const dispatch = useAppDispatch();
-  const { passCodeVerifyed } = useAppSelector(state => state.user);
+  const { passCodeVerified } = useAppSelector(state => state.user);
 
   useEffect(() => {
     if (!verificationCode) return;
@@ -17,7 +17,7 @@ const PassCodeVerifyPage = () => {
   return (
     <>
       <h2>Pass code verify page</h2>
-      {passCodeVerifyed && <Navigate to="/profile" replace />}
+      {passCodeVerified && <Navigate to="/profile" replace />}
     </>
   );
 };

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { currentUser, emailVerify, logIn, logOut, registration } from "./userOperations";
+import { currentUser, emailVerify, logIn, logOut, passCodeVerify, changePass, registration } from "./userOperations";
 
 type Ttype = "error" | "success" | "warning" | "info";
 
@@ -66,9 +66,23 @@ const notificationSlice = createSlice({
         if (payload) state.message = payload;
         state.type = "error";
       })
-      .addCase(emailVerify.pending, state => {})
-      .addCase(emailVerify.fulfilled, (state, { payload }) => {})
-      .addCase(emailVerify.rejected, state => {}),
+      // .addCase(emailVerify.pending, state => {})
+      // .addCase(emailVerify.fulfilled, (state, { payload }) => {})
+      // .addCase(emailVerify.rejected, state => { })
+      // .addCase(passCodeVerify.pending, state => {})
+      // .addCase(passCodeVerify.fulfilled, (state, { payload }) => {})
+      // .addCase(passCodeVerify.rejected, state => {}),
+      .addCase(changePass.pending, state => {})
+      .addCase(changePass.fulfilled, (state, { payload }) => {
+        state.message = payload;
+        state.type = "success";
+        state.showNotification = true;
+      })
+      .addCase(changePass.rejected, (state, { payload }) => {
+        if (payload) state.message = payload;
+        state.type = "error";
+        state.showNotification = true;
+      }),
 });
 
 export const { setShowNotification, setMessage, setType } = notificationSlice.actions;
