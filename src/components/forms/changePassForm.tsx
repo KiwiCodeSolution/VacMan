@@ -8,9 +8,9 @@ const ChangePassForm = () => {
   const dispatch = useAppDispatch();
   const initialValues = { password: "", confirmPassword: "" };
   type Values = typeof initialValues;
+
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     // console.log("values: ", values);
-
     dispatch(changePass(values.password));
     resetForm();
   };
@@ -29,7 +29,7 @@ const ChangePassForm = () => {
           </ul>
           <div className="mt-auto mb-24">
             <Button variant="black" btnType="submit">
-              Send Email
+              Save new password
             </Button>
           </div>
         </form>
