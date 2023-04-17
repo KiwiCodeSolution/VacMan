@@ -60,6 +60,11 @@ const SettingsPage = () => {
           </li>
         ))}
       </ul>
+      <div className="my-6">
+        <Button variant="white" clickFn={() => navigate("/changePass")}>
+          Change password
+        </Button>
+      </div>
       <Button variant="black" clickFn={() => dispatch(logOut())}>
         Log Out
       </Button>
