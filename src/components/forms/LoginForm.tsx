@@ -21,9 +21,8 @@ const LoginForm = () => {
   const dispatch = useAppDispatch();
 
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
-    console.log("Form was submitted.");
-    console.log("values: ", values);
-
+    // console.log("Form was submitted.");
+    // console.log("values: ", values);
     dispatch(logIn(values));
     resetForm();
   };

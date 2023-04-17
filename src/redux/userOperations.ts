@@ -22,7 +22,7 @@ export const registration = createAsyncThunk<
 >("user/registration", async (credentials, { rejectWithValue }) => {
   try {
     const response = await axios.post("/auth/register", credentials);
-    console.log("AsyncThunk: Congratulations! You are registered!");
+    // console.log("AsyncThunk: Congratulations! You are registered!");
     return response.data.message;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -38,8 +38,8 @@ export const logIn = createAsyncThunk<IUser, { email: string; password: string }
     try {
       const { data } = await axios.post("/auth/login", credentials);
       setAuthHeader(data.user.token);
-      console.log("Congratulations! You are logined!");
-      console.log(data.user);
+      // console.log("Congratulations! You are logined!");
+      // console.log(data.user);
       return data.user;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -55,7 +55,7 @@ export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string
   "user/logout",
   async (_, { rejectWithValue }) => {
     const response = await axios.get("/auth/logout");
-    console.log(response);
+    // console.log(response);
 
     if (response.status !== 200) {
       return rejectWithValue(response.data.message);
@@ -83,12 +83,51 @@ export const currentUser = createAsyncThunk<IUser, undefined, { rejectValue: str
 
 export const emailVerify = createAsyncThunk<IUser, { verificationCode: string }, { rejectValue: string }>(
   "user/emailVerify",
-  async (credentials, { rejectWithValue }) => {
+  async ({ verificationCode }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`/auth/emailVerify?verificationCode=${credentials.verificationCode}`);
+      const { data } = await axios.get(`/auth/emailVerify?verificationCode=${verificationCode}`);
       setAuthHeader(data.user.token);
-      console.log(data);
+      // console.log(data);
       return data.user;
+    } catch (error) {
+      if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
+      return error;
+    }
+  }
+);
+
+export const passRestore = createAsyncThunk<string, { email: string }, { rejectValue: string }>(
+  "user/restorePass",
+  async ({ email }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`/auth/passRestore`, { email });
+      return data.message;
+    } catch (error) {
+      if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
+      return error;
+    }
+  }
+);
+export const passCodeVerify = createAsyncThunk<IUser, { verificationCode: string }, { rejectValue: string }>(
+  "user/pathCodeVerify",
+  async ({ verificationCode }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`/auth/pathCodeVerify?verificationCode=${verificationCode}`);
+      setAuthHeader(data.user.token);
+      // console.log(data);
+      return data.user;
+    } catch (error) {
+      if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
+      return error;
+    }
+  }
+);
+export const changePass = createAsyncThunk<string, string, { rejectValue: string }>(
+  "user/changePass",
+  async (password, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`/auth/changePass`, password);
+      return data.message;
     } catch (error) {
       if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
       return error;

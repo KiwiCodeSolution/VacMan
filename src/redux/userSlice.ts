@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
-import { currentUser, emailVerify, logIn, logOut, registration } from "./userOperations";
+import { currentUser, registration, logIn, logOut, passCodeVerify, emailVerify, changePass } from "./userOperations";
 
 export interface IProfile {
   [key: string]: string;
@@ -24,6 +24,8 @@ const initialState = {
   email: "",
   token: "",
   isAuth: false,
+  emailConfirmed: false,
+  passCodeVerifyed: false,
   onBoarding: true,
   isLoading: false,
   showStartingPage: true,
@@ -139,11 +141,36 @@ const userSlice = createSlice({
         state.profile = payload.profile;
         state.token = payload.token;
         state.onBoarding = true;
+        state.emailConfirmed = true;
         state.isLoading = false;
       })
       .addCase(emailVerify.rejected, state => {
         state.isLoading = false;
-      }),
+      })
+      .addCase(passCodeVerify.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(passCodeVerify.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
+        state.email = payload.email;
+        state.profile = payload.profile;
+        state.token = payload.token;
+        state.onBoarding = true;
+        state.passCodeVerifyed = true;
+        state.isAuth = true;
+        state.isLoading = false;
+      })
+      .addCase(passCodeVerify.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(changePass.pending, state => {
+        state.isLoading = true
+      })
+      .addCase(changePass.fulfilled, state => {
+        state.isLoading = false;
+      })
+      .addCase(changePass.rejected, state => {
+        state.isLoading = false;
+  }),
 });
 
 export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>

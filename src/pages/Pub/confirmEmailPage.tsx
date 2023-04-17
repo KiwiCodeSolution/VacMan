@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { emailVerify } from "../../redux/userOperations";
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import { emailVerify } from "redux/userOperations";
+import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
 import { setIsAuth } from "../../redux/userSlice";
 
 const ConfirmEmailPage = () => {
   const [searchParams] = useSearchParams();
   const verificationCode = searchParams.get("verificationCode");
-  const [confirmed, setConfirmed] = useState<boolean>(false);
+  const { emailConfirmed } = useAppSelector(state => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -20,14 +20,13 @@ const ConfirmEmailPage = () => {
   useEffect(() => {
     if (!verificationCode) return;
     dispatch(emailVerify({ verificationCode }));
-    setConfirmed(true);
   }, [dispatch, verificationCode]);
 
   return (
     <>
       <h2>Email confirmation</h2>
       <div className="mt-20">{/* icon ok */}</div>
-      {confirmed ? <p>Congratulations registration succesful</p> : <p>Email confirmation false ...</p>}
+      {emailConfirmed ? <p>Congratulations registration succesful</p> : <p>Email confirmation false ...</p>}
       <button className="mt-20 bg-bg-grey" onClick={goToHomePage}>
         [ START ]
       </button>

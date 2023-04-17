@@ -7,9 +7,6 @@ import Logo from "components/ui/loader";
 import { useAppSelector } from "hooks/reduxHooks";
 import NavHeader from "components/navHeader";
 
-// для имитации письма подтверждения имейла
-const verificationCode = ""; // в кавычки вставьте свой токен
-
 export default function SignUpPage() {
   const googleAuth = useGoogleAuth();
   const { isLoading } = useAppSelector(state => state.user);
@@ -37,10 +34,6 @@ export default function SignUpPage() {
             </Link>
           </div>
         </div>
-        <h2 className="mt-20">Имитация письма с сылкой подтверждения..</h2>
-        <a className="border p-1" href={`http://localhost:5173/confirmEmail?verificationCode=${verificationCode}`}>
-          Подтвердить email
-        </a>
       </div>
     </>
   );

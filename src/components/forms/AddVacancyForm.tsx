@@ -84,7 +84,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
       userRank: +userReview,
       notes,
     };
-    console.log("Handle submit data: ", data);
+    // console.log("Handle submit data: ", data);
 
     if (!initialVacancy) {
       addNewVacancy(data);

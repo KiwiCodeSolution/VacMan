@@ -10,11 +10,11 @@ const Header = () => {
         {profile.avatar ? (
           <img src={profile.avatar} className="w-14 h-14 rounded-full" alt="avatar" />
         ) : (
-          <Icons.Avatar size={56} />
+          <Icons.Avatar size={56} className="text-txt-grey rounded-full" />
         )}
       </Link>
       <p className="ml-4 w-[178px] font-bold text-xl text-txt-black">
-        Hello, {profile.name.split(" ")[0] || "unonymous"}
+        Hello, {profile.name?.split(" ")[0] || "unonymous"}
         <br />
         <span className="font-normal text-txt-main">Have a nice day</span>
       </p>

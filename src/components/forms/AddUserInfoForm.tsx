@@ -49,8 +49,8 @@ const AddUserInfoForm = () => {
   const { profile } = useAppSelector(state => state.user);
 
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
-    console.log("Form was submitted.");
-    console.log("values: ", values);
+    // console.log("Form was submitted.");
+    // console.log("values: ", values);
     dispatch(setProfile({ ...profile, ...values }));
     resetForm();
     navigate("/");

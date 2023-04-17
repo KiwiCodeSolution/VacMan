@@ -11,7 +11,8 @@ import Entrance from "./pages/Private/entrance";
 import LogInPage from "./pages/Pub/login";
 import SignUpPage from "./pages/Pub/signup";
 import RestorePassPage from "./pages/Pub/restorePass";
-import ConfirmPassPage from "./pages/Private/confirmPass";
+import ChangePassPage from "./pages/Private/changePassPage";
+import PassCodeVerifyPage from "pages/Pub/passCodeVerify";
 import Home from "./components/main";
 import Reminder from "pages/Private/reminder";
 import Calendar from "pages/Private/calendar";
@@ -38,7 +39,7 @@ const App = () => {
     dispatch(currentUser());
     setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
   }, [dispatch, token]);
-  
+
   // notification
   useEffect(() => {
     const time = setTimeout(() => {
@@ -52,34 +53,36 @@ const App = () => {
     <StartingPage />
   ) : (
     <>
-    {showNotification && <Notification />}
-    <Routes>
-      {/* Private Routes */}
-      <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>}>
-        {/* with Header & Menu */}
-        <Route index element={<PrivateRoute><Home /></PrivateRoute>} />
-        <Route path="addUserData" element={<PrivateRoute><AddUserData /></PrivateRoute>} />
-        <Route path="reminder" element={<PrivateRoute><Reminder /></PrivateRoute>} />
-        <Route path="calendar" element={<PrivateRoute><Calendar /></PrivateRoute>} />
-        <Route path="settings" element={<PrivateRoute><SettingsPage /></PrivateRoute>} />
-        <Route path="profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
-        <Route path="archived" element={<PrivateRoute><Archived /></PrivateRoute>} />
-      </Route>
-      <Route path=":_id" element={<PrivateRoute><Card /></PrivateRoute>}>
-        {/* No Header & Menu */}
-        <Route path="details" element={<PrivateRoute><FullNote /></PrivateRoute>} />
-        <Route path="add" element={<PrivateRoute><AddVacancy /></PrivateRoute>} />
-        <Route path="edit" element={<PrivateRoute><EditVacancy /></PrivateRoute>} />
-      </Route>
+      {showNotification && <Notification />}
+      <Routes>
+        {/* Private Routes */}
+        <Route path="/" element={<PrivateRoute><Entrance /></PrivateRoute>}>
+          {/* with Header & Menu */}
+          <Route index element={<PrivateRoute><Home /></PrivateRoute>} />
+          <Route path="addUserData" element={<PrivateRoute><AddUserData /></PrivateRoute>} />
+          <Route path="reminder" element={<PrivateRoute><Reminder /></PrivateRoute>} />
+          <Route path="calendar" element={<PrivateRoute><Calendar /></PrivateRoute>} />
+          <Route path="settings" element={<PrivateRoute><SettingsPage /></PrivateRoute>} />
+          <Route path="profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+          <Route path="changePass" element={<PrivateRoute><ChangePassPage /></PrivateRoute>} />
+          <Route path="archived" element={<PrivateRoute><Archived /></PrivateRoute>} />
+        </Route>
+        <Route path=":_id" element={<PrivateRoute><Card /></PrivateRoute>}>
+          {/* No Header & Menu */}
+          <Route path="details" element={<PrivateRoute><FullNote /></PrivateRoute>} />
+          <Route path="add" element={<PrivateRoute><AddVacancy /></PrivateRoute>} />
+          <Route path="edit" element={<PrivateRoute><EditVacancy /></PrivateRoute>} />
+        </Route>
 
-      {/* Public Routes */}
-      <Route path="login" element={<RedirectRoute><LogInPage /></RedirectRoute>} />
-      <Route path="signup" element={<RedirectRoute><SignUpPage /></RedirectRoute>} />
-      <Route path="restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
-      <Route path="confirmPass" element={<RedirectRoute><ConfirmPassPage /></RedirectRoute>} />
-      <Route path="confirmEmail" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
-      <Route path="*" element={<NotFound />} />
-    </Routes></>
+        {/* Public Routes */}
+        <Route path="login" element={<RedirectRoute><LogInPage /></RedirectRoute>} />
+        <Route path="signup" element={<RedirectRoute><SignUpPage /></RedirectRoute>} />
+        <Route path="restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
+        <Route path="restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
+        <Route path="passCodeVerify" element={<RedirectRoute><PassCodeVerifyPage /></RedirectRoute>} />
+        <Route path="confirmEmail" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
+        <Route path="*" element={<NotFound />} />
+      </Routes></>
   );
 };
 

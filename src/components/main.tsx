@@ -26,10 +26,10 @@ export default function Main() {
         </div>
       ) : isError ? (
         <h2>ERROR</h2>
-      ) : !response ? (
+      ) : !vacancies || !vacancies.length ? (
         <>
           <Header />
-          <div className="flex items-center justify-items-center px-4">
+          <div className="flex items-center justify-center px-4">
             <Icons.Todos />
           </div>
         </>
