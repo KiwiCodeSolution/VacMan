@@ -1,6 +1,8 @@
+/* eslint-disable prettier/prettier */
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type { IUser } from "./userSlice";
+// eslint-disable-next-line import/no-cycle
+import { IProfile, IUser } from "./userSlice";
 // import { displayMsgCustom } from "components/notifications";
 
 // axios.defaults.baseURL = "http://localhost:3030";
@@ -126,7 +128,7 @@ export const changePass = createAsyncThunk<string, string, { rejectValue: string
   "user/changePass",
   async (password, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(`/auth/changePass`, password);
+      const { data } = await axios.post("/auth/changePass", password);
       return data.message;
     } catch (error) {
       if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
@@ -134,3 +136,17 @@ export const changePass = createAsyncThunk<string, string, { rejectValue: string
     }
   }
 );
+
+export const updateProfile = createAsyncThunk<
+  { message: string; profileData: IProfile },
+  IProfile,
+  { rejectValue: string }
+>("user/updateProfile", async (profileData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/profile", profileData);
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
+      return error;
+    }
+});

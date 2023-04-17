@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
-import { currentUser, registration, logIn, logOut, passCodeVerify, emailVerify, changePass } from "./userOperations";
+// eslint-disable-next-line import/no-cycle
+import { currentUser, registration, logIn, logOut, passCodeVerify, emailVerify, changePass, updateProfile } from "./userOperations";
 
 export interface IProfile {
   [key: string]: string;
@@ -177,7 +178,18 @@ const userSlice = createSlice({
       })
       .addCase(changePass.rejected, state => {
         state.isLoading = false;
-  }),
+      })
+      .addCase(updateProfile.pending, state => {
+        state.isLoading = true
+      })
+      .addCase(updateProfile.fulfilled, (state, { payload }: { payload: { message: string, profileData: IProfile } }) => {
+        state.profile = payload.profileData;
+        state.isLoading = false;
+      })
+      .addCase(updateProfile.rejected, state => {
+        state.isLoading = false;
+      })
+  ,
 });
 
 export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>

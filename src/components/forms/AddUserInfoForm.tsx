@@ -11,18 +11,9 @@ import Button from "components/ui/button";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { setProfile } from "redux/userSlice";
 
-// type Values = InferType<typeof addUserInfoSchema>;
-
-// type Fields = {
-//   name: string;
-//   label: string;
-//   labelIcon?: (props: icons.IIconProps) => JSX.Element;
-//   type: string;
-// };
-
 const formFields = [
   { name: "name", label: "user name", labelIcon: icons.Phone16, type: "name" },
-  { name: "phone", label: "Phone number", labelIcon: icons.Phone16, type: "phone" },
+  { name: "phoneNumber", label: "Phone number", labelIcon: icons.Phone16, type: "phone" },
   { name: "position", label: "Position", labelIcon: icons.Position, type: "text" },
   { name: "location", label: "Location", labelIcon: icons.Location, type: "text" },
   { name: "instagram", label: "Instagram", labelIcon: icons.Instagram, type: "text" },

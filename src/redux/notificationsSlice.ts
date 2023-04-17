@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { currentUser, emailVerify, logIn, logOut, passCodeVerify, changePass, registration } from "./userOperations";
+import { currentUser, emailVerify, logIn, logOut, passCodeVerify, changePass, registration, updateProfile } from "./userOperations";
+import { IProfile } from "./userSlice";
 
 type Ttype = "error" | "success" | "warning" | "info";
 
@@ -79,6 +80,17 @@ const notificationSlice = createSlice({
         state.showNotification = true;
       })
       .addCase(changePass.rejected, (state, { payload }) => {
+        if (payload) state.message = payload;
+        state.type = "error";
+        state.showNotification = true;
+      })
+      .addCase(updateProfile.pending, state => {})
+      .addCase(updateProfile.fulfilled, (state, { payload }: { payload: { message: string, profileData: IProfile } }) => {
+        state.message = payload.message;
+        state.type = "success";
+        state.showNotification = true;
+      })
+      .addCase(updateProfile.rejected, (state, { payload }) => {
         if (payload) state.message = payload;
         state.type = "error";
         state.showNotification = true;
