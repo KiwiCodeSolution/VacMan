@@ -110,6 +110,7 @@ const userSlice = createSlice({
         state.profile = {} as IProfile;
         state.settings = {} as ISettings;
         state.showStartingPage = true;
+        state.passCodeVerified = false;
         state.isLoading = false;
       })
       .addCase(logOut.rejected, (state, { payload }) => {
@@ -134,6 +135,7 @@ const userSlice = createSlice({
         state.currProfile = "";
         state.profile = {} as IProfile;
         state.settings = {} as ISettings;
+        state.passCodeVerified = false;
         state.isLoading = false;
       })
       .addCase(emailVerify.pending, state => {
@@ -152,6 +154,7 @@ const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(passCodeVerify.pending, state => {
+        state.passCodeVerified = false;
         state.isLoading = true;
       })
       .addCase(passCodeVerify.fulfilled, (state, { payload }: PayloadAction<IUser>) => {

@@ -29,7 +29,7 @@ export default function Main() {
       ) : !vacancies || !vacancies.length ? (
         <>
           <Header />
-          <div className="flex items-center justify-center px-4">
+          <div className="flex justify-center mt-24 px-4">
             <Icons.Todos />
           </div>
         </>
