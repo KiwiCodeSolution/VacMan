@@ -9,7 +9,7 @@ import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
 import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
 import { IVacancy } from "redux/VacancyQueries";
-import { useAppDispatch } from "hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { setIsLoading } from "redux/userSlice";
 import useHandleVacancy from "hooks/handleVacancy";
 
@@ -35,12 +35,6 @@ const ACTIONS = [
   "Second act",
 ];
 
-const CURRENCY = [
-  { name: "USD", sign: "$" },
-  { name: "Euro", sign: "€" },
-  { name: "local", sign: "₴" },
-];
-
 const RATING_VALUES = ["1", "2", "3", "4", "5"];
 
 const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "red", "mustard"];
@@ -48,11 +42,18 @@ const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "r
 const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   const dispatch = useAppDispatch();
   const { addNewVacancy, editVacancy } = useHandleVacancy();
+  const { settings } = useAppSelector(state => state.user);
 
+  const CURRENCY = [
+    { name: "USD", sign: "$" },
+    { name: "Euro", sign: "€" },
+    { name: "local", sign: settings.localCurrency || "" },
+  ];
   const initialValues = {
     companyName: initialVacancy?.companyName || "",
     companyURL: initialVacancy?.companyURL || "",
     source: initialVacancy?.source || "",
+    sourceURL: initialVacancy?.sourceURL || "",
     position: initialVacancy?.position || "",
     salary: `${initialVacancy?.salary || 100}`,
     currency: initialVacancy?.currency || "USD",
@@ -65,7 +66,20 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   type Values = typeof initialValues;
 
   const handleFormSubmit = (
-    { companyName, companyURL, source, position, salary, currency, stage, action, color, userReview, notebook }: Values,
+    {
+      companyName,
+      companyURL,
+      source,
+      sourceURL,
+      position,
+      salary,
+      currency,
+      stage,
+      action,
+      color,
+      userReview,
+      notebook,
+    }: Values,
     { resetForm }: FormikHelpers<Values>
   ): void => {
     dispatch(setIsLoading(true));
@@ -75,6 +89,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
       companyName,
       companyURL,
       source,
+      sourceURL,
       position,
       salary: +salary,
       currency,
@@ -112,6 +127,9 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
             </li>
             <li>
               <CustomInput name="source" id="source" type="text" label="Source" LabelIcon={icons.Link} />
+            </li>
+            <li>
+              <CustomInput name="sourceURL" id="sourceURL" type="text" label="SourceURL" LabelIcon={icons.Link} />
             </li>
             <li>
               <CustomInput name="position" id="position" type="text" label="Position" LabelIcon={icons.Position} />

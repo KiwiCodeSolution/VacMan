@@ -36,6 +36,7 @@ const useHandleVacancy = () => {
       .then(payload => {
         dispatch(setMessage(payload.message));
         dispatch(setType("success"));
+        navigate(-1);
       })
       .catch(error => {
         dispatch(setMessage(error.data.message));
