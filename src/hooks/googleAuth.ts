@@ -4,8 +4,8 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { setAuthHeader } from "redux/userOperations";
 
-// const serverURL = 'http://localhost:3030';
-// const serverURL = 'http://kiwicode.tech:5000';
+// const serverURL = "http://localhost:3030";
+// const serverURL = "http://kiwicode.tech:5000";
 const serverURL = "https://vacmanserver-production.up.railway.app";
 
 const getGoogleUserData = async (accessToken: string) => {

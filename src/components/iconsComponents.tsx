@@ -62,7 +62,7 @@ export const Eye = ({ size = 16, className, crossed }: IIconProps & { crossed?: 
 //   </svg>
 // );
 
-export const Todos = ({ size = 16, className }: IIconProps) => (
+export const Todos = ({ size = 270, className }: IIconProps) => (
   <svg width={size} height={size} viewBox="0 0 270 230" fill="#E6E6E6" stroke="none" className={className}>
     <g opacity="0.6">
       <path

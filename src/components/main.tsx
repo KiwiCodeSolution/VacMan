@@ -26,11 +26,15 @@ export default function Main() {
         </div>
       ) : isError ? (
         <h2>ERROR</h2>
-      ) : !response ? (
+      ) : !vacancies || !vacancies.length ? (
         <>
           <Header />
-          <div className="flex items-center justify-items-center px-4">
+          <div className="flex justify-center mt-24 px-4">
             <Icons.Todos />
+          </div>
+          <p className="text-center text-txt-main text-xl pt-8">You do not have any job vacancies created yet</p>
+          <div className="flex justify-end mx-2 fixed bottom-32 right-8">
+            <AddBtn />
           </div>
         </>
       ) : (

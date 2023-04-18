@@ -57,7 +57,8 @@ const axiosBaseQuery =
         },
       };
     }
-  };
+    };
+// const baseURL = "https://kiwicode.tech:5000/";
 const baseUrl = "https://vacmanserver-production.up.railway.app/";
 // const baseUrl = "http://localhost:3030/";
 

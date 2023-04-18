@@ -84,7 +84,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
       userRank: +userReview,
       notes,
     };
-    console.log("Handle submit data: ", data);
+    // console.log("Handle submit data: ", data);
 
     if (!initialVacancy) {
       addNewVacancy(data);
@@ -146,7 +146,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
             <CustomInput name="notebook" id="notebook" type="text" label="Notebook" LabelIcon={icons.Notebook} />
           </div>
 
-          <div className="mt-24">
+          <div className="mt-24 mb-4">
             <Button btnType="submit" variant="black">
               {initialVacancy ? "save vacancy" : "create"}
             </Button>

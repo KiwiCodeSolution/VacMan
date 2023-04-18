@@ -9,20 +9,11 @@ import Button from "components/ui/button";
 
 // import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { setProfile } from "redux/userSlice";
-
-// type Values = InferType<typeof addUserInfoSchema>;
-
-// type Fields = {
-//   name: string;
-//   label: string;
-//   labelIcon?: (props: icons.IIconProps) => JSX.Element;
-//   type: string;
-// };
+import { updateProfile } from "redux/userOperations";
 
 const formFields = [
   { name: "name", label: "user name", labelIcon: icons.Phone16, type: "name" },
-  { name: "phone", label: "Phone number", labelIcon: icons.Phone16, type: "phone" },
+  { name: "phoneNumber", label: "Phone number", labelIcon: icons.Phone16, type: "phone" },
   { name: "position", label: "Position", labelIcon: icons.Position, type: "text" },
   { name: "location", label: "Location", labelIcon: icons.Location, type: "text" },
   { name: "instagram", label: "Instagram", labelIcon: icons.Instagram, type: "text" },
@@ -33,7 +24,7 @@ const formFields = [
 
 const initialValues = {
   name: "",
-  phone: "",
+  phoneNumber: "",
   position: "",
   location: "",
   instagram: "",
@@ -49,9 +40,8 @@ const AddUserInfoForm = () => {
   const { profile } = useAppSelector(state => state.user);
 
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
-    console.log("Form was submitted.");
-    console.log("values: ", values);
-    dispatch(setProfile({ ...profile, ...values }));
+    // console.log("values: ", { ...profile, ...values });
+    dispatch(updateProfile({ ...profile, ...values }));
     resetForm();
     navigate("/");
   };

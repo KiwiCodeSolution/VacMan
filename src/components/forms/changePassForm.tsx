@@ -1,16 +1,17 @@
 import { Formik, FormikHelpers, FormikProps } from "formik";
-// import { useAppDispatch } from "hooks/reduxHooks";
+import { useAppDispatch } from "hooks/reduxHooks";
 import CustomInput from "components/forms/CustomInput";
 import Button from "components/ui/button";
+import { changePass } from "redux/userOperations";
 
-const restorePassForm = () => {
-  // const dispatch = useAppDispatch();
-  const initialValues = { email: "" };
+const ChangePassForm = () => {
+  const dispatch = useAppDispatch();
+  const initialValues = { password: "", confirmPassword: "" };
   type Values = typeof initialValues;
+
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     // console.log("values: ", values);
-
-    // dispatch(logIn(values));
+    dispatch(changePass(values.password));
     resetForm();
   };
 
@@ -20,12 +21,15 @@ const restorePassForm = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-y-6 pb-6 min-w-[328px]" noValidate>
           <ul className="flex flex-col">
             <li>
-              <CustomInput name="email" label="Email" placeholder="Type email" id="email" type="email" />
+              <CustomInput name="password" label="Password" id="password" type="password" />
+            </li>
+            <li>
+              <CustomInput name="confirmPassword" label="Confirm Password" id="confirmPassword" type="password" />
             </li>
           </ul>
           <div className="mt-auto mb-24">
             <Button variant="black" btnType="submit">
-              Send Email
+              Save new password
             </Button>
           </div>
         </form>
@@ -33,4 +37,4 @@ const restorePassForm = () => {
     </Formik>
   );
 };
-export default restorePassForm;
+export default ChangePassForm;
