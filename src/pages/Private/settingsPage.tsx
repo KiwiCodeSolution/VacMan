@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import NavHeader from "components/navHeader";
 import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
@@ -35,7 +36,7 @@ const SettingsPage = () => {
         </div>
       </div>
 
-      <p className="text-xl text-center">{profile.name}</p>
+      <p className="pt-4 text-xl font-semibold text-center">{profile.name}</p>
       <p className="text-center">position: {profile.position}</p>
 
       <div className="mx-auto w-24 pt-4 pb-7">
@@ -47,7 +48,7 @@ const SettingsPage = () => {
       </div>
 
       <ul className="container mx-auto px-4">
-        {elements.map(el => (
+        {elements.map(el =>
           <li key={el.name} className="flex flex-row items-center ml-2 py-3">
             <div className="w-10 h-10 bg-app-grey rounded-full p-2">
               <el.icon size={24} />
@@ -58,7 +59,7 @@ const SettingsPage = () => {
               <el.btn size={24} />
             </button>
           </li>
-        ))}
+        )}
       </ul>
       <div className="my-6">
         <Button variant="white" clickFn={() => navigate("/changePass")}>

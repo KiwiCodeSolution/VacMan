@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useAppSelector } from "hooks/reduxHooks";
 
 export default function ConfirmPassPage() {
-  const { profile } = useAppSelector(state => state.user);
+  const { profile, currProfile } = useAppSelector(state => state.user);
   const location = useLocation();
 
   return (
@@ -25,10 +25,17 @@ export default function ConfirmPassPage() {
 
       <p className="text-xl text-center">{profile.name}</p>
       <p className="text-center">position: {profile.position}</p>
-
-      <div className="container mx-auto mt-20 px-4">
-        <ChangePassForm />
-      </div>
+      {currProfile !== "google" ? (
+        <div className="container mx-auto mt-20 px-4">
+          <ChangePassForm />
+        </div>
+      ) : (
+        <div className="py-10 bg-red-400 container mx-auto mt-20 px-4 text-center text-2xl">
+          <p>You can not change password !</p>
+          <p>You entered through</p>
+          <p className="font-bold underline">{`${currProfile} account`}</p>
+        </div>
+      )}
     </div>
   );
 }

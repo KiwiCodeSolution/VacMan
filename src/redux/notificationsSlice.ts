@@ -85,7 +85,7 @@ const notificationSlice = createSlice({
         state.showNotification = true;
       })
       .addCase(updateProfile.pending, state => {})
-      .addCase(updateProfile.fulfilled, (state, { payload }: { payload: { message: string, profileData: IProfile } }) => {
+      .addCase(updateProfile.fulfilled, (state, { payload }: { payload: { message: string, profile: IProfile } }) => {
         state.message = payload.message;
         state.type = "success";
         state.showNotification = true;

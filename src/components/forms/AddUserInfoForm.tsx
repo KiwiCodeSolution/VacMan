@@ -9,7 +9,7 @@ import Button from "components/ui/button";
 
 // import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { setProfile } from "redux/userSlice";
+import { updateProfile } from "redux/userOperations";
 
 const formFields = [
   { name: "name", label: "user name", labelIcon: icons.Phone16, type: "name" },
@@ -40,9 +40,8 @@ const AddUserInfoForm = () => {
   const { profile } = useAppSelector(state => state.user);
 
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
-    // console.log("Form was submitted.");
-    // console.log("values: ", values);
-    dispatch(setProfile({ ...profile, ...values }));
+    // console.log("values: ", { ...profile, ...values });
+    dispatch(updateProfile({ ...profile, ...values }));
     resetForm();
     navigate("/");
   };

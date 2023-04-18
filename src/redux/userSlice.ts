@@ -182,8 +182,8 @@ const userSlice = createSlice({
       .addCase(updateProfile.pending, state => {
         state.isLoading = true
       })
-      .addCase(updateProfile.fulfilled, (state, { payload }: { payload: { message: string, profileData: IProfile } }) => {
-        state.profile = payload.profileData;
+      .addCase(updateProfile.fulfilled, (state, { payload }: { payload: { message: string, profile: IProfile } }) => {
+        state.profile = payload.profile;
         state.isLoading = false;
       })
       .addCase(updateProfile.rejected, state => {

@@ -128,7 +128,7 @@ export const changePass = createAsyncThunk<string, string, { rejectValue: string
   "user/changePass",
   async (password, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/auth/changePass", password);
+      const { data } = await axios.post("/auth/changePass", { password });
       return data.message;
     } catch (error) {
       if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
@@ -138,12 +138,12 @@ export const changePass = createAsyncThunk<string, string, { rejectValue: string
 );
 
 export const updateProfile = createAsyncThunk<
-  { message: string; profileData: IProfile },
+  { message: string; profile: IProfile },
   IProfile,
   { rejectValue: string }
 >("user/updateProfile", async (profileData, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/profile", profileData);
+      const { data } = await axios.post("/profile", { ...profileData });
       return data;
     } catch (error) {
       if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
