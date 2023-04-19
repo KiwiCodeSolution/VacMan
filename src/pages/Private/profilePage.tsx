@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import NavHeader from "components/navHeader";
 import { useAppSelector } from "hooks/reduxHooks";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 
 const ProfilePage = () => {
@@ -25,7 +25,7 @@ const ProfilePage = () => {
             <Icons.Avatar className="w-[95%] h-[95%] text-txt-main" />
           </div>
           <button className="absolute w-8 h-8 bottom-0 right-0  flex justify-center items-center rounded-full bg-txt-black">
-            <Icons.Camera size="100%" className="" />
+            <Link to="/addAvatar" state={{ from: location }}><Icons.Camera size="100%" className="" /></Link>
           </button>
         </div>
       </div>
