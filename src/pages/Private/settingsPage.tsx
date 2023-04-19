@@ -31,7 +31,7 @@ const SettingsPage = () => {
             <Icons.Avatar className="w-[95%] h-[95%] text-txt-main" />
           </div>
           <button className="absolute w-8 h-8 bottom-0 right-0 flex justify-center items-center rounded-full bg-txt-black">
-            <Icons.Camera size="100%" className="" />
+            <Link to="/addAvatar" state={{ from: location }}><Icons.Camera size="100%" className="" /></Link>
           </button>
         </div>
       </div>
