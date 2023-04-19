@@ -4,7 +4,7 @@ import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { logOut } from "redux/userOperations";
+import { logOut, updateSettings } from "redux/userOperations";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
@@ -12,13 +12,28 @@ const SettingsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const changeLanguage = () => {
+    // pop-up return {lang}
+    dispatch(updateSettings({ ...settings, lang: "eng" }));
+  }
+  const toggleNotification = () => {
+    dispatch(updateSettings({ ...settings, notification: !settings.notification }));
+  }
+  const toggleTheme = () => {
+    dispatch(updateSettings({ ...settings, theme: settings.theme === "light" ? "dark" : "light" }));
+  }
+  const changeLocalCurrency = () => {
+    const localCurrency = "Hrn";
+    // pop-up return {localCurrency}
+    dispatch(updateSettings({ ...settings, localCurrency }))
+  }
   const elements = [
-    { icon: Icons.SettingsLang, name: "Language", value: settings.lang, btn: Icons.ArrowForward, btnSize: 24 },
-    { icon: Icons.SettingsNotification, name: "Notification", value: settings.notification, btn: Icons.ArrowForward },
-    { icon: Icons.SettingsHelp, name: "Theme", value: settings.theme, btn: Icons.ArrowForward },
-    { icon: Icons.Salary, name: "Local currency", value: settings.localCurrency, btn: Icons.ArrowForward },
+    { icon: Icons.SettingsLang, name: "Language", value: settings.lang, btn: Icons.ArrowForward, onClickFn: changeLanguage },
+    { icon: Icons.SettingsNotification, name: "Notification", value: settings.notification ? "on" : "off", btn: Icons.ArrowForward, onClickFn: toggleNotification },
+    { icon: Icons.SettingsHelp, name: "Theme", value: settings.theme, btn: Icons.ArrowForward, onClickFn: toggleTheme },
+    { icon: Icons.Salary, name: "Local currency", value: settings.localCurrency, btn: Icons.ArrowForward, onClickFn: changeLocalCurrency },
     { icon: Icons.SettingsArchive, name: "Archive", btn: Icons.ArrowForward, onClickFn: () => navigate("/archived") },
-    { icon: Icons.SettingsPolicy, name: "Policy", btn: Icons.ArrowForward },
+    { icon: Icons.SettingsPolicy, name: "Policy", btn: Icons.ArrowForward, onClickFn: () => navigate("/privacyPolicy") },
   ];
 
   return (

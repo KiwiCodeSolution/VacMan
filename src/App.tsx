@@ -30,6 +30,7 @@ import AddUserData from "pages/Private/addUserData";
 import { setShowNotification } from "redux/notificationsSlice";
 import Notification from "components/notifications";
 import AddAvatar from "pages/Private/addAvatar";
+import PrivacyPolicy from "pages/Private/privacyPolici";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -68,6 +69,7 @@ const App = () => {
           <Route path="changePass" element={<PrivateRoute><ChangePassPage /></PrivateRoute>} />
           <Route path="archived" element={<PrivateRoute><Archived /></PrivateRoute>} />
           <Route path="addAvatar" element={<PrivateRoute><AddAvatar /></PrivateRoute>} />
+          <Route path="privacyPolicy" element={<PrivateRoute><PrivacyPolicy /></PrivateRoute>} />
         </Route>
 
         <Route path=":_id" element={<PrivateRoute><Card /></PrivateRoute>}>
