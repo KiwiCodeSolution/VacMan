@@ -3,6 +3,7 @@ import NavHeader from "components/navHeader";
 import { useAppSelector } from "hooks/reduxHooks";
 import { Link, useLocation } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
+// import AddBtn from "components/addBtn";
 
 const ProfilePage = () => {
   const location = useLocation();
@@ -43,6 +44,9 @@ const ProfilePage = () => {
             <div className="w-8 h-8 ml-auto hover:scale-110 focus:scale-110">
               <el.btn size={24} />
             </div>
+            {/* <div className="flex justify-end mx-2 fixed bottom-32 right-8">
+              <AddBtn />
+            </div> */}
           </li>
         ))}
       </ul>

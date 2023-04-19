@@ -2,7 +2,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 // eslint-disable-next-line import/no-cycle
-import { IProfile, IUser } from "./userSlice";
+import { IProfile, ISettings, IUser } from "./userSlice";
 // import { displayMsgCustom } from "components/notifications";
 
 // axios.defaults.baseURL = "http://localhost:3030";
@@ -144,6 +144,20 @@ export const updateProfile = createAsyncThunk<
 >("user/updateProfile", async (profileData, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/profile", { ...profileData });
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
+      return error;
+    }
+});
+
+export const updateSettings = createAsyncThunk<
+  { message: string; settings: ISettings },
+  ISettings,
+  { rejectValue: string }
+>("user/updateSettings", async (settingsData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/settings", { ...settingsData });
       return data;
     } catch (error) {
       if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);

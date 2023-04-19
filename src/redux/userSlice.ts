@@ -2,7 +2,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 // eslint-disable-next-line import/no-cycle
-import { currentUser, registration, logIn, logOut, passCodeVerify, emailVerify, changePass, updateProfile } from "./userOperations";
+import {
+  currentUser,
+  registration,
+  logIn,
+  logOut,
+  passCodeVerify,
+  emailVerify,
+  changePass,
+  updateProfile,
+  updateSettings,
+} from "./userOperations";
 
 export interface IProfile {
   [key: string]: string;
@@ -10,8 +20,8 @@ export interface IProfile {
 export interface ISettings {
   lang: "eng" | "ukr" | "ru";
   theme: "light" | "dark";
-  localCurrency: "";
-  notification: "";
+  localCurrency: string;
+  notification: string;
 }
 export interface IUser {
   email: string;
@@ -189,10 +199,19 @@ const userSlice = createSlice({
       .addCase(updateProfile.rejected, state => {
         state.isLoading = false;
       })
-  ,
+      .addCase(updateSettings.pending, state => {
+        state.isLoading = true
+      })
+      .addCase(updateSettings.fulfilled, (state, { payload }: { payload: { message: string, settings: ISettings } }) => {
+        state.settings = payload.settings;
+        state.isLoading = false;
+      })
+      .addCase(updateSettings.rejected, state => {
+        state.isLoading = false;
+      }),
 });
 
 export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>
-export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setProfile, setSettings, setUser, setMessage } =
+export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setUser, setMessage } =
   userSlice.actions;
 export default userSlice.reducer;
