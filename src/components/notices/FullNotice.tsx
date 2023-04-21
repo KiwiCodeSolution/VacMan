@@ -72,12 +72,12 @@ const FullNote = () => {
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
                 <Icons.Salary size={24} /> <p className="text-base">Salary</p>
               </span>
-              <p className="text-end text-[32px]">
+              <p className="pb-1 text-end text-[30px]">
                 {salaryMin}
                 {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
               </p>
               {salaryMax !== 0 &&
-                <p className="text-end text-[32px]">
+                <p className="text-end text-[30px]">
                   {salaryMax}
                   {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
                 </p>
@@ -95,10 +95,15 @@ const FullNote = () => {
                 <p className="font-semibold mb-2">Deadline</p>
               </div>
             </div>
-            {actions.length ? (
-              actions.map(({ name, deadline }) => (
-                <Actions key={deadline} name={name} deadline={deadline} date={Date.now()} />
-              ))
+            {actions.length ? ( // show the last action
+              <Actions
+                name={actions[actions.length - 1].name}
+                deadline={actions[actions.length - 1].deadline}
+                date={actions[actions.length - 1].date}
+              />
+              // actions.map(({ name, deadline }) => (
+              //   <Actions key={deadline} name={name} deadline={deadline} date={Date.now()} />
+              // ))
             ) : (
               <p className="text-txt-main">You have no action</p>
             )}
