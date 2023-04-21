@@ -31,8 +31,7 @@ const SettingsPage = () => {
   const elements = [
     {
       icon: Icons.SettingsLang,
-      name: "Language",
-      // value: settings.lang,
+      name: "Language", // value: settings.lang,
       btn: Icons.ArrowForward,
       onClickFn: changeLanguage,
       extension: <LanguageBtnGroup />,

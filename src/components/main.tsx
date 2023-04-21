@@ -9,7 +9,6 @@ import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import Loader from "components/ui/loader";
 import ShortNote from "components/notices/ShortNotice";
 import Header from "./Header";
-import LanguageRadioBtnGroup from "./language/LanguageBtnGroup";
 
 export default function Main() {
   const { token } = useAppSelector(state => state.user);
@@ -42,7 +41,6 @@ export default function Main() {
         <>
           <Header />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-28 mt-5 items-center gap-4 px-4">
-            <LanguageRadioBtnGroup />
             {vacancies && vacancies.map(vacancy => <ShortNote key={vacancy._id} shortVacancy={vacancy} />)}
           </div>
 
