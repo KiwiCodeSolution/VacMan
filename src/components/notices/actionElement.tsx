@@ -8,15 +8,7 @@ const convertDate = (date?: number) => {
   const min = dateFormat.getMinutes();
   return `${dateFormat.getDate()}-${month < 10 ? "0" : ""}${month}-${dateFormat.getFullYear()} ${hour}.${min}`;
 };
-const Actions = ({ name, deadline, date }: IAction) => {
-  // let newdate;
-  // if (deadline) {
-  //   const deadlineFormat = new Date(deadline);
-  //   const month = deadlineFormat.getMonth() + 1;
-  //   newdate = `${deadlineFormat.getDate()}-${month < 10 ? "0" : ""}${month}-${deadlineFormat.getFullYear()}`;
-  // } else {
-  //   newdate = Date.now().toString();
-  // }
+const ActionElement = ({ name, deadline, date }: IAction) => {
   const formattedDeadline = convertDate(deadline);
   const formattedDate = convertDate(date);
   return (
@@ -31,4 +23,4 @@ const Actions = ({ name, deadline, date }: IAction) => {
   );
 };
 
-export default Actions;
+export default ActionElement;
