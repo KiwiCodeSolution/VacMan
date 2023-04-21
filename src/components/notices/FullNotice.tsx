@@ -52,7 +52,7 @@ const FullNote = () => {
 
               {source ? (
                 <a href={sourceURL}
-                  className={`font-bold ${sourceURL ? "text-txt-link" : null} text-xl mt-2`}
+                  className={`font-bold ${sourceURL && "text-txt-link"} text-xl mt-2`}
                   target="_blank"
                   rel="noreferrer"
                 >
