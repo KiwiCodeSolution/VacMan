@@ -4,7 +4,7 @@ import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
 import { IVacancy, useDeleteVacancyMutation } from "redux/VacancyQueries";
 import currencyList from "assets/currencyList";
-import { useAppDispatch } from "hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { setMessage, setType, setShowNotification } from "redux/notificationsSlice";
 import useHandleVacancy from "hooks/handleVacancy";
 
@@ -29,12 +29,13 @@ export const colorVariants = {
 } as IColor;
 
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
+  const { settings } = useAppSelector(state => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [deleteVacancy] = useDeleteVacancyMutation();
   const { handleArchive } = useHandleVacancy();
 
-  const { _id, companyName, position, salary, currency, stage, cardColor, userRank, actions, companyURL, archived } =
+  const { _id, companyName, position, salaryMin, salaryMax, currency, cardColor, userRank, actions, companyURL, archived } =
     shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
@@ -88,16 +89,22 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
             <p>You have no action</p>
           )}
         </li>
-        <li className="flex gap-x-2 gap-y-1">
+        {/* <li className="flex gap-x-2 gap-y-1">
           <Icons.Stage size={24} />
           <p>{stage}</p>
-        </li>
+        </li> */}
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Salary size={24} />
           <p>
-            {salary}
-            {currencyList[currency]}
+            {salaryMin}
+            {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
           </p>
+          {salaryMax !== 0 &&
+            <p>-
+              {salaryMax}
+              {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
+            </p>
+          }
         </li>
         <li className="absolute bottom-2 right-[14px]">
           {!archived ? (
