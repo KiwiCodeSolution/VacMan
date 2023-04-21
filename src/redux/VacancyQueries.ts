@@ -1,12 +1,7 @@
 /* eslint-disable prettier/prettier */
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
-import { TcurrencyList } from "assets/currencyList";
 
-// interface INote {
-//   date: number;
-//   text: string;
-// }
 export interface IAction {
   date: number;
   name: string;
@@ -30,7 +25,6 @@ export interface IVacancy {
   cardColor: string;
 }
 
-// eslint-disable-next-line prettier/prettier
 const axiosBaseQuery =
   (
     { baseUrl }: { baseUrl: string } = { baseUrl: "" }
@@ -72,10 +66,6 @@ export const vacancyAPI = createApi({
       // keepUnusedDataFor: 3,
       providesTags: ["vacancies"],
     }),
-    // getVacancyById: builder.query<IVacancy, string>({
-    //   query: id => ({ url: `vacancy/${id}`, method: 'GET' }),
-    //   providesTags: ['vacancies'],
-    // }),
     addVacancy: builder.mutation<{ message: string; data: IVacancy }, Partial<IVacancy>>({
       query: data => ({ url: "vacancy", method: "POST", data }),
       invalidatesTags: ["vacancies"],
@@ -93,7 +83,6 @@ export const vacancyAPI = createApi({
 
 export const {
   useGetVacanciesQuery,
-  // useGetVacancyByIdQuery,
   useAddVacancyMutation,
   useUpdateVacancyMutation,
   useDeleteVacancyMutation,
