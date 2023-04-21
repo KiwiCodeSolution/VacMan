@@ -9,8 +9,10 @@ import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import Actions from "./Actions";
 import { colorVariants } from "./ShortNotice";
 import useHandleVacancy from "hooks/handleVacancy";
+import { useAppSelector } from "hooks/reduxHooks";
 
 const FullNote = () => {
+  const { settings } = useAppSelector(state => state.user)
   const { _id } = useParams();
   const { data: response } = useGetVacanciesQuery();
   const { handleArchive } = useHandleVacancy();
@@ -27,9 +29,9 @@ const FullNote = () => {
     source,
     sourceURL,
     position,
-    salary,
+    salaryMin,
+    salaryMax,
     currency,
-    stage,
     actions,
     notes,
     userRank,
@@ -49,7 +51,11 @@ const FullNote = () => {
               <Stars amount={5} active={userRank} archived={archived} />
 
               {source ? (
-                <a href={sourceURL} className="font-bold text-xl mt-2" target="_blank" rel="noreferrer">
+                <a href={sourceURL}
+                  className={`font-bold ${sourceURL && "text-txt-link"} text-xl mt-2`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {source}
                 </a>
               ) : (
@@ -66,16 +72,17 @@ const FullNote = () => {
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
                 <Icons.Salary size={24} /> <p className="text-base">Salary</p>
               </span>
-              <p className="text-[32px]">{salary} {currencyList[currency]}</p>
+              <p className="text-end text-[32px]">
+                {salaryMin}
+                {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
+              </p>
+              {salaryMax !== 0 &&
+                <p className="text-end text-[32px]">
+                  {salaryMax}
+                  {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
+                </p>
+              }
             </div>
-          </li>
-
-          <li className="mb-4">
-            <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
-              <Icons.Stage size={24} />
-              <span>Stage</span>
-            </div>
-            <p className="text-txt-main">{stage}</p>
           </li>
 
           <li className="mb-4">
@@ -103,11 +110,7 @@ const FullNote = () => {
           </li>
           <li className="mb-[35px]">
             <div className="border-solid border-2 w-full rounded-xl h-[156px] bg-bg-light border-bg-grey p-2">
-              {notes.length > 0 ? (
-                notes.map(({ date, text }) => <span key={date}>{text}</span>)
-              ) : (
-                <p className="text-txt-main text-base">You do not have any posts for this vacancy yet</p>
-              )}
+              {notes || <p className="text-txt-main text-base">You do not have any posts for this vacancy yet</p>}
             </div>
           </li>
         </ul>

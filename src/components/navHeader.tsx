@@ -29,7 +29,12 @@ const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAd
       </div>
 
       {link ? (
-        <a href={link} className="text-txt-link text-2xl font-semibold grow text-center">
+        <a
+          href={link}
+          className="text-txt-link text-2xl font-semibold grow text-center"
+          target="_blank"
+          rel="noreferrer"
+        >
           {text}
         </a>
       ) : (
