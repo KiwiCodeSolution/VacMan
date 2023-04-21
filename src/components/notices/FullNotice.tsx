@@ -51,7 +51,11 @@ const FullNote = () => {
               <Stars amount={5} active={userRank} archived={archived} />
 
               {source ? (
-                <a href={sourceURL} className={`font-bold ${sourceURL ? "text-txt-link" : null} text-xl mt-2`} target="_blank" rel="noreferrer">
+                <a href={sourceURL}
+                  className={`font-bold ${sourceURL ? "text-txt-link" : null} text-xl mt-2`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {source}
                 </a>
               ) : (
