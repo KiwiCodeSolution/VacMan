@@ -89,7 +89,7 @@ const FullNote = () => {
           </li>
 
           <li className="mb-4">
-            <button className="flex justify-between" onClick={() => setShowActions(!showActions)}>
+            <button className="flex w-full justify-between" onClick={() => setShowActions(!showActions)}>
               <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
                 <Icons.Action size={24} />
                 <p>Action</p>
@@ -99,7 +99,7 @@ const FullNote = () => {
               </div>
             </button>
             {showActions ? <ActionList actions={actions} /> :
-              <ActionElement
+              actions.length !== 0 && <ActionElement
                 name={actions[actions.length - 1].name}
                 deadline={actions[actions.length - 1].deadline}
                 date={actions[actions.length - 1].date}

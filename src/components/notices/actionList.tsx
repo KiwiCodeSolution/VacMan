@@ -1,19 +1,24 @@
 import { IAction } from "redux/VacancyQueries";
 import ActionElement from "./actionElement";
 import Button from "components/ui/button";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 const ActionList = ({ actions }: { actions: IAction[] }) => {
+  const location = useLocation();
+  const { _id } = useParams();
   return (
     <>
       <p>Action List</p>
       {actions.map(({ date, name, deadline }) => (
-        <li key={deadline}>
+        <div key={deadline}>
           <ActionElement date={date} name={name} deadline={deadline} />
-        </li>
+        </div>
       ))}
-      <Button variant="white" btnType="button">
-        Add new action
-      </Button>
+      <Link to={`/${_id}/addAction`} state={{ from: location }}>
+        <Button variant="white" btnType="button">
+          New action
+        </Button>
+      </Link>
     </>
   );
 };
