@@ -1,4 +1,5 @@
 const currencyList = {
+  Null: "",
   USD: "$",
   Euro: "€",
   Hrn: "₴",
@@ -28,4 +29,5 @@ const currencyList = {
   Sheqel: "₪",
   Penny: "₰",
 };
+export type TcurrencyList = typeof currencyList;
 export default currencyList;

@@ -13,6 +13,7 @@ import {
   updateProfile,
   updateSettings,
 } from "./userOperations";
+import { TcurrencyList } from "assets/currencyList";
 
 export interface IProfile {
   [key: string]: string;
@@ -20,7 +21,7 @@ export interface IProfile {
 export interface ISettings {
   lang: "eng" | "ukr" | "ru";
   theme: "light" | "dark";
-  localCurrency: string;
+  localCurrency: keyof TcurrencyList;
   notification: boolean;
 }
 export interface IUser {
@@ -42,7 +43,7 @@ const initialState = {
   showStartingPage: true,
   currProfile: "",
   profile: { avatar: "", phoneNumber: "", position: "" } as IProfile,
-  settings: {lang: "eng", theme: "light", localCurrency: "", notification: false} as ISettings,
+  settings: {lang: "eng", theme: "light", localCurrency: "Null", notification: false} as ISettings,
   message: "",
 };
 

@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
+import { TcurrencyList } from "assets/currencyList";
 
-interface INote {
-  date: number;
-  text: string;
-}
+// interface INote {
+//   date: number;
+//   text: string;
+// }
 export interface IAction {
   date: number;
   name: string;
@@ -19,15 +20,14 @@ export interface IVacancy {
   source: string;
   sourceURL: string;
   position: string;
-  salary: number;
-  currency: "USD" | "Euro" | "Hrn";
-  notes: INote[];
+  salaryMin: number;
+  salaryMax: number;
+  currency: "USD" | "Euro" | "local";
+  notes: string;
   actions: IAction[];
-  status: string;
   userRank: number;
   archived: boolean;
   cardColor: string;
-  stage: string;
 }
 
 // eslint-disable-next-line prettier/prettier
