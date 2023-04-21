@@ -5,7 +5,7 @@ import * as Icons from "components/iconsComponents";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logOut, updateSettings } from "redux/userOperations";
-import LanguageBtnGroup from "components/forms/LanguageBtnGroup";
+import LanguageBtnGroup from "components/language/LanguageBtnGroup";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();

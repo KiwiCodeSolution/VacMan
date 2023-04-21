@@ -9,7 +9,7 @@ import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import Loader from "components/ui/loader";
 import ShortNote from "components/notices/ShortNotice";
 import Header from "./Header";
-import LanguageRadioBtnGroup from "./forms/LanguageBtnGroup";
+import LanguageRadioBtnGroup from "./language/LanguageBtnGroup";
 
 export default function Main() {
   const { token } = useAppSelector(state => state.user);
