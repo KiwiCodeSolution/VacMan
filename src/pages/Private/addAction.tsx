@@ -1,3 +1,4 @@
+import AddActionForm from "components/forms/AddActionForm";
 import NavHeader from "components/navHeader";
 import { useLocation } from "react-router-dom";
 
@@ -7,7 +8,9 @@ const AddAction = () => {
   return (
     <>
       <NavHeader bg="bg-light" prevAddress={location?.state?.from.pathname ?? "/"} text="Add action" underlined />
-      <h2>Add action</h2>
+      <div className="px-4 pt-3">
+        <AddActionForm />
+      </div>
     </>
   )
 };

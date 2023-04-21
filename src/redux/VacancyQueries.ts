@@ -70,7 +70,7 @@ export const vacancyAPI = createApi({
       query: data => ({ url: "vacancy", method: "POST", data }),
       invalidatesTags: ["vacancies"],
     }),
-    updateVacancy: builder.mutation<{ message: string; data: IVacancy }, Partial<IVacancy>>({
+    updateVacancy: builder.mutation<{ message: string; data: Partial<IVacancy> }, Partial<IVacancy>>({
       query: data => ({ url: `vacancy`, method: "PUT", data }),
       invalidatesTags: ["vacancies"],
     }),
