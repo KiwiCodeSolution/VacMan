@@ -28,7 +28,7 @@ function CustomInput(props: CustomInputProps) {
 
   const isPasswordField = type === "password";
   const hasError = error && touched;
-  const noEraser = name === "salaryMin" || name === "salaryMax";
+  const noEraser = name === "salaryMin" || name === "salaryMax" || type === "date";
   return (
     <div className=" grow text-txt-main ">
       <label htmlFor={id} className="flex items-center gap-1 text-base ">

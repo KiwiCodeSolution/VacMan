@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 // addVacancyForm;
-import { Formik, FormikHelpers, FormikProps } from "formik";
+import { Formik, FormikProps } from "formik";
 
 import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
@@ -68,10 +68,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   };
   type Values = typeof initialValues;
 
-  const handleFormSubmit = (
-    data: Values
-    // { resetForm }: FormikHelpers<Values>
-  ): void => {
+  const handleFormSubmit = (data: Values): void => {
     dispatch(setIsLoading(true));
     // console.log(data);
     const preparedData = {
