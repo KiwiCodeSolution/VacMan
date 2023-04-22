@@ -4,17 +4,17 @@ import { useParams } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Button from "components/ui/button";
 import NavHeader from "components/navHeader";
-import currencyList from "assets/currencyList";
 import Stars from "components/ui/stars";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import ActionElement from "./actionElement";
 import ActionList from "./actionList";
-import { colorVariants } from "./ShortNotice";
+import { ICurrency, colorVariants } from "./ShortNotice";
 import useHandleVacancy from "hooks/handleVacancy";
 import { useAppSelector } from "hooks/reduxHooks";
+import countries from "../../data/currencies.json";
 
 const FullNote = () => {
-  const { settings } = useAppSelector(state => state.user)
+  const { settings } = useAppSelector(state => state.user);
   const { _id } = useParams();
   const { data: response } = useGetVacanciesQuery();
   const { handleArchive } = useHandleVacancy();
@@ -42,19 +42,31 @@ const FullNote = () => {
     archived,
   } = currentVacancy;
 
+  const findLocalCurrency = countries.find(
+    country => country.code === settings.localCurrency.toUpperCase()
+  ) as ICurrency;
+
+  const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
+
   return (
     <div className="container mx-auto">
-      <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} bg="bg-light" underlined />
-      <div
-        className={`container mx-auto rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-xl`}
-      >
+      <NavHeader
+        prevAddress="/"
+        text={companyName}
+        link={companyURL}
+        editAddress={`/${_id}/edit`}
+        bg="bg-light"
+        underlined
+      />
+      <div className={`container mx-auto rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-xl`}>
         <ul>
           <li className="flex justify-between">
             <div className="flex flex-col justify-between">
               <Stars amount={5} active={userRank} archived={archived} />
 
               {source ? (
-                <a href={sourceURL}
+                <a
+                  href={sourceURL}
                   className={`font-bold ${sourceURL && "text-txt-link"} text-xl mt-2`}
                   target="_blank"
                   rel="noreferrer"
@@ -77,14 +89,14 @@ const FullNote = () => {
               </span>
               <p className="pb-1 text-end text-[30px]">
                 {salaryMin}
-                {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
+                {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
               </p>
-              {salaryMax !== 0 &&
+              {salaryMax !== 0 && (
                 <p className="text-end text-[30px]">
                   {salaryMax}
-                  {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
+                  {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
                 </p>
-              }
+              )}
             </div>
           </li>
 
@@ -98,13 +110,17 @@ const FullNote = () => {
                 <p className="font-semibold mb-2">Deadline</p>
               </div>
             </button>
-            {showActions ? <ActionList actions={actions} /> :
-              actions.length !== 0 && <ActionElement
-                name={actions[actions.length - 1].name}
-                deadline={actions[actions.length - 1].deadline}
-                date={actions[actions.length - 1].date}
-              />
-            }
+            {showActions ? (
+              <ActionList actions={actions} />
+            ) : (
+              actions.length !== 0 && (
+                <ActionElement
+                  name={actions[actions.length - 1].name}
+                  deadline={actions[actions.length - 1].deadline}
+                  date={actions[actions.length - 1].date}
+                />
+              )
+            )}
           </li>
 
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">
@@ -118,7 +134,9 @@ const FullNote = () => {
           </li>
         </ul>
 
-        <Button variant="black" clickFn={() => handleArchive(_id, true)}>Archive</Button>
+        <Button variant="black" clickFn={() => handleArchive(_id, true)}>
+          Archive
+        </Button>
       </div>
     </div>
   );

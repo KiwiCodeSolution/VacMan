@@ -12,6 +12,7 @@ import { ISettings } from "redux/userSlice";
 import { updateSettings } from "redux/userOperations";
 import { useState } from "react";
 import Button from "components/ui/button";
+import { ICurrency } from "components/notices/ShortNotice";
 
 const modalSettingsRoot = document.querySelector("#modalSettings-root") as HTMLElement;
 
@@ -32,18 +33,19 @@ const CurrencySelection = ({ onClick }: ICurrencyProps) => {
     text: "",
   } as Values;
 
-  // const changeCurrency = (currentCurrency: ISettings["localCurrency"]) => {
-  const changeCurrency = (currentCurrency: string) => {
+  const changeCurrency = (currentCurrency: ISettings["localCurrency"]) => {
     console.log(currentCurrency);
     onClick();
-    // dispatch(updateSettings({ ...settings, localCurrency: currentCurrency }));
+    dispatch(updateSettings({ ...settings, localCurrency: currentCurrency }));
   };
 
   const sortedCountries = countries.sort((firstCountry, secondCountry) =>
     firstCountry.currency.localeCompare(secondCountry.currency)
   );
   const normalized = text.toLowerCase();
-  const filteredCountries = sortedCountries.filter(country => country.currency.toLowerCase().includes(normalized));
+  const filteredCountries = sortedCountries.filter(country =>
+    country.currency.toLowerCase().includes(normalized)
+  ) as ICurrency[];
 
   const handleChange = (event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<HTMLInputElement>) => {
     setText(event.currentTarget.value.toLowerCase());
@@ -51,38 +53,35 @@ const CurrencySelection = ({ onClick }: ICurrencyProps) => {
 
   const handelFormSubmit = (currentCurrency: Values): void => {
     console.log(currentCurrency);
-    // dispatch(updateSettings({ ...settings, localCurrency: currentCurrency }));
     setText("");
   };
 
   return createPortal(
     <div className="absolute h-full w-full backdrop-blur-xl z-30 rounded-lg animate__animated animate__zoomIn animate__faster top-0">
-      <div className="w-[320px] h-[430px] p-3 bg-bg-light rounded-lg absolute top-1/2 left-2/4 -translate-x-1/2 -translate-y-1/2 z-30 overflow-auto flex flex-col justify-between">
-        <Formik initialValues={initialValues} onSubmit={handelFormSubmit} className="h-20 bg-bg-light">
-          <Form autoComplete="off" className="flex sticky top-0 items-center w-full  bg-bg-light">
+      <div className="w-[280px] h-[430px] p-3 bg-bg-grey rounded-lg absolute top-1/2 left-2/4 -translate-x-1/2 -translate-y-1/2 z-30 overflow-auto flex flex-col justify-between">
+        <Formik initialValues={initialValues} onSubmit={handelFormSubmit} className="h-20 bg-bg-light relative">
+          <Form autoComplete="off" className="flex sticky top-0 left-0 right-0 ">
             <label htmlFor="currency" className="w-full">
-              <div className="relative">
-                <input
-                  id="currency"
-                  type="text"
-                  name="text"
-                  value={text}
-                  autoComplete="off"
-                  onChange={handleChange}
-                  placeholder="Enter currency"
-                  className="w-full h-8 px-2 py-1 outline-none rounded-lg bg-bg-light z-10"
-                />
-                <hr />
-                {text === "" ? (
-                  <button type="button" className="absolute top-1 right-2 items-center">
-                    <Icons.Search />
-                  </button>
-                ) : (
-                  <button type="button" className="absolute top-1 right-2 items-center" onClick={() => setText("")}>
-                    <Icons.Close />
-                  </button>
-                )}
-              </div>
+              <input
+                id="currency"
+                type="text"
+                name="text"
+                value={text}
+                autoComplete="off"
+                onChange={handleChange}
+                placeholder="Enter currency"
+                className="w-full h-8 px-2 py-1 outline-none rounded-md border "
+              />
+
+              {text === "" ? (
+                <button type="button" className="absolute top-1 right-2 items-center">
+                  <Icons.Search />
+                </button>
+              ) : (
+                <button type="button" className="absolute top-1 right-2 items-center" onClick={() => setText("")}>
+                  <Icons.Close />
+                </button>
+              )}
             </label>
           </Form>
         </Formik>
@@ -94,12 +93,9 @@ const CurrencySelection = ({ onClick }: ICurrencyProps) => {
                 <p>Please try again later.</p>
               </div>
             ))}
-          {text !== "" ? (
-            filteredCountries.map(el => (
-              <li
-                key={el.code}
-                className="flex gap-x-1 justify-between rounded-xl p-4 shadow-md hover:shadow-xl focus:shadow-xl"
-              >
+          {filteredCountries.map(el => (
+            <li key={el.code} className="shadow-md hover:shadow-xl focus:shadow-xl">
+              <div className="flex gap-x-1 justify-between rounded-xl p-2  bg-bg-light">
                 <div className="flex gap-x-1">
                   <p>{el.currency}</p>
                   <span className="font-bold ml-4">{el.sign}</span>
@@ -107,17 +103,19 @@ const CurrencySelection = ({ onClick }: ICurrencyProps) => {
                 <button
                   type="button"
                   onClick={() => changeCurrency(el.code)}
-                  className="w-6 h-6 rounded-full drop-shadow-md hover:shadow-2xl focus:shadow-2xl hover:scale-110 focus:scale-110 transition-transform duration-300 items-center z-0"
+                  className="w-6 h-6 rounded-full drop-shadow-md hover:shadow-2xl focus:shadow-2xl hover:scale-110 focus:scale-110 transition-transform duration-300 items-center"
                 >
                   <Icons.Checked size={18} className="mx-auto" />
                 </button>
-              </li>
-            ))
-          ) : (
-            <p className="text-center">Please enter currency.</p>
-          )}
+              </div>
+            </li>
+          ))}
         </ul>
-        <Button clickFn={onClick}>Close</Button>
+        <div>
+          <Button clickFn={onClick} variant="black">
+            Close
+          </Button>
+        </div>
       </div>
     </div>,
     modalSettingsRoot

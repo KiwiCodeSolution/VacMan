@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
 import { IVacancy, useDeleteVacancyMutation } from "redux/VacancyQueries";
-import currencyList from "assets/currencyList";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { setMessage, setType, setShowNotification } from "redux/notificationsSlice";
 import useHandleVacancy from "hooks/handleVacancy";
+import countries from "../../data/currencies.json";
+import { ISettings } from "redux/userSlice";
 
 type VacancyProps = {
   shortVacancy: IVacancy;
@@ -14,6 +15,12 @@ type VacancyProps = {
 
 export interface IColor {
   [key: string]: string;
+}
+
+export interface ICurrency {
+  currency: string;
+  sign: string;
+  code: ISettings["localCurrency"];
 }
 
 export const colorVariants = {
@@ -35,10 +42,31 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const [deleteVacancy] = useDeleteVacancyMutation();
   const { handleArchive } = useHandleVacancy();
 
-  const { _id, companyName, position, salaryMin, salaryMax, currency, cardColor, userRank, actions, companyURL, archived } =
-    shortVacancy;
+  const {
+    _id,
+    companyName,
+    position,
+    salaryMin,
+    salaryMax,
+    currency,
+    cardColor,
+    userRank,
+    actions,
+    companyURL,
+    archived,
+  } = shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
+
+  const findLocalCurrency = countries.find(
+    country => country.code === settings.localCurrency.toUpperCase()
+  ) as ICurrency;
+
+  const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
+
+  console.log(currency);
+  console.log(findLocalCurrency);
+  console.log(findCurrency);
 
   function removeVacancy(): void {
     if (_id) {
@@ -97,14 +125,14 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
           <Icons.Salary size={24} />
           <p>
             {salaryMin}
-            {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
+            {/* {currency === "local" ? findLocalCurrency.sign : findCurrency.sign} */}
           </p>
-          {salaryMax !== 0 &&
-            <p>-
-              {salaryMax}
-              {currency === "local" ? currencyList[settings.localCurrency] : currencyList[currency]}
+          {salaryMax !== 0 && (
+            <p>
+              -{salaryMax}
+              {/* {currency === "local" ? findLocalCurrency.sign : findCurrency.sign} */}
             </p>
-          }
+          )}
         </li>
         <li className="absolute bottom-2 right-[14px]">
           {!archived ? (
@@ -115,16 +143,14 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
                 <Icons.Trash size="30" />
               </button>
 
-              <button type="button" onClick={() => handleArchive(_id, false)}
-                className={`${effect}`}
-              >
+              <button type="button" onClick={() => handleArchive(_id, false)} className={`${effect}`}>
                 <Icons.Recover size="32" />
               </button>
             </div>
           )}
         </li>
       </ul>
-    </div >
+    </div>
   );
 };
 
