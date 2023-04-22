@@ -4,12 +4,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { createPortal } from "react-dom";
 import * as Icons from "components/iconsComponents";
-// import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import countries from "../../data/currencies.json";
 import "animate.css";
 import { Form, Formik } from "formik";
-// import { ISettings } from "redux/userSlice";
-// import { updateSettings } from "redux/userOperations";
+import { ISettings } from "redux/userSlice";
+import { updateSettings } from "redux/userOperations";
 import { useState } from "react";
 import Button from "components/ui/button";
 
@@ -24,8 +24,8 @@ interface ICurrencyProps {
 }
 
 const CurrencySelection = ({ onClick }: ICurrencyProps) => {
-  //   const dispatch = useAppDispatch();
-  //   const { settings } = useAppSelector(state => state.user);
+  const dispatch = useAppDispatch();
+  const { settings } = useAppSelector(state => state.user);
   const [text, setText] = useState("");
 
   const initialValues = {
@@ -33,10 +33,6 @@ const CurrencySelection = ({ onClick }: ICurrencyProps) => {
   } as Values;
 
   // const changeCurrency = (currentCurrency: ISettings["localCurrency"]) => {
-  //   console.log(currentCurrency);
-  //   onClick();
-  // dispatch(updateSettings({ ...settings, localCurrency: currentCurrency }));
-  // };
   const changeCurrency = (currentCurrency: string) => {
     console.log(currentCurrency);
     onClick();
