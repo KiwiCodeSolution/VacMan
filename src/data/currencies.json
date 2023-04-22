@@ -1,0 +1,281 @@
+[
+  {
+    "id": "1",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Australia.svg/22px-Flag_of_Australia.svg.png",
+    "country": "Австралія",
+    "currency": "Австралійський долар",
+    "sign": "$",
+    "letCode": "AUD",
+    "numCode": "036"
+  },
+  {
+    "id": "2",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_Austria.svg/22px-Flag_of_Austria.svg.png",
+    "country": "Австрія",
+    "currency": "Євро",
+    "sign": "€",
+    "letCode": "EUR",
+    "numCode": "978"
+  },
+  {
+    "id": "3",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Flag_of_Azerbaijan.svg/22px-Flag_of_Azerbaijan.svg.png",
+    "country": "Азербайджан",
+    "currency": "Азербайджанський манат",
+    "sign": "₼",
+    "letCode": "AZN",
+    "numCode": "944"
+  },
+  {
+    "id": "4",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Flag_of_%C3%85land.svg/22px-Flag_of_%C3%85land.svg.png",
+    "country": "Аландські острови",
+    "currency": "Євро",
+    "sign": "€",
+    "letCode": "EUR",
+    "numCode": "978"
+  },
+  {
+    "id": "5",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Flag_of_Albania.svg/22px-Flag_of_Albania.svg.png",
+    "country": "Албанія",
+    "currency": "Лек",
+    "sign": "L",
+    "letCode": "ALL",
+    "numCode": "008"
+  },
+  {
+    "id": "6",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_Algeria.svg/22px-Flag_of_Algeria.svg.png",
+    "country": "Алжир",
+    "currency": "Алжирський динар",
+    "sign": "د.ج • DA",
+    "letCode": "DZD",
+    "numCode": "012"
+  },
+  {
+    "id": "7",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flag_of_American_Samoa.svg/22px-Flag_of_American_Samoa.svg.png",
+    "country": "Американське Самоа",
+    "currency": "Долар США",
+    "sign": "$",
+    "letCode": "USD",
+    "numCode": "840"
+  },
+  {
+    "id": "8",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Flag_of_Anguilla.svg/22px-Flag_of_Anguilla.svg.png",
+    "country": "Ангілья",
+    "currency": "Східнокарибський долар",
+    "sign": "$",
+    "letCode": "XCD",
+    "numCode": "951"
+  },
+  {
+    "id": "9",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Flag_of_Angola.svg/22px-Flag_of_Angola.svg.png",
+    "country": "Ангола",
+    "currency": "Кванза",
+    "sign": "Kz",
+    "letCode": "AOA",
+    "numCode": "973"
+  },
+  {
+    "id": "10",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Flag_of_Andorra.svg/22px-Flag_of_Andorra.svg.png",
+    "country": "Андорра",
+    "currency": "Євро",
+    "sign": "€",
+    "letCode": "EUR",
+    "numCode": "978"
+  },
+  {
+    "id": "11",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Flag_of_Antigua_and_Barbuda.svg/22px-Flag_of_Antigua_and_Barbuda.svg.png",
+    "country": "Антигуа і Барбуда",
+    "currency": "Східнокарибський долар",
+    "sign": "$",
+    "letCode": "XCD",
+    "numCode": "951"
+  },
+  {
+    "id": "12",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_Argentina.svg/22px-Flag_of_Argentina.svg.png",
+    "country": "Аргентина",
+    "currency": "Аргентинський песо",
+    "sign": "$",
+    "letCode": "ARS",
+    "numCode": "032"
+  },
+  {
+    "id": "13",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Flag_of_Armenia.svg/22px-Flag_of_Armenia.svg.png",
+    "country": "Арменія",
+    "currency": "Драм",
+    "sign": "֏",
+    "letCode": "AMD",
+    "numCode": "051"
+  },
+  {
+    "id": "14",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Flag_of_Aruba.svg/22px-Flag_of_Aruba.svg.png",
+    "country": "Аруба",
+    "currency": "Арубський флорин",
+    "sign": "ƒ",
+    "letCode": "AWG",
+    "numCode": "533"
+  },
+  {
+    "id": "15",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/22px-Flag_of_the_Taliban.svg.png",
+    "country": "Афганістан",
+    "currency": "Афгані",
+    "sign": "؋ • Af",
+    "letCode": "AFN",
+    "numCode": "971"
+  },
+  {
+    "id": "16",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Flag_of_the_Bahamas.svg/22px-Flag_of_the_Bahamas.svg.png",
+    "country": "Багамські О-ви",
+    "currency": "Багамський долар",
+    "sign": "$",
+    "letCode": "BSD",
+    "numCode": "044"
+  },
+  {
+    "id": "17",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Flag_of_Bangladesh.svg/22px-Flag_of_Bangladesh.svg.png",
+    "country": "Бангладеш",
+    "currency": "Така",
+    "sign": "৳",
+    "letCode": "BDT",
+    "numCode": "050"
+  },
+  {
+    "id": "18",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Flag_of_Barbados.svg/22px-Flag_of_Barbados.svg.png",
+    "country": "Барбадос",
+    "currency": "Барбадоський долар",
+    "sign": "$",
+    "letCode": "BBD",
+    "numCode": "052"
+  },
+  {
+    "id": "19",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Flag_of_Bahrain.svg/22px-Flag_of_Bahrain.svg.png",
+    "country": "Бахрейн",
+    "currency": "Бахрейнський динар",
+    "sign": ".د.ب • BD",
+    "letCode": "BHD",
+    "numCode": "048"
+  },
+  {
+    "id": "20",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Flag_of_Belize.svg/22px-Flag_of_Belize.svg.png",
+    "country": "Беліз",
+    "currency": "Белізький долар",
+    "sign": "$",
+    "letCode": "BZD",
+    "numCode": "084"
+  },
+  {
+    "id": "21",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Flag_of_Belarus.svg/22px-Flag_of_Belarus.svg.png",
+    "country": "Білорусь",
+    "currency": "Рубль",
+    "sign": "Br",
+    "letCode": "BYN",
+    "numCode": "933"
+  },
+  {
+    "id": "22",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Flag_of_Belgium_%28civil%29.svg/22px-Flag_of_Belgium_%28civil%29.svg.png",
+    "country": "Бельгія",
+    "currency": "Євро",
+    "sign": "€",
+    "letCode": "EUR",
+    "numCode": "978"
+  },
+  {
+    "id": "23",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Flag_of_Benin.svg/22px-Flag_of_Benin.svg.png",
+    "country": "Бенін",
+    "currency": "Західноафриканський франк",
+    "sign": "₣",
+    "letCode": "XOF",
+    "numCode": "952"
+  },
+  {
+    "id": "24",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Flag_of_Bermuda.svg/22px-Flag_of_Bermuda.svg.png",
+    "country": "Бермудські О-ви",
+    "currency": "Бермудський долар",
+    "sign": "$",
+    "letCode": "BMD",
+    "numCode": "060"
+  },
+  {
+    "id": "25",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Bulgaria.svg/22px-Flag_of_Bulgaria.svg.png",
+    "country": "Болгарія",
+    "currency": "Болгарський лев",
+    "sign": "лв",
+    "letCode": "BGN",
+    "numCode": "975"
+  },
+  {
+    "id": "26",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Flag_of_Bolivia_%28state%29.svg/22px-Flag_of_Bolivia_%28state%29.svg.png",
+    "country": "Болівія",
+    "currency": "Болівіано",
+    "sign": "$",
+    "letCode": "BOB",
+    "numCode": "068"
+  },
+  {
+    "id": "27",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Flag_of_Bonaire.svg/22px-Flag_of_Bonaire.svg.png",
+    "country": "Бонайре",
+    "currency": "Долар",
+    "sign": "$",
+    "letCode": "USD",
+    "numCode": "840"
+  },
+  {
+    "id": "28",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Flag_of_Bosnia_and_Herzegovina.svg/22px-Flag_of_Bosnia_and_Herzegovina.svg.png",
+    "country": "Боснія і Герцеговина",
+    "currency": "Конвертовна марка",
+    "sign": "KM",
+    "letCode": "BAM",
+    "numCode": "977"
+  },
+  {
+    "id": "29",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_Botswana.svg/22px-Flag_of_Botswana.svg.png",
+    "country": "Ботсвана",
+    "currency": "Пула",
+    "sign": "P",
+    "letCode": "BWP",
+    "numCode": "072"
+  },
+  {
+    "id": "30",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/22px-Flag_of_Brazil.svg.png",
+    "country": "Бразилія",
+    "currency": "Бразильський реал",
+    "sign": "$",
+    "letCode": "BRL",
+    "numCode": "986"
+  },
+  {
+    "id": "31",
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_Brunei.svg/22px-Flag_of_Brunei.svg.png",
+    "country": "Бруней",
+    "currency": "Брунейський долар",
+    "sign": "$",
+    "letCode": "BND",
+    "numCode": "096"
+  }
+]
