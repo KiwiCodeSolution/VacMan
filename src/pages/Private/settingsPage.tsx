@@ -6,10 +6,13 @@ import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logOut, updateSettings } from "redux/userOperations";
 import LanguageBtnGroup from "components/language/LanguageBtnGroup";
+import { useState } from "react";
+import CurrencySelection from "components/modals/CurrencySelectionModal";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
   const { profile, settings } = useAppSelector(state => state.user);
+  const [openmod, setOpenmod] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,9 +28,15 @@ const SettingsPage = () => {
   };
   const changeLocalCurrency = () => {
     const localCurrency = "Hrn";
+    setOpenmod(!openmod);
     // pop-up return {localCurrency}
     dispatch(updateSettings({ ...settings, localCurrency }));
   };
+
+  const onOpenModal = () => {
+    setOpenmod(!openmod);
+  };
+
   const elements = [
     {
       icon: Icons.SettingsLang,
@@ -117,6 +126,7 @@ const SettingsPage = () => {
       <Button variant="black" clickFn={() => dispatch(logOut())}>
         Log Out
       </Button>
+      {openmod && <CurrencySelection onClick={onOpenModal} />}
     </div>
   );
 };
