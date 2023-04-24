@@ -37,10 +37,10 @@ export const colorVariants = {
 
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const { settings } = useAppSelector(state => state.user);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const [deleteVacancy] = useDeleteVacancyMutation();
-  const { handleArchive } = useHandleVacancy();
+  // const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
+  // const [deleteVacancy] = useDeleteVacancyMutation();
+  const { handleArchive, removeVacancy } = useHandleVacancy();
 
   const {
     _id,
@@ -58,32 +58,32 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
-  const findLocalCurrency = countries.find(
-    country => country.code === settings.localCurrency.toUpperCase()
-  ) as ICurrency;
+  // const findLocalCurrency = countries.find(
+  //   country => country.code === settings.localCurrency.toUpperCase()
+  // ) as ICurrency;
 
-  const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
-  
-  console.log(currency);
-  console.log(findLocalCurrency);
-  console.log(findCurrency);
+  // const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
 
-  function removeVacancy(): void {
-    if (_id) {
-      deleteVacancy({ _id })
-        .unwrap()
-        .then(res => {
-          dispatch(setMessage(res.message));
-          dispatch(setType("success"));
-        })
-        .catch(res => {
-          dispatch(setMessage(res.message));
-          dispatch(setType("error"));
-        })
-        .finally(() => dispatch(setShowNotification(true)));
-      navigate("/");
-    }
-  }
+  // console.log(currency);
+  // console.log(findLocalCurrency);
+  // console.log(findCurrency);
+
+  // function removeVacancy(): void {
+  //   if (_id) {
+  //     deleteVacancy({ _id })
+  //       .unwrap()
+  //       .then(res => {
+  //         dispatch(setMessage(res.message));
+  //         dispatch(setType("success"));
+  //       })
+  //       .catch(res => {
+  //         dispatch(setMessage(res.message));
+  //         dispatch(setType("error"));
+  //       })
+  //       .finally(() => dispatch(setShowNotification(true)));
+  //     navigate("/");
+  //   }
+  // }
 
   return (
     <div>
@@ -112,7 +112,8 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Action size={24} />
           {actions.length ? (
-            actions.map(({ name, deadline }) => <span key={deadline}>{name}, </span>)
+            actions[actions.length - 1].name
+            // actions.map(({ name, deadline }) => <span key={deadline}>{name}, </span>)
           ) : (
             <p>You have no action</p>
           )}
@@ -139,7 +140,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
             <Stars amount={5} active={userRank} />
           ) : (
             <div className="flex gap-1">
-              <button type="button" onClick={removeVacancy} className={`${effect}`}>
+              <button type="button" onClick={() => removeVacancy(_id)} className={`${effect}`}>
                 <Icons.Trash size="30" />
               </button>
 

@@ -9,7 +9,7 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
   return (
     <>
       {actions.map(({ date, name, deadline }) => (
-        <div key={deadline}>
+        <div key={date}>
           <ActionElement date={date} name={name} deadline={deadline} />
         </div>
       ))}

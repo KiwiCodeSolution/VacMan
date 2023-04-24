@@ -39,7 +39,7 @@ const AddActionForm = () => {
     if (!vacancy) return;
     const { actions } = vacancy;
     editVacancy({ _id, data: { actions: [...actions, newAction] } });
-    navigate("-1");
+    navigate(-1);
   };
 
   return vacancy ? (
