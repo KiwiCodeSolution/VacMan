@@ -64,9 +64,6 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
 
   const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
 
-  console.log(currency);
-  console.log(findLocalCurrency);
-  console.log(findCurrency);
 
   function removeVacancy(): void {
     if (_id) {

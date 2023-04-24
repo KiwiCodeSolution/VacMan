@@ -12,13 +12,18 @@ const ActionElement = ({ name, deadline, date }: IAction) => {
   const formattedDeadline = convertDate(deadline);
   const formattedDate = convertDate(date);
   return (
-    <div className="flex justify-between text-txt-main">
-      <div>
-        <p>{name} </p>
-      </div>
-      <div>
-        <p className="mb-2">{formattedDeadline}</p>
-      </div>
+    <div className="ml-4">
+      <ol className="border-l-2 border-bg-grey pb-3">
+        <li>
+          <div className="flex-start flex items-center">
+            <div className="-ml-[9px] -mt-2 mr-3 flex h-4 w-4 items-center justify-center rounded-full bg-app-green" />
+            <p className="-mt-2 text-base font-medium">{name} </p>
+          </div>
+          <div className="ml-6 pb-6">
+            <p className="text-xs font-medium text-txt-main">{formattedDeadline}</p>
+          </div>
+        </li>
+      </ol>
     </div>
   );
 };
