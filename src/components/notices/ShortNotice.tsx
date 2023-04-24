@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
-import { IVacancy, useDeleteVacancyMutation } from "redux/VacancyQueries";
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { setMessage, setType, setShowNotification } from "redux/notificationsSlice";
+import { IVacancy } from "redux/VacancyQueries";
+import { useAppSelector } from "hooks/reduxHooks";
 import useHandleVacancy from "hooks/handleVacancy";
 import countries from "../../data/currencies.json";
 import { ISettings } from "redux/userSlice";
@@ -37,9 +36,6 @@ export const colorVariants = {
 
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const { settings } = useAppSelector(state => state.user);
-  // const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
-  // const [deleteVacancy] = useDeleteVacancyMutation();
   const { handleArchive, removeVacancy } = useHandleVacancy();
 
   const {
@@ -58,32 +54,15 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
-  // const findLocalCurrency = countries.find(
-  //   country => country.code === settings.localCurrency.toUpperCase()
-  // ) as ICurrency;
+  const findLocalCurrency = countries.find(
+    country => country.code === settings.localCurrency.toUpperCase()
+  ) as ICurrency;
 
-  // const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
+  const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
 
   // console.log(currency);
   // console.log(findLocalCurrency);
   // console.log(findCurrency);
-
-  // function removeVacancy(): void {
-  //   if (_id) {
-  //     deleteVacancy({ _id })
-  //       .unwrap()
-  //       .then(res => {
-  //         dispatch(setMessage(res.message));
-  //         dispatch(setType("success"));
-  //       })
-  //       .catch(res => {
-  //         dispatch(setMessage(res.message));
-  //         dispatch(setType("error"));
-  //       })
-  //       .finally(() => dispatch(setShowNotification(true)));
-  //     navigate("/");
-  //   }
-  // }
 
   return (
     <div>
@@ -113,25 +92,20 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
           <Icons.Action size={24} />
           {actions.length ? (
             actions[actions.length - 1].name
-            // actions.map(({ name, deadline }) => <span key={deadline}>{name}, </span>)
           ) : (
             <p>You have no action</p>
           )}
         </li>
-        {/* <li className="flex gap-x-2 gap-y-1">
-          <Icons.Stage size={24} />
-          <p>{stage}</p>
-        </li> */}
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Salary size={24} />
           <p>
             {salaryMin}
-            {/* {currency === "local" ? findLocalCurrency.sign : findCurrency.sign} */}
+            {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
           </p>
           {salaryMax !== 0 && (
             <p>
               -{salaryMax}
-              {/* {currency === "local" ? findLocalCurrency.sign : findCurrency.sign} */}
+              {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
             </p>
           )}
         </li>

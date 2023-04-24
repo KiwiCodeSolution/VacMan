@@ -13,7 +13,8 @@ import { IVacancy } from "redux/VacancyQueries";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { setIsLoading } from "redux/userSlice";
 import useHandleVacancy from "hooks/handleVacancy";
-import currencyList from "assets/currencyList";
+// import currencyList from "assets/currencyList";
+import countries from "data/currencies.json";
 
 // const STAGES = [
 //   "Waiting for answer",
@@ -46,10 +47,15 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   const { addNewVacancy, editVacancy } = useHandleVacancy();
   const { settings } = useAppSelector(state => state.user);
 
+  const findLocalCurrency = countries.find(
+    country => country.code === settings.localCurrency.toUpperCase()
+  );
+
   const CURRENCY = [
     { name: "USD", sign: "$" },
     { name: "Euro", sign: "€" },
-    { name: "local", sign: currencyList[settings.localCurrency] },
+    // { name: "local", sign: currencyList[settings.localCurrency] },
+    { name: "local", sign: findLocalCurrency?.sign || "" }
   ];
   const initialValues = {
     companyName: initialVacancy?.companyName || "",
