@@ -1,19 +1,25 @@
 /* eslint-disable prettier/prettier */
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Button from "components/ui/button";
 import NavHeader from "components/navHeader";
-import currencyList from "assets/currencyList";
 import Stars from "components/ui/stars";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
-import Actions from "./Actions";
-import { colorVariants } from "./ShortNotice";
+// import ActionElement from "./actionElement";
+import ActionList from "./actionList";
+import { ICurrency, colorVariants } from "./ShortNotice";
 import useHandleVacancy from "hooks/handleVacancy";
+import { useAppSelector } from "hooks/reduxHooks";
+import countries from "../../data/currencies.json";
+import ActionShortElement from "./actionShortElement";
 
 const FullNote = () => {
+  const { settings } = useAppSelector(state => state.user);
   const { _id } = useParams();
   const { data: response } = useGetVacanciesQuery();
   const { handleArchive } = useHandleVacancy();
+  const [showActions, setShowActions] = useState(false);
 
   if (!_id) return <h2>Error, id is required</h2>;
   const vacancies = response?.data;
@@ -27,9 +33,9 @@ const FullNote = () => {
     source,
     sourceURL,
     position,
-    salary,
+    salaryMin,
+    salaryMax,
     currency,
-    stage,
     actions,
     notes,
     userRank,
@@ -37,19 +43,35 @@ const FullNote = () => {
     archived,
   } = currentVacancy;
 
+  const findLocalCurrency = countries.find(
+    country => country.code === settings.localCurrency.toUpperCase()
+  ) as ICurrency;
+
+  const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
+
   return (
     <div className="container mx-auto">
-      <NavHeader prevAddress="/" text={companyName} link={companyURL} editAddress={`/${_id}/edit`} bg="bg-light" underlined />
-      <div
-        className={`container mx-auto rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-xl`}
-      >
+      <NavHeader
+        prevAddress="/"
+        text={companyName}
+        link={companyURL}
+        editAddress={`/${_id}/edit`}
+        bg="bg-light"
+        underlined
+      />
+      <div className={`container mx-auto rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-xl`}>
         <ul>
           <li className="flex justify-between">
             <div className="flex flex-col justify-between">
               <Stars amount={5} active={userRank} archived={archived} />
 
               {source ? (
-                <a href={sourceURL} className="font-bold text-xl mt-2" target="_blank" rel="noreferrer">
+                <a
+                  href={sourceURL}
+                  className={`font-bold ${sourceURL && "text-txt-link"} text-xl mt-2`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {source}
                 </a>
               ) : (
@@ -66,34 +88,39 @@ const FullNote = () => {
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
                 <Icons.Salary size={24} /> <p className="text-base">Salary</p>
               </span>
-              <p className="text-[32px]">{salary} {currencyList[currency]}</p>
+              <p className="pb-1 text-end text-[30px]">
+                {salaryMin}
+                {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
+              </p>
+              {salaryMax !== 0 && (
+                <p className="text-end text-[30px]">
+                  {salaryMax}
+                  {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
+                </p>
+              )}
             </div>
           </li>
 
           <li className="mb-4">
-            <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
-              <Icons.Stage size={24} />
-              <span>Stage</span>
-            </div>
-            <p className="text-txt-main">{stage}</p>
-          </li>
-
-          <li className="mb-4">
-            <div className="flex justify-between">
+            <button className="flex w-full justify-between mb-2" onClick={() => setShowActions(!showActions)}>
               <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
                 <Icons.Action size={24} />
-                <p>Action</p>
+                {showActions ? <p>Action time-line</p> : <p>Action</p>}
               </div>
               <div>
                 <p className="font-semibold mb-2">Deadline</p>
               </div>
-            </div>
-            {actions.length ? (
-              actions.map(({ name, deadline }) => (
-                <Actions key={deadline} name={name} deadline={deadline} date={Date.now()} />
-              ))
+            </button>
+            {showActions ? (
+              <ActionList actions={actions} />
             ) : (
-              <p className="text-txt-main">You have no action</p>
+              actions.length !== 0 && (
+                <ActionShortElement
+                  name={actions[actions.length - 1].name}
+                  deadline={actions[actions.length - 1].deadline}
+                  date={actions[actions.length - 1].date}
+                />
+              )
             )}
           </li>
 
@@ -103,16 +130,14 @@ const FullNote = () => {
           </li>
           <li className="mb-[35px]">
             <div className="border-solid border-2 w-full rounded-xl h-[156px] bg-bg-light border-bg-grey p-2">
-              {notes.length > 0 ? (
-                notes.map(({ date, text }) => <span key={date}>{text}</span>)
-              ) : (
-                <p className="text-txt-main text-base">You do not have any posts for this vacancy yet</p>
-              )}
+              {notes || <p className="text-txt-main text-base">You do not have any posts for this vacancy yet</p>}
             </div>
           </li>
         </ul>
 
-        <Button variant="black" clickFn={() => handleArchive(_id, true)}>Archive</Button>
+        <Button variant="black" clickFn={() => handleArchive(_id, true)}>
+          Archive
+        </Button>
       </div>
     </div>
   );

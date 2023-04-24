@@ -2,10 +2,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 
-interface INote {
-  date: number;
-  text: string;
-}
 export interface IAction {
   date: number;
   name: string;
@@ -19,18 +15,16 @@ export interface IVacancy {
   source: string;
   sourceURL: string;
   position: string;
-  salary: number;
-  currency: "USD" | "Euro" | "Hrn";
-  notes: INote[];
+  salaryMin: number;
+  salaryMax: number;
+  currency: "USD" | "Euro" | "local";
+  notes: string;
   actions: IAction[];
-  status: string;
   userRank: number;
   archived: boolean;
   cardColor: string;
-  stage: string;
 }
 
-// eslint-disable-next-line prettier/prettier
 const axiosBaseQuery =
   (
     { baseUrl }: { baseUrl: string } = { baseUrl: "" }
@@ -72,15 +66,11 @@ export const vacancyAPI = createApi({
       // keepUnusedDataFor: 3,
       providesTags: ["vacancies"],
     }),
-    // getVacancyById: builder.query<IVacancy, string>({
-    //   query: id => ({ url: `vacancy/${id}`, method: 'GET' }),
-    //   providesTags: ['vacancies'],
-    // }),
     addVacancy: builder.mutation<{ message: string; data: IVacancy }, Partial<IVacancy>>({
       query: data => ({ url: "vacancy", method: "POST", data }),
       invalidatesTags: ["vacancies"],
     }),
-    updateVacancy: builder.mutation<{ message: string; data: IVacancy }, Partial<IVacancy>>({
+    updateVacancy: builder.mutation<{ message: string; data: Partial<IVacancy> }, Partial<IVacancy>>({
       query: data => ({ url: `vacancy`, method: "PUT", data }),
       invalidatesTags: ["vacancies"],
     }),
@@ -93,7 +83,6 @@ export const vacancyAPI = createApi({
 
 export const {
   useGetVacanciesQuery,
-  // useGetVacancyByIdQuery,
   useAddVacancyMutation,
   useUpdateVacancyMutation,
   useDeleteVacancyMutation,

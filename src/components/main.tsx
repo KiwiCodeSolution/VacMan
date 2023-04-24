@@ -32,7 +32,7 @@ export default function Main() {
           <div className="flex justify-center mt-24 px-4">
             <Icons.Todos />
           </div>
-          <p className="text-center text-txt-main text-xl pt-8">You do not have any job vacancies created yet</p>
+          <p className="text-center text-txt-main text-xl px-10 pt-8">You do not have any job vacancies created yet</p>
           <div className="flex justify-end mx-2 fixed bottom-32 right-8">
             <AddBtn />
           </div>

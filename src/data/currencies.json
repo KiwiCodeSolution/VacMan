@@ -1,0 +1,137 @@
+[
+  {
+    "currency": "Hryvnia",
+    "sign": "₴",
+    "code": "UAH"
+  },
+  {
+    "currency": "Dollar",
+    "sign": "$",
+    "code": "USD"
+  },
+  {
+    "currency": "Euro",
+    "sign": "€",
+    "code": "EUR"
+  },
+  {
+    "currency": "Pound Sterling",
+    "sign": "£",
+    "code": "GBP"
+  },
+  {
+    "currency": "Yen",
+    "sign": "¥",
+    "code": "JPY"
+  },
+  {
+    "currency": "Yuán",
+    "sign": "¥",
+    "code": "CNY"
+  },
+  {
+    "currency": "Ruble",
+    "sign": "₽",
+    "code": "RUB"
+  },
+  {
+    "currency": "Sheqel",
+    "sign": "₪",
+    "code": "ILS"
+  },
+  {
+    "currency": "Rupee",
+    "sign": "₨",
+    "code": "INR"
+  },
+  {
+    "currency": "Won",
+    "sign": "₩",
+    "code": "KRW"
+  },
+  {
+    "currency": "Naira",
+    "sign": "₦",
+    "code": "NGN"
+  },
+  {
+    "currency": "Baht",
+    "sign": "฿",
+    "code": "THB"
+  },
+  {
+    "currency": "Dông",
+    "sign": "₫",
+    "code": "VND"
+  },
+  {
+    "currency": "Kip",
+    "sign": "₭",
+    "code": "LAK"
+  },
+  {
+    "currency": "Riel",
+    "sign": "៛",
+    "code": "KHR"
+  },
+  {
+    "currency": "Tögrög",
+    "sign": "₮",
+    "code": "MNT"
+  },
+  {
+    "currency": "Peso",
+    "sign": "₱",
+    "code": "PHP"
+  },
+  {
+    "currency": "Rial",
+    "sign": "﷼",
+    "code": "IRR"
+  },
+  {
+    "currency": "Colon",
+    "sign": "₡",
+    "code": "CRC"
+  },
+  {
+    "currency": "Guarani",
+    "sign": "₲",
+    "code": "PYG"
+  },
+  {
+    "currency": "Afghani",
+    "sign": "؋",
+    "code": "AFN"
+  },
+  {
+    "currency": "Cedi",
+    "sign": "₵",
+    "code": "GHS"
+  },
+  {
+    "currency": "Tenge",
+    "sign": "₸",
+    "code": "KZT"
+  },
+  {
+    "currency": "Turkish Lira",
+    "sign": "₺",
+    "code": "TRY"
+  },
+  {
+    "currency": "Manat",
+    "sign": "₼",
+    "code": "AZN"
+  },
+  {
+    "currency": "Lari",
+    "sign": "₾",
+    "code": "GEL"
+  },
+  {
+    "currency": "PLN",
+    "sign": "Zł",
+    "code": "Złoty"
+  }
+]

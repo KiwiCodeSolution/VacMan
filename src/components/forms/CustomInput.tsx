@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 // customInput;
 import { useState } from "react";
 import { useField, FieldHookConfig } from "formik";
@@ -27,7 +28,7 @@ function CustomInput(props: CustomInputProps) {
 
   const isPasswordField = type === "password";
   const hasError = error && touched;
-
+  const noEraser = name === "salaryMin" || name === "salaryMax" || type === "date";
   return (
     <div className=" grow text-txt-main ">
       <label htmlFor={id} className="flex items-center gap-1 text-base ">
@@ -45,9 +46,8 @@ function CustomInput(props: CustomInputProps) {
           onChange={onChange}
           placeholder={placeholder}
           autoComplete="off"
-          className={`px-4 w-full h-full rounded-md  border ${
-            hasError ? "border-app-red" : "border-text-main"
-          } bg-txt-white focus:outline-none focus:border-app-blue`}
+          className={`px-4 w-full h-full rounded-md  border ${hasError ? "border-app-red" : "border-text-main"
+            } bg-txt-white focus:outline-none focus:border-app-blue`}
         />
 
         {isPasswordField ? (
@@ -60,14 +60,16 @@ function CustomInput(props: CustomInputProps) {
             <Eye size={24} crossed={!isPasswordShown} className="text-txt-main" />
           </button>
         ) : (
-          <button
-            type="button"
-            className="absolute bottom-1/2 right-2 translate-y-1/2"
-            onClick={clearField}
-            aria-label="clear field button"
-          >
-            <Rubber size={24} className="text-txt-main" />
-          </button>
+          !noEraser && (
+            <button
+              type="button"
+              className="absolute bottom-1/2 right-2 translate-y-1/2"
+              onClick={clearField}
+              aria-label="clear field button"
+            >
+              <Rubber size={24} className="text-txt-main" />
+            </button>
+          )
         )}
 
         {hasError && <p className="absolute left-0 top-full -translate-y-[15%] text-app-red">{error}</p>}

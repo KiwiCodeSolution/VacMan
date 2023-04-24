@@ -29,6 +29,9 @@ import FullNote from "components/notices/FullNotice";
 import AddUserData from "pages/Private/addUserData";
 import { setShowNotification } from "redux/notificationsSlice";
 import Notification from "components/notifications";
+import AddAvatar from "pages/Private/addAvatar";
+import PrivacyPolicy from "pages/Private/privacyPolici";
+import AddAction from "pages/Private/addAction";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -66,12 +69,16 @@ const App = () => {
           <Route path="profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
           <Route path="changePass" element={<PrivateRoute><ChangePassPage /></PrivateRoute>} />
           <Route path="archived" element={<PrivateRoute><Archived /></PrivateRoute>} />
+          <Route path="addAvatar" element={<PrivateRoute><AddAvatar /></PrivateRoute>} />
+          <Route path="privacyPolicy" element={<PrivateRoute><PrivacyPolicy /></PrivateRoute>} />
         </Route>
+
         <Route path=":_id" element={<PrivateRoute><Card /></PrivateRoute>}>
-          {/* No Header & Menu */}
+          {/* with NavHeader */}
           <Route path="details" element={<PrivateRoute><FullNote /></PrivateRoute>} />
           <Route path="add" element={<PrivateRoute><AddVacancy /></PrivateRoute>} />
           <Route path="edit" element={<PrivateRoute><EditVacancy /></PrivateRoute>} />
+          <Route path="addAction" element={<PrivateRoute><AddAction /></PrivateRoute>} />
         </Route>
 
         {/* Public Routes */}
