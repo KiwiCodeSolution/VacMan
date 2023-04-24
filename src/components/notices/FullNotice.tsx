@@ -6,12 +6,13 @@ import Button from "components/ui/button";
 import NavHeader from "components/navHeader";
 import Stars from "components/ui/stars";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
-import ActionElement from "./actionElement";
+// import ActionElement from "./actionElement";
 import ActionList from "./actionList";
 import { ICurrency, colorVariants } from "./ShortNotice";
 import useHandleVacancy from "hooks/handleVacancy";
 import { useAppSelector } from "hooks/reduxHooks";
 import countries from "../../data/currencies.json";
+import ActionShortElement from "./actionShortElement";
 
 const FullNote = () => {
   const { settings } = useAppSelector(state => state.user);
@@ -114,7 +115,7 @@ const FullNote = () => {
               <ActionList actions={actions} />
             ) : (
               actions.length !== 0 && (
-                <ActionElement
+                <ActionShortElement
                   name={actions[actions.length - 1].name}
                   deadline={actions[actions.length - 1].deadline}
                   date={actions[actions.length - 1].date}
