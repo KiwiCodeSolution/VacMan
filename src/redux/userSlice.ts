@@ -13,7 +13,6 @@ import {
   updateProfile,
   updateSettings,
 } from "./userOperations";
-import { TcurrencyList } from "assets/currencyList";
 
 export interface IProfile {
   [key: string]: string;
@@ -21,7 +20,35 @@ export interface IProfile {
 export interface ISettings {
   lang: "eng" | "ukr" | "ru";
   theme: "light" | "dark";
-  localCurrency: keyof TcurrencyList;
+  localCurrency:
+    | "HRN"
+    | "USD"
+    | "EURO"
+    | "GBP"
+    | "JPY"
+    | "CNY"
+    | "RUB"
+    | "ILS"
+    | "INR"
+    | "KRW"
+    | "NGN"
+    | "THB"
+    | "VND"
+    | "LAK"
+    | "KHR"
+    | "MNT"
+    | "PHP"
+    | "IRR"
+    | "CRC"
+    | "PYG"
+    | "AFN"
+    | "GHS"
+    | "KZT"
+    | "TRY"
+    | "AZN"
+    | "GEL"
+    | "Złoty"
+    | "Null";
   notification: boolean;
 }
 export interface IUser {
@@ -43,7 +70,7 @@ const initialState = {
   showStartingPage: true,
   currProfile: "",
   profile: { avatar: "", phoneNumber: "", position: "" } as IProfile,
-  settings: {lang: "eng", theme: "light", localCurrency: "Null", notification: false} as ISettings,
+  settings: { lang: "eng", theme: "light", localCurrency: "Null", notification: false } as ISettings,
   message: "",
 };
 
@@ -182,7 +209,7 @@ const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(changePass.pending, state => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(changePass.fulfilled, state => {
         state.isLoading = false;
@@ -191,9 +218,9 @@ const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateProfile.pending, state => {
-        state.isLoading = true
+        state.isLoading = true;
       })
-      .addCase(updateProfile.fulfilled, (state, { payload }: { payload: { message: string, profile: IProfile } }) => {
+      .addCase(updateProfile.fulfilled, (state, { payload }: { payload: { message: string; profile: IProfile } }) => {
         state.profile = payload.profile;
         state.isLoading = false;
       })
@@ -201,18 +228,20 @@ const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateSettings.pending, state => {
-        state.isLoading = true
+        state.isLoading = true;
       })
-      .addCase(updateSettings.fulfilled, (state, { payload }: { payload: { message: string, settings: ISettings } }) => {
-        state.settings = payload.settings;
-        state.isLoading = false;
-      })
+      .addCase(
+        updateSettings.fulfilled,
+        (state, { payload }: { payload: { message: string; settings: ISettings } }) => {
+          state.settings = payload.settings;
+          state.isLoading = false;
+        }
+      )
       .addCase(updateSettings.rejected, state => {
         state.isLoading = false;
       }),
 });
 
 export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>
-export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setUser, setMessage } =
-  userSlice.actions;
+export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setUser, setMessage } = userSlice.actions;
 export default userSlice.reducer;

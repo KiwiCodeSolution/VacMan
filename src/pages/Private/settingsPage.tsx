@@ -27,10 +27,10 @@ const SettingsPage = () => {
     dispatch(updateSettings({ ...settings, theme: settings.theme === "light" ? "dark" : "light" }));
   };
   const changeLocalCurrency = () => {
-    const localCurrency = "Hrn";
+    // const localCurrency = "HRN";
     setOpenmod(!openmod);
     // pop-up return {localCurrency}
-    dispatch(updateSettings({ ...settings, localCurrency }));
+    // dispatch(updateSettings({ ...settings, localCurrency }));
   };
 
   const onOpenModal = () => {
