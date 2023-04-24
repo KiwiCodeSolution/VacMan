@@ -8,7 +8,6 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
   const { _id } = useParams();
   return (
     <>
-      <p>Action List</p>
       {actions.map(({ date, name, deadline }) => (
         <div key={deadline}>
           <ActionElement date={date} name={name} deadline={deadline} />

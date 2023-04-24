@@ -63,7 +63,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
   ) as ICurrency;
 
   const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
-
+  
   console.log(currency);
   console.log(findLocalCurrency);
   console.log(findCurrency);

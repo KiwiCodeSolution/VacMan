@@ -6,12 +6,13 @@ import Button from "components/ui/button";
 import NavHeader from "components/navHeader";
 import Stars from "components/ui/stars";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
-import ActionElement from "./actionElement";
+// import ActionElement from "./actionElement";
 import ActionList from "./actionList";
 import { ICurrency, colorVariants } from "./ShortNotice";
 import useHandleVacancy from "hooks/handleVacancy";
 import { useAppSelector } from "hooks/reduxHooks";
 import countries from "../../data/currencies.json";
+import ActionShortElement from "./actionShortElement";
 
 const FullNote = () => {
   const { settings } = useAppSelector(state => state.user);
@@ -101,10 +102,10 @@ const FullNote = () => {
           </li>
 
           <li className="mb-4">
-            <button className="flex w-full justify-between" onClick={() => setShowActions(!showActions)}>
+            <button className="flex w-full justify-between mb-2" onClick={() => setShowActions(!showActions)}>
               <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
                 <Icons.Action size={24} />
-                <p>Action</p>
+                {showActions ? <p>Action time-line</p> : <p>Action</p>}
               </div>
               <div>
                 <p className="font-semibold mb-2">Deadline</p>
@@ -114,7 +115,7 @@ const FullNote = () => {
               <ActionList actions={actions} />
             ) : (
               actions.length !== 0 && (
-                <ActionElement
+                <ActionShortElement
                   name={actions[actions.length - 1].name}
                   deadline={actions[actions.length - 1].deadline}
                   date={actions[actions.length - 1].date}
