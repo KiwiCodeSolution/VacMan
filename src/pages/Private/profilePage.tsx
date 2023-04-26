@@ -3,6 +3,8 @@ import NavHeader from "components/navHeader";
 import { useAppSelector } from "hooks/reduxHooks";
 import { Link, useLocation } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
+import SubHeader from "components/subHeader";
+import Button from "components/ui/button";
 // import AddBtn from "components/addBtn";
 
 const ProfilePage = () => {
@@ -19,20 +21,15 @@ const ProfilePage = () => {
   return (
     <div className="mb-28">
       <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
-      <div className="sticky w-full h-[136px] ">
-        <Icons.Rectangle className="w-full h-full text-txt-darkgrey" />
-        <div className="absolute w-[120px] h-[120px] bottom-0 left-1/2 -translate-x-1/2 rounded-full">
-          <div className="w-full h-full flex justify-center items-center rounded-full bg-gradient-to-b from-[#C4C4D4] to-[#141415]">
-            <Icons.Avatar className="w-[95%] h-[95%] text-txt-main" />
-          </div>
-          <button className="absolute w-8 h-8 bottom-0 right-0  flex justify-center items-center rounded-full bg-txt-black">
-            <Link to="/addAvatar" state={{ from: location }}><Icons.Camera size="100%" className="" /></Link>
-          </button>
-        </div>
-      </div>
+      <SubHeader fill="text-txt-darkgrey" />
 
-      <p className="pt-4 font-semibold text-xl text-center">{profile.name}</p>
-      <p className="text-center">position: {profile.position}</p>
+      <div className="mx-auto w-40 pt-4 pb-7">
+        <Link to="/addUserData" state={{ from: location }}>
+          <Button btnType="button" variant="black">
+            Add Profile data
+          </Button>
+        </Link>
+      </div>
 
       <ul className="container mx-auto px-4">
         {elements.map(el => el.name && (

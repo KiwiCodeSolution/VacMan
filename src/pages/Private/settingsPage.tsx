@@ -1,23 +1,29 @@
 /* eslint-disable prettier/prettier */
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
+import { logOut, updateSettings } from "redux/userOperations";
 import NavHeader from "components/navHeader";
 import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { logOut, updateSettings } from "redux/userOperations";
 import LanguageBtnGroup from "components/language/LanguageBtnGroup";
-import { useState } from "react";
 import CurrencySelection from "components/modals/CurrencySelectionModal";
+import SubHeader from "components/subHeader";
+// import { ISettings } from "redux/userSlice";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
-  const { profile, settings } = useAppSelector(state => state.user);
+  const { settings } = useAppSelector(state => state.user);
   const [openmod, setOpenmod] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  // let newSettings: ISettings;
 
+  // useEffect(() => {
+  //   return () => dispatch(updateSettings({ ...settings, ...newSettings }));
+  // })
   const changeLanguage = () => {
-    // pop-up return {lang}
     dispatch(updateSettings({ ...settings, lang: "eng" }));
   };
   const toggleNotification = () => {
@@ -33,9 +39,7 @@ const SettingsPage = () => {
     // dispatch(updateSettings({ ...settings, localCurrency }));
   };
 
-  const onOpenModal = () => {
-    setOpenmod(!openmod);
-  };
+  const onOpenModal = () => setOpenmod(!openmod);
 
   const elements = [
     {
@@ -78,22 +82,7 @@ const SettingsPage = () => {
   return (
     <div className="mb-28">
       <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-black" text="Settings" textWhite />
-      <div className="sticky w-full h-[136px] ">
-        <Icons.Rectangle className="w-full h-full text-txt-black" />
-        <div className="absolute w-[120px] h-[120px] bottom-0 left-1/2 -translate-x-1/2 rounded-full ">
-          <div className="w-full h-full flex justify-center items-center rounded-full bg-gradient-to-b from-[#C4C4D4] to-[#141415]">
-            <Icons.Avatar className="w-[95%] h-[95%] text-txt-main" />
-          </div>
-          <button className="absolute w-8 h-8 bottom-0 right-0 flex justify-center items-center rounded-full bg-txt-black">
-            <Link to="/addAvatar" state={{ from: location }}>
-              <Icons.Camera size="100%" className="" />
-            </Link>
-          </button>
-        </div>
-      </div>
-
-      <p className="pt-4 text-xl font-semibold text-center">{profile.name}</p>
-      <p className="text-center">position: {profile.position}</p>
+      <SubHeader fill="text-txt-black" />
 
       <div className="mx-auto w-24 pt-4 pb-7">
         <Link to="/profile" state={{ from: location }}>

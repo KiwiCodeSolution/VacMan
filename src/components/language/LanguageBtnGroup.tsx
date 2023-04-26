@@ -17,8 +17,7 @@ const LanguageBtnGroup = () => {
   ];
 
   const changeLanguage = (currentLang: ISettings["lang"]) => {
-    console.log(currentLang);
-    // pop-up return {lang}
+    // console.log(currentLang);
     dispatch(updateSettings({ ...settings, lang: currentLang }));
   };
 
