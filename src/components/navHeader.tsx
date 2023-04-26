@@ -9,7 +9,7 @@ interface IProps {
   nextAddress?: string;
   editAddress?: string;
   skip?: string;
-  bg?: "bg-light" | "bg-grey" | "bg-black";
+  bg?: "bg-light" | "bg-grey" | "bg-black" | "bg-blue";
   underlined?: boolean;
 }
 const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAddress, skip, underlined }: IProps) => {

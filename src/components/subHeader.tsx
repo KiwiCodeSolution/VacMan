@@ -2,7 +2,8 @@ import { useLocation, Link } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import { useAppSelector } from "hooks/reduxHooks";
 
-const SubHeader = ({ fill }: { fill: "text-txt-black" | "text-txt-darkgrey" }) => {
+type propType = { fill: "text-txt-black" | "text-txt-darkgrey" | "text-txt-blue" };
+const SubHeader = ({ fill }: propType) => {
   const location = useLocation();
   const { profile } = useAppSelector(state => state.user);
 
