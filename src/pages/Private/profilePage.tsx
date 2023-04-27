@@ -49,7 +49,7 @@ const ProfilePage = () => {
           // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
           <li
             key={el.name}
-            className="flex flex-row items-center ml-2 py-3 cursor-pointer"
+            className="flex flex-row items-center ml-2 py-3 cursor-pointer select-none"
             onClick={() => copyToClipboard(el.name)}
             onKeyDown={handleKeyDown}
           >
