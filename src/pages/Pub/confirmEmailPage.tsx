@@ -22,24 +22,27 @@ const ConfirmEmailPage = () => {
   useEffect(() => {
     if (!verificationCode) return;
     dispatch(emailVerify({ verificationCode }));
+    // if OK 'emailConfirmed' become 'true'
   }, [dispatch, verificationCode]);
 
   return (
     <div className="container px-4 mt-[152px] mb-[90px]">
       {emailConfirmed ? (
         <>
-          <Icons.OkInCircle />
-          <p className="mt-[50px]">Congratulations registration succesful</p>
+          <Icons.OkInCircle className="text-txt-orange m-auto" />
+          <p className="mt-[50px] text-center">Congratulations registration succesful</p>
           <Button variant="black" clickFn={goToHomePage}>
             START
           </Button>
         </>
       ) : (
         <>
-          <Icons.FalseInCircle className="text-txt-orange" />
-          <p className="mt-[50px]">Some troubles with</p>
-          <p>email confirmation.</p>
-          <p className="mt-4 mb-[132px]">Try to find another email with link or try to register again after 1 hour</p>
+          <Icons.FalseInCircle className="text-txt-orange m-auto" />
+          <p className="mt-[50px] text-center">Some troubles with</p>
+          <p className="text-center">email confirmation.</p>
+          <p className="mt-4 mb-[132px] text-center">
+            Try to find another email with link or try to register again after 1 hour
+          </p>
           <Button variant="black" clickFn={() => navigate("/register")}>
             Go to Registration Page
           </Button>
