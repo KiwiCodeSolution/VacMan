@@ -14,10 +14,10 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
         </div>
       ))}
       <div className="flex flex-raw">
-        <div className="ml-2 -mt-2 h-4 w-4 rounded-full bg-app-green" />
+        <div className="ml-2 -mt-2 h-4 w-4 rounded-full bg-bg-black" />
         <div className="w-16 border-t-2 border-bg-grey" />
       </div>
-      <div className="-mt-8 ml-20 w-40">
+      <div className="-mt-8 ml-20 w-48">
         <Link to={`/${_id}/addAction`} state={{ from: location }}>
           <Button variant="white" btnType="button">
             New action
