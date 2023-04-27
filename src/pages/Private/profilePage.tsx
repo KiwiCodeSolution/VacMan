@@ -1,14 +1,17 @@
 /* eslint-disable prettier/prettier */
-import NavHeader from "components/navHeader";
-import { useAppSelector } from "hooks/reduxHooks";
 import { Link, useLocation } from "react-router-dom";
+import NavHeader from "components/navHeader";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import * as Icons from "components/iconsComponents";
 import SubHeader from "components/subHeader";
 import Button from "components/ui/button";
+import { setShowNotification, setMessage, setType } from "redux/notificationsSlice";
+
 // import AddBtn from "components/addBtn";
 
 const ProfilePage = () => {
   const location = useLocation();
+  const dispatch = useAppDispatch();
   const { email, profile } = useAppSelector(state => state.user);
   const elements = [
     { icon: Icons.Envelope, name: email, btn: Icons.ArrowForward, btnSize: 24 },
@@ -18,6 +21,16 @@ const ProfilePage = () => {
     { icon: Icons.Instagram, name: profile.instagram, btn: Icons.ArrowForward },
     { icon: Icons.Facebook, name: profile.facebook, btn: Icons.ArrowForward },
   ];
+
+  const copyToClipboard = (name: string) => {
+    console.log("copyToClipboard function", name);
+    window.navigator.clipboard.writeText(name);
+    dispatch(setMessage(`'${name}' copied to clipboard`));
+    dispatch(setType("info"));
+    dispatch(setShowNotification(true));
+  }
+  const handleKeyDown = () => null;
+
   return (
     <div className="mb-28">
       <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
@@ -33,7 +46,13 @@ const ProfilePage = () => {
 
       <ul className="container mx-auto px-4">
         {elements.map(el => el.name && (
-          <li key={el.name} className="flex flex-row items-center ml-2 py-3">
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+          <li
+            key={el.name}
+            className="flex flex-row items-center ml-2 py-3 cursor-pointer"
+            onClick={() => copyToClipboard(el.name)}
+            onKeyDown={handleKeyDown}
+          >
             <div className="w-10 h-10 bg-app-grey rounded-full p-1">
               <el.icon size={32} />
             </div>
@@ -47,7 +66,7 @@ const ProfilePage = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </div >
   );
 };
 export default ProfilePage;
