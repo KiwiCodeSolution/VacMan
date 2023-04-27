@@ -14,7 +14,7 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
         </div>
       ))}
       <div className="flex flex-raw">
-        <div className="ml-[7px] -mt-2 flex h-4 w-4 items-center justify-center rounded-full bg-app-green" />
+        <div className="ml-2 -mt-2 h-4 w-4 rounded-full bg-app-green" />
         <div className="w-16 border-t-2 border-bg-grey" />
       </div>
       <div className="-mt-8 ml-20 w-40">
