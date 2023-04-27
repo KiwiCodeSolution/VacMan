@@ -13,11 +13,17 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
           <ActionElement date={date} name={name} deadline={deadline} />
         </div>
       ))}
-      <Link to={`/${_id}/addAction`} state={{ from: location }}>
-        <Button variant="white" btnType="button">
-          New action
-        </Button>
-      </Link>
+      <div className="flex flex-raw">
+        <div className="ml-[7px] -mt-2 flex h-4 w-4 items-center justify-center rounded-full bg-app-green" />
+        <div className="w-16 border-t-2 border-bg-grey" />
+      </div>
+      <div className="-mt-8 ml-20 w-40">
+        <Link to={`/${_id}/addAction`} state={{ from: location }}>
+          <Button variant="white" btnType="button">
+            New action
+          </Button>
+        </Link>
+      </div>
     </>
   );
 };
