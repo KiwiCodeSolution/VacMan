@@ -3,6 +3,19 @@ module.exports = {
   content: ["./index.html", "./src/**/*.tsx"],
   theme: {
     extend: {
+      keyframes: {
+        slide: {
+          "0%": {
+            transform: 'translateY(-100%)',
+          },
+          "100%": {
+            transform: 'translateY(0)',
+          }
+        }
+      },
+      animation: {
+        slide: "slide 1s"
+      },
       colors: {
         "txt-main": "#5b5b69",
         "txt-black": "#040c0c",

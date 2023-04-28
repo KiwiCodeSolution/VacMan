@@ -7,7 +7,7 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
   const location = useLocation();
   const { _id } = useParams();
   return (
-    <>
+    <div className="animate-slide overflow-hidden">
       {actions.map(({ date, name, deadline }) => (
         <div key={date}>
           <ActionElement date={date} name={name} deadline={deadline} />
@@ -24,7 +24,7 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
           </Button>
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 export default ActionList;

@@ -32,7 +32,7 @@ const ProfilePage = () => {
   const handleKeyDown = () => null;
 
   return (
-    <div className="mb-28">
+    <div className="mb-28 select-none">
       <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
       <SubHeader fill="text-txt-darkgrey" />
 
@@ -49,7 +49,7 @@ const ProfilePage = () => {
           // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
           <li
             key={el.name}
-            className="flex flex-row items-center ml-2 py-3 cursor-pointer select-none"
+            className="flex flex-row items-center ml-2 py-3 cursor-pointer"
             onClick={() => copyToClipboard(el.name)}
             onKeyDown={handleKeyDown}
           >

@@ -80,7 +80,7 @@ const SettingsPage = () => {
   ];
 
   return (
-    <div className="mb-28">
+    <div className="mb-28 select-none">
       <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-black" text="Settings" textWhite />
       <SubHeader fill="text-txt-black" />
 
