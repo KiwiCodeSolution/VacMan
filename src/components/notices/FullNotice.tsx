@@ -6,16 +6,12 @@ import Button from "components/ui/button";
 import NavHeader from "components/navHeader";
 import Stars from "components/ui/stars";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
-// import ActionElement from "./actionElement";
 import ActionList from "./actionList";
-import { ICurrency, colorVariants } from "./ShortNotice";
+import { colorVariants } from "./ShortNotice";
 import useHandleVacancy from "hooks/handleVacancy";
-import { useAppSelector } from "hooks/reduxHooks";
-import countries from "../../data/currencies.json";
 import ActionShortElement from "./actionShortElement";
 
 const FullNote = () => {
-  const { settings } = useAppSelector(state => state.user);
   const { _id } = useParams();
   const { data: response } = useGetVacanciesQuery();
   const { handleArchive } = useHandleVacancy();
@@ -33,21 +29,13 @@ const FullNote = () => {
     source,
     sourceURL,
     position,
-    salaryMin,
-    salaryMax,
-    currency,
+    salary,
     actions,
     notes,
     userRank,
     cardColor,
     archived,
   } = currentVacancy;
-
-  const findLocalCurrency = countries.find(
-    country => country.code === settings.localCurrency.toUpperCase()
-  ) as ICurrency;
-
-  const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
 
   return (
     <div className="container mx-auto">
@@ -89,15 +77,8 @@ const FullNote = () => {
                 <Icons.Salary size={24} /> <p className="text-base">Salary</p>
               </span>
               <p className="pb-1 text-end text-[30px]">
-                {salaryMin}
-                {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
+                {salary}
               </p>
-              {salaryMax !== 0 && (
-                <p className="text-end text-[30px]">
-                  {salaryMax}
-                  {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
-                </p>
-              )}
             </div>
           </li>
 

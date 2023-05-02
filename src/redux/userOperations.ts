@@ -40,12 +40,9 @@ export const logIn = createAsyncThunk<IUser, { email: string; password: string }
     try {
       const { data } = await axios.post("/auth/login", credentials);
       setAuthHeader(data.user.token);
-      // console.log("Congratulations! You are logined!");
-      // console.log(data.user);
       return data.user;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        // console.log('AxiosError:', error);
         return rejectWithValue(error.response?.data?.message);
       }
       return error;
@@ -57,8 +54,6 @@ export const logOut = createAsyncThunk<boolean, undefined, { rejectValue: string
   "user/logout",
   async (_, { rejectWithValue }) => {
     const response = await axios.get("/auth/logout");
-    // console.log(response);
-
     if (response.status !== 200) {
       return rejectWithValue(response.data.message);
     }
@@ -89,7 +84,6 @@ export const emailVerify = createAsyncThunk<IUser, { verificationCode: string },
     try {
       const { data } = await axios.get(`/auth/emailVerify?verificationCode=${verificationCode}`);
       setAuthHeader(data.user.token);
-      // console.log(data);
       return data.user;
     } catch (error) {
       if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
