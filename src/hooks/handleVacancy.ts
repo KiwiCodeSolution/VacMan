@@ -76,7 +76,6 @@ const useHandleVacancy = () => {
         dispatch(setType("error"));
       })
       .finally(() => dispatch(setShowNotification(true)));
-    navigate("/");
   };
 
   return { handleArchive, editVacancy, addNewVacancy, removeVacancy };

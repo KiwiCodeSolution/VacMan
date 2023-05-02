@@ -9,11 +9,13 @@ import { useGetVacanciesQuery } from "redux/VacancyQueries";
 const formFields = [
   { name: "name", label: "action name", type: "name" },
   { name: "deadline", label: "deadline date", type: "date" },
+  { name: "time", label: "deadline time", type: "time" },
 ];
 
 const initialValues = {
   name: "",
   deadline: "",
+  time: "",
 };
 type Values = typeof initialValues;
 
@@ -25,16 +27,17 @@ const AddActionForm = () => {
   const vacancy = response?.data?.find(el => el._id === _id);
   if (!_id) return <h2>No such id</h2>;
 
-  const handelFormSubmit = ({ name, deadline }: Values): void => {
+  const handelFormSubmit = ({ name, deadline, time }: Values): void => {
     // const date = new Date(deadline).toLocaleDateString();
-    console.log("values: ", { name, deadline });
-    const date = new Date(deadline);
+    // console.log("values: ", { name, deadline });
+    const date = new Date(`${deadline} ${time}`);
     const newAction = {
       name,
       deadline: date.getTime(),
       date: Date.now(),
       fulfilled: false,
     };
+    // console.log("new action date:", newAction);
 
     if (!vacancy) return;
     const { actions } = vacancy;

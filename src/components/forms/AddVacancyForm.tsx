@@ -145,7 +145,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
           </ul>
 
           <div className="mt-4">
-            <CustomInput name="notebook" id="notebook" type="text" label="Notebook" LabelIcon={icons.Notebook} />
+            <CustomInput name="notes" id="notes" type="text" label="Notebook" LabelIcon={icons.Notebook} />
           </div>
 
           <div className="mt-24 mb-4">

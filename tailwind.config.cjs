@@ -3,6 +3,19 @@ module.exports = {
   content: ["./index.html", "./src/**/*.tsx"],
   theme: {
     extend: {
+      keyframes: {
+        slide: {
+          "0%": {
+            transform: 'translateY(-100%)',
+          },
+          "100%": {
+            transform: 'translateY(0)',
+          }
+        }
+      },
+      animation: {
+        slide: "slide 1s"
+      },
       colors: {
         "txt-main": "#5b5b69",
         "txt-black": "#040c0c",
@@ -10,9 +23,12 @@ module.exports = {
         "txt-grey": "#d9d9d9",
         "txt-darkgrey": "#646464",
         "txt-link": "#3ca4ec",
+        "txt-blue": "#a9e2f0",
+        "txt-orange": "#f0be6c",
         "bg-light": "#fffdf4",
         "bg-grey": "#646464",
         "bg-black": "#040c0c",
+        "bg-blue": "#a9e2f0",
         "btn-grey": "#d9d9d9",
         "btn-black": "#040c0c",
         "btn-light": "#fffdf4",
