@@ -82,8 +82,8 @@ const FullNote = () => {
             </div>
           </li>
 
-          <li className="mb-4">
-            <button className="flex w-full justify-between mb-2" onClick={() => setShowActions(!showActions)}>
+          <li className="mb-4 border-solid border-2 w-full rounded-xl bg-bg-light p-2">
+            <button className="flex w-full justify-between mb-2 border-b-2" onClick={() => setShowActions(!showActions)}>
               <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
                 <Icons.Action size={24} />
                 {showActions ? <p>Action time-line</p> : <p>Action</p>}
