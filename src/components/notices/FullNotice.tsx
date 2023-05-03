@@ -37,8 +37,6 @@ const FullNote = () => {
     archived,
   } = currentVacancy;
 
-  const animate = `${showActions ? "transition-all max-h-full" : "transition-all max-h-0"}`;
-
   return (
     <div className="container mx-auto">
       <NavHeader
@@ -95,11 +93,8 @@ const FullNote = () => {
                 <p className="font-semibold mb-2">Deadline</p>
               </div>
             </button>
-
             {showActions ? (
-              <div className="animate__animated animate__slideInDown">
-                <ActionList actions={actions} />
-              </div>
+              <ActionList actions={actions} />
             ) : (
               actions.length !== 0 && (
                 <ActionShortElement
@@ -109,17 +104,6 @@ const FullNote = () => {
                 />
               )
             )}
-
-            {/* {!showActions && actions.length !== 0 && (
-              <ActionShortElement
-                name={actions[actions.length - 1].name}
-                deadline={actions[actions.length - 1].deadline}
-                date={actions[actions.length - 1].date}
-              />
-            )}
-            <div className="animate-[unfold_1s_ease-in-out]">
-              <ActionList actions={actions} />
-            </div> */}
           </li>
 
           <li className="flex gap-x-2 gap-y-1 mb-2 font-medium text-xl">

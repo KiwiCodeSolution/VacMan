@@ -28,17 +28,7 @@ export const colorVariants = {
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const { handleArchive, removeVacancy } = useHandleVacancy();
 
-  const {
-    _id,
-    companyName,
-    position,
-    salary,
-    cardColor,
-    userRank,
-    actions,
-    companyURL,
-    archived,
-  } = shortVacancy;
+  const { _id, companyName, position, salary, cardColor, userRank, actions, archived } = shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
@@ -54,13 +44,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         </button>
         <li className="flex gap-x-2 gap-y-1 font-bold">
           <Icons.CompanyName size={24} />
-          {companyURL ? (
-            <a href={companyURL} target="_blank" rel="noreferrer">
-              {companyName}
-            </a>
-          ) : (
-            <p>{companyName}</p>
-          )}
+          <p>{companyName}</p>
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Position size={24} />
@@ -68,11 +52,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Action size={24} />
-          {actions.length ? (
-            actions[actions.length - 1].name
-          ) : (
-            <p>You have no action</p>
-          )}
+          {actions.length ? actions[actions.length - 1].name : <p>You have no action</p>}
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Salary size={24} />
