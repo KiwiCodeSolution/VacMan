@@ -20,35 +20,6 @@ export interface IProfile {
 export interface ISettings {
   lang: "eng" | "ukr" | "ru";
   theme: "light" | "dark";
-  localCurrency:
-    | "HRN"
-    | "USD"
-    | "EURO"
-    | "GBP"
-    | "JPY"
-    | "CNY"
-    | "RUB"
-    | "ILS"
-    | "INR"
-    | "KRW"
-    | "NGN"
-    | "THB"
-    | "VND"
-    | "LAK"
-    | "KHR"
-    | "MNT"
-    | "PHP"
-    | "IRR"
-    | "CRC"
-    | "PYG"
-    | "AFN"
-    | "GHS"
-    | "KZT"
-    | "TRY"
-    | "AZN"
-    | "GEL"
-    | "Złoty"
-    | "Null";
   notification: boolean;
 }
 export interface IUser {
@@ -70,7 +41,7 @@ const initialState = {
   showStartingPage: true,
   currProfile: "",
   profile: { avatar: "", phoneNumber: "", position: "" } as IProfile,
-  settings: { lang: "eng", theme: "light", localCurrency: "Null", notification: false } as ISettings,
+  settings: { lang: "eng", theme: "light",  notification: false } as ISettings,
   message: "",
 };
 

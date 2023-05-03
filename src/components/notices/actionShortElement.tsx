@@ -8,9 +8,9 @@ const convertDate = (date?: number) => {
   const min = dateFormat.getMinutes();
   return `${dateFormat.getDate()}-${month < 10 ? "0" : ""}${month}-${dateFormat.getFullYear()} ${hour}.${min}`;
 };
-const ActionShortElement = ({ name, deadline, date }: IAction) => {
+const ActionShortElement = ({ name, deadline }: IAction) => {
   const formattedDeadline = convertDate(deadline);
-  const formattedDate = convertDate(date);
+  // const formattedDate = convertDate(date);
   return (
     <div className="flex justify-between text-txt-main">
       <div>

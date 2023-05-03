@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
 import { IVacancy } from "redux/VacancyQueries";
-import { useAppSelector } from "hooks/reduxHooks";
 import useHandleVacancy from "hooks/handleVacancy";
-import countries from "../../data/currencies.json";
-import { ISettings } from "redux/userSlice";
 
 type VacancyProps = {
   shortVacancy: IVacancy;
@@ -14,12 +11,6 @@ type VacancyProps = {
 
 export interface IColor {
   [key: string]: string;
-}
-
-export interface ICurrency {
-  currency: string;
-  sign: string;
-  code: ISettings["localCurrency"];
 }
 
 export const colorVariants = {
@@ -35,16 +26,13 @@ export const colorVariants = {
 } as IColor;
 
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
-  const { settings } = useAppSelector(state => state.user);
   const { handleArchive, removeVacancy } = useHandleVacancy();
 
   const {
     _id,
     companyName,
     position,
-    salaryMin,
-    salaryMax,
-    currency,
+    salary,
     cardColor,
     userRank,
     actions,
@@ -53,16 +41,6 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
   } = shortVacancy;
   const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
-
-  const findLocalCurrency = countries.find(
-    country => country.code === settings.localCurrency.toUpperCase()
-  ) as ICurrency;
-
-  const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
-
-  // console.log(currency);
-  // console.log(findLocalCurrency);
-  // console.log(findCurrency);
 
   return (
     <div>
@@ -98,16 +76,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Salary size={24} />
-          <p>
-            {salaryMin}
-            {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
-          </p>
-          {salaryMax !== 0 && (
-            <p>
-              -{salaryMax}
-              {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
-            </p>
-          )}
+          <p>{salary}</p>
         </li>
         <li className="absolute bottom-2 right-[14px]">
           {!archived ? (

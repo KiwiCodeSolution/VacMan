@@ -6,16 +6,12 @@ import Button from "components/ui/button";
 import NavHeader from "components/navHeader";
 import Stars from "components/ui/stars";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
-// import ActionElement from "./actionElement";
 import ActionList from "./actionList";
-import { ICurrency, colorVariants } from "./ShortNotice";
+import { colorVariants } from "./ShortNotice";
 import useHandleVacancy from "hooks/handleVacancy";
-import { useAppSelector } from "hooks/reduxHooks";
-import countries from "../../data/currencies.json";
 import ActionShortElement from "./actionShortElement";
 
 const FullNote = () => {
-  const { settings } = useAppSelector(state => state.user);
   const { _id } = useParams();
   const { data: response } = useGetVacanciesQuery();
   const { handleArchive } = useHandleVacancy();
@@ -33,21 +29,13 @@ const FullNote = () => {
     source,
     sourceURL,
     position,
-    salaryMin,
-    salaryMax,
-    currency,
+    salary,
     actions,
     notes,
     userRank,
     cardColor,
     archived,
   } = currentVacancy;
-
-  const findLocalCurrency = countries.find(
-    country => country.code === settings.localCurrency.toUpperCase()
-  ) as ICurrency;
-
-  const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
 
   const animate = `${showActions ? "transition-all max-h-full" : "transition-all max-h-0"}`;
 
@@ -90,21 +78,15 @@ const FullNote = () => {
               <span className="flex gap-x-2 gap-y-1 mb-2 font-medium">
                 <Icons.Salary size={24} /> <p className="text-base">Salary</p>
               </span>
-              <p className="pb-1 text-end text-[30px]">
-                {salaryMin}
-                {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
-              </p>
-              {salaryMax !== 0 && (
-                <p className="text-end text-[30px]">
-                  {salaryMax}
-                  {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
-                </p>
-              )}
+              <p className="pb-1 text-end text-[30px]">{salary}</p>
             </div>
           </li>
 
-          <li className="mb-4">
-            <button className="flex w-full justify-between mb-2" onClick={() => setShowActions(!showActions)}>
+          <li className="mb-4 border-solid border-2 w-full rounded-xl bg-bg-light p-2">
+            <button
+              className="flex w-full justify-between mb-2 border-b-2"
+              onClick={() => setShowActions(!showActions)}
+            >
               <div className="flex gap-x-2 gap-y-1 mb-2 font-semibold">
                 <Icons.Action size={24} />
                 {showActions ? <p>Action time-line</p> : <p>Action</p>}

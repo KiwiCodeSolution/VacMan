@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { useState } from "react";
+// import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
@@ -8,14 +8,13 @@ import NavHeader from "components/navHeader";
 import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
 import LanguageBtnGroup from "components/language/LanguageBtnGroup";
-import CurrencySelection from "components/modals/CurrencySelectionModal";
 import SubHeader from "components/subHeader";
 // import { ISettings } from "redux/userSlice";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
   const { settings } = useAppSelector(state => state.user);
-  const [openmod, setOpenmod] = useState(false);
+  // const [openmod, setOpenmod] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   // let newSettings: ISettings;
@@ -32,14 +31,8 @@ const SettingsPage = () => {
   const toggleTheme = () => {
     dispatch(updateSettings({ ...settings, theme: settings.theme === "light" ? "dark" : "light" }));
   };
-  const changeLocalCurrency = () => {
-    // const localCurrency = "HRN";
-    setOpenmod(!openmod);
-    // pop-up return {localCurrency}
-    // dispatch(updateSettings({ ...settings, localCurrency }));
-  };
 
-  const onOpenModal = () => setOpenmod(!openmod);
+  // const onOpenModal = () => setOpenmod(!openmod);
 
   const elements = [
     {
@@ -62,13 +55,6 @@ const SettingsPage = () => {
       value: settings.theme,
       btn: Icons.ArrowForward,
       onClickFn: toggleTheme,
-    },
-    {
-      icon: Icons.Salary,
-      name: "Local currency",
-      value: settings.localCurrency,
-      btn: Icons.ArrowForward,
-      onClickFn: changeLocalCurrency,
     },
     { icon: Icons.SettingsArchive, name: "Archive", btn: Icons.ArrowForward, onClickFn: () => navigate("/archived") },
     {
@@ -115,7 +101,6 @@ const SettingsPage = () => {
       <Button variant="black" clickFn={() => dispatch(logOut())}>
         Log Out
       </Button>
-      {openmod && <CurrencySelection onClick={onOpenModal} />}
     </div>
   );
 };
