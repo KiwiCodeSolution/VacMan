@@ -3,11 +3,12 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 // eslint-disable-next-line import/no-cycle
 import { IProfile, ISettings, IUser } from "./userSlice";
+// import { string } from "yup";
 // import { displayMsgCustom } from "components/notifications";
 
-// axios.defaults.baseURL = "http://localhost:3030";
+axios.defaults.baseURL = "http://localhost:3030";
 // axios.defaults.baseURL = "http://kiwicode.tech:5000";
-axios.defaults.baseURL = "https://vacmanserver-production.up.railway.app";
+// axios.defaults.baseURL = "https://vacmanserver-production.up.railway.app";
 
 export const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -157,4 +158,14 @@ export const updateSettings = createAsyncThunk<
       if (axios.isAxiosError(error)) return rejectWithValue(error.response?.data?.message);
       return error;
     }
+});
+
+export const uploadAvatar = createAsyncThunk<
+  { message: string; profile: IProfile }, any, { rejectValue: string }
+  >("user/uploadAvatar", async (data, { rejectWithValue }) => {
+  const response = await axios.post("profile/uploadAva", data);
+  if (response.status !== 200) {
+    return rejectWithValue(response.data.message);
+  };
+  return response.data;
 });

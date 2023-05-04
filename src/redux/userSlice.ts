@@ -12,6 +12,7 @@ import {
   changePass,
   updateProfile,
   updateSettings,
+  uploadAvatar,
 } from "./userOperations";
 
 export interface IProfile {
@@ -210,7 +211,19 @@ const userSlice = createSlice({
       )
       .addCase(updateSettings.rejected, state => {
         state.isLoading = false;
-      }),
+      })
+      .addCase(uploadAvatar.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(
+        uploadAvatar.fulfilled,
+        (state, { payload }: { payload: { message: string; profile: IProfile } }) => {
+          state.profile = payload.profile;
+        })
+      .addCase(uploadAvatar.rejected, state => {
+        state.isLoading = false;
+      })
+  ,
 });
 
 export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setUser, setMessage } = userSlice.actions;

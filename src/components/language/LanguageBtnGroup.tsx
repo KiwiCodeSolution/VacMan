@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { updateSettings } from "redux/userOperations";
+// import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
+// import { updateSettings } from "redux/userOperations";
 import { ISettings } from "redux/userSlice";
 
 interface ILanguage {
