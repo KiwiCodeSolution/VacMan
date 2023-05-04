@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "./store";
+// import type { RootState } from "./store";
 // eslint-disable-next-line import/no-cycle
 import {
   currentUser,
@@ -213,6 +213,5 @@ const userSlice = createSlice({
       }),
 });
 
-export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>
 export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setUser, setMessage } = userSlice.actions;
 export default userSlice.reducer;

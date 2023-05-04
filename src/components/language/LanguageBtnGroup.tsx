@@ -6,32 +6,36 @@ interface ILanguage {
   shortName: ISettings["lang"];
   name: string;
 }
+interface IParams {
+  newSettings: ISettings;
+  setNewSettings: (newSettings: ISettings) => void;
+}
 
-const LanguageBtnGroup = () => {
-  const dispatch = useAppDispatch();
-  const { settings } = useAppSelector(state => state.user);
+const LanguageBtnGroup = ({ newSettings, setNewSettings }: IParams) => {
+  // const dispatch = useAppDispatch();
+  // const { settings } = useAppSelector(state => state.user);
 
   const language: ILanguage[] = [
     { shortName: "eng", name: "English" },
     { shortName: "ukr", name: "Ukraine" },
+    { shortName: "ru", name: "Russian" },
   ];
 
-  const changeLanguage = (currentLang: ISettings["lang"]) => {
-    // console.log(currentLang);
-    dispatch(updateSettings({ ...settings, lang: currentLang }));
-  };
-
   return (
-    <ul className={`w-fit flex gap-${language.length}`}>
+    <ul className="w-fit flex">
       {language.map(el => (
         <li
           key={el.shortName}
-          className={`w-20 h-8 p-1.5 flex items-center justify-center
-          ${el.shortName === settings.lang ? "text-app-green" : "text-txt-main"}
+          className={`w-16 h-8 p-1.5 flex items-center justify-center
+          ${el.shortName === newSettings.lang ? "text-app-orange" : "text-txt-main"}
         font-semibold text-txt-main cursor-pointer transition-all duration-300 
         hover:text-txt-black`}
         >
-          <button type="button" onClick={() => changeLanguage(el.shortName)}>
+          <button
+            className={`${el.shortName === newSettings.lang && "border-b-2"} `}
+            type="button"
+            onClick={() => setNewSettings({ ...newSettings, lang: el.shortName })}
+          >
             {el.name}
           </button>
         </li>
