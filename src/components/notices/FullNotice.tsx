@@ -115,7 +115,8 @@ const FullNote = () => {
             </button>
 
             {showActions ? (
-              <div className="animate__animated animate__slideInDown">
+              // <div className="animate__animated animate__slideInDown">
+              <div>
                 <ActionList actions={actions} />
               </div>
             ) : (

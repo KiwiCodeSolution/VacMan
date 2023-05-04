@@ -7,6 +7,7 @@ export interface IAction {
   name: string;
   deadline?: number;
   fulfilled?: boolean;
+  index?: number;
 }
 export interface IVacancy {
   _id: string;
@@ -51,7 +52,7 @@ const axiosBaseQuery =
         },
       };
     }
-    };
+  };
 // const baseURL = "https://kiwicode.tech:5000/";
 const baseUrl = "https://vacmanserver-production.up.railway.app/";
 // const baseUrl = "http://localhost:3030/";
@@ -81,9 +82,5 @@ export const vacancyAPI = createApi({
   }),
 });
 
-export const {
-  useGetVacanciesQuery,
-  useAddVacancyMutation,
-  useUpdateVacancyMutation,
-  useDeleteVacancyMutation,
-} = vacancyAPI;
+export const { useGetVacanciesQuery, useAddVacancyMutation, useUpdateVacancyMutation, useDeleteVacancyMutation } =
+  vacancyAPI;
