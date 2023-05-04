@@ -6,9 +6,9 @@ import { IProfile, ISettings, IUser } from "./userSlice";
 // import { string } from "yup";
 // import { displayMsgCustom } from "components/notifications";
 
-axios.defaults.baseURL = "http://localhost:3030";
+// axios.defaults.baseURL = "http://localhost:3030";
 // axios.defaults.baseURL = "http://kiwicode.tech:5000";
-// axios.defaults.baseURL = "https://vacmanserver-production.up.railway.app";
+axios.defaults.baseURL = "https://vacmanserver-production.up.railway.app";
 
 export const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
