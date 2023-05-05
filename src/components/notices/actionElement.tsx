@@ -9,8 +9,7 @@ const convertDate = (date?: number) => {
   return `${dateFormat.getDate()}-${month < 10 ? "0" : ""}${month}-${dateFormat.getFullYear()} ${hour}.${min}`;
 };
 
-const ActionElement = ({ name, deadline, date, index }: IAction) => {
-  console.log(index);
+const ActionElement = ({ name, deadline, date }: IAction) => {
   const formattedDeadline = convertDate(deadline);
   const formattedDate = convertDate(date);
 

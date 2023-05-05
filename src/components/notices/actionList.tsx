@@ -10,9 +10,9 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
   return (
     <div className="relative overflow-hidden py-2">
       <div className="animate-slide">
-        {actions.map(({ date, name, deadline }, index) => (
+        {actions.map(({ date, name, deadline }) => (
           <div key={date}>
-            <ActionElement date={date} name={name} deadline={deadline} index={index} />
+            <ActionElement date={date} name={name} deadline={deadline} />
           </div>
         ))}
       </div>

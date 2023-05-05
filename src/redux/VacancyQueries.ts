@@ -7,8 +7,8 @@ export interface IAction {
   name: string;
   deadline?: number;
   fulfilled?: boolean;
-  index?: number;
 }
+
 export interface IVacancy {
   _id: string;
   companyName: string;
