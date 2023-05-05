@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "./store";
+// import type { RootState } from "./store";
 // eslint-disable-next-line import/no-cycle
 import {
   currentUser,
@@ -12,6 +12,7 @@ import {
   changePass,
   updateProfile,
   updateSettings,
+  uploadAvatar,
 } from "./userOperations";
 
 export interface IProfile {
@@ -20,35 +21,6 @@ export interface IProfile {
 export interface ISettings {
   lang: "eng" | "ukr" | "ru";
   theme: "light" | "dark";
-  localCurrency:
-    | "HRN"
-    | "USD"
-    | "EURO"
-    | "GBP"
-    | "JPY"
-    | "CNY"
-    | "RUB"
-    | "ILS"
-    | "INR"
-    | "KRW"
-    | "NGN"
-    | "THB"
-    | "VND"
-    | "LAK"
-    | "KHR"
-    | "MNT"
-    | "PHP"
-    | "IRR"
-    | "CRC"
-    | "PYG"
-    | "AFN"
-    | "GHS"
-    | "KZT"
-    | "TRY"
-    | "AZN"
-    | "GEL"
-    | "Złoty"
-    | "Null";
   notification: boolean;
 }
 export interface IUser {
@@ -70,7 +42,7 @@ const initialState = {
   showStartingPage: true,
   currProfile: "",
   profile: { avatar: "", phoneNumber: "", position: "" } as IProfile,
-  settings: { lang: "eng", theme: "light", localCurrency: "Null", notification: false } as ISettings,
+  settings: { lang: "eng", theme: "light",  notification: false } as ISettings,
   message: "",
 };
 
@@ -239,9 +211,20 @@ const userSlice = createSlice({
       )
       .addCase(updateSettings.rejected, state => {
         state.isLoading = false;
-      }),
+      })
+      .addCase(uploadAvatar.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(
+        uploadAvatar.fulfilled,
+        (state, { payload }: { payload: { message: string; profile: IProfile } }) => {
+          state.profile = payload.profile;
+        })
+      .addCase(uploadAvatar.rejected, state => {
+        state.isLoading = false;
+      })
+  ,
 });
 
-export const selectProfile = (state: RootState): IUser => state.user; // а нахрена это ? <Sander-Pod>
 export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setUser, setMessage } = userSlice.actions;
 export default userSlice.reducer;

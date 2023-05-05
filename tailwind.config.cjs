@@ -18,7 +18,7 @@ module.exports = {
         },
       },
       animation: {
-        slide: "slide 1s",
+        slide: "slide 0.2s",
         show: "show 3s cubic-bezier(0.4, 0, 0.6, 1)",
       },
       colors: {

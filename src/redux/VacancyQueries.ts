@@ -12,14 +12,12 @@ export interface IAction {
 export interface IVacancy {
   _id: string;
   companyName: string;
-  companyURL: string;
-  source: string;
-  sourceURL: string;
-  position: string;
-  salaryMin: number;
-  salaryMax: number;
-  currency: "USD" | "Euro" | "local";
-  notes: string;
+  companyURL?: string;
+  source?: string;
+  sourceURL?: string;
+  position?: string;
+  salary?: string;
+  notes?: string;
   actions: IAction[];
   userRank: number;
   archived: boolean;

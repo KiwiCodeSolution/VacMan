@@ -40,16 +40,10 @@ const Notification = () => {
     dispatch(setShowNotification(false));
   }
 
-  const blur = `${type !== "info" ? "backdrop-blur-xl animate__animated animate__zoomIn animate__faster" : null}`;
-
-  const animation = `${type !== "info" ? null : "animate-show"}`;
-
   return createPortal(
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div className={`absolute h-full w-full ${blur} z-30 rounded-lg top-0`} onClick={handleClick}>
-      <div
-        className={`flex justify-between absolute top-1/2 left-2/4 -translate-x-1/2 -translate-y-1/2 z-30 ${animation}`}
-      >
+    <div className="absolute h-full w-full z-30 rounded-lg top-0" onClick={handleClick}>
+      <div className="flex justify-between absolute top-1/2 left-2/4 -translate-x-1/2 -translate-y-1/2 z-30 animate-show">
         <div className={currentNotificationClass[type]}>
           <div className="pt-3 bg-contain mx-auto">{currentNotificationIcon[type]}</div>
           <span className="mt-12 text-center font-medium text-base text-txt-white">{message || "..."}</span>
