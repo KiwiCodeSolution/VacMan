@@ -12,14 +12,19 @@ module.exports = {
             transform: "translateY(0)",
           },
         },
-        show: {
+        invisible: {
           "0%": { opacity: 1 },
           "100%": { opacity: 0 },
         },
+        show: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
       },
       animation: {
-        slide: "slide 0.2s",
-        show: "show 3s cubic-bezier(0.4, 0, 0.6, 1)",
+        slide: "slide 1s",
+        show: "show 2s ease-in-out",
+        invisible: "invisible 3s cubic-bezier(0.4, 0, 0.6, 1)",
       },
       colors: {
         "txt-main": "#5b5b69",
