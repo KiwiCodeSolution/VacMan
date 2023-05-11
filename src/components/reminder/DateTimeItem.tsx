@@ -1,23 +1,32 @@
-interface IDateTime {
-  date: number;
-}
+import { IAction } from "redux/VacancyQueries";
+
+type DateTimeProps = {
+  date: IAction["date"];
+};
 
 const convertDate = (date?: number) => {
   if (!date) return "";
   const dateFormat = new Date(date);
   const month = dateFormat.getMonth() + 1;
-  const hour = dateFormat.getHours();
-  const min = dateFormat.getMinutes();
-  return `${dateFormat.getDate()}-${month < 10 ? "0" : ""}${month}-${dateFormat.getFullYear()} ${hour}.${min}`;
+  return `${dateFormat.getDate()}.${month < 10 ? "0" : ""}${month}.${dateFormat.getFullYear()}`;
 };
 
-const DateTimeItem = ({ date }: IDateTime) => {
+const convertTime = (date?: number) => {
+  if (!date) return "";
+  const dateFormat = new Date(date);
+  const hour = dateFormat.getHours();
+  const min = dateFormat.getMinutes();
+  return `${hour}:${min}`;
+};
+
+const DateTimeItem = ({ date }: DateTimeProps) => {
   const formattedDate = convertDate(date);
+  const formattedTime = convertTime(date);
 
   return (
-    <ul>
-      <li>{formattedDate}</li>
-      <li>{formattedDate}</li>
+    <ul className="flex justify-between">
+      <li className="py-1 px-[10px]">{formattedDate}</li>
+      <li>{formattedTime}</li>
     </ul>
   );
 };
