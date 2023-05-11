@@ -151,7 +151,8 @@ export const updateSettings = createAsyncThunk<
   ISettings,
   { rejectValue: string }
 >("user/updateSettings", async (settingsData, { rejectWithValue }) => {
-    try {
+  try {
+    // console.log("update vacancy data:", { ...settingsData });
       const { data } = await axios.post("/settings", { ...settingsData });
       return data;
     } catch (error) {

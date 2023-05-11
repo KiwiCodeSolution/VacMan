@@ -17,10 +17,13 @@ const SettingsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  location.state.newSettings = newSettings;
+  // console.log("new settings:", newSettings);
   useEffect(() => {
     return () => {
       // console.log("saving new settings:", newSettings);
-      dispatch(updateSettings(newSettings));
+      // console.log("location:", location);
+      dispatch(updateSettings(location.state.newSettings));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
