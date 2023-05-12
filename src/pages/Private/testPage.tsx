@@ -7,7 +7,7 @@ const TestPage = () => {
   const [state, setState] = useState(1);
 
   useEffect(() => {
-    return () => console.log("clearing function, return:", state)
+    return () => console.log("clearing function, return:", state);
   }, [state]);
 
   const incFn = () => setState(state + 1);
