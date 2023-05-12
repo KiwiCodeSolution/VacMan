@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 const TestPage = () => {
   const [state, setState] = useState(1);
 
-  useEffect(() => () => console.log("clearing function, return:", state), [state]);
+  useEffect(() => {
+    return () => console.log("clearing function, return:", state)
+  }, [state]);
 
   const incFn = () => setState(state + 1);
 
