@@ -13,20 +13,19 @@ import SubHeader from "components/subHeader";
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
   const { settings } = useAppSelector(state => state.user);
-  const [newSettings, setNewSettings] = useState({ ...settings });
+  const [newSettings, setNewSettings] = useState(settings);
   const location = useLocation();
   const navigate = useNavigate();
 
-  location.state.newSettings = newSettings;
+  // location.state.newSettings = newSettings;
   // console.log("new settings:", newSettings);
   useEffect(() => {
     return () => {
-      // console.log("saving new settings:", newSettings);
+      console.log("saving new settings:", newSettings);
       // console.log("location:", location);
-      dispatch(updateSettings(location.state.newSettings));
+      dispatch(updateSettings(newSettings));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, newSettings]);
 
   // const changeLanguage = () => {
   //   setNewSettings({ ...newSettings, lang: newSettings.lang === "eng" ? "ru" : "eng" });
