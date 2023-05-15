@@ -9,6 +9,7 @@ import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
 import LanguageBtnGroup from "components/language/LanguageBtnGroup";
 import SubHeader from "components/subHeader";
+import { ISettings } from "redux/userSlice";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
@@ -24,7 +25,12 @@ const SettingsPage = () => {
       // console.log("saving new settings:", newSettings);
       // console.log("location:", location);
       // dispatch(updateSettings(newSettings));
-      dispatch(updateSettings(location.state.newSettings));
+      let permition = 0;
+      const arrOfKeys = Object.keys(settings);
+      arrOfKeys.forEach(key => {
+        if (location.state.newSettings[key] !== settings[key as keyof ISettings]) permition += 1;
+      })
+      if (permition) dispatch(updateSettings(location.state.newSettings));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
