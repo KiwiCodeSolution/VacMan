@@ -32,6 +32,7 @@ import Notification from "components/notifications";
 import AddAvatar from "pages/Private/addAvatar";
 import PrivacyPolicy from "pages/Private/privacyPolici";
 import AddAction from "pages/Private/addAction";
+import TestPage from "pages/Private/testPage";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -71,6 +72,7 @@ const App = () => {
           <Route path="archived" element={<PrivateRoute><Archived /></PrivateRoute>} />
           <Route path="addAvatar" element={<PrivateRoute><AddAvatar /></PrivateRoute>} />
           <Route path="privacyPolicy" element={<PrivateRoute><PrivacyPolicy /></PrivateRoute>} />
+          <Route path="test" element={<PrivateRoute><TestPage /></PrivateRoute>} />
         </Route>
 
         <Route path=":_id" element={<PrivateRoute><Card /></PrivateRoute>}>

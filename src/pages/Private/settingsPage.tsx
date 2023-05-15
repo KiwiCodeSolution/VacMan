@@ -9,18 +9,28 @@ import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
 import LanguageBtnGroup from "components/language/LanguageBtnGroup";
 import SubHeader from "components/subHeader";
+import { ISettings } from "redux/userSlice";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
   const { settings } = useAppSelector(state => state.user);
-  const [newSettings, setNewSettings] = useState({ ...settings });
+  const [newSettings, setNewSettings] = useState(settings);
   const location = useLocation();
   const navigate = useNavigate();
 
+  location.state.newSettings = newSettings;
+  // console.log("new settings:", newSettings);
   useEffect(() => {
     return () => {
       // console.log("saving new settings:", newSettings);
-      dispatch(updateSettings(newSettings));
+      // console.log("location:", location);
+      // dispatch(updateSettings(newSettings));
+      let permition = 0;
+      const arrOfKeys = Object.keys(settings);
+      arrOfKeys.forEach(key => {
+        if (location.state.newSettings[key] !== settings[key as keyof ISettings]) permition += 1;
+      })
+      if (permition) dispatch(updateSettings(location.state.newSettings));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
