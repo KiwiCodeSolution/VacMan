@@ -5,7 +5,7 @@ import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 export interface IAction {
   date: number;
   name: string;
-  deadline?: number;
+  deadline: number;
   fulfilled?: boolean;
 }
 
