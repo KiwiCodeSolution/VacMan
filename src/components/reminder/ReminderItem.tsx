@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-shadow */
 // import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import { IVacancy } from "redux/VacancyQueries";
@@ -49,12 +50,13 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       <li className="px-5">
         {/* Deadline for */}
         <p>
-          <span className="font-medium">company:</span> {vacancy.companyName},{" "}
-          <span className="font-medium">vacancy:</span> {vacancy.position},
+          <span className="font-semibold">Company:</span> "{vacancy.companyName}"
         </p>
-
         <p>
-          <span className="font-medium">action:</span> {actionItem.name}
+          <span className="font-semibold">Vacancy:</span> {vacancy.position}
+        </p>
+        <p>
+          <span className="font-semibold">Action:</span> {actionItem.name}
         </p>
       </li>
 

@@ -13,7 +13,7 @@ import Loader from "components/ui/loader";
 const Reminder = () => {
   const location = useLocation();
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
-  if (!response) return "";
+  if (!response) return (<h2>No response data</h2>);
 
   const vacancies = response.data
     ?.filter(vacancy => vacancy.archived === false)
