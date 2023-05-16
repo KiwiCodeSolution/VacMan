@@ -14,8 +14,8 @@ import ActionShortElement from "./actionShortElement";
 const FullNote = () => {
   const { _id } = useParams();
   const { data: response } = useGetVacanciesQuery();
-  const { handleArchive } = useHandleVacancy();
   const [showActions, setShowActions] = useState(false);
+  const { handleArchive, removeVacancy } = useHandleVacancy();
 
   if (!_id) return <h2>Error, id is required</h2>;
   const vacancies = response?.data;
@@ -116,10 +116,20 @@ const FullNote = () => {
             </div>
           </li>
         </ul>
-
-        <Button variant="black" clickFn={() => handleArchive(_id, true)}>
-          Archive
-        </Button>
+        {archived ? (
+          <div className="flex">
+            <Button variant="black" clickFn={() => handleArchive(_id, false)}>
+              Return to active
+            </Button>
+            <Button variant="black" clickFn={() => removeVacancy(_id)}>
+              Remove
+            </Button>
+          </div>
+        ) : (
+          <Button variant="black" clickFn={() => handleArchive(_id, true)}>
+            Archive
+          </Button>
+        )}
       </div>
     </div>
   );
