@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
 import { IVacancy } from "redux/VacancyQueries";
@@ -31,6 +31,7 @@ export const effectItem = `hover:shadow-2xl focus:shadow-2xl`;
 
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const { handleArchive, removeVacancy } = useHandleVacancy();
+  const location = useLocation();
 
   const { _id, companyName, position, salary, cardColor, userRank, actions, archived } = shortVacancy;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
@@ -41,7 +42,7 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         className={`relative flex flex-col gap-y-1 rounded-xl p-4 shadow-xl ${colorVariants[cardColor]} ${archivalText} ${effectItem} max-w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto`}
       >
         <button className={`absolute top-4 right-[14px] ${effectIcon}`}>
-          <Link to={`/${_id}/details`}>
+          <Link to={`/${_id}/details`} state={{ from: location }}>
             <Icons.Eye size={32} />
           </Link>
         </button>

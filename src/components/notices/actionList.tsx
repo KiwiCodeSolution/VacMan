@@ -3,11 +3,11 @@ import ActionElement from "./actionElement";
 import Button from "components/ui/button";
 import { Link, useLocation, useParams } from "react-router-dom";
 
-const ActionList = ({ actions }: { actions: IAction[] }) => {
+const ActionList = ({ actions, isArchived }: { actions: IAction[]; isArchived?: boolean | undefined }) => {
   const location = useLocation();
   const { _id } = useParams();
 
-  const disabledButton = !actions[actions.length - 1].fulfilled;
+  const disabledButton = !actions[actions.length - 1].fulfilled || isArchived;
 
   return (
     <div className="relative overflow-hidden py-2">
