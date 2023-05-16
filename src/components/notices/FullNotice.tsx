@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Button from "components/ui/button";
 import NavHeader from "components/navHeader";
@@ -13,6 +13,7 @@ import ActionShortElement from "./actionShortElement";
 
 const FullNote = () => {
   const { _id } = useParams();
+  const location = useLocation();
   const { data: response } = useGetVacanciesQuery();
   const [showActions, setShowActions] = useState(false);
   const { handleArchive, removeVacancy } = useHandleVacancy();
@@ -40,7 +41,7 @@ const FullNote = () => {
   return (
     <div className="container mx-auto">
       <NavHeader
-        prevAddress="/"
+        prevAddress={location?.state?.from.pathname ?? "/"}
         text={companyName}
         link={companyURL}
         editAddress={`/${_id}/edit`}
@@ -94,7 +95,7 @@ const FullNote = () => {
               </div>
             </button>
             {showActions ? (
-              <ActionList actions={actions} />
+              <ActionList actions={actions} isArchived={archived} />
             ) : (
               actions.length !== 0 && (
                 <ActionShortElement
@@ -117,12 +118,20 @@ const FullNote = () => {
           </li>
         </ul>
         {archived ? (
-          <div className="flex">
-            <Button variant="black" clickFn={() => handleArchive(_id, false)}>
-              Return to active
-            </Button>
-            <Button variant="black" clickFn={() => removeVacancy(_id)}>
+          <div className="flex gap-x-3">
+            <Button
+              variant="black"
+              clickFn={() => removeVacancy(_id)}
+              icon={<Icons.Trash size="30" className="mr-3" />}
+            >
               Remove
+            </Button>
+            <Button
+              variant="black"
+              clickFn={() => handleArchive(_id, false)}
+              icon={<Icons.Recover size="32" className="mr-3" />}
+            >
+              Return to active
             </Button>
           </div>
         ) : (

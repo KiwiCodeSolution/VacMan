@@ -6,7 +6,9 @@ const convertDate = (date?: number) => {
   const month = dateFormat.getMonth() + 1;
   const hour = dateFormat.getHours();
   const min = dateFormat.getMinutes();
-  return `${dateFormat.getDate()}-${month < 10 ? "0" : ""}${month}-${dateFormat.getFullYear()} ${hour}.${min}`;
+  return `${dateFormat.getDate()}-${month < 10 ? "0" : ""}${month}-${dateFormat.getFullYear()} ${hour}.${
+    min > 10 ? min : `0${min}`
+  }`;
 };
 
 const ActionElement = ({ name, deadline, date }: IAction) => {

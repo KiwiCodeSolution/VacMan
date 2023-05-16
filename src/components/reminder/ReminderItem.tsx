@@ -4,8 +4,9 @@
 import { IVacancy } from "redux/VacancyQueries";
 import * as Icons from "components/iconsComponents";
 import { colorVariants, effectIcon, effectItem } from "components/notices/ShortNotice";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { effectButton } from "components/ui/button";
+import useHandleVacancy from "hooks/handleVacancy";
 
 export interface IReminderVacancy {
   date: number;
@@ -19,6 +20,8 @@ type ReminderProps = {
 };
 
 const ReminderItem = ({ vacancy }: ReminderProps) => {
+  const location = useLocation();
+  const { editVacancy } = useHandleVacancy();
   const { actions, cardColor, _id } = vacancy;
 
   const actionItem = actions[actions.length - 1];
@@ -37,6 +40,12 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
     return `${hour}:${min > 10 ? min : `0${min}`}`;
   };
 
+  const updateAction = { actions };
+
+  function fulfilled() {
+    editVacancy({ _id, data: updateAction });
+  }
+
   return (
     <ul
       className={`flex flex-col gap-y-2 rounded-2xl focus:shadow-2xl w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto border relative ${effectItem}`}
@@ -51,7 +60,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
           </div>
         </div>
         <button className={`absolute top-3 right-3 ${effectIcon}`}>
-          <Link to={`/${_id}/details`}>
+          <Link to={`/${_id}/details`} state={{ from: location }}>
             <Icons.Eye size={32} />
           </Link>
         </button>
@@ -74,15 +83,20 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       >
         <button
           type="button"
-          className={`flex justify-center items-center gap-x-5 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${effectButton}`}
+          className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${effectButton}`}
         >
-          Edit <Icons.Edit />
+          <Icons.Edit />
+          Edit
         </button>
         <button
           type="button"
-          className={`flex justify-center items-center gap-x-5 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${effectButton}`}
+          className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${effectButton}`}
+          onClick={() => {
+            fulfilled();
+          }}
         >
-          Fulfilled <Icons.Checked />
+          <Icons.Checked />
+          Fulfilled
         </button>
       </li>
     </ul>
