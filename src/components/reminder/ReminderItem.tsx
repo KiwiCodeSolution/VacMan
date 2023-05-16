@@ -3,7 +3,9 @@
 // import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import { IVacancy } from "redux/VacancyQueries";
 import * as Icons from "components/iconsComponents";
-import { colorVariants } from "components/notices/ShortNotice";
+import { colorVariants, effectIcon, effectItem } from "components/notices/ShortNotice";
+import { Link } from "react-router-dom";
+import { effectButton } from "components/ui/button";
 
 export interface IReminderVacancy {
   date: number;
@@ -17,7 +19,7 @@ type ReminderProps = {
 };
 
 const ReminderItem = ({ vacancy }: ReminderProps) => {
-  const { actions, cardColor } = vacancy;
+  const { actions, cardColor, _id } = vacancy;
 
   const actionItem = actions[actions.length - 1];
   const deadlineItem = actionItem.deadline as IReminderVacancy["deadline"];
@@ -36,27 +38,34 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
   };
 
   return (
-    <ul className="flex flex-col gap-y-1 rounded-2xl shadow-xl hover:shadow-2xl focus:shadow-2xl w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto border">
+    <ul
+      className={`flex flex-col gap-y-2 rounded-2xl focus:shadow-2xl w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto border relative ${effectItem}`}
+    >
       <li className="flex justify-between px-3 mt-3">
-        <div className="flex items-center gap-x-2 py-[2px] px-[10px] border border-bg-grey rounded-3xl">
-          <Icons.Bell /> {convertDate(deadlineItem)}
+        <div className="flex items-center gap-x-4 py-[2px] px-[10px] border border-bg-grey rounded-3xl">
+          <div className="flex items-center gap-x-2">
+            <Icons.Bell /> {convertDate(deadlineItem)}
+          </div>
+          <div className="flex items-center gap-x-2">
+            <Icons.Clock /> {convertTime(deadlineItem)}
+          </div>
         </div>
-        <div className="flex items-center gap-x-2 py-[2px] px-[10px] border border-bg-grey rounded-3xl">
-          <Icons.Clock />
-          {convertTime(deadlineItem)}
-        </div>
+        <button className={`absolute top-3 right-3 ${effectIcon}`}>
+          <Link to={`/${_id}/details`}>
+            <Icons.Eye size={32} />
+          </Link>
+        </button>
       </li>
-
-      <li className="px-5">
-        {/* Deadline for */}
-        <p>
-          <span className="font-semibold">Company:</span> "{vacancy.companyName}"
+      <li className="px-5 flex flex-col gap-y-1">
+        <p className="flex gap-x-2 gap-y-1 font-bold">
+          <Icons.CompanyName size={24} />
+          Company: "{vacancy.companyName}"
         </p>
-        <p>
-          <span className="font-semibold">Vacancy:</span> {vacancy.position}
+        <p className="flex gap-x-2 gap-y-1">
+          <Icons.Position size={24} /> Vacancy: {vacancy.position}
         </p>
-        <p>
-          <span className="font-semibold">Action:</span> {actionItem.name}
+        <p className="flex gap-x-2 gap-y-1">
+          <Icons.Action size={24} /> Action: {actionItem.name}
         </p>
       </li>
 
@@ -65,13 +74,13 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       >
         <button
           type="button"
-          className="flex justify-center items-center gap-x-5 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] focus:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]"
+          className={`flex justify-center items-center gap-x-5 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${effectButton}`}
         >
           Edit <Icons.Edit />
         </button>
         <button
           type="button"
-          className="flex justify-center items-center gap-x-5 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] focus:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]"
+          className={`flex justify-center items-center gap-x-5 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${effectButton}`}
         >
           Fulfilled <Icons.Checked />
         </button>

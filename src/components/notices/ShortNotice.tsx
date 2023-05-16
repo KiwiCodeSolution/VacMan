@@ -25,20 +25,23 @@ export const colorVariants = {
   orange: "bg-app-orange",
 } as IColor;
 
+export const effectIcon = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
+
+export const effectItem = `hover:shadow-2xl focus:shadow-2xl`;
+
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
   const { handleArchive, removeVacancy } = useHandleVacancy();
 
   const { _id, companyName, position, salary, cardColor, userRank, actions, archived } = shortVacancy;
-  const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
 
   return (
     <div>
       <ul
-        className={`relative flex flex-col gap-y-1 rounded-xl p-4 shadow-xl ${colorVariants[cardColor]} ${archivalText} hover:shadow-2xl focus:shadow-2xl max-w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto`}
+        className={`relative flex flex-col gap-y-1 rounded-xl p-4 shadow-xl ${colorVariants[cardColor]} ${archivalText} ${effectItem} max-w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto`}
       >
-        <button className={`absolute top-4 right-[14px] ${effect}`}>
-          <Link to={`${_id}/details`}>
+        <button className={`absolute top-4 right-[14px] ${effectIcon}`}>
+          <Link to={`/${_id}/details`}>
             <Icons.Eye size={32} />
           </Link>
         </button>
@@ -63,11 +66,11 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
             <Stars amount={5} active={userRank} />
           ) : (
             <div className="flex gap-1">
-              <button type="button" onClick={() => removeVacancy(_id)} className={`${effect}`}>
+              <button type="button" onClick={() => removeVacancy(_id)} className={`${effectIcon}`}>
                 <Icons.Trash size="30" />
               </button>
 
-              <button type="button" onClick={() => handleArchive(_id, false)} className={`${effect}`}>
+              <button type="button" onClick={() => handleArchive(_id, false)} className={`${effectIcon}`}>
                 <Icons.Recover size="32" />
               </button>
             </div>

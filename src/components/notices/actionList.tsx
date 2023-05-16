@@ -7,6 +7,8 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
   const location = useLocation();
   const { _id } = useParams();
 
+  const disabledButton = !actions[actions.length - 1].fulfilled;
+
   return (
     <div className="relative overflow-hidden py-2">
       <div className="animate-slide">
@@ -23,7 +25,7 @@ const ActionList = ({ actions }: { actions: IAction[] }) => {
         </div>
         <div className="-mt-8 ml-20 w-48">
           <Link to={`/${_id}/addAction`} state={{ from: location }}>
-            <Button variant="white" btnType="button">
+            <Button variant="white" btnType="button" disabled={disabledButton}>
               New action
             </Button>
           </Link>
