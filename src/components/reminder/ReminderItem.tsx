@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-shadow */
 // import { useGetVacanciesQuery } from "redux/VacancyQueries";
-import { IVacancy } from "redux/VacancyQueries";
+import { IAction, IVacancy } from "redux/VacancyQueries";
 import * as Icons from "components/iconsComponents";
 import { colorVariants, effectIcon, effectItem } from "components/notices/ShortNotice";
 import { Link, useLocation } from "react-router-dom";
@@ -40,10 +40,17 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
     return `${hour}:${min > 10 ? min : `0${min}`}`;
   };
 
-  const updateAction = { actions };
+  // const updateAction = { actions };
 
   function fulfilled() {
-    editVacancy({ _id, data: updateAction });
+    const newActions = [] as IAction[];
+
+    actions.forEach(action => {
+      newActions.push({ ...action });
+    });
+    newActions[newActions.length - 1].fulfilled = true;
+
+    editVacancy({ _id, data: { actions: newActions } });
   }
 
   return (

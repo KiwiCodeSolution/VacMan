@@ -131,7 +131,7 @@ const FullNote = () => {
               clickFn={() => handleArchive(_id, false)}
               icon={<Icons.Recover size="32" className="mr-3" />}
             >
-              Return to active
+              Restore
             </Button>
           </div>
         ) : (

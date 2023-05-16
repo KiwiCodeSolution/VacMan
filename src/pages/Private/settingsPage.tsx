@@ -18,13 +18,9 @@ const SettingsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  location.state.newSettings = newSettings;
-  // console.log("new settings:", newSettings);
+  location.state = { newSettings };
   useEffect(() => {
     return () => {
-      // console.log("saving new settings:", newSettings);
-      // console.log("location:", location);
-      // dispatch(updateSettings(newSettings));
       let permition = 0;
       const arrOfKeys = Object.keys(settings);
       arrOfKeys.forEach(key => {
@@ -67,7 +63,12 @@ const SettingsPage = () => {
       btn: Icons.ArrowForward,
       onClickFn: toggleTheme,
     },
-    { icon: Icons.SettingsArchive, name: "Archive", btn: Icons.ArrowForward, onClickFn: () => navigate("/archived") },
+    {
+      icon: Icons.SettingsArchive,
+      name: "Archive",
+      btn: Icons.ArrowForward,
+      onClickFn: () => navigate("/archived"),
+    },
     {
       icon: Icons.SettingsPolicy,
       name: "Policy",
@@ -78,7 +79,7 @@ const SettingsPage = () => {
 
   return (
     <div className="mb-28 select-none">
-      <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-black" text="Settings" textWhite />
+      <NavHeader prevAddress={location?.state?.from?.pathname ?? "/"} bg="bg-black" text="Settings" textWhite />
       <SubHeader fill="text-txt-black" />
 
       <div className="mx-auto w-24 pt-4 pb-7">
