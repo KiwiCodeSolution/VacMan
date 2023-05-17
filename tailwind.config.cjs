@@ -20,11 +20,20 @@ module.exports = {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
         },
+        bell: {
+          "0%, 20%, 40%, 60%, 80%, 100%": {
+            transform: "rotate(20deg)",
+          },
+          "10%, 30%, 50%, 70%, 90%": {
+            transform: "rotate(-20deg)",
+          },
+        },
       },
       animation: {
         slide: "slide 1s",
         show: "show 2s ease-in-out",
         invisible: "invisible 3s cubic-bezier(0.4, 0, 0.6, 1)",
+        bell: "bell 0.7s",
       },
       colors: {
         "txt-main": "#5b5b69",
