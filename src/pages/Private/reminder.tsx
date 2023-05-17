@@ -16,9 +16,12 @@ const Reminder = () => {
   if (!response) return <h2>No response data</h2>;
 
   const vacanciesActiveActions = response.data
-    ?.filter(vacancy => vacancy.archived === false)
-    .filter(vacancy => vacancy.actions.length > 1)
-    .filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === false)
+    ?.filter(
+      vacancy =>
+        vacancy.archived === false &&
+        vacancy.actions.length > 1 &&
+        vacancy.actions[vacancy.actions.length - 1].fulfilled === false
+    )
     .sort(
       (firstVacancy, secondVacancy) =>
         firstVacancy?.actions[firstVacancy.actions.length - 1].deadline -
@@ -26,9 +29,12 @@ const Reminder = () => {
     );
 
   const vacanciesFulfilledActions = response.data
-    ?.filter(vacancy => vacancy.archived === false)
-    .filter(vacancy => vacancy.actions.length > 1)
-    .filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === true)
+    ?.filter(
+      vacancy =>
+        vacancy.archived === false &&
+        vacancy.actions.length > 1 &&
+        vacancy.actions[vacancy.actions.length - 1].fulfilled === true
+    )
     .sort(
       (firstVacancy, secondVacancy) =>
         firstVacancy?.actions[firstVacancy.actions.length - 1].deadline -
