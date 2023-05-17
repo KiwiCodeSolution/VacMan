@@ -9,14 +9,19 @@ import * as Icons from "components/iconsComponents";
 import { useLocation } from "react-router-dom";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import Loader from "components/ui/loader";
+import { useAppSelector } from "hooks/reduxHooks";
+import { setAuthHeader } from "redux/userOperations";
 
 const Reminder = () => {
+  const { token } = useAppSelector(state => state.user);
+  setAuthHeader(token);
   const location = useLocation();
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
-  if (!response) return <h2>No response data</h2>;
+
+  if (!response) return <h2>Waiting for data ..</h2>;
 
   const vacanciesActiveActions = response.data
-    ?.filter(vacancy => vacancy.archived === false)
+    .filter(vacancy => vacancy.archived === false)
     .filter(vacancy => vacancy.actions.length > 1)
     .filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === false)
     .sort(

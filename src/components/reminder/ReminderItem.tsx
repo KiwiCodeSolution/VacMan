@@ -24,7 +24,6 @@ type ReminderProps = {
 
 const ReminderItem = ({ vacancy }: ReminderProps) => {
   const location = useLocation();
-  console.log(location);
   const { editVacancy } = useHandleVacancy();
   const dispatch = useAppDispatch();
   const { actions, cardColor, _id } = vacancy;
