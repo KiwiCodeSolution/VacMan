@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-shadow */
 // import { useGetVacanciesQuery } from "redux/VacancyQueries";
@@ -7,6 +8,8 @@ import { colorVariants, effectIcon, effectItem } from "components/notices/ShortN
 import { Link, useLocation } from "react-router-dom";
 import { effectButton } from "components/ui/button";
 import useHandleVacancy from "hooks/handleVacancy";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { setReminder } from "redux/userSlice";
 
 export interface IReminderVacancy {
   date: number;
@@ -21,11 +24,14 @@ type ReminderProps = {
 
 const ReminderItem = ({ vacancy }: ReminderProps) => {
   const location = useLocation();
+  console.log(location);
   const { editVacancy } = useHandleVacancy();
+  const dispatch = useAppDispatch();
   const { actions, cardColor, _id } = vacancy;
 
   const actionItem = actions[actions.length - 1];
   const deadlineItem = actionItem.deadline as IReminderVacancy["deadline"];
+  const fulfilledItem = actionItem.fulfilled as IReminderVacancy["fulfilled"];
 
   const convertDate = (deadlineDate: number) => {
     const dateFormat = new Date(deadlineDate);
@@ -40,27 +46,43 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
     return `${hour}:${min > 10 ? min : `0${min}`}`;
   };
 
-  // const updateAction = { actions };
-
   function fulfilled() {
     const newActions = [] as IAction[];
-
     actions.forEach(action => {
       newActions.push({ ...action });
     });
     newActions[newActions.length - 1].fulfilled = true;
-
     editVacancy({ _id, data: { actions: newActions } });
   }
 
+  // styles
+
+  const isFulfilledBg = actionItem.fulfilled ? "bg-txt-grey" : null;
+  const disabledButtonStyle = actionItem.fulfilled ? null : `${effectButton}`;
+
+  const deadlineStyles = (fulfilledItem: IReminderVacancy["fulfilled"], deadlineItem: IReminderVacancy["deadline"]) => {
+    if (fulfilledItem) {
+      return;
+    }
+    if (Date.now() - deadlineItem > 0) {
+      dispatch(setReminder(true));
+      return "fill-red-600 stroke-red-600 animate-bell";
+    }
+    if (Date.now() - deadlineItem < 86400000) {
+      return "fill-orange-400 stroke-orange-400";
+    }
+  };
+
+  //
+
   return (
     <ul
-      className={`flex flex-col gap-y-2 rounded-2xl focus:shadow-2xl w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto border relative ${effectItem}`}
+      className={`flex flex-col gap-y-2 rounded-2xl focus:shadow-2xl w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto border relative ${effectItem} ${isFulfilledBg}`}
     >
       <li className="flex justify-between px-3 mt-3">
         <div className="flex items-center gap-x-4 py-[2px] px-[10px] border border-bg-grey rounded-3xl">
           <div className="flex items-center gap-x-2">
-            <Icons.Bell /> {convertDate(deadlineItem)}
+            <Icons.Bell className={deadlineStyles(fulfilledItem, deadlineItem)} /> {convertDate(deadlineItem)}
           </div>
           <div className="flex items-center gap-x-2">
             <Icons.Clock /> {convertTime(deadlineItem)}
@@ -90,14 +112,16 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       >
         <button
           type="button"
-          className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${effectButton}`}
+          className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
+          disabled={actionItem.fulfilled}
         >
           <Icons.Edit />
           Edit
         </button>
         <button
           type="button"
-          className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${effectButton}`}
+          className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
+          disabled={actionItem.fulfilled}
           onClick={() => {
             fulfilled();
           }}

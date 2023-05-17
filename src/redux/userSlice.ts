@@ -42,8 +42,9 @@ const initialState = {
   showStartingPage: true,
   currProfile: "",
   profile: { avatar: "", phoneNumber: "", position: "" } as IProfile,
-  settings: { lang: "eng", theme: "light",  notification: false } as ISettings,
+  settings: { lang: "eng", theme: "light", notification: false } as ISettings,
   message: "",
+  reminder: false,
 };
 
 const userSlice = createSlice({
@@ -77,6 +78,9 @@ const userSlice = createSlice({
       state.profile = payload.profile;
       state.settings = payload.settings;
       state.currProfile = payload.currProfile || "";
+    },
+    setReminder(state, { payload }: PayloadAction<boolean>) {
+      state.reminder = payload;
     },
   },
 
@@ -215,16 +219,14 @@ const userSlice = createSlice({
       .addCase(uploadAvatar.pending, state => {
         state.isLoading = true;
       })
-      .addCase(
-        uploadAvatar.fulfilled,
-        (state, { payload }: { payload: { message: string; profile: IProfile } }) => {
-          state.profile = payload.profile;
-        })
+      .addCase(uploadAvatar.fulfilled, (state, { payload }: { payload: { message: string; profile: IProfile } }) => {
+        state.profile = payload.profile;
+      })
       .addCase(uploadAvatar.rejected, state => {
         state.isLoading = false;
-      })
-  ,
+      }),
 });
 
-export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setUser, setMessage } = userSlice.actions;
+export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setUser, setMessage, setReminder } =
+  userSlice.actions;
 export default userSlice.reducer;

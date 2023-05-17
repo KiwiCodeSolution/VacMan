@@ -13,11 +13,22 @@ import Loader from "components/ui/loader";
 const Reminder = () => {
   const location = useLocation();
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
-  if (!response) return (<h2>No response data</h2>);
+  if (!response) return <h2>No response data</h2>;
 
-  const vacancies = response.data
+  const vacanciesActiveActions = response.data
     ?.filter(vacancy => vacancy.archived === false)
     .filter(vacancy => vacancy.actions.length > 1)
+    .filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === false)
+    .sort(
+      (firstVacancy, secondVacancy) =>
+        firstVacancy?.actions[firstVacancy.actions.length - 1].deadline -
+        secondVacancy?.actions[secondVacancy.actions.length - 1].deadline
+    );
+
+  const vacanciesFulfilledActions = response.data
+    ?.filter(vacancy => vacancy.archived === false)
+    .filter(vacancy => vacancy.actions.length > 1)
+    .filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === true)
     .sort(
       (firstVacancy, secondVacancy) =>
         firstVacancy?.actions[firstVacancy.actions.length - 1].deadline -
@@ -34,7 +45,7 @@ const Reminder = () => {
           </div>
         ) : isError ? (
           <h2>ERROR</h2>
-        ) : !vacancies || !vacancies.length ? (
+        ) : !vacanciesActiveActions || !vacanciesActiveActions.length ? (
           <>
             <div className="flex justify-center mt-24 px-4">
               <Icons.Todos />
@@ -43,7 +54,12 @@ const Reminder = () => {
           </>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-28 mt-5 items-center gap-4 px-4">
-            {vacancies && vacancies.map(vacancy => <ReminderItem key={vacancy._id} vacancy={vacancy} />)}
+            {vacanciesActiveActions.map(vacancy => (
+              <ReminderItem key={vacancy._id} vacancy={vacancy} />
+            ))}
+            {vacanciesFulfilledActions.map(vacancy => (
+              <ReminderItem key={vacancy._id} vacancy={vacancy} />
+            ))}
           </div>
         )}
       </div>
