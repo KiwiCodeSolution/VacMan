@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable prettier/prettier */
 import { useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
@@ -55,14 +56,18 @@ const FullNote = () => {
               <Stars amount={5} active={userRank} archived={archived} />
 
               {source ? (
-                <a
-                  href={sourceURL}
-                  className={`font-bold ${sourceURL && "text-txt-link"} text-xl mt-2`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {source}
-                </a>
+                sourceURL ? (
+                  <a
+                    href={sourceURL}
+                    className="font-bold text-txt-link text-xl mt-2"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {source}
+                  </a>
+                ) : (
+                  <p className="font-bold text-xl mt-2">{source}</p>
+                )
               ) : (
                 <p className="py-3" />
               )}
