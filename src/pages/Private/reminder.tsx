@@ -9,11 +9,16 @@ import * as Icons from "components/iconsComponents";
 import { useLocation } from "react-router-dom";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import Loader from "components/ui/loader";
+import { useAppSelector } from "hooks/reduxHooks";
+import { setAuthHeader } from "redux/userOperations";
 
 const Reminder = () => {
+  const { token } = useAppSelector(state => state.user);
+  setAuthHeader(token);
   const location = useLocation();
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
-  if (!response) return <h2>No response data</h2>;
+
+  if (!response) return <h2 className="text-center">Waiting for data ..</h2>;
 
   const vacanciesActiveActions = response.data
     ?.filter(
@@ -41,6 +46,9 @@ const Reminder = () => {
         secondVacancy?.actions[secondVacancy.actions.length - 1].deadline
     );
 
+  console.log("Active:", vacanciesActiveActions);
+  console.log("Fulfilled:", vacanciesFulfilledActions);
+
   return (
     <>
       <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-light" text="Reminder" underlined />
@@ -51,7 +59,7 @@ const Reminder = () => {
           </div>
         ) : isError ? (
           <h2>ERROR</h2>
-        ) : !vacanciesActiveActions || !vacanciesActiveActions.length ? (
+        ) : !(vacanciesActiveActions.length || vacanciesFulfilledActions.length) ? (
           <>
             <div className="flex justify-center mt-24 px-4">
               <Icons.Todos />

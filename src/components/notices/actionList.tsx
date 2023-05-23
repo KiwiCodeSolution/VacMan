@@ -12,9 +12,9 @@ const ActionList = ({ actions, isArchived }: { actions: IAction[]; isArchived?: 
   return (
     <div className="relative overflow-hidden py-2">
       <div className="animate-slide">
-        {actions.map(({ date, name, deadline }) => (
-          <div key={date}>
-            <ActionElement date={date} name={name} deadline={deadline} />
+        {actions.map(action => (
+          <div key={action.date}>
+            <ActionElement action={action} />
           </div>
         ))}
       </div>

@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-shadow */
 // import { useGetVacanciesQuery } from "redux/VacancyQueries";
-import { IAction, IVacancy } from "redux/VacancyQueries";
+import { IVacancy } from "redux/VacancyQueries";
 import * as Icons from "components/iconsComponents";
 import { colorVariants, effectIcon, effectItem } from "components/notices/ShortNotice";
 import { Link, useLocation } from "react-router-dom";
@@ -28,6 +28,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
   const { editVacancy } = useHandleVacancy();
   const dispatch = useAppDispatch();
   const { actions, cardColor, _id } = vacancy;
+  const newActions = structuredClone(actions);
 
   const actionItem = actions[actions.length - 1];
   const deadlineItem = actionItem.deadline as IReminderVacancy["deadline"];
@@ -47,11 +48,11 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
   };
 
   function fulfilled() {
-    const newActions = [] as IAction[];
-    actions.forEach(action => {
-      newActions.push({ ...action });
-    });
     newActions[newActions.length - 1].fulfilled = true;
+    editVacancy({ _id, data: { actions: newActions } });
+  }
+  function undoFulfilled() {
+    newActions[newActions.length - 1].fulfilled = false;
     editVacancy({ _id, data: { actions: newActions } });
   }
 
@@ -110,25 +111,33 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       <li
         className={`flex justify-between align-baseline pt-2 gap-x-4 px-3 pb-2 ${colorVariants[cardColor]} border-b-0 rounded-xl`}
       >
-        <button
-          type="button"
-          className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
-          disabled={actionItem.fulfilled}
-        >
-          <Icons.Edit />
-          Edit
-        </button>
-        <button
-          type="button"
-          className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
-          disabled={actionItem.fulfilled}
-          onClick={() => {
-            fulfilled();
-          }}
-        >
-          <Icons.Checked />
-          Fulfilled
-        </button>
+        {actionItem.fulfilled ? (
+          <button
+            type="button"
+            className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
+            onClick={() => undoFulfilled()}
+          >
+            Undo Fulfilled
+          </button>
+        ) : (
+          <>
+            <button
+              type="button"
+              className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
+            >
+              <Icons.Edit />
+              Edit
+            </button>
+            <button
+              type="button"
+              className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
+              onClick={() => fulfilled()}
+            >
+              <Icons.Checked />
+              Fulfilled
+            </button>
+          </>
+        )}
       </li>
     </ul>
   );
