@@ -24,6 +24,7 @@ type ReminderProps = {
 
 const ReminderItem = ({ vacancy }: ReminderProps) => {
   const location = useLocation();
+
   const { editVacancy } = useHandleVacancy();
   const dispatch = useAppDispatch();
   const { actions, cardColor, _id } = vacancy;
@@ -68,7 +69,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       dispatch(setReminder(true));
       return "fill-red-600 stroke-red-600 animate-bell";
     }
-    if (Date.now() - deadlineItem < 86400000) {
+    if (Date.now() - deadlineItem > -86400000) {
       return "fill-orange-400 stroke-orange-400";
     }
   };
