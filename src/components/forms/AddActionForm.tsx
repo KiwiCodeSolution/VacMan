@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Formik, FormikProps } from "formik";
 import { format } from "date-fns";
 
@@ -16,7 +16,6 @@ const formFields = [
 ];
 
 const AddActionForm = () => {
-  const navigate = useNavigate();
   const { editVacancy } = useHandleVacancy();
   const { data: response, isLoading } = useGetVacanciesQuery();
   const { _id } = useParams();
