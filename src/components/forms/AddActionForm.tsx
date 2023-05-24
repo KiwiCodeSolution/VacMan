@@ -57,8 +57,7 @@ const AddActionForm = () => {
 
     const updatedActions = actionToEdit ? [...actions].slice(0, -1).concat(newAction) : [...actions, newAction];
 
-    editVacancy({ _id, data: { actions: updatedActions } });
-    navigate(-1);
+    editVacancy({ _id, data: { actions: updatedActions }, goBack: true });
   };
 
   if (isLoading) return <p>Loading...</p>;
