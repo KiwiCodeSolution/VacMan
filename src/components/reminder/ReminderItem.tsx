@@ -78,7 +78,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
 
   return (
     <ul
-      className={`flex flex-col gap-y-2 rounded-2xl focus:shadow-2xl w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto border relative ${effectItem} ${isFulfilledBg}`}
+      className={`flex flex-col gap-y-2 rounded-2xl focus:shadow-2xl w-[310px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto border relative ${effectItem} ${isFulfilledBg}`}
     >
       <li className="flex justify-between px-3 mt-3">
         <div className="flex items-center gap-x-4 py-[2px] px-[10px] border border-bg-grey rounded-3xl">
