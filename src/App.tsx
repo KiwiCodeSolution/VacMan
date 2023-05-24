@@ -32,16 +32,21 @@ import Notification from "components/notifications";
 import AddAvatar from "pages/Private/addAvatar";
 import PrivacyPolicy from "pages/Private/privacyPolici";
 import AddAction from "pages/Private/addAction";
+import EditAction from "pages/Private/editAction";
 
 const App = () => {
   const dispatch = useAppDispatch();
   const { token, showStartingPage } = useAppSelector(state => state.user);
-  const { showNotification } = useAppSelector(state => state.notification);
+  const { showNotification, message } = useAppSelector(state => state.notification);
 
   useEffect(() => {
     dispatch(currentUser());
     setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
   }, [dispatch, token]);
+
+  useEffect(() => {
+    if (message === "user not authorized ") dispatch(currentUser())
+  }, [message]);
 
   // notification
   useEffect(() => {
@@ -79,6 +84,7 @@ const App = () => {
           <Route path="add" element={<PrivateRoute><AddVacancy /></PrivateRoute>} />
           <Route path="edit" element={<PrivateRoute><EditVacancy /></PrivateRoute>} />
           <Route path="addAction" element={<PrivateRoute><AddAction /></PrivateRoute>} />
+          <Route path="editAction" element={<PrivateRoute><EditAction /></PrivateRoute>} />
         </Route>
 
         {/* Public Routes */}

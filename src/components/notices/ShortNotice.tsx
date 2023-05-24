@@ -1,12 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import * as Icons from "components/iconsComponents";
 import Stars from "components/ui/stars";
 import { IVacancy } from "redux/VacancyQueries";
-import { useAppSelector } from "hooks/reduxHooks";
 import useHandleVacancy from "hooks/handleVacancy";
-import countries from "../../data/currencies.json";
-import { ISettings } from "redux/userSlice";
 
 type VacancyProps = {
   shortVacancy: IVacancy;
@@ -14,12 +11,6 @@ type VacancyProps = {
 
 export interface IColor {
   [key: string]: string;
-}
-
-export interface ICurrency {
-  currency: string;
-  sign: string;
-  code: ISettings["localCurrency"];
 }
 
 export const colorVariants = {
@@ -34,55 +25,30 @@ export const colorVariants = {
   orange: "bg-app-orange",
 } as IColor;
 
+export const effectIcon = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
+
+export const effectItem = `hover:shadow-2xl focus:shadow-2xl`;
+
 const ShortNote = ({ shortVacancy }: VacancyProps) => {
-  const { settings } = useAppSelector(state => state.user);
   const { handleArchive, removeVacancy } = useHandleVacancy();
+  const location = useLocation();
 
-  const {
-    _id,
-    companyName,
-    position,
-    salaryMin,
-    salaryMax,
-    currency,
-    cardColor,
-    userRank,
-    actions,
-    companyURL,
-    archived,
-  } = shortVacancy;
-  const effect = `hover:scale-110 focus:scale-110 transition-transform duration-300`;
+  const { _id, companyName, position, salary, cardColor, userRank, actions, archived } = shortVacancy;
   const archivalText = `${archived ? `text-txt-main` : `text-txt-black`}`;
-
-  const findLocalCurrency = countries.find(
-    country => country.code === settings.localCurrency.toUpperCase()
-  ) as ICurrency;
-
-  const findCurrency = countries.find(country => country.code === currency.toUpperCase()) as ICurrency;
-
-  // console.log(currency);
-  // console.log(findLocalCurrency);
-  // console.log(findCurrency);
 
   return (
     <div>
       <ul
-        className={`relative flex flex-col gap-y-1 rounded-xl p-4 shadow-xl ${colorVariants[cardColor]} ${archivalText} hover:shadow-2xl focus:shadow-2xl max-w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto`}
+        className={`relative flex flex-col gap-y-1 rounded-xl p-4 shadow-xl ${colorVariants[cardColor]} ${archivalText} ${effectItem} max-w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto`}
       >
-        <button className={`absolute top-4 right-[14px] ${effect}`}>
-          <Link to={`${_id}/details`}>
+        <button className={`absolute top-4 right-[14px] ${effectIcon}`}>
+          <Link to={`/${_id}/details`} state={{ from: location }}>
             <Icons.Eye size={32} />
           </Link>
         </button>
         <li className="flex gap-x-2 gap-y-1 font-bold">
           <Icons.CompanyName size={24} />
-          {companyURL ? (
-            <a href={companyURL} target="_blank" rel="noreferrer">
-              {companyName}
-            </a>
-          ) : (
-            <p>{companyName}</p>
-          )}
+          <p>{companyName}</p>
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Position size={24} />
@@ -90,35 +56,22 @@ const ShortNote = ({ shortVacancy }: VacancyProps) => {
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Action size={24} />
-          {actions.length ? (
-            actions[actions.length - 1].name
-          ) : (
-            <p>You have no action</p>
-          )}
+          {actions.length ? actions[actions.length - 1].name : <p>You have no action</p>}
         </li>
         <li className="flex gap-x-2 gap-y-1">
           <Icons.Salary size={24} />
-          <p>
-            {salaryMin}
-            {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
-          </p>
-          {salaryMax !== 0 && (
-            <p>
-              -{salaryMax}
-              {currency === "local" ? findLocalCurrency.sign : findCurrency.sign}
-            </p>
-          )}
+          <p>{salary}</p>
         </li>
         <li className="absolute bottom-2 right-[14px]">
           {!archived ? (
             <Stars amount={5} active={userRank} />
           ) : (
             <div className="flex gap-1">
-              <button type="button" onClick={() => removeVacancy(_id)} className={`${effect}`}>
+              <button type="button" onClick={() => removeVacancy(_id)} className={`${effectIcon}`}>
                 <Icons.Trash size="30" />
               </button>
 
-              <button type="button" onClick={() => handleArchive(_id, false)} className={`${effect}`}>
+              <button type="button" onClick={() => handleArchive(_id, false)} className={`${effectIcon}`}>
                 <Icons.Recover size="32" />
               </button>
             </div>

@@ -47,13 +47,13 @@ const useHandleVacancy = () => {
         dispatch(setShowNotification(true));
       });
   };
-  const editVacancy = ({ _id, data }: { _id: string; data: Partial<IVacancy> }) => {
+  const editVacancy = ({ _id, data, goBack }: { _id: string; data: Partial<IVacancy>; goBack: boolean }) => {
     updateVacancy({ ...data, _id })
       .unwrap()
       .then(payload => {
         dispatch(setMessage(payload.message));
         dispatch(setType("success"));
-        navigate(-1);
+        if (goBack) navigate(-1);
       })
       .catch(error => {
         dispatch(setMessage(error.data.message));
@@ -76,7 +76,6 @@ const useHandleVacancy = () => {
         dispatch(setType("error"));
       })
       .finally(() => dispatch(setShowNotification(true)));
-    navigate("/");
   };
 
   return { handleArchive, editVacancy, addNewVacancy, removeVacancy };

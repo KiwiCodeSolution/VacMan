@@ -5,16 +5,12 @@ import { Formik, FormikProps } from "formik";
 import * as icons from "components/iconsComponents";
 import Button from "components/ui/button";
 import CustomInput from "components/forms/CustomInput";
-import CurrencyRadioBtnsGroup from "components/forms/currencyRadioBtnsGroup";
 import StarRadioBtnsGroup from "components/forms/StarRadioBtnsGroup";
-import FilterRadioBtnsGroup from "components/forms/FilterRadioBtnsGroup";
 import ColorRadioBtnsGroup from "components/forms/ColorRadioBtnsGroup";
 import { IVacancy } from "redux/VacancyQueries";
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
+import { useAppDispatch } from "hooks/reduxHooks";
 import { setIsLoading } from "redux/userSlice";
 import useHandleVacancy from "hooks/handleVacancy";
-// import currencyList from "assets/currencyList";
-import countries from "data/currencies.json";
 
 // const STAGES = [
 //   "Waiting for answer",
@@ -45,29 +41,14 @@ const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "r
 const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   const dispatch = useAppDispatch();
   const { addNewVacancy, editVacancy } = useHandleVacancy();
-  const { settings } = useAppSelector(state => state.user);
 
-  const findLocalCurrency = countries.find(
-    country => country.code === settings.localCurrency.toUpperCase()
-  );
-
-  const CURRENCY = [
-    { name: "USD", sign: "$" },
-    { name: "Euro", sign: "€" },
-    // { name: "local", sign: currencyList[settings.localCurrency] },
-    { name: "local", sign: findLocalCurrency?.sign || "" }
-  ];
   const initialValues = {
     companyName: initialVacancy?.companyName || "",
     companyURL: initialVacancy?.companyURL || "",
     source: initialVacancy?.source || "",
     sourceURL: initialVacancy?.sourceURL || "",
     position: initialVacancy?.position || "",
-    salaryMin: `${initialVacancy?.salaryMin || ""}`,
-    salaryMax: `${initialVacancy?.salaryMax || ""}`,
-    currency: initialVacancy?.currency || "USD",
-    // stage: initialVacancy?.stage || "new",
-    // action: initialVacancy?.actions[0]?.name || "",
+    salary: initialVacancy?.salary || "",
     cardColor: initialVacancy?.cardColor || "",
     userRank: `${initialVacancy?.userRank || "1"}`,
     notes: initialVacancy?.notes || "",
@@ -79,14 +60,12 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     // console.log(data);
     const preparedData = {
       ...data,
-      salaryMin: Number(data.salaryMin),
-      salaryMax: Number(data.salaryMax),
       userRank: Number(data.userRank),
     }
     if (!initialVacancy) {
       addNewVacancy(preparedData);
     } else {
-      editVacancy({ data: preparedData, _id: initialVacancy._id });
+      editVacancy({ data: preparedData, _id: initialVacancy._id, goBack: true });
     }
     // console.log(preparedData);
   };
@@ -112,25 +91,17 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
               <CustomInput name="source" id="source" type="text" label="Source" LabelIcon={icons.Link} />
             </li>
             <li>
-              <CustomInput name="sourceURL" id="sourceURL" type="text" label="SourceURL" LabelIcon={icons.Link} />
+              <CustomInput name="sourceURL" id="sourceURL" type="text" label="Source Link" LabelIcon={icons.Link} />
             </li>
             <li>
               <CustomInput name="position" id="position" type="text" label="Position" LabelIcon={icons.Position} />
             </li>
-            <li className="flex gap-2 items-end">
-              <CustomInput name="salaryMin" id="salaryMin" type="text" label="Salary min" />
-              <CustomInput name="salaryMax" id="salaryMax" type="text" label="max" />
-              <CurrencyRadioBtnsGroup name="currency" values={CURRENCY} />
+            <li>
+              <CustomInput name="salary" id="salary" type="text" label="Salary" />
             </li>
           </ul>
 
           <ul className="mt-3">
-            {/* <li className="py-4 border-t border-txt-main">
-              <FilterRadioBtnsGroup name="stage" values={STAGES} label="Stage" LabelIcon={icons.Stage} />
-            </li> */}
-            {/* <li className="py-4 border-t border-txt-main">
-              <FilterRadioBtnsGroup name="action" values={ACTIONS} label="Action" LabelIcon={icons.Action} />
-            </li> */}
             <li className="py-4 border-t border-txt-main">
               <ColorRadioBtnsGroup name="cardColor" values={COLORS} label="Color" LabelIcon={icons.Color} />
             </li>
@@ -145,7 +116,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
           </ul>
 
           <div className="mt-4">
-            <CustomInput name="notebook" id="notebook" type="text" label="Notebook" LabelIcon={icons.Notebook} />
+            <CustomInput name="notes" id="notes" type="text" label="Notebook" LabelIcon={icons.Notebook} />
           </div>
 
           <div className="mt-24 mb-4">

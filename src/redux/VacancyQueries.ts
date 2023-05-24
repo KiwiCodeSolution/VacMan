@@ -2,23 +2,25 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 
+// eslint-disable-next-line import/no-cycle
+import { RootState } from "./store";
+
 export interface IAction {
   date: number;
   name: string;
-  deadline?: number;
+  deadline: number;
   fulfilled?: boolean;
 }
+
 export interface IVacancy {
   _id: string;
   companyName: string;
-  companyURL: string;
-  source: string;
-  sourceURL: string;
-  position: string;
-  salaryMin: number;
-  salaryMax: number;
-  currency: "USD" | "Euro" | "local";
-  notes: string;
+  companyURL?: string;
+  source?: string;
+  sourceURL?: string;
+  position?: string;
+  salary?: string;
+  notes?: string;
   actions: IAction[];
   userRank: number;
   archived: boolean;
@@ -38,9 +40,14 @@ const axiosBaseQuery =
     unknown,
     unknown
   > =>
-  async ({ url, method, data, params }) => {
+  async ({ url, method, data, params }, { getState }) => {
+    const { token } = (getState() as RootState).user;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
     try {
-      const result = await axios({ url: baseUrl + url, method, data, params });
+      const result = await axios({ url: baseUrl + url, method, data, params, headers });
       return { data: result.data };
     } catch (axiosError) {
       const err = axiosError as AxiosError;
@@ -51,7 +58,7 @@ const axiosBaseQuery =
         },
       };
     }
-    };
+  };
 // const baseURL = "https://kiwicode.tech:5000/";
 const baseUrl = "https://vacmanserver-production.up.railway.app/";
 // const baseUrl = "http://localhost:3030/";
@@ -81,9 +88,5 @@ export const vacancyAPI = createApi({
   }),
 });
 
-export const {
-  useGetVacanciesQuery,
-  useAddVacancyMutation,
-  useUpdateVacancyMutation,
-  useDeleteVacancyMutation,
-} = vacancyAPI;
+export const { useGetVacanciesQuery, useAddVacancyMutation, useUpdateVacancyMutation, useDeleteVacancyMutation } =
+  vacancyAPI;

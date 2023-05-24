@@ -1,40 +1,44 @@
 /* eslint-disable prettier/prettier */
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
+import { logOut, updateSettings } from "redux/userOperations";
 import NavHeader from "components/navHeader";
 import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { logOut, updateSettings } from "redux/userOperations";
 import LanguageBtnGroup from "components/language/LanguageBtnGroup";
-import { useState } from "react";
-import CurrencySelection from "components/modals/CurrencySelectionModal";
+import SubHeader from "components/subHeader";
+import { ISettings } from "redux/userSlice";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
-  const { profile, settings } = useAppSelector(state => state.user);
-  const [openmod, setOpenmod] = useState(false);
+  const { settings } = useAppSelector(state => state.user);
+  const [newSettings, setNewSettings] = useState(settings);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const changeLanguage = () => {
-    // pop-up return {lang}
-    dispatch(updateSettings({ ...settings, lang: "eng" }));
-  };
+  location.state = { newSettings };
+  useEffect(() => {
+    return () => {
+      let permition = 0;
+      const arrOfKeys = Object.keys(settings);
+      arrOfKeys.forEach(key => {
+        if (location.state.newSettings[key] !== settings[key as keyof ISettings]) permition += 1;
+      })
+      if (permition) dispatch(updateSettings(location.state.newSettings));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // const changeLanguage = () => {
+  //   setNewSettings({ ...newSettings, lang: newSettings.lang === "eng" ? "ru" : "eng" });
+  // };
   const toggleNotification = () => {
-    dispatch(updateSettings({ ...settings, notification: !settings.notification }));
+    setNewSettings({ ...newSettings, notification: !newSettings.notification });
   };
   const toggleTheme = () => {
-    dispatch(updateSettings({ ...settings, theme: settings.theme === "light" ? "dark" : "light" }));
-  };
-  const changeLocalCurrency = () => {
-    // const localCurrency = "HRN";
-    setOpenmod(!openmod);
-    // pop-up return {localCurrency}
-    // dispatch(updateSettings({ ...settings, localCurrency }));
-  };
-
-  const onOpenModal = () => {
-    setOpenmod(!openmod);
+    setNewSettings({ ...newSettings, theme: newSettings.theme === "light" ? "dark" : "light" });
   };
 
   const elements = [
@@ -42,31 +46,29 @@ const SettingsPage = () => {
       icon: Icons.SettingsLang,
       name: "Language", // value: settings.lang,
       btn: Icons.ArrowForward,
-      onClickFn: changeLanguage,
-      extension: <LanguageBtnGroup />,
+      // onClickFn: changeLanguage,
+      extension: <LanguageBtnGroup newSettings={newSettings} setNewSettings={setNewSettings} />,
     },
     {
       icon: Icons.SettingsNotification,
       name: "Notification",
-      value: settings.notification ? "on" : "off",
+      value: newSettings.notification ? "on" : "off",
       btn: Icons.ArrowForward,
       onClickFn: toggleNotification,
     },
     {
       icon: Icons.SettingsTheme,
       name: "Theme",
-      value: settings.theme,
+      value: newSettings.theme,
       btn: Icons.ArrowForward,
       onClickFn: toggleTheme,
     },
     {
-      icon: Icons.Salary,
-      name: "Local currency",
-      value: settings.localCurrency,
+      icon: Icons.SettingsArchive,
+      name: "Archive",
       btn: Icons.ArrowForward,
-      onClickFn: changeLocalCurrency,
+      onClickFn: () => navigate("/archived"),
     },
-    { icon: Icons.SettingsArchive, name: "Archive", btn: Icons.ArrowForward, onClickFn: () => navigate("/archived") },
     {
       icon: Icons.SettingsPolicy,
       name: "Policy",
@@ -76,24 +78,9 @@ const SettingsPage = () => {
   ];
 
   return (
-    <div className="mb-28">
-      <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-black" text="Settings" textWhite />
-      <div className="sticky w-full h-[136px] ">
-        <Icons.Rectangle className="w-full h-full text-txt-black" />
-        <div className="absolute w-[120px] h-[120px] bottom-0 left-1/2 -translate-x-1/2 rounded-full ">
-          <div className="w-full h-full flex justify-center items-center rounded-full bg-gradient-to-b from-[#C4C4D4] to-[#141415]">
-            <Icons.Avatar className="w-[95%] h-[95%] text-txt-main" />
-          </div>
-          <button className="absolute w-8 h-8 bottom-0 right-0 flex justify-center items-center rounded-full bg-txt-black">
-            <Link to="/addAvatar" state={{ from: location }}>
-              <Icons.Camera size="100%" className="" />
-            </Link>
-          </button>
-        </div>
-      </div>
-
-      <p className="pt-4 text-xl font-semibold text-center">{profile.name}</p>
-      <p className="text-center">position: {profile.position}</p>
+    <div className="mb-28 select-none">
+      <NavHeader prevAddress={location?.state?.from?.pathname ?? "/"} bg="bg-black" text="Settings" textWhite />
+      <SubHeader fill="text-txt-black" />
 
       <div className="mx-auto w-24 pt-4 pb-7">
         <Link to="/profile" state={{ from: location }}>
@@ -112,9 +99,11 @@ const SettingsPage = () => {
             <p className="pl-4 font-semibold">{el.name}</p>
             <p className="text-txt-main ml-auto">{el.value}</p>
             {el.extension || null}
-            <button className="w-8 h-8 ml-auto hover:scale-110 focus:scale-110" onClick={el.onClickFn}>
-              <el.btn size={24} />
-            </button>
+            {el.onClickFn && (
+              <button className="w-8 h-8 ml-auto hover:scale-110 focus:scale-110" onClick={el.onClickFn}>
+                <el.btn size={24} />
+              </button>)
+            }
           </li>
         ))}
       </ul>
@@ -126,7 +115,6 @@ const SettingsPage = () => {
       <Button variant="black" clickFn={() => dispatch(logOut())}>
         Log Out
       </Button>
-      {openmod && <CurrencySelection onClick={onOpenModal} />}
     </div>
   );
 };

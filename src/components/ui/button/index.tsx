@@ -3,19 +3,26 @@ interface IButton {
   variant?: "black" | "white";
   btnType?: "submit" | "button" | "reset" | undefined;
   clickFn?: (() => void) | undefined;
+  disabled?: boolean | undefined;
+  icon?: string | JSX.Element | JSX.Element[] | undefined;
 }
 
 // eslint-disable-next-line prettier/prettier
-const button =
-  "flex rounded-xl mx-auto py-3 h-12 w-11/12 justify-center border border-txt-black text-base items-center font-bold hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] focus:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]";
+export const effectButton =
+  "hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] focus:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]";
 
-export default function Button({ children, variant, btnType, clickFn }: IButton) {
+export default function Button({ children, variant, btnType, clickFn, disabled, icon }: IButton) {
+  const disabledButtonStyle = disabled ? `border-txt-grey` : `${effectButton} border-txt-black`;
+
+  const button = `flex rounded-xl mx-auto py-3 h-12 w-full max-w-[300px] justify-center border text-base items-center font-bold ${disabledButtonStyle}`;
+
   const currentStyle = variant
     ? `${button} text-txt-${variant === "black" ? "white" : "main"} bg-bg-${variant}`
     : button;
   const handleClick = () => (clickFn ? clickFn() : null);
   return (
-    <button type={btnType || "button"} className={currentStyle} onClick={handleClick}>
+    <button type={btnType || "button"} className={currentStyle} onClick={handleClick} disabled={disabled}>
+      {icon}
       {children}
     </button>
   );

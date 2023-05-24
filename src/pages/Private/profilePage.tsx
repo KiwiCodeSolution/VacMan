@@ -1,12 +1,17 @@
 /* eslint-disable prettier/prettier */
-import NavHeader from "components/navHeader";
-import { useAppSelector } from "hooks/reduxHooks";
 import { Link, useLocation } from "react-router-dom";
+import NavHeader from "components/navHeader";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import * as Icons from "components/iconsComponents";
+import SubHeader from "components/subHeader";
+import Button from "components/ui/button";
+import { setShowNotification, setMessage, setType } from "redux/notificationsSlice";
+
 // import AddBtn from "components/addBtn";
 
 const ProfilePage = () => {
   const location = useLocation();
+  const dispatch = useAppDispatch();
   const { email, profile } = useAppSelector(state => state.user);
   const elements = [
     { icon: Icons.Envelope, name: email, btn: Icons.ArrowForward, btnSize: 24 },
@@ -16,27 +21,38 @@ const ProfilePage = () => {
     { icon: Icons.Instagram, name: profile.instagram, btn: Icons.ArrowForward },
     { icon: Icons.Facebook, name: profile.facebook, btn: Icons.ArrowForward },
   ];
-  return (
-    <div className="mb-28">
-      <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
-      <div className="sticky w-full h-[136px] ">
-        <Icons.Rectangle className="w-full h-full text-txt-darkgrey" />
-        <div className="absolute w-[120px] h-[120px] bottom-0 left-1/2 -translate-x-1/2 rounded-full">
-          <div className="w-full h-full flex justify-center items-center rounded-full bg-gradient-to-b from-[#C4C4D4] to-[#141415]">
-            <Icons.Avatar className="w-[95%] h-[95%] text-txt-main" />
-          </div>
-          <button className="absolute w-8 h-8 bottom-0 right-0  flex justify-center items-center rounded-full bg-txt-black">
-            <Link to="/addAvatar" state={{ from: location }}><Icons.Camera size="100%" className="" /></Link>
-          </button>
-        </div>
-      </div>
 
-      <p className="pt-4 font-semibold text-xl text-center">{profile.name}</p>
-      <p className="text-center">position: {profile.position}</p>
+  const copyToClipboard = (name: string) => {
+    console.log("copyToClipboard function", name);
+    window.navigator.clipboard.writeText(name);
+    dispatch(setMessage(`'${name}' copied to clipboard`));
+    dispatch(setType("info"));
+    dispatch(setShowNotification(true));
+  }
+  const handleKeyDown = () => null;
+
+  return (
+    <div className="mb-28 select-none">
+      <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
+      <SubHeader fill="text-txt-darkgrey" />
+
+      <div className="mx-auto w-40 pt-4 pb-7">
+        <Link to="/addUserData" state={{ from: location }}>
+          <Button btnType="button" variant="black">
+            Add Profile data
+          </Button>
+        </Link>
+      </div>
 
       <ul className="container mx-auto px-4">
         {elements.map(el => el.name && (
-          <li key={el.name} className="flex flex-row items-center ml-2 py-3">
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+          <li
+            key={el.name}
+            className="flex flex-row items-center ml-2 py-3 cursor-pointer"
+            onClick={() => copyToClipboard(el.name)}
+            onKeyDown={handleKeyDown}
+          >
             <div className="w-10 h-10 bg-app-grey rounded-full p-1">
               <el.icon size={32} />
             </div>
@@ -50,7 +66,7 @@ const ProfilePage = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </div >
   );
 };
 export default ProfilePage;

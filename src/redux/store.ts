@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import user from "./userSlice";
+// eslint-disable-next-line import/no-cycle
 import { vacancyAPI } from "./VacancyQueries";
 import notificationsSlice from "./notificationsSlice";
 
