@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useAppDispatch } from "hooks/reduxHooks";
 // import { setAuthHeader } from "redux/userOperations";
@@ -37,11 +37,13 @@ export default function Main() {
 
   const isActionsActive = vacancies?.filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === false);
 
-  if (isActionsActive?.length) {
-    dispatch(setReminder(true));
-  } else {
-    dispatch(setReminder(false));
-  }
+  useEffect(() => {
+    if (isActionsActive?.length) {
+      dispatch(setReminder(true));
+    } else {
+      dispatch(setReminder(false));
+    }
+  }, [dispatch, isActionsActive?.length])
 
   const handleChange = (event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<HTMLInputElement>) => {
     setText(event.currentTarget.value.toLowerCase());
