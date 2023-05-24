@@ -120,13 +120,14 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
           </button>
         ) : (
           <>
-            <button
-              type="button"
+            <Link
+              to={`/${_id}/EditAction`}
+              state={{ from: location }}
               className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
             >
               <Icons.Edit />
               Edit
-            </button>
+            </Link>
             <button
               type="button"
               className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}

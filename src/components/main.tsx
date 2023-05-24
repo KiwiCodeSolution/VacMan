@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
-import { useAppSelector } from "hooks/reduxHooks";
+// import { useAppSelector } from "hooks/reduxHooks";
+// import { setAuthHeader } from "redux/userOperations";
 import * as Icons from "components/iconsComponents";
 import AddBtn from "components/addBtn";
-import { setAuthHeader } from "redux/userOperations";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
 
 import Loader from "components/ui/loader";
@@ -11,8 +11,8 @@ import ShortNote from "components/notices/ShortNotice";
 import Header from "./Header";
 
 export default function Main() {
-  const { token } = useAppSelector(state => state.user);
-  setAuthHeader(token);
+  // const { token } = useAppSelector(state => state.user);
+  // setAuthHeader(token);
 
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
 
