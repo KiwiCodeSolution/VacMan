@@ -1,15 +1,12 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-shadow */
-// import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import { IVacancy } from "redux/VacancyQueries";
 import * as Icons from "components/iconsComponents";
 import { colorVariants, effectIcon, effectItem } from "components/notices/ShortNotice";
 import { Link, useLocation } from "react-router-dom";
 import { effectButton } from "components/ui/button";
 import useHandleVacancy from "hooks/handleVacancy";
-import { useAppDispatch } from "hooks/reduxHooks";
-import { setReminder } from "redux/userSlice";
 
 export interface IReminderVacancy {
   date: number;
@@ -26,7 +23,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
   const location = useLocation();
 
   const { editVacancy } = useHandleVacancy();
-  const dispatch = useAppDispatch();
+
   const { actions, cardColor, _id } = vacancy;
   const newActions = structuredClone(actions);
 
@@ -66,7 +63,6 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       return;
     }
     if (Date.now() - deadlineItem > 0) {
-      dispatch(setReminder(true));
       return "fill-red-600 stroke-red-600 animate-bell";
     }
     if (Date.now() - deadlineItem > -86400000) {
@@ -83,7 +79,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       <li className="flex justify-between px-3 mt-3">
         <div className="flex items-center gap-x-4 py-[2px] px-[10px] border border-bg-grey rounded-3xl">
           <div className="flex items-center gap-x-2">
-            <Icons.Bell className={deadlineStyles(fulfilledItem, deadlineItem)} /> {convertDate(deadlineItem)}
+            <Icons.Bell size={22} className={deadlineStyles(fulfilledItem, deadlineItem)} /> {convertDate(deadlineItem)}
           </div>
           <div className="flex items-center gap-x-2">
             <Icons.Clock /> {convertTime(deadlineItem)}
