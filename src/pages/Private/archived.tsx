@@ -26,7 +26,8 @@ const Archived = () => {
     setText(event.currentTarget.value.toLowerCase());
   };
 
-  const handelFormSubmit = (): void => {
+  const handelFormSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
     setText("");
   };
 

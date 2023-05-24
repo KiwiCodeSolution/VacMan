@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
 import { Form, Formik } from "formik";
@@ -14,6 +15,7 @@ import Header from "./Header";
 
 export interface Values {
   text: string;
+  preventDefault: () => void;
 }
 
 export default function Main() {
@@ -35,7 +37,8 @@ export default function Main() {
     setText(event.currentTarget.value.toLowerCase());
   };
 
-  const handelFormSubmit = (): void => {
+  const handelFormSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
     setText("");
   };
 
