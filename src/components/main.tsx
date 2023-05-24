@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
-import { useAppSelector } from "hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import * as Icons from "components/iconsComponents";
 import AddBtn from "components/addBtn";
 import { setAuthHeader } from "redux/userOperations";
@@ -9,14 +9,21 @@ import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import Loader from "components/ui/loader";
 import ShortNote from "components/notices/ShortNotice";
 import Header from "./Header";
+import { setReminder } from "redux/userSlice";
 
 export default function Main() {
   const { token } = useAppSelector(state => state.user);
   setAuthHeader(token);
-
+  const dispatch = useAppDispatch();
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
 
   const vacancies = response?.data?.filter(vacancy => vacancy.archived === false);
+
+  const isActionsActive = vacancies?.filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === false);
+
+  if (isActionsActive?.length && isActionsActive?.length > 0) {
+    dispatch(setReminder(true));
+  }
 
   return (
     <div className="container mx-auto bg-bg-light">
