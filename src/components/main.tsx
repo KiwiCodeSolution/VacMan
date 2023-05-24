@@ -37,8 +37,10 @@ export default function Main() {
 
   const isActionsActive = vacancies?.filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === false);
 
-  if (isActionsActive?.length && isActionsActive?.length > 0) {
+  if (isActionsActive?.length) {
     dispatch(setReminder(true));
+  } else {
+    dispatch(setReminder(false));
   }
 
   const handleChange = (event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<HTMLInputElement>) => {
