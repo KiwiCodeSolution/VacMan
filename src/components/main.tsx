@@ -4,7 +4,7 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
 
-import { useAppSelector } from "hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { setAuthHeader } from "redux/userOperations";
 import { IVacancy, useGetVacanciesQuery } from "redux/VacancyQueries";
 import * as Icons from "components/iconsComponents";
@@ -12,6 +12,7 @@ import AddBtn from "components/addBtn";
 import Loader from "components/ui/loader";
 import ShortNote from "components/notices/ShortNotice";
 import Header from "./Header";
+import { setReminder } from "redux/userSlice";
 
 export interface Values {
   text: string;
@@ -21,6 +22,7 @@ export interface Values {
 export default function Main() {
   const { token } = useAppSelector(state => state.user);
   setAuthHeader(token);
+  const dispatch = useAppDispatch();
   const [text, setText] = useState("");
 
   const initialValues = {
@@ -32,6 +34,12 @@ export default function Main() {
   const vacancies = response?.data
     ?.filter(vacancy => vacancy.archived === false && vacancy.companyName.toLowerCase().includes(text.toLowerCase()))
     .sort((firstVacancy, secondVacancy) => secondVacancy.actions[0].date - firstVacancy.actions[0].date) as IVacancy[];
+
+  const isActionsActive = vacancies?.filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === false);
+
+  if (isActionsActive?.length && isActionsActive?.length > 0) {
+    dispatch(setReminder(true));
+  }
 
   const handleChange = (event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<HTMLInputElement>) => {
     setText(event.currentTarget.value.toLowerCase());
