@@ -37,12 +37,16 @@ import EditAction from "pages/Private/editAction";
 const App = () => {
   const dispatch = useAppDispatch();
   const { token, showStartingPage } = useAppSelector(state => state.user);
-  const { showNotification } = useAppSelector(state => state.notification);
+  const { showNotification, message } = useAppSelector(state => state.notification);
 
   useEffect(() => {
     dispatch(currentUser());
     setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
   }, [dispatch, token]);
+
+  useEffect(() => {
+    if (message === "user not authorized ") dispatch(currentUser())
+  }, [message]);
 
   // notification
   useEffect(() => {
