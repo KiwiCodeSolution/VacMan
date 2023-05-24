@@ -2,6 +2,9 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 
+// eslint-disable-next-line import/no-cycle
+import { RootState } from "./store";
+
 export interface IAction {
   date: number;
   name: string;
@@ -37,9 +40,14 @@ const axiosBaseQuery =
     unknown,
     unknown
   > =>
-  async ({ url, method, data, params }) => {
+  async ({ url, method, data, params }, { getState }) => {
+    const { token } = (getState() as RootState).user;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
     try {
-      const result = await axios({ url: baseUrl + url, method, data, params });
+      const result = await axios({ url: baseUrl + url, method, data, params, headers });
       return { data: result.data };
     } catch (axiosError) {
       const err = axiosError as AxiosError;

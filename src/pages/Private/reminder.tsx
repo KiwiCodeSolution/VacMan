@@ -9,12 +9,12 @@ import * as Icons from "components/iconsComponents";
 import { useLocation } from "react-router-dom";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import Loader from "components/ui/loader";
-import { useAppSelector } from "hooks/reduxHooks";
-import { setAuthHeader } from "redux/userOperations";
+// import { useAppSelector } from "hooks/reduxHooks";
+// import { setAuthHeader } from "redux/userOperations";
 
 const Reminder = () => {
-  const { token } = useAppSelector(state => state.user);
-  setAuthHeader(token);
+  // const { token } = useAppSelector(state => state.user);
+  // setAuthHeader(token);
   const location = useLocation();
   const { data: response, isLoading, isError } = useGetVacanciesQuery();
 

@@ -4,8 +4,8 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
 
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { setAuthHeader } from "redux/userOperations";
+import { useAppDispatch } from "hooks/reduxHooks";
+// import { setAuthHeader } from "redux/userOperations";
 import { IVacancy, useGetVacanciesQuery } from "redux/VacancyQueries";
 import * as Icons from "components/iconsComponents";
 import AddBtn from "components/addBtn";
@@ -20,8 +20,8 @@ export interface Values {
 }
 
 export default function Main() {
-  const { token } = useAppSelector(state => state.user);
-  setAuthHeader(token);
+  // const { token } = useAppSelector(state => state.user);
+  // setAuthHeader(token);
   const dispatch = useAppDispatch();
   const [text, setText] = useState("");
 
