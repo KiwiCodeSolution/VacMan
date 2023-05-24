@@ -26,8 +26,7 @@ const Archived = () => {
     setText(event.currentTarget.value.toLowerCase());
   };
 
-  const handelFormSubmit = (currentCurrency: Values): void => {
-    console.log(currentCurrency);
+  const handelFormSubmit = (): void => {
     setText("");
   };
 
@@ -40,32 +39,34 @@ const Archived = () => {
       ) : (
         <>
           <NavHeader bg="bg-light" prevAddress="/settings" text="Archive" underlined />
-          <Formik initialValues={initialValues} onSubmit={handelFormSubmit} className="h-20 bg-bg-light relative">
-            <Form autoComplete="off" className="flex sticky top-0 left-0 right-0 mt-2">
-              <label htmlFor="company" className="w-full">
-                <input
-                  id="company"
-                  type="text"
-                  name="text"
-                  value={text}
-                  autoComplete="off"
-                  onChange={handleChange}
-                  placeholder="Enter company name"
-                  className="w-full h-8 px-2 py-1 outline-none rounded-md border "
-                />
+          <div className="sticky top-20 z-10 px-4">
+            <Formik initialValues={initialValues} onSubmit={handelFormSubmit} className="h-20 bg-bg-light">
+              <Form autoComplete="off" className="flex sticky top-0 left-0 right-0 mt-2">
+                <label htmlFor="company" className="w-full">
+                  <input
+                    id="company"
+                    type="text"
+                    name="text"
+                    value={text}
+                    autoComplete="off"
+                    onChange={handleChange}
+                    placeholder="Enter company name"
+                    className="w-full h-8 px-2 py-1 outline-none rounded-md border "
+                  />
 
-                {text === "" ? (
-                  <button type="button" className="absolute top-1 right-2 items-center">
-                    <Icons.Search />
-                  </button>
-                ) : (
-                  <button type="button" className="absolute top-1 right-2 items-center" onClick={() => setText("")}>
-                    <Icons.Close />
-                  </button>
-                )}
-              </label>
-            </Form>
-          </Formik>
+                  {text === "" ? (
+                    <button type="button" className="absolute top-1 right-2 items-center">
+                      <Icons.Search />
+                    </button>
+                  ) : (
+                    <button type="button" className="absolute top-1 right-2 items-center" onClick={() => setText("")}>
+                      <Icons.Close />
+                    </button>
+                  )}
+                </label>
+              </Form>
+            </Formik>
+          </div>
           {!archivedVacancies || !archivedVacancies.length ? (
             <div className="mt-20 text-2xl text-txt-main text-center">No archived vacancy</div>
           ) : (
