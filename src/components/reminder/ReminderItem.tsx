@@ -46,11 +46,11 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
 
   function fulfilled() {
     newActions[newActions.length - 1].fulfilled = true;
-    editVacancy({ _id, data: { actions: newActions } });
+    editVacancy({ _id, data: { actions: newActions }, goBack: false });
   }
   function undoFulfilled() {
     newActions[newActions.length - 1].fulfilled = false;
-    editVacancy({ _id, data: { actions: newActions } });
+    editVacancy({ _id, data: { actions: newActions }, goBack: false });
   }
 
   // styles
@@ -74,7 +74,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
 
   return (
     <ul
-      className={`flex flex-col gap-y-2 rounded-2xl focus:shadow-2xl w-[328px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto border relative ${effectItem} ${isFulfilledBg}`}
+      className={`flex flex-col gap-y-2 rounded-2xl focus:shadow-2xl w-[310px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[480px] mx-auto border relative ${effectItem} ${isFulfilledBg}`}
     >
       <li className="flex justify-between px-3 mt-3">
         <div className="flex items-center gap-x-4 py-[2px] px-[10px] border border-bg-grey rounded-3xl">
@@ -94,13 +94,13 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       <li className="px-5 flex flex-col gap-y-1">
         <p className="flex gap-x-2 gap-y-1 font-bold">
           <Icons.CompanyName size={24} />
-          Company: "{vacancy.companyName}"
+          Company: <span className="font-normal">"{vacancy.companyName}"</span>
         </p>
-        <p className="flex gap-x-2 gap-y-1">
-          <Icons.Position size={24} /> Vacancy: {vacancy.position}
+        <p className="flex gap-x-2 gap-y-1 font-bold">
+          <Icons.Position size={24} /> Vacancy: <span className="font-normal">{vacancy.position}</span>
         </p>
-        <p className="flex gap-x-2 gap-y-1">
-          <Icons.Action size={24} /> Action: {actionItem.name}
+        <p className="flex gap-x-2 gap-y-1 font-bold">
+          <Icons.Action size={24} /> Action: <span className="font-normal">{actionItem.name}</span>
         </p>
       </li>
 

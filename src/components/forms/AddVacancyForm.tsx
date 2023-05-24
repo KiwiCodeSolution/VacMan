@@ -65,7 +65,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     if (!initialVacancy) {
       addNewVacancy(preparedData);
     } else {
-      editVacancy({ data: preparedData, _id: initialVacancy._id });
+      editVacancy({ data: preparedData, _id: initialVacancy._id, goBack: true });
     }
     // console.log(preparedData);
   };
