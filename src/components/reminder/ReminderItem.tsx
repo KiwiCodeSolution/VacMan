@@ -24,6 +24,7 @@ type ReminderProps = {
 
 const ReminderItem = ({ vacancy }: ReminderProps) => {
   const location = useLocation();
+
   const { editVacancy } = useHandleVacancy();
   const dispatch = useAppDispatch();
   const { actions, cardColor, _id } = vacancy;
@@ -48,11 +49,11 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
 
   function fulfilled() {
     newActions[newActions.length - 1].fulfilled = true;
-    editVacancy({ _id, data: { actions: newActions } });
+    editVacancy({ _id, data: { actions: newActions }, goBack: false });
   }
   function undoFulfilled() {
     newActions[newActions.length - 1].fulfilled = false;
-    editVacancy({ _id, data: { actions: newActions } });
+    editVacancy({ _id, data: { actions: newActions }, goBack: false });
   }
 
   // styles
@@ -68,7 +69,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       dispatch(setReminder(true));
       return "fill-red-600 stroke-red-600 animate-bell";
     }
-    if (Date.now() - deadlineItem < 86400000) {
+    if (Date.now() - deadlineItem > -86400000) {
       return "fill-orange-400 stroke-orange-400";
     }
   };
@@ -97,13 +98,13 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       <li className="px-5 flex flex-col gap-y-1">
         <p className="flex gap-x-2 gap-y-1 font-bold">
           <Icons.CompanyName size={24} />
-          Company: "{vacancy.companyName}"
+          Company: <span className="font-normal">"{vacancy.companyName}"</span>
         </p>
-        <p className="flex gap-x-2 gap-y-1">
-          <Icons.Position size={24} /> Vacancy: {vacancy.position}
+        <p className="flex gap-x-2 gap-y-1 font-bold">
+          <Icons.Position size={24} /> Vacancy: <span className="font-normal">{vacancy.position}</span>
         </p>
-        <p className="flex gap-x-2 gap-y-1">
-          <Icons.Action size={24} /> Action: {actionItem.name}
+        <p className="flex gap-x-2 gap-y-1 font-bold">
+          <Icons.Action size={24} /> Action: <span className="font-normal">{actionItem.name}</span>
         </p>
       </li>
 

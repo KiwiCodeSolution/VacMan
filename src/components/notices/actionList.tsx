@@ -21,7 +21,7 @@ const ActionList = ({ actions, isArchived }: { actions: IAction[]; isArchived?: 
       <div className="animate-show">
         <div className="flex flex-raw">
           <div className="ml-2 -mt-2 h-4 w-4 rounded-full bg-bg-black" />
-          <div className="w-16 border-t-2 border-bg-grey" />
+          <div className="w-14 border-t-2 border-bg-grey" />
         </div>
         <div className="-mt-8 ml-20 w-48">
           <Link to={`/${_id}/addAction`} state={{ from: location }}>
