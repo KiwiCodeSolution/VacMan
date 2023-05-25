@@ -35,7 +35,7 @@ const CalendarComponent = () => {
           className="text-center flex flex-col gap-y-3"
           tileClassName={({ date }) => {
             const realDay = format(date, "dd-MM-yyyy");
-            const typeClass = `rounded-full w-6 h-8 hover:bg-app-smoke hover:text-txt-black  focus:border focus:border-app-red focus:bg-app-smoke  text-center`;
+            const typeClass = `w-6 h-8 hover:bg-app-smoke hover:text-txt-black  focus:border focus:border-app-red focus:bg-app-smoke  text-center`;
             if (
               events &&
               events.find(ev => format(ev.actions[ev.actions.length - 1].deadline, "dd-MM-yyyy") === realDay)
@@ -43,12 +43,12 @@ const CalendarComponent = () => {
               const color = events.find(
                 ev => format(ev.actions[ev.actions.length - 1].deadline, "dd-MM-yyyy") === realDay
               )?.cardColor;
-              return `bg-app-${color} ${typeClass}`;
+              return `bg-app-${color} ${typeClass} rounded-full `;
             }
             if (format(date, "dd-MM-yyyy") === format(new Date(), "dd-MM-yyyy")) {
-              return `bg-app-smoke text-txt-red ${typeClass}`;
+              return `bg-app-smoke text-txt-red border border-app-black ${typeClass}`;
             }
-            return typeClass;
+            return `${typeClass} rounded-full `;
           }}
         />
       </li>

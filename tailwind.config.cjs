@@ -54,6 +54,7 @@ module.exports = {
         "btn-black": "#040c0c",
         "btn-light": "#fffdf4",
         "app-red": "#f28b82",
+        "app-black": "#040c0c",
         "app-blue": "#a9e2f0",
         "app-green": "#68efac",
         "app-pink": "#f4bcdc",
