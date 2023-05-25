@@ -44,6 +44,7 @@ module.exports = {
         "txt-darkgrey": "#646464",
         "txt-link": "#3ca4ec",
         "txt-blue": "#a9e2f0",
+        "txt-red": "#f28b82",
         "txt-orange": "#f0be6c",
         "bg-light": "#fffdf4",
         "bg-grey": "#646464",

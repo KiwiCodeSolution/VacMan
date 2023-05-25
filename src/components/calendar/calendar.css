@@ -1,0 +1,22 @@
+.react-calendar__navigation {
+  /* background-color: brown; */
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 20px;
+}
+
+.react-calendar__navigation__arrow {
+  font-size: 26px;
+  line-height: 0;
+  padding: 0;
+}
+
+.react-calendar__navigation__arrow:hover {
+  color: #f28b82;
+}
+
+.react-calendar__navigation__label__labelText {
+  font-size: 16px;
+  line-height: 0;
+}
