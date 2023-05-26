@@ -8,7 +8,7 @@ const AddUserData = () => {
     <>
       <NavHeader
         prevAddress={location?.state?.from.pathname ?? "/"}
-        bg="bg-light"
+        bg="bg-bg-light"
         text="User information"
         skip="/"
         underlined

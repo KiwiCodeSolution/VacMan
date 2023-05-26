@@ -22,23 +22,21 @@ const formFields = [
   { name: "telegram", label: "Telegram", labelIcon: icons.Telegram, type: "text" },
 ];
 
-const initialValues = {
-  name: "",
-  phoneNumber: "",
-  position: "",
-  location: "",
-  instagram: "",
-  facebook: "",
-  linkedin: "",
-  telegram: "",
-};
-type Values = typeof initialValues;
-
 const AddUserInfoForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { profile } = useAppSelector(state => state.user);
-
+  const initialValues = {
+    name: profile.name || "",
+    phoneNumber: profile.phoneNumber || "",
+    position: profile.position || "",
+    location: profile.location || "",
+    instagram: profile.instagram || "",
+    facebook: profile.facebook || "",
+    linkedin: profile.linkedIn || "",
+    telegram: profile.telegram || "",
+  };
+  type Values = typeof initialValues;
   const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
     // console.log("values: ", { ...profile, ...values });
     dispatch(updateProfile({ ...profile, ...values }));

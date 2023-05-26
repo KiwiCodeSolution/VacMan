@@ -33,7 +33,7 @@ const ProfilePage = () => {
 
   return (
     <div className="mb-28 select-none">
-      <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
+      <NavHeader bg="bg-bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
       <SubHeader fill="text-txt-darkgrey" />
 
       <div className="mx-auto w-40 pt-4 pb-7">

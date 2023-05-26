@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import ChangePassForm from "components/forms/changePassForm";
 import NavHeader from "components/navHeader";
 import { useLocation } from "react-router-dom";
@@ -10,7 +11,7 @@ export default function ConfirmPassPage() {
 
   return (
     <div className="mb-28">
-      <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/settings"} text="ChangePass" textWhite />
+      <NavHeader bg="bg-bg-grey" prevAddress={location?.state?.from.pathname ?? "/settings"} text="ChangePass" textWhite />
       <SubHeader fill="text-txt-darkgrey" />
 
       {currProfile !== "google" ? (

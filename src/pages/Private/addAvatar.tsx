@@ -12,7 +12,7 @@ const AddAvatar = () => {
 
   return (
     <>
-      <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Add avatar" textWhite />
+      <NavHeader bg="bg-bg-blue" prevAddress={location?.state?.from.pathname ?? "/"} text="Add avatar" />
       <SubHeader fill="text-txt-blue" />
 
       {currProfile !== "google" ? (

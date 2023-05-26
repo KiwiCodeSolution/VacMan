@@ -51,7 +51,7 @@ const Reminder = () => {
 
   return (
     <>
-      <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-light" text="Reminder" underlined />
+      <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-bg-light" text="Reminder" underlined />
       <div className="container mx-auto bg-bg-light">
         {isLoading ? (
           <div className="mt-48">

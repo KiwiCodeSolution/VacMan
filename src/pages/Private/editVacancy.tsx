@@ -14,7 +14,7 @@ const EditVacancy = () => {
 
   return (
     <>
-      <NavHeader bg="bg-light" prevAddress={`/${id}/details`} text="Edit vacancy" underlined />
+      <NavHeader bg="bg-bg-light" prevAddress={`/${id}/details`} text="Edit vacancy" underlined />
       {isLoading ? <Loader active absolute /> : (
         <div className="px-4 pt-3">
           <AddVacancyForm initialVacancy={data && data.data.find(el => el._id === id)} />
