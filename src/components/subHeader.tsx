@@ -28,7 +28,7 @@ const SubHeader = ({ fill }: propType) => {
       </div>
 
       <p className="pt-4 text-xl font-semibold text-center">{profile.name}</p>
-      <p className="text-center">position: {profile.position}</p>
+      <p className="text-center">{profile.position}</p>
     </>
   );
 };
