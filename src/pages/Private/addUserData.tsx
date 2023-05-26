@@ -1,11 +1,16 @@
 import AddUserInfoForm from "components/forms/AddUserInfoForm";
+import InputCustomData from "components/modal/InputCustomDataModal";
 import NavHeader from "components/navHeader";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const AddUserData = () => {
   const location = useLocation();
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <>
+      {showModal && <InputCustomData setShowModal={setShowModal} />}
       <NavHeader
         prevAddress={location?.state?.from.pathname ?? "/"}
         bg="bg-bg-light"
@@ -14,7 +19,7 @@ const AddUserData = () => {
         underlined
       />
       <div className="container mx-auto px-4">
-        <AddUserInfoForm />
+        <AddUserInfoForm setShowModal={setShowModal} />
       </div>
     </>
   );

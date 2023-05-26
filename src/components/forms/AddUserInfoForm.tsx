@@ -1,6 +1,6 @@
 // addUserInfoForm.tsx;
 import { useNavigate } from "react-router-dom";
-import { Formik, FormikHelpers, FormikProps } from "formik";
+import { Formik, FormikProps } from "formik";
 // import { InferType } from "yup";
 
 import CustomInput from "components/forms/CustomInput";
@@ -11,36 +11,39 @@ import Button from "components/ui/button";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { updateProfile } from "redux/userOperations";
 
-const formFields = [
-  { name: "name", label: "user name", labelIcon: icons.Phone16, type: "name" },
-  { name: "phoneNumber", label: "Phone number", labelIcon: icons.Phone16, type: "phone" },
-  { name: "position", label: "Position", labelIcon: icons.Position, type: "text" },
-  { name: "location", label: "Location", labelIcon: icons.Location, type: "text" },
-  { name: "instagram", label: "Instagram", labelIcon: icons.Instagram, type: "text" },
-  { name: "facebook", label: "Facebook", labelIcon: icons.Facebook, type: "text" },
-  { name: "linkedin", label: "LinkedIn", labelIcon: icons.LinkedIn, type: "text" },
-  { name: "telegram", label: "Telegram", labelIcon: icons.Telegram, type: "text" },
-];
-
-const AddUserInfoForm = () => {
+const AddUserInfoForm = ({ setShowModal }: { setShowModal: (prop: boolean) => void }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { profile } = useAppSelector(state => state.user);
-  const initialValues = {
-    name: profile.name || "",
-    phoneNumber: profile.phoneNumber || "",
-    position: profile.position || "",
-    location: profile.location || "",
-    instagram: profile.instagram || "",
-    facebook: profile.facebook || "",
-    linkedin: profile.linkedIn || "",
-    telegram: profile.telegram || "",
-  };
+
+  const formFields = [
+    { name: "name", label: "User name", labelIcon: icons.Person, type: "name" },
+    { name: "phoneNumber", label: "Phone number", labelIcon: icons.Phone16, type: "phone" },
+    { name: "position", label: "Position", labelIcon: icons.Position, type: "text" },
+    { name: "location", label: "Location", labelIcon: icons.Location, type: "text" },
+    { name: "instagram", label: "Instagram", labelIcon: icons.Instagram, type: "text" },
+    { name: "facebook", label: "Facebook", labelIcon: icons.Facebook, type: "text" },
+    { name: "linkedin", label: "LinkedIn", labelIcon: icons.LinkedIn, type: "text" },
+    { name: "telegram", label: "Telegram", labelIcon: icons.Telegram, type: "text" },
+  ];
+
+  const initialValues = { ...profile };
   type Values = typeof initialValues;
-  const handelFormSubmit = (values: Values, { resetForm }: FormikHelpers<Values>): void => {
+  if (Object.keys(profile).length > 9) {
+    // profile has custom data
+    const customData = Object.keys(profile).slice(9);
+    // console.log("profile has custom data:", Object.keys(profile));
+    // console.log("custom data:", customData);
+    // console.log("form fields", formFields);
+    if (Object.keys(profile).length - 1 > formFields.length) {
+      customData.forEach(field =>
+        formFields.push({ name: field, label: field, labelIcon: icons.Person, type: "text" })
+      );
+    }
+  }
+  const handelFormSubmit = (values: Values): void => {
     // console.log("values: ", { ...profile, ...values });
     dispatch(updateProfile({ ...profile, ...values }));
-    resetForm();
     navigate("/");
   };
 
@@ -55,6 +58,11 @@ const AddUserInfoForm = () => {
               </li>
             ))}
           </ul>
+          <div className="mt-auto">
+            <Button btnType="button" variant="white" clickFn={() => setShowModal(true)}>
+              Set a custom data
+            </Button>
+          </div>
           <div className="mt-auto mb-24">
             <Button btnType="submit" variant="black">
               SAVE

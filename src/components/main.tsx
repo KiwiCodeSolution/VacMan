@@ -5,14 +5,13 @@ import { Form, Formik } from "formik";
 import { useState, useEffect } from "react";
 
 import { useAppDispatch } from "hooks/reduxHooks";
-// import { setAuthHeader } from "redux/userOperations";
 import { IVacancy, useGetVacanciesQuery } from "redux/VacancyQueries";
-import * as Icons from "components/iconsComponents";
-import AddBtn from "components/addBtn";
-import Loader from "components/ui/loader";
-import ShortNote from "components/notices/ShortNotice";
-import Header from "./Header";
 import { setReminder } from "redux/userSlice";
+import * as Icons from "./iconsComponents";
+import AddBtn from "./addBtn";
+import Loader from "./ui/loader";
+import ShortNote from "./notices/ShortNotice";
+import Header from "./Header";
 
 export interface Values {
   text: string;
@@ -20,8 +19,6 @@ export interface Values {
 }
 
 export default function Main() {
-  // const { token } = useAppSelector(state => state.user);
-  // setAuthHeader(token);
   const dispatch = useAppDispatch();
   const [text, setText] = useState("");
 
@@ -35,7 +32,7 @@ export default function Main() {
     ?.filter(vacancy => vacancy.archived === false && vacancy.companyName.toLowerCase().includes(text.toLowerCase()))
     .sort((firstVacancy, secondVacancy) => secondVacancy.actions[0].date - firstVacancy.actions[0].date) as IVacancy[];
 
-  const isActionsActive = vacancies?.filter(vacancy => vacancy.actions[vacancy.actions.length - 1].fulfilled === false);
+  const isActionsActive = vacancies?.filter(vacancy => vacancy.actions.at(-1)?.fulfilled === false);
 
   useEffect(() => {
     if (isActionsActive?.length) {
