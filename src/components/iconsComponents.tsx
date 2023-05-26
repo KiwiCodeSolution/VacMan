@@ -15,7 +15,11 @@ export type IIconProps = {
   size?: string | number;
   className?: string;
 };
-
+export const Person = ({ size = 16, className }: IIconProps) => (
+  <svg width={size} height={size} viewBox="0 0 1024 1024" fill="currentColor" className={className}>
+    <path d="M512 597.994667q108.010667 0 225.002667 46.997333t116.992 123.008l0 85.994667-684.010667 0 0-85.994667q0-76.010667 116.992-123.008t225.002667-46.997333zM512 512q-69.994667 0-120-50.005333t-50.005333-120 50.005333-121.002667 120-51.008 120 51.008 50.005333 121.002667-50.005333 120-120 50.005333z" />
+  </svg>
+)
 export const Rubber = ({ size = 16, className }: IIconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="none" className={className}>
     <path d="M14.2277 15.2279L9.9847 10.9849L4.3277 16.6419L6.4497 18.7629C7.01228 19.3254 7.77521 19.6413 8.5707 19.6413C9.36619 19.6413 10.1291 19.3254 10.6917 18.7629L14.2277 15.2279ZM12.7837 19.4999H15.4997C15.7649 19.4999 16.0193 19.6053 16.2068 19.7928C16.3943 19.9804 16.4997 20.2347 16.4997 20.4999C16.4997 20.7652 16.3943 21.0195 16.2068 21.2071C16.0193 21.3946 15.7649 21.4999 15.4997 21.4999H4.4997C4.24617 21.4997 4.00218 21.4032 3.81711 21.2299C3.63203 21.0567 3.51968 20.8196 3.50278 20.5666C3.48588 20.3136 3.5657 20.0637 3.72609 19.8673C3.88647 19.671 4.11545 19.5429 4.3667 19.5089L2.9137 18.0559C2.53876 17.6809 2.32812 17.1723 2.32812 16.6419C2.32812 16.1116 2.53876 15.603 2.9137 15.2279L14.2277 3.91394C14.6028 3.539 15.1114 3.32837 15.6417 3.32837C16.172 3.32837 16.6806 3.539 17.0557 3.91394L21.2997 8.15694C21.6746 8.532 21.8853 9.04061 21.8853 9.57094C21.8853 10.1013 21.6746 10.6099 21.2997 10.9849L12.7837 19.4999Z" />
@@ -36,31 +40,6 @@ export const Eye = ({ size = 16, className, crossed }: IIconProps & { crossed?: 
     {crossed && <path d="M4 4L20 20" />}
   </svg>
 );
-
-// export const Rectangle = ({ size = 16, className }: IIconProps) => (
-//   <svg width={size} height={size} viewBox="0 0 360 248" fill="currentColor" stroke="none" className={className}>
-//     <path d="M0 0H360V158.372L0 248V0Z" />
-//   </svg>
-// );
-
-// export const Triangle = ({
-//   size,
-//   width = 200,
-//   height = 200,
-//   className,
-// }: IIconProps & { width?: string | number; height?: string | number }) => (
-//   <svg
-//     xmlns="http://www.w3.org/2000/svg"
-//     width={size || width}
-//     height={size || height}
-//     fill="currentColor"
-//     viewBox="0 0 200 200"
-//     preserveAspectRatio="none"
-//     className={className}
-//   >
-//     <polygon points="0 0 0 200 200 0 0 0" />
-//   </svg>
-// );
 
 export const Todos = ({ size = 270, className }: IIconProps) => (
   <svg width={size} height={size} viewBox="0 0 270 230" fill="#E6E6E6" stroke="none" className={className}>
