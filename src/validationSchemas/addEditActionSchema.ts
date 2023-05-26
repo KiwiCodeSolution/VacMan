@@ -5,7 +5,7 @@ const DATE_PATTERN = "yyyy-MM-dd";
 const TIME_PATTERN = "HH:mm";
 
 const addEditActionShema = yup.object({
-  name: yup.string().min(2).max(100).required(),
+  name: yup.string().min(2).max(40).required(),
 
   deadline: yup
     .string()
