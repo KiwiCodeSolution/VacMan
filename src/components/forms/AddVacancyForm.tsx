@@ -11,6 +11,7 @@ import { IVacancy } from "redux/VacancyQueries";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { setIsLoading } from "redux/userSlice";
 import useHandleVacancy from "hooks/handleVacancy";
+import addEditVacancySchema from "validationSchemas/addEditVacancySchema";
 
 // const STAGES = [
 //   "Waiting for answer",
@@ -61,7 +62,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
     const preparedData = {
       ...data,
       userRank: Number(data.userRank),
-    }
+    };
     if (!initialVacancy) {
       addNewVacancy(preparedData);
     } else {
@@ -71,7 +72,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleFormSubmit}>
+    <Formik initialValues={initialValues} validationSchema={addEditVacancySchema} onSubmit={handleFormSubmit}>
       {({ handleSubmit }: FormikProps<Values>) => (
         <form onSubmit={handleSubmit}>
           <ul className="flex flex-col gap-y-3">
@@ -106,12 +107,7 @@ const AddVacancyForm = ({ initialVacancy }: { initialVacancy?: IVacancy }) => {
               <ColorRadioBtnsGroup name="cardColor" values={COLORS} label="Color" LabelIcon={icons.Color} />
             </li>
             <li className="py-4 border-y border-txt-main">
-              <StarRadioBtnsGroup
-                name="userRank"
-                values={RATING_VALUES}
-                label="User Review"
-                LabelIcon={icons.Review}
-              />
+              <StarRadioBtnsGroup name="userRank" values={RATING_VALUES} label="User Review" LabelIcon={icons.Review} />
             </li>
           </ul>
 
