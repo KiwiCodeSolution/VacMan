@@ -31,8 +31,13 @@ export default function Main() {
   const vacancies = response?.data
     ?.filter(vacancy => vacancy.archived === false && vacancy.companyName.toLowerCase().includes(text.toLowerCase()))
     .sort((firstVacancy, secondVacancy) => secondVacancy.actions[0].date - firstVacancy.actions[0].date) as IVacancy[];
+  const isActionsActive = vacancies?.filter(
+    vacancy =>
+      vacancy.actions[vacancy.actions.length - 1].fulfilled === false &&
+      Date.now() - vacancy.actions[vacancy.actions.length - 1].deadline > -86400000
+  );
+  console.log(isActionsActive);
 
-  const isActionsActive = vacancies?.filter(vacancy => vacancy.actions.at(-1)?.fulfilled === false);
 
   useEffect(() => {
     if (isActionsActive?.length) {
@@ -40,7 +45,7 @@ export default function Main() {
     } else {
       dispatch(setReminder(false));
     }
-  }, [dispatch, isActionsActive?.length])
+  }, [dispatch, isActionsActive?.length]);
 
   const handleChange = (event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<HTMLInputElement>) => {
     setText(event.currentTarget.value.toLowerCase());
