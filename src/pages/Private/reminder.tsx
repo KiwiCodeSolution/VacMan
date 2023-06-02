@@ -46,9 +46,6 @@ const Reminder = () => {
         secondVacancy?.actions[secondVacancy.actions.length - 1].deadline
     );
 
-  console.log("Active:", vacanciesActiveActions);
-  console.log("Fulfilled:", vacanciesFulfilledActions);
-
   return (
     <>
       <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-light" text="Reminder" underlined />
