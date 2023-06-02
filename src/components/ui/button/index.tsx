@@ -1,3 +1,5 @@
+import { effectButton } from "utils/stylesHelpers";
+
 interface IButton {
   children: string | JSX.Element | JSX.Element[];
   variant?: "black" | "white";
@@ -8,8 +10,6 @@ interface IButton {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const effectButton =
-  "hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] focus:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)]";
 
 export default function Button({ children, variant, btnType, clickFn, disabled, icon }: IButton) {
   const disabledButtonStyle = disabled ? `border-txt-grey` : `${effectButton} border-txt-black`;

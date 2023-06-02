@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { IAction } from "redux/VacancyQueries";
 import ActionElement from "./actionElement";
 import Button from "components/ui/button";
@@ -12,8 +13,8 @@ const ActionList = ({ actions, isArchived }: { actions: IAction[]; isArchived?: 
   return (
     <div className="relative overflow-hidden py-2">
       <div className="animate-slide">
-        {actions.map(action => (
-          <div key={action.date}>
+        {actions.map((action, index) => (
+          <div key={action.date + index}>
             <ActionElement action={action} />
           </div>
         ))}

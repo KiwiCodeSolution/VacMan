@@ -36,8 +36,6 @@ export default function Main() {
       vacancy.actions[vacancy.actions.length - 1].fulfilled === false &&
       Date.now() - vacancy.actions[vacancy.actions.length - 1].deadline > -86400000
   );
-  console.log(isActionsActive);
-
 
   useEffect(() => {
     if (isActionsActive?.length) {

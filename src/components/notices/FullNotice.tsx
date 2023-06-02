@@ -8,9 +8,9 @@ import NavHeader from "components/navHeader";
 import Stars from "components/ui/stars";
 import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import ActionList from "./actionList";
-import { colorVariants } from "./ShortNotice";
 import useHandleVacancy from "hooks/handleVacancy";
 import ActionShortElement from "./actionShortElement";
+import { colorVariants } from "utils/stylesHelpers";
 
 const FullNote = () => {
   const { _id } = useParams();
@@ -46,7 +46,7 @@ const FullNote = () => {
         text={companyName}
         link={companyURL}
         editAddress={`/${_id}/edit`}
-        bg="bg-light"
+        bg="bg-bg-light"
         underlined
       />
       <div className={`container mx-auto rounded-xl py-6 px-4 ${colorVariants[cardColor]} text-base shadow-xl`}>
@@ -57,12 +57,7 @@ const FullNote = () => {
 
               {source ? (
                 sourceURL ? (
-                  <a
-                    href={sourceURL}
-                    className="font-bold text-txt-link text-xl mt-2"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a href={sourceURL} className="font-bold text-txt-link text-xl mt-2" target="_blank" rel="noreferrer">
                     {source}
                   </a>
                 ) : (

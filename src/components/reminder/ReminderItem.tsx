@@ -2,11 +2,11 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { IVacancy } from "redux/VacancyQueries";
+import { format } from "date-fns";
 import * as Icons from "components/iconsComponents";
-import { colorVariants, effectIcon, effectItem } from "components/notices/ShortNotice";
 import { Link, useLocation } from "react-router-dom";
-import { effectButton } from "components/ui/button";
 import useHandleVacancy from "hooks/handleVacancy";
+import { colorVariants, effectButton, effectIcon, effectItem } from "utils/stylesHelpers";
 
 export interface IReminderVacancy {
   date: number;
@@ -30,19 +30,6 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
   const actionItem = actions[actions.length - 1];
   const deadlineItem = actionItem.deadline as IReminderVacancy["deadline"];
   const fulfilledItem = actionItem.fulfilled as IReminderVacancy["fulfilled"];
-
-  const convertDate = (deadlineDate: number) => {
-    const dateFormat = new Date(deadlineDate);
-    const month = dateFormat.getMonth() + 1;
-    return `${dateFormat.getDate()}.${month < 10 ? "0" : ""}${month}.${dateFormat.getFullYear()}`;
-  };
-
-  const convertTime = (deadlineDate: number) => {
-    const dateFormat = new Date(deadlineDate);
-    const hour = dateFormat.getHours();
-    const min = dateFormat.getMinutes();
-    return `${hour}:${min > 10 ? min : `0${min}`}`;
-  };
 
   function fulfilled() {
     newActions[newActions.length - 1].fulfilled = true;
@@ -79,10 +66,11 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
       <li className="flex justify-between px-3 mt-3">
         <div className="flex items-center gap-x-4 py-[2px] px-[10px] border border-bg-grey rounded-3xl">
           <div className="flex items-center gap-x-2">
-            <Icons.Bell size={22} className={deadlineStyles(fulfilledItem, deadlineItem)} /> {convertDate(deadlineItem)}
+            <Icons.Bell size={22} className={deadlineStyles(fulfilledItem, deadlineItem)} />{" "}
+            {format(deadlineItem, "dd-MM-yyyy")}
           </div>
           <div className="flex items-center gap-x-2">
-            <Icons.Clock /> {convertTime(deadlineItem)}
+            <Icons.Clock /> {format(deadlineItem, "hh:mm")}
           </div>
         </div>
         <button className={`absolute top-3 right-3 ${effectIcon}`}>
