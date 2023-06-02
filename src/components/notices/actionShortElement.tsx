@@ -13,8 +13,8 @@ import { format } from "date-fns";
 // };
 
 const ActionShortElement = ({ name, deadline }: IAction) => {
-  const formattedDeadline = format(deadline, "dd-MM-yyyy hh:mm");
-  // const formattedDate = format(date, "dd-MM-yyyy hh:mm");
+  const formattedDeadline = format(deadline, "dd-MM-yyyy HH:mm");
+  // const formattedDate = format(date, "dd-MM-yyyy HH:mm");
   return (
     <div className="flex justify-between text-txt-main">
       <div>

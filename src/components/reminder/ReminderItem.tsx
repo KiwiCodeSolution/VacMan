@@ -70,7 +70,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
             {format(deadlineItem, "dd-MM-yyyy")}
           </div>
           <div className="flex items-center gap-x-2">
-            <Icons.Clock /> {format(deadlineItem, "hh:mm")}
+            <Icons.Clock /> {format(deadlineItem, "HH:mm")}
           </div>
         </div>
         <button className={`absolute top-3 right-3 ${effectIcon}`}>
@@ -80,24 +80,24 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
         </button>
       </li>
       <li className="px-5 flex flex-col gap-y-1">
-        <p className="flex gap-x-2 gap-y-1 font-bold">
+        <div className="flex gap-x-2 gap-y-1 font-bold">
           <div className="w-[24px]">
             <Icons.CompanyName size={24} />{" "}
           </div>
           Company: <span className="font-normal">"{vacancy.companyName}"</span>
-        </p>
-        <p className="flex gap-x-2 gap-y-1 font-bold">
+        </div>
+        <div className="flex gap-x-2 gap-y-1 font-bold">
           <div className="w-[24px]">
             <Icons.Position size={24} />{" "}
           </div>
           Vacancy: <span className="font-normal">{vacancy.position}</span>
-        </p>
-        <p className="flex gap-x-2 gap-y-1 font-bold">
+        </div>
+        <div className="flex gap-x-2 gap-y-1 font-bold">
           <div className="w-[24px]">
             <Icons.Action size={24} />{" "}
           </div>
           Action: <span className="font-normal">{actionItem.name}</span>
-        </p>
+        </div>
       </li>
 
       <li
