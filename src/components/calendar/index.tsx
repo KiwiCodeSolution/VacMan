@@ -51,6 +51,7 @@ const CalendarComponent = () => {
               return `bg-app-smoke text-txt-red ${typeClass} border border-1 border-bg-grey`;
             }
             return `${typeClass} rounded-full`;
+
           }}
         />
       </li>

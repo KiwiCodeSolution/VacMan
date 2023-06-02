@@ -9,11 +9,11 @@ interface IProps {
   nextAddress?: string;
   editAddress?: string;
   skip?: string;
-  bg?: "bg-light" | "bg-grey" | "bg-black" | "bg-blue";
+  bg?: "bg-bg-light" | "bg-bg-grey" | "bg-bg-black" | "bg-bg-blue";
   underlined?: boolean;
 }
 const NavHeader = ({ bg, prevAddress, text, textWhite, link, nextAddress, editAddress, skip, underlined }: IProps) => {
-  const bgColor = bg ? `bg-${bg}` : "bg-transparent";
+  const bgColor = bg || "bg-transparent";
   const textColor = textWhite ? "text-txt-white" : undefined;
   const border = underlined ? "border-b border-txt-grey" : null;
   return (

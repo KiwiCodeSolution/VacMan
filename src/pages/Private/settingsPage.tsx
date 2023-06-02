@@ -79,7 +79,7 @@ const SettingsPage = () => {
 
   return (
     <div className="mb-28 select-none">
-      <NavHeader prevAddress={location?.state?.from?.pathname ?? "/"} bg="bg-black" text="Settings" textWhite />
+      <NavHeader prevAddress={location?.state?.from?.pathname ?? "/"} bg="bg-bg-black" text="Settings" textWhite />
       <SubHeader fill="text-txt-black" />
 
       <div className="mx-auto w-24 pt-4 pb-7">

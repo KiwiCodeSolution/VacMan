@@ -8,7 +8,7 @@ const AddVacancy = () => {
   const { isLoading } = useAppSelector(state => state.user);
   return (
     <>
-      <NavHeader prevAddress="/" text="Add Vacancy" bg="bg-light" underlined />
+      <NavHeader prevAddress="/" text="Add Vacancy" bg="bg-bg-light" underlined />
       {isLoading ? <Loader active absolute /> : (
         <div className="px-4 pt-3">
           <AddVacancyForm />

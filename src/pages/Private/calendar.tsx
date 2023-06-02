@@ -7,7 +7,7 @@ const Calendar = () => {
 
   return (
     <>
-      <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-light" text="Calendar" underlined />
+      <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-bg-light" text="Calendar" underlined />
       <CalendarComponent />
     </>
   );

@@ -39,7 +39,7 @@ const Archived = () => {
         </div>
       ) : (
         <>
-          <NavHeader bg="bg-light" prevAddress="/settings" text="Archive" underlined />
+          <NavHeader bg="bg-bg-light" prevAddress="/settings" text="Archive" underlined />
           <div className="sticky top-20 z-10 px-4">
             <Formik initialValues={initialValues} onSubmit={handelFormSubmit} className="h-20 bg-bg-light">
               <Form autoComplete="off" className="flex sticky top-0 left-0 right-0 mt-2">

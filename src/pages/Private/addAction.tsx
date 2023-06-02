@@ -7,7 +7,7 @@ const AddAction = () => {
   const location = useLocation();
   return (
     <>
-      <NavHeader bg="bg-light" prevAddress={location?.state?.from.pathname ?? "/"} text="Add action" underlined />
+      <NavHeader bg="bg-bg-light" prevAddress={location?.state?.from.pathname ?? "/"} text="Add action" underlined />
       <div className="px-4 pt-3">
         <AddActionForm />
       </div>

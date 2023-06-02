@@ -13,17 +13,25 @@ const ProfilePage = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const { email, profile } = useAppSelector(state => state.user);
+
   const elements = [
-    { icon: Icons.Envelope, name: email, btn: Icons.ArrowForward, btnSize: 24 },
-    { icon: Icons.Phone16, name: profile.phoneNumber, btn: Icons.ArrowForward },
-    { icon: Icons.LinkedIn, name: profile.linkedIn, btn: Icons.ArrowForward },
-    { icon: Icons.Telegram, name: profile.telegram, btn: Icons.ArrowForward },
-    { icon: Icons.Instagram, name: profile.instagram, btn: Icons.ArrowForward },
-    { icon: Icons.Facebook, name: profile.facebook, btn: Icons.ArrowForward },
+    { icon: Icons.Envelope, name: email },
+    { icon: Icons.Phone16, name: profile.phoneNumber },
+    { icon: Icons.LinkedIn, name: profile.linkedIn },
+    { icon: Icons.Telegram, name: profile.telegram },
+    { icon: Icons.Instagram, name: profile.instagram },
+    { icon: Icons.Facebook, name: profile.facebook },
   ];
 
+  const customElements: { name: string; value: string; }[] = [];
+  if (Object.keys(profile).length > 9) {
+    const customData = Object.keys(profile).slice(9);
+    customData.forEach(field => customElements.push({ name: field, value: profile[field] }));
+    console.log("custom elements", customElements);
+  }
+
   const copyToClipboard = (name: string) => {
-    console.log("copyToClipboard function", name);
+    // console.log("copyToClipboard function", name);
     window.navigator.clipboard.writeText(name);
     dispatch(setMessage(`'${name}' copied to clipboard`));
     dispatch(setType("info"));
@@ -33,7 +41,7 @@ const ProfilePage = () => {
 
   return (
     <div className="mb-28 select-none">
-      <NavHeader bg="bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
+      <NavHeader bg="bg-bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
       <SubHeader fill="text-txt-darkgrey" />
 
       <div className="mx-auto w-40 pt-4 pb-7">
@@ -45,6 +53,8 @@ const ProfilePage = () => {
       </div>
 
       <ul className="container mx-auto px-4">
+        <p className="text-center txt-main text-xl">click the line to copy to clipboard</p>
+        <hr />
         {elements.map(el => el.name && (
           // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
           <li
@@ -57,12 +67,19 @@ const ProfilePage = () => {
               <el.icon size={32} />
             </div>
             <p className="pl-4 font-semibold">{el.name}</p>
-            <div className="w-8 h-8 ml-auto hover:scale-110 focus:scale-110">
-              <el.btn size={24} />
-            </div>
-            {/* <div className="flex justify-end mx-2 fixed bottom-32 right-8">
-              <AddBtn />
-            </div> */}
+          </li>
+        ))}
+        {customElements.map(el => el.value && (
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+          <li
+            key={el.name}
+            className="flex flex-col items-left ml-2 py-3 cursor-pointer"
+            onClick={() => copyToClipboard(el.value)}
+            onKeyDown={handleKeyDown}
+          >
+            <p className="pl-4 font-semibold border-l-2">{el.name}</p>
+            <hr />
+            <p className="pl-4 font-semibold border-l-2 text-txt-main">{el.value}</p>
           </li>
         ))}
       </ul>
