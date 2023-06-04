@@ -8,7 +8,7 @@ const ActionList = ({ actions, isArchived }: { actions: IAction[]; isArchived?: 
   const location = useLocation();
   const { _id } = useParams();
 
-  const disabledButton = !actions[actions.length - 1].fulfilled || isArchived;
+  // const disabledButton = actions[actions.length - 1].fulfilled || isArchived;
 
   return (
     <div className="relative overflow-hidden py-2">
@@ -25,11 +25,19 @@ const ActionList = ({ actions, isArchived }: { actions: IAction[]; isArchived?: 
           <div className="w-14 border-t-2 border-bg-grey" />
         </div>
         <div className="-mt-8 ml-20 w-48">
-          <Link to={`/${_id}/addAction`} state={{ from: location }}>
-            <Button variant="white" btnType="button" disabled={disabledButton}>
-              New action
-            </Button>
-          </Link>
+          {actions.at(-1)?.fulfilled ? (
+            <Link to={`/${_id}/addAction`} state={{ from: location }}>
+              <Button variant="white" btnType="button" disabled={isArchived}>
+                New action
+              </Button>
+            </Link>
+          ) : (
+            <Link to={`/${_id}/editAction`} state={{ from: location }}>
+              <Button variant="white" btnType="button" disabled={isArchived}>
+                Edit action
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
