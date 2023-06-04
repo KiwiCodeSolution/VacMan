@@ -5,6 +5,7 @@ import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import { useState } from "react";
 import ReminderItem from "components/reminder/ReminderItem";
 import "./calendar.css";
+import { colorVariants } from "utils/stylesHelpers";
 
 const CalendarComponent = () => {
   const [currentDay, setCurrentDay] = useState(new Date());
@@ -26,7 +27,7 @@ const CalendarComponent = () => {
   };
 
   return (
-    <ul className="lg:flex justify-between py-4 align-baseline">
+    <ul className="lg:flex justify-between py-4 align-baseline mb-28">
       <li className="w-[350px] mx-auto mb-8 lg:mb-0">
         <Calendar
           onChange={onChange}
@@ -35,20 +36,20 @@ const CalendarComponent = () => {
           className="text-center flex flex-col gap-y-3"
           tileClassName={({ date }) => {
             const realDay = format(date, "dd-MM-yyyy");
-            const typeClass = `w-6 h-8 hover:bg-app-smoke hover:text-txt-black  focus:border focus:border-app-red focus:bg-app-smoke  text-center`;
+            const typeClass = `w-6 h-8 hover:bg-app-smoke hover:text-txt-black  focus:border focus:border-app-red focus:bg-app-smoke text-center`;
             if (
               events &&
               events.find(ev => format(ev.actions[ev.actions.length - 1].deadline, "dd-MM-yyyy") === realDay)
             ) {
               const color = events.find(
                 ev => format(ev.actions[ev.actions.length - 1].deadline, "dd-MM-yyyy") === realDay
-              )?.cardColor;
-              return `bg-app-${color} ${typeClass} rounded-full `;
+              )?.cardColor as string;
+              return `${colorVariants[color]} ${typeClass} rounded-full`;
             }
             if (format(date, "dd-MM-yyyy") === format(new Date(), "dd-MM-yyyy")) {
-              return `bg-app-smoke text-txt-red border border-app-black ${typeClass}`;
+              return `bg-app-smoke text-txt-red ${typeClass} border border-1 border-bg-grey`;
             }
-            return `${typeClass} rounded-full `;
+            return `${typeClass} rounded-full`;
           }}
         />
       </li>

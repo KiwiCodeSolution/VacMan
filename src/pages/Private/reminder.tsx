@@ -46,13 +46,10 @@ const Reminder = () => {
         secondVacancy?.actions[secondVacancy.actions.length - 1].deadline
     );
 
-  console.log("Active:", vacanciesActiveActions);
-  console.log("Fulfilled:", vacanciesFulfilledActions);
-
   return (
     <>
       <NavHeader prevAddress={location?.state?.from.pathname ?? "/"} bg="bg-bg-light" text="Reminder" underlined />
-      <div className="container mx-auto bg-bg-light">
+      <div className="container mx-auto bg-bg-light ">
         {isLoading ? (
           <div className="mt-48">
             <Loader active absolute />

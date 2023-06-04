@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
@@ -31,8 +32,11 @@ export default function Main() {
   const vacancies = response?.data
     ?.filter(vacancy => vacancy.archived === false && vacancy.companyName.toLowerCase().includes(text.toLowerCase()))
     .sort((firstVacancy, secondVacancy) => secondVacancy.actions[0].date - firstVacancy.actions[0].date) as IVacancy[];
-
-  const isActionsActive = vacancies?.filter(vacancy => vacancy.actions.at(-1)?.fulfilled === false);
+  const isActionsActive = vacancies?.filter(
+    vacancy =>
+      vacancy.actions.at(-1)!.fulfilled === false &&
+      Date.now() - vacancy.actions.at(-1)!.deadline > -86400000
+  );
 
   useEffect(() => {
     if (isActionsActive?.length) {
@@ -40,7 +44,7 @@ export default function Main() {
     } else {
       dispatch(setReminder(false));
     }
-  }, [dispatch, isActionsActive?.length])
+  }, [dispatch, isActionsActive?.length]);
 
   const handleChange = (event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<HTMLInputElement>) => {
     setText(event.currentTarget.value.toLowerCase());
