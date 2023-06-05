@@ -6,10 +6,10 @@ const addEditVacancySchema = yup.object({
   source: yup.string().max(20),
   sourceURL: yup.string(),
   position: yup.string().max(30),
-  salary: yup.number().min(0).max(999999),
+  salary: yup.string().max(15),
   cardColor: yup.string(),
   userRank: yup.number().min(1).max(5),
-  notes: yup.string().max(500),
+  notes: yup.string().max(10000),
 });
 
 export default addEditVacancySchema;
