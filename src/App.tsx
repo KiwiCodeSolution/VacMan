@@ -91,7 +91,6 @@ const App = () => {
         <Route path="login" element={<RedirectRoute><LogInPage /></RedirectRoute>} />
         <Route path="signup" element={<RedirectRoute><SignUpPage /></RedirectRoute>} />
         <Route path="restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
-        <Route path="restorePass" element={<RedirectRoute><RestorePassPage /></RedirectRoute>} />
         <Route path="passCodeVerify" element={<RedirectRoute><PassCodeVerifyPage /></RedirectRoute>} />
         <Route path="confirmEmail" element={<RedirectRoute><ConfirmEmailPage /></RedirectRoute>} />
         <Route path="*" element={<NotFound />} />
