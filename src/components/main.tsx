@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
@@ -33,8 +34,8 @@ export default function Main() {
     .sort((firstVacancy, secondVacancy) => secondVacancy.actions[0].date - firstVacancy.actions[0].date) as IVacancy[];
   const isActionsActive = vacancies?.filter(
     vacancy =>
-      vacancy.actions[vacancy.actions.length - 1].fulfilled === false &&
-      Date.now() - vacancy.actions[vacancy.actions.length - 1].deadline > -86400000
+      vacancy.actions.at(-1)!.fulfilled === false &&
+      Date.now() - vacancy.actions.at(-1)!.deadline > -86400000
   );
 
   useEffect(() => {
