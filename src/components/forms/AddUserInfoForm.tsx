@@ -1,4 +1,3 @@
-// addUserInfoForm.tsx;
 import { useNavigate } from "react-router-dom";
 import { Formik, FormikProps } from "formik";
 // import { InferType } from "yup";
@@ -32,9 +31,7 @@ const AddUserInfoForm = ({ setShowModal }: { setShowModal: (prop: boolean) => vo
   if (Object.keys(profile).length > 9) {
     // profile has custom data
     const customData = Object.keys(profile).slice(9);
-    // console.log("profile has custom data:", Object.keys(profile));
-    // console.log("custom data:", customData);
-    // console.log("form fields", formFields);
+
     if (Object.keys(profile).length - 1 > formFields.length) {
       customData.forEach(field =>
         formFields.push({ name: field, label: field, labelIcon: icons.Person, type: "text" })
