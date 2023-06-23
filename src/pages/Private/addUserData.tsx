@@ -19,6 +19,7 @@ const AddUserData = () => {
         underlined
       />
       <div className="container mx-auto px-4">
+        <p className="bg-app-blue rounded-md text-center">Empty fields stay invisible in Profile</p>
         <AddUserInfoForm setShowModal={setShowModal} />
       </div>
     </>
