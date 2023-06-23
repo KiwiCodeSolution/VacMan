@@ -9,6 +9,7 @@ import Button from "components/ui/button";
 // import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { updateProfile } from "redux/userOperations";
+import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
 
 const AddUserInfoForm = ({ setShowModal }: { setShowModal: (prop: boolean) => void }) => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const AddUserInfoForm = ({ setShowModal }: { setShowModal: (prop: boolean) => vo
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handelFormSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handelFormSubmit} validationSchema={addUserInfoSchema}>
       {({ handleSubmit }: FormikProps<Values>) => (
         <form onSubmit={handleSubmit} className="flex flex-col gap-y-6 grow mt-4 pb-6" noValidate>
           <ul className="flex flex-col gap-y-6">
