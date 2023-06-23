@@ -40,8 +40,6 @@ const AddActionForm = () => {
   }
 
   const handelFormSubmit = ({ name, deadline, time }: Values): void => {
-    // const date = new Date(deadline).toLocaleDateString();
-    // console.log("values: ", { name, deadline });
     const date = new Date(`${deadline} ${time}`);
     const newAction = {
       name,
@@ -60,7 +58,6 @@ const AddActionForm = () => {
   };
 
   if (isLoading) return <p>Loading...</p>;
-  if (!vacancy) return <p>No vacancy found</p>;
 
   return (
     <Formik initialValues={initialValues} validationSchema={addEditActionShema} onSubmit={handelFormSubmit}>

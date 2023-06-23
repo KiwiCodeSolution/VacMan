@@ -13,28 +13,6 @@ import { setIsLoading } from "redux/userSlice";
 import useHandleVacancy from "hooks/handleVacancy";
 import addEditVacancySchema from "validationSchemas/addEditVacancySchema";
 
-// const STAGES = [
-//   "Waiting for answer",
-//   "Doing a test",
-//   "Got rejected",
-//   "Prepearing for interview",
-//   "Prepearing for English",
-//   "Prepearing for tech. interview",
-//   "Got offer",
-//   "Another",
-// ];
-
-// const ACTIONS = [
-//   "Send resume",
-//   "Politely decline",
-//   "An interview with an eichar",
-//   "Ask a question to eichar",
-//   "English interview",
-//   "Make a test",
-//   "Wait for a reply",
-//   "Second act",
-// ];
-
 const RATING_VALUES = ["1", "2", "3", "4", "5"];
 
 const COLORS = ["grey", "blue", "green", "yellow", "orange", "pink", "smoke", "red", "mustard"];
