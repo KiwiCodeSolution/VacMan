@@ -11,7 +11,12 @@ import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { updateProfile } from "redux/userOperations";
 import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
 
-const AddUserInfoForm = ({ setShowModal }: { setShowModal: (prop: boolean) => void }) => {
+interface IProps {
+  setShowModal: (prop: boolean) => void;
+  goBackPath?: string;
+}
+
+const AddUserInfoForm = ({ setShowModal, goBackPath }: IProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { profile } = useAppSelector(state => state.user);
@@ -39,10 +44,15 @@ const AddUserInfoForm = ({ setShowModal }: { setShowModal: (prop: boolean) => vo
       );
     }
   }
+
   const handelFormSubmit = (values: Values): void => {
     // console.log("values: ", { ...profile, ...values });
     dispatch(updateProfile({ ...profile, ...values }));
-    navigate("/");
+    if (goBackPath) {
+      navigate(goBackPath);
+    } else {
+      navigate("/");
+    }
   };
 
   return (

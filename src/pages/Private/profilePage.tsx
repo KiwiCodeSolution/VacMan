@@ -63,6 +63,7 @@ const ProfilePage = () => {
           <li
             key={el.name}
             className="flex flex-row items-center ml-2 py-3 cursor-pointer"
+            onClick={() => copyToClipboard(el.name)}
           >
             <div className="w-10 h-10 bg-app-grey rounded-full p-1">
               <el.icon size={32} />
@@ -73,7 +74,7 @@ const ProfilePage = () => {
         {customElements.map(el => el.value && (
           <li
             key={el.name}
-            className="flex flex-col items-left ml-2 py-3 cursor-pointer"
+            className="flex flex-col items-left ml-2 py-3"
           >
             <div className="pl-4 font-semibold border-l-2 flex">
               <p>{el.name}</p>
@@ -86,7 +87,7 @@ const ProfilePage = () => {
             </div>
             <hr />
             <p
-              className="pl-4 font-semibold border-l-2 text-txt-main"
+              className="pl-4 font-semibold border-l-2 text-txt-main cursor-pointer"
               onClick={() => copyToClipboard(el.value)}
             >
               {el.value}
