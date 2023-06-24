@@ -3,14 +3,12 @@
 /* eslint-disable prettier/prettier */
 import { Link, useLocation } from "react-router-dom";
 import NavHeader from "components/navHeader";
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import * as Icons from "components/iconsComponents";
 import SubHeader from "components/subHeader";
 import Button from "components/ui/button";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { setShowNotification, setMessage, setType } from "redux/notificationsSlice";
 import { updateProfile } from "redux/userOperations";
-
-// import AddBtn from "components/addBtn";
 
 const ProfilePage = () => {
   const location = useLocation();
@@ -34,19 +32,16 @@ const ProfilePage = () => {
   }
 
   const copyToClipboard = (name: string) => {
-    // console.log("copyToClipboard function", name);
     window.navigator.clipboard.writeText(name);
     dispatch(setMessage(`'${name}' copied to clipboard`));
     dispatch(setType("info"));
     dispatch(setShowNotification(true));
   }
-  const handleDeleteCustomField = (name: string) => {
+  const deleteCustomField = (name: string) => {
     const newProfile = { ...profile };
     delete newProfile[name];
-    // console.log("profile:", newProfile);
     dispatch(updateProfile({ ...newProfile }));
   }
-  // const handleKeyDown = () => null;
 
   return (
     <div className="mb-28 select-none">
@@ -84,7 +79,7 @@ const ProfilePage = () => {
               <p>{el.name}</p>
               <button
                 className="bg-app-orange px-1 ml-auto rounded-md"
-                onClick={() => handleDeleteCustomField(el.name)}
+                onClick={() => deleteCustomField(el.name)}
               >
                 Delete
               </button>
@@ -99,7 +94,7 @@ const ProfilePage = () => {
           </li>
         ))}
       </ul>
-    </div >
+    </div>
   );
 };
 export default ProfilePage;
