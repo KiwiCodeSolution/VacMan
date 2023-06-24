@@ -1,13 +1,14 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable prettier/prettier */
 import { Link, useLocation } from "react-router-dom";
 import NavHeader from "components/navHeader";
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import * as Icons from "components/iconsComponents";
 import SubHeader from "components/subHeader";
 import Button from "components/ui/button";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { setShowNotification, setMessage, setType } from "redux/notificationsSlice";
-
-// import AddBtn from "components/addBtn";
+import { updateProfile } from "redux/userOperations";
 
 const ProfilePage = () => {
   const location = useLocation();
@@ -27,41 +28,42 @@ const ProfilePage = () => {
   if (Object.keys(profile).length > 9) {
     const customData = Object.keys(profile).slice(9);
     customData.forEach(field => customElements.push({ name: field, value: profile[field] }));
-    console.log("custom elements", customElements);
+    // console.log("custom elements", customElements);
   }
 
   const copyToClipboard = (name: string) => {
-    // console.log("copyToClipboard function", name);
     window.navigator.clipboard.writeText(name);
     dispatch(setMessage(`'${name}' copied to clipboard`));
     dispatch(setType("info"));
     dispatch(setShowNotification(true));
   }
-  const handleKeyDown = () => null;
+  const deleteCustomField = (name: string) => {
+    const newProfile = { ...profile };
+    delete newProfile[name];
+    dispatch(updateProfile({ ...newProfile }));
+  }
 
   return (
     <div className="mb-28 select-none">
       <NavHeader bg="bg-bg-grey" prevAddress={location?.state?.from.pathname ?? "/"} text="Profile" textWhite />
       <SubHeader fill="text-txt-darkgrey" />
 
-      <div className="mx-auto w-40 pt-4 pb-7">
+      <div className="mx-auto w-60 pt-4 pb-7">
         <Link to="/addUserData" state={{ from: location }}>
           <Button btnType="button" variant="black">
-            Add Profile data
+            Add-Edit Profile data
           </Button>
         </Link>
       </div>
 
       <ul className="container mx-auto px-4">
-        <p className="text-center txt-main text-xl">click the line to copy to clipboard</p>
+        <p className="text-center txt-main text-xl bg-bg-blue">click the line below to copy</p>
         <hr />
         {elements.map(el => el.name && (
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
           <li
             key={el.name}
             className="flex flex-row items-center ml-2 py-3 cursor-pointer"
             onClick={() => copyToClipboard(el.name)}
-            onKeyDown={handleKeyDown}
           >
             <div className="w-10 h-10 bg-app-grey rounded-full p-1">
               <el.icon size={32} />
@@ -70,20 +72,30 @@ const ProfilePage = () => {
           </li>
         ))}
         {customElements.map(el => el.value && (
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
           <li
             key={el.name}
-            className="flex flex-col items-left ml-2 py-3 cursor-pointer"
-            onClick={() => copyToClipboard(el.value)}
-            onKeyDown={handleKeyDown}
+            className="flex flex-col items-left ml-2 py-3"
           >
-            <p className="pl-4 font-semibold border-l-2">{el.name}</p>
+            <div className="pl-4 font-semibold border-l-2 flex">
+              <p>{el.name}</p>
+              <button
+                className="bg-app-orange px-1 ml-auto rounded-md"
+                onClick={() => deleteCustomField(el.name)}
+              >
+                Delete
+              </button>
+            </div>
             <hr />
-            <p className="pl-4 font-semibold border-l-2 text-txt-main">{el.value}</p>
+            <p
+              className="pl-4 font-semibold border-l-2 text-txt-main cursor-pointer"
+              onClick={() => copyToClipboard(el.value)}
+            >
+              {el.value}
+            </p>
           </li>
         ))}
       </ul>
-    </div >
+    </div>
   );
 };
 export default ProfilePage;

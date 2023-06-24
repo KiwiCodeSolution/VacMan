@@ -19,7 +19,8 @@ const AddUserData = () => {
         underlined
       />
       <div className="container mx-auto px-4">
-        <AddUserInfoForm setShowModal={setShowModal} />
+        <p className="bg-app-blue rounded-md text-center">Empty fields stay invisible in Profile</p>
+        <AddUserInfoForm setShowModal={setShowModal} goBackPath={location?.state?.from.pathname} />
       </div>
     </>
   );

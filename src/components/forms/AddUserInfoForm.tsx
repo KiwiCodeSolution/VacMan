@@ -1,4 +1,3 @@
-// addUserInfoForm.tsx;
 import { useNavigate } from "react-router-dom";
 import { Formik, FormikProps } from "formik";
 // import { InferType } from "yup";
@@ -10,8 +9,14 @@ import Button from "components/ui/button";
 // import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { updateProfile } from "redux/userOperations";
+import addUserInfoSchema from "validationSchemas/addUserInfoSchema";
 
-const AddUserInfoForm = ({ setShowModal }: { setShowModal: (prop: boolean) => void }) => {
+interface IProps {
+  setShowModal: (prop: boolean) => void;
+  goBackPath?: string;
+}
+
+const AddUserInfoForm = ({ setShowModal, goBackPath }: IProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { profile } = useAppSelector(state => state.user);
@@ -32,23 +37,26 @@ const AddUserInfoForm = ({ setShowModal }: { setShowModal: (prop: boolean) => vo
   if (Object.keys(profile).length > 9) {
     // profile has custom data
     const customData = Object.keys(profile).slice(9);
-    // console.log("profile has custom data:", Object.keys(profile));
-    // console.log("custom data:", customData);
-    // console.log("form fields", formFields);
+
     if (Object.keys(profile).length - 1 > formFields.length) {
       customData.forEach(field =>
         formFields.push({ name: field, label: field, labelIcon: icons.Person, type: "text" })
       );
     }
   }
+
   const handelFormSubmit = (values: Values): void => {
     // console.log("values: ", { ...profile, ...values });
     dispatch(updateProfile({ ...profile, ...values }));
-    navigate("/");
+    if (goBackPath) {
+      navigate(goBackPath);
+    } else {
+      navigate("/");
+    }
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handelFormSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handelFormSubmit} validationSchema={addUserInfoSchema}>
       {({ handleSubmit }: FormikProps<Values>) => (
         <form onSubmit={handleSubmit} className="flex flex-col gap-y-6 grow mt-4 pb-6" noValidate>
           <ul className="flex flex-col gap-y-6">
