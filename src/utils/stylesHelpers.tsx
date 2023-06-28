@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { IColor } from "components/notices/ShortNotice";
 
 export const colorVariants = {

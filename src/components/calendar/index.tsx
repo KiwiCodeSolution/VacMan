@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Calendar from "react-calendar";
-import { format } from "date-fns";
-import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import { useState } from "react";
+import Calendar from "react-calendar";
+import { useGetVacanciesQuery } from "redux/VacancyQueries";
 import ReminderItem from "components/reminder/ReminderItem";
 import "./calendar.css";
 import { colorVariants } from "utils/stylesHelpers";
+import { format } from "date-fns";
 
 const CalendarComponent = () => {
   const [currentDay, setCurrentDay] = useState(new Date());
@@ -14,12 +15,12 @@ const CalendarComponent = () => {
   const todo = response?.data?.filter(
     vacancy =>
       vacancy.archived === false &&
-      vacancy.actions[vacancy.actions.length - 1].fulfilled === false &&
-      format(vacancy.actions[vacancy.actions.length - 1].deadline, "dd-MM-yyyy") === format(currentDay, "dd-MM-yyyy")
+      vacancy.actions.at(-1)!.fulfilled === false &&
+      format(vacancy.actions.at(-1)!.deadline, "dd-MM-yyyy") === format(currentDay, "dd-MM-yyyy")
   );
 
   const events = response?.data?.filter(
-    vacancy => vacancy.archived === false && vacancy.actions[vacancy.actions.length - 1].fulfilled === false
+    vacancy => vacancy.archived === false && vacancy.actions.at(-1)!.fulfilled === false
   );
 
   const onChange = (value: any) => {
@@ -37,13 +38,9 @@ const CalendarComponent = () => {
           tileClassName={({ date }) => {
             const realDay = format(date, "dd-MM-yyyy");
             const typeClass = `w-6 h-8 hover:bg-app-smoke hover:text-txt-black  focus:border focus:border-app-red focus:bg-app-smoke text-center`;
-            if (
-              events &&
-              events.find(ev => format(ev.actions[ev.actions.length - 1].deadline, "dd-MM-yyyy") === realDay)
-            ) {
-              const color = events.find(
-                ev => format(ev.actions[ev.actions.length - 1].deadline, "dd-MM-yyyy") === realDay
-              )?.cardColor as string;
+            if (events && events.find(ev => format(ev.actions.at(-1)!.deadline, "dd-MM-yyyy") === realDay)) {
+              const color = events.find(ev => format(ev.actions.at(-1)!.deadline, "dd-MM-yyyy") === realDay)
+                ?.cardColor as string;
               return `${colorVariants[color]} ${typeClass} rounded-full`;
             }
             if (format(date, "dd-MM-yyyy") === format(new Date(), "dd-MM-yyyy")) {
