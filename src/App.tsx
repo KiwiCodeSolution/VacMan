@@ -33,6 +33,7 @@ import AddAvatar from "pages/Private/addAvatar";
 import PrivacyPolicy from "pages/Private/privacyPolici";
 import AddAction from "pages/Private/addAction";
 import EditAction from "pages/Private/editAction";
+import HelpFeedback from "pages/Private/helpFeedback";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -75,6 +76,7 @@ const App = () => {
           <Route path="changePass" element={<PrivateRoute><ChangePassPage /></PrivateRoute>} />
           <Route path="archived" element={<PrivateRoute><Archived /></PrivateRoute>} />
           <Route path="addAvatar" element={<PrivateRoute><AddAvatar /></PrivateRoute>} />
+          <Route path="help_feedback" element={<PrivateRoute><HelpFeedback /></PrivateRoute>} />
           <Route path="privacyPolicy" element={<PrivateRoute><PrivacyPolicy /></PrivateRoute>} />
         </Route>
 

@@ -17,10 +17,10 @@ const imageUrls: IimageUrl = {
 };
 
 const text = [
-  "We can help you organize your job search",
+  "We can help you organize your job search from different resources",
   "We will complete all the necessary tasks on time",
   "We will track your progress on the way to meeting your goals",
-  "Stop reading it, Do it !",
+  "Fill free to contact our company",
 ];
 
 const OnBoarding = () => {
