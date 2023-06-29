@@ -4,12 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { logOut, updateSettings } from "redux/userOperations";
+import { ISettings } from "redux/userSlice";
+
 import NavHeader from "components/navHeader";
 import Button from "components/ui/button";
 import * as Icons from "components/iconsComponents";
 import LanguageBtnGroup from "components/language/LanguageBtnGroup";
 import SubHeader from "components/subHeader";
-import { ISettings } from "redux/userSlice";
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
@@ -18,11 +19,12 @@ const SettingsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  location.state = { newSettings };
+  location.state = { newSettings }; // as a temporary storage
   useEffect(() => {
     return () => {
-      let permition = 0;
+      let permition = 0; // no changes in settings
       const arrOfKeys = Object.keys(settings);
+      // checkin changes
       arrOfKeys.forEach(key => {
         if (location.state.newSettings[key] !== settings[key as keyof ISettings]) permition += 1;
       })

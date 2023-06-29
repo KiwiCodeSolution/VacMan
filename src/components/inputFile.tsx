@@ -10,9 +10,9 @@ const InputFileForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const serverURL = "http://localhost:3030/profile/uploadAva";
+  // const serverURL = "http://localhost:3030/profile/uploadAva";
   // const serverURL = "http://kiwicode.tech:5000/profile/uploadAva";
-  // const serverURL = "https://vacmanserver-production.up.railway.app/profile/uploadAva";
+  const serverURL = "https://vacmanserver-production.up.railway.app/profile/uploadAva";
 
   const handleChange = (e: ChangeEvent) => {
     const target = e.target as HTMLInputElement;
