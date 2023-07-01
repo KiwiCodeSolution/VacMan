@@ -97,7 +97,7 @@ export default function Main() {
             </div>
             ) : (
             <div className="flex flex-col gap-y-4">
-              <p className="text-center text-txt-main text-xl pt-8">Start with adding a new record from..</p>
+              <p className="text-center text-txt-main text-xl pt-8">Start adding a new record from..</p>
               <div className="flex flex-wrap justify-center gap-2">
                 <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://djinni.co/jobs/" target="_blank" rel="noreferrer">Djinni</a>
                 <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://dou.ua" target="_blank" rel="noreferrer">Dou</a>
