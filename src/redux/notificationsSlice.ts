@@ -11,6 +11,7 @@ import {
   registration,
   updateProfile,
   updateSettings,
+  sendFeedback,
 } from "./userOperations";
 import { IProfile, ISettings } from "./userSlice";
 
@@ -112,6 +113,17 @@ const notificationSlice = createSlice({
         state.showNotification = true;
       })
       .addCase(updateSettings.rejected, (state, { payload }) => {
+        if (payload) state.message = payload;
+        state.type = "error";
+        state.showNotification = true;
+      })
+      .addCase(sendFeedback.pending, state => {})
+      .addCase(sendFeedback.fulfilled, state => {
+        state.message = "message sended";
+        state.type = "success";
+        state.showNotification = true;
+      })
+      .addCase(sendFeedback.rejected, (state, { payload }) => {
         if (payload) state.message = payload;
         state.type = "error";
         state.showNotification = true;
