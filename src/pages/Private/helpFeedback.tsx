@@ -1,16 +1,18 @@
+/* eslint-disable prettier/prettier */
 import NavHeader from "components/navHeader";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { sendFeedback } from "redux/userOperations";
 
 const HelpFeedback = () => {
   const dispatch = useAppDispatch();
-  const { email } = useAppSelector(state => state.user);
+  const { email, profile} = useAppSelector(state => state.user);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log((e.currentTarget.elements.namedItem("text") as HTMLInputElement).value);
     const text = (e.currentTarget.elements.namedItem("text") as HTMLInputElement).value;
-    dispatch(sendFeedback({ text, email }));
+
+    dispatch(sendFeedback({ text, email, profile }));
   };
 
   return (

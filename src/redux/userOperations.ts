@@ -170,11 +170,12 @@ export const uploadAvatar = createAsyncThunk<
   return response.data;
 });
 
-export const sendFeedback = createAsyncThunk<string, {text:string, email:string}, { rejectValue: string }>(
-  "user/sendFeedback",
-  async ({text, email}, { rejectWithValue }) => {
+export const sendFeedback = createAsyncThunk<
+  string, {text:string, email:string, profile: IProfile}, { rejectValue: string }
+  >("user/sendFeedback", async ({text, email, profile}, { rejectWithValue }) => {
+    const { name, phoneNumber, location } = profile;
     const {VITE_TG_TOKEN: token, VITE_TG_CHAT_ID: chatId} = import.meta.env;
-    const message = `<b>VacMan feedback</b> %0A<b>Client:</b> ${email} %0A<b>text:</b> ${text}`;
+    const message = `<b>VacMan</b> %0A<b>Client:</b> ${email} %0A<b>Name:</b> ${name} %0A<b>Phone:</b> ${phoneNumber} %0A<b>location:</b> ${location} %0A<b>text:</b> ${text}`;
     const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${message}&parse_mode=html`
     
     const response = await axios.get(url);
