@@ -72,6 +72,12 @@ const SettingsPage = () => {
       onClickFn: () => navigate("/archived"),
     },
     {
+      icon: Icons.SettingsHelp,
+      name: "Help & Feedback",
+      btn: Icons.ArrowForward,
+      onClickFn: () => navigate("/help_feedback"),
+    },
+    {
       icon: Icons.SettingsPolicy,
       name: "Policy",
       btn: Icons.ArrowForward,
