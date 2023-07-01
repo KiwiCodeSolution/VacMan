@@ -16,12 +16,23 @@ interface IProps {
   goBackPath?: string;
 }
 
+interface IUserInfoFormFields {
+  name: string;
+  label: string;
+  labelIcon: (props: icons.IIconProps) => JSX.Element;
+  type: string;
+}
+
 const AddUserInfoForm = ({ setShowModal, goBackPath }: IProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { profile } = useAppSelector(state => state.user);
+  const {
+    profile: { avatar, ...profile },
+  } = useAppSelector(state => state.user);
 
-  const formFields = [
+  // console.log("profile: ", profile);
+
+  const defaultFields: Array<IUserInfoFormFields> = [
     { name: "name", label: "User name", labelIcon: icons.Person, type: "name" },
     { name: "phoneNumber", label: "Phone number", labelIcon: icons.Phone16, type: "phone" },
     { name: "position", label: "Position", labelIcon: icons.Position, type: "text" },
@@ -32,22 +43,32 @@ const AddUserInfoForm = ({ setShowModal, goBackPath }: IProps) => {
     { name: "telegram", label: "Telegram", labelIcon: icons.Telegram, type: "text" },
   ];
 
+  const customFields: Array<IUserInfoFormFields> = [];
+  const profileFieldNames = Object.keys(profile);
+
   const initialValues = { ...profile };
   type Values = typeof initialValues;
-  if (Object.keys(profile).length > 9) {
-    // profile has custom data
-    const customData = Object.keys(profile).slice(9);
 
-    if (Object.keys(profile).length - 1 > formFields.length) {
-      customData.forEach(field =>
-        formFields.push({ name: field, label: field, labelIcon: icons.Person, type: "text" })
-      );
+  profileFieldNames.forEach((profileFieldName: string) => {
+    if (!defaultFields.find((defaultField: IUserInfoFormFields) => defaultField.name === profileFieldName)) {
+      customFields.push({ name: profileFieldName, label: profileFieldName, labelIcon: icons.Person, type: "text" });
     }
-  }
+  });
 
-  const handelFormSubmit = (values: Values): void => {
-    // console.log("values: ", { ...profile, ...values });
-    dispatch(updateProfile({ ...profile, ...values }));
+  // if (Object.keys(profile).length > 9) {
+  //   // profile has custom data
+  //   const customData = Object.keys(profile).slice(9);
+
+  //   if (Object.keys(profile).length - 1 > defaultFields.length) {
+  //     customData.forEach(field =>
+  //       defaultFields.push({ name: field, label: field, labelIcon: icons.Person, type: "text" })
+  //     );
+  //   }
+  // }
+
+  const handelFormSubmit = async (values: Values): Promise<void> => {
+    await dispatch(updateProfile({ ...profile, ...values, avatar }));
+
     if (goBackPath) {
       navigate(goBackPath);
     } else {
@@ -60,7 +81,7 @@ const AddUserInfoForm = ({ setShowModal, goBackPath }: IProps) => {
       {({ handleSubmit }: FormikProps<Values>) => (
         <form onSubmit={handleSubmit} className="flex flex-col gap-y-6 grow mt-4 pb-6" noValidate>
           <ul className="flex flex-col gap-y-6">
-            {formFields.map(({ name, label, labelIcon, type }) => (
+            {[...defaultFields, ...customFields].map(({ name, label, labelIcon, type }) => (
               <li key={name}>
                 <CustomInput name={name} label={label} LabelIcon={labelIcon} id={name} type={type} />
               </li>
