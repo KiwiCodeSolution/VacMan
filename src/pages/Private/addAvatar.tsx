@@ -16,13 +16,13 @@ const AddAvatar = () => {
       <SubHeader fill="text-txt-blue" />
 
       {currProfile !== "google" ? (
-        <div className="container mx-auto mt-20 px-4">
+        <div className="container mx-auto mt-20 mb-24 px-4">
           <InputFileForm />
         </div>
       ) : (
         <div className="py-10 bg-red-400 container mx-auto mt-20 px-4 text-center text-2xl">
           <p>You can not change avatar !</p>
-          <p>You entered through</p>
+          <p>You entered with</p>
           <p className="font-bold underline">{`${currProfile} account`}</p>
         </div>
       )}

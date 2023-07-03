@@ -25,7 +25,6 @@ export const registration = createAsyncThunk<
 >("user/registration", async (credentials, { rejectWithValue }) => {
   try {
     const response = await axios.post("/auth/register", credentials);
-    // console.log("AsyncThunk: Congratulations! You are registered!");
     return response.data.message;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -170,3 +169,19 @@ export const uploadAvatar = createAsyncThunk<
   };
   return response.data;
 });
+
+export const sendFeedback = createAsyncThunk<
+  string, {text:string, email:string, profile: IProfile}, { rejectValue: string }
+  >("user/sendFeedback", async ({text, email, profile}, { rejectWithValue }) => {
+    const { name, phoneNumber, location } = profile;
+    const {VITE_TG_TOKEN: token, VITE_TG_CHAT_ID: chatId} = import.meta.env;
+    const message = `<b>VacMan</b> %0A<b>Client:</b> ${email} %0A<b>Name:</b> ${name} %0A<b>Phone:</b> ${phoneNumber} %0A<b>location:</b> ${location} %0A<b>text:</b> ${text}`;
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${message}&parse_mode=html`
+    
+    const response = await axios.get(url);
+    if (response.status !== 200) {
+      return rejectWithValue(response.data.message);
+    }
+    return response.data;
+  }
+);

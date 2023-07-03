@@ -66,38 +66,51 @@ export default function Main() {
       ) : (
         <div className="relative">
           <Header />
-          <div className="sticky top-20 z-10 px-4">
-            <Formik initialValues={initialValues} onSubmit={handelFormSubmit} className="h-20 bg-bg-light">
-              <Form autoComplete="off" className="flex sticky top-0 left-0 right-0 mt-2">
-                <label htmlFor="company" className="w-full">
-                  <input
-                    id="company"
-                    type="text"
-                    name="text"
-                    value={text}
-                    autoComplete="off"
-                    onChange={handleChange}
-                    placeholder="Enter company name"
-                    className="w-full h-8 px-2 py-1 outline-none rounded-md border"
-                  />
+          {vacancies.length ?
+            (<div className="sticky top-20 z-10 px-4">
+              <Formik initialValues={initialValues} onSubmit={handelFormSubmit} className="h-20 bg-bg-light">
+                <Form autoComplete="off" className="flex sticky top-0 left-0 right-0 mt-2">
+                  <label htmlFor="company" className="w-full">
+                    <input
+                      id="company"
+                      type="text"
+                      name="text"
+                      value={text}
+                      autoComplete="off"
+                      onChange={handleChange}
+                      placeholder="Enter company name"
+                      className="w-full h-8 px-2 py-1 outline-none rounded-md border"
+                    />
 
-                  {text === "" ? (
-                    <button type="button" className="absolute top-1 right-2 items-center">
-                      <Icons.Search />
-                    </button>
-                  ) : (
-                    <button type="button" className="absolute top-1 right-2 items-center" onClick={() => setText("")}>
-                      <Icons.Close />
-                    </button>
-                  )}
-                </label>
-              </Form>
-            </Formik>
-          </div>
+                    {text === "" ? (
+                      <button type="button" className="absolute top-1 right-2 items-center">
+                        <Icons.Search />
+                      </button>
+                    ) : (
+                      <button type="button" className="absolute top-1 right-2 items-center" onClick={() => setText("")}>
+                        <Icons.Close />
+                      </button>
+                    )}
+                  </label>
+                </Form>
+              </Formik>
+            </div>
+            ) : (
+            <div className="flex flex-col gap-y-4">
+              <p className="text-center text-txt-main text-xl pt-8">Start adding a new record from..</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://djinni.co/jobs/" target="_blank" rel="noreferrer">Djinni</a>
+                <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://dou.ua" target="_blank" rel="noreferrer">Dou</a>
+                <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://ua.jooble.org" target="_blank" rel="noreferrer">Jooble</a>
+                <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://work.ua" target="_blank" rel="noreferrer">Work.ua</a>
+              </div>
+            </div>
+            )
+          }
 
           {!vacancies || !vacancies.length ? (
             <>
-              <div className="flex justify-center mt-24 px-4">
+              <div className="flex justify-center mt-4 px-4">
                 <Icons.Todos />
               </div>
               <p className="text-center text-txt-main text-xl px-10 pt-8">No vacancies</p>
@@ -119,4 +132,4 @@ export default function Main() {
       )}
     </div>
   );
-}
+};

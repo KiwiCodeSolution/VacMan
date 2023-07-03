@@ -13,35 +13,47 @@ import { updateProfile } from "redux/userOperations";
 const ProfilePage = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const { email, profile } = useAppSelector(state => state.user);
+  const {
+    email,
+    profile: { name, position, avatar, ...profile },
+  } = useAppSelector(state => state.user);
 
-  const elements = [
-    { icon: Icons.Envelope, name: email },
-    { icon: Icons.Phone16, name: profile.phoneNumber },
-    { icon: Icons.LinkedIn, name: profile.linkedIn },
-    { icon: Icons.Telegram, name: profile.telegram },
-    { icon: Icons.Instagram, name: profile.instagram },
-    { icon: Icons.Facebook, name: profile.facebook },
+  const defaultProfileRecords = [
+    { icon: Icons.Envelope, name: "email", value: email },
+    { icon: Icons.Phone16, name: "phoneNumber", value: profile.phoneNumber },
+    { icon: Icons.Location, name: "location", value: profile.location },
+    { icon: Icons.LinkedIn, name: "linkedin", value: profile.linkedin },
+    { icon: Icons.Telegram, name: "telegram", value: profile.telegram },
+    { icon: Icons.Instagram, name: "instagram", value: profile.instagram },
+    { icon: Icons.Facebook, name: "facebook", value: profile.facebook },
   ];
 
-  const customElements: { name: string; value: string; }[] = [];
-  if (Object.keys(profile).length > 9) {
-    const customData = Object.keys(profile).slice(9);
-    customData.forEach(field => customElements.push({ name: field, value: profile[field] }));
-    // console.log("custom elements", customElements);
-  }
+  const customProfileRecords: Array<{ name: string; value: string }> = [];
+  const profileFieldNames = Object.keys(profile);
 
-  const copyToClipboard = (name: string) => {
-    window.navigator.clipboard.writeText(name);
-    dispatch(setMessage(`'${name}' copied to clipboard`));
+  profileFieldNames.forEach((profileFieldName: string) => {
+    if (!defaultProfileRecords.find(defaultRecord => profileFieldName === defaultRecord.name)) {
+      customProfileRecords.push({ name: profileFieldName, value: profile[profileFieldName] });
+    }
+  });
+
+  // if (Object.keys(profile).length > 9) {
+  //   const customData = Object.keys(profile).slice(9);
+  //   customData.forEach(field => customElements.push({ name: field, value: profile[field] }));
+  //   // console.log("custom elements", customElements);
+  // }
+
+  const copyToClipboard = (profileRecordName: string) => {
+    window.navigator.clipboard.writeText(profileRecordName);
+    dispatch(setMessage(`'${profileRecordName}' copied to clipboard`));
     dispatch(setType("info"));
     dispatch(setShowNotification(true));
-  }
-  const deleteCustomField = (name: string) => {
+  };
+  const deleteCustomField = (profileRecordName: string) => {
     const newProfile = { ...profile };
-    delete newProfile[name];
-    dispatch(updateProfile({ ...newProfile }));
-  }
+    delete newProfile[profileRecordName];
+    dispatch(updateProfile({ ...newProfile, name, position, avatar }));
+  };
 
   return (
     <div className="mb-28 select-none">
@@ -59,41 +71,41 @@ const ProfilePage = () => {
       <ul className="container mx-auto px-4">
         <p className="text-center txt-main text-xl bg-bg-blue">click the line below to copy</p>
         <hr />
-        {elements.map(el => el.name && (
-          <li
-            key={el.name}
-            className="flex flex-row items-center ml-2 py-3 cursor-pointer"
-            onClick={() => copyToClipboard(el.name)}
-          >
-            <div className="w-10 h-10 bg-app-grey rounded-full p-1">
-              <el.icon size={32} />
-            </div>
-            <p className="pl-4 font-semibold">{el.name}</p>
-          </li>
-        ))}
-        {customElements.map(el => el.value && (
-          <li
-            key={el.name}
-            className="flex flex-col items-left ml-2 py-3"
-          >
-            <div className="pl-4 font-semibold border-l-2 flex">
-              <p>{el.name}</p>
-              <button
-                className="bg-app-orange px-1 ml-auto rounded-md"
-                onClick={() => deleteCustomField(el.name)}
+        {defaultProfileRecords.map(
+          rec =>
+            rec.value && (
+              <li
+                key={rec.value}
+                className="flex flex-row items-center ml-2 py-3 cursor-pointer"
+                onClick={() => copyToClipboard(rec.value)}
               >
-                Delete
-              </button>
-            </div>
-            <hr />
-            <p
-              className="pl-4 font-semibold border-l-2 text-txt-main cursor-pointer"
-              onClick={() => copyToClipboard(el.value)}
-            >
-              {el.value}
-            </p>
-          </li>
-        ))}
+                <div className="w-10 h-10 bg-app-grey rounded-full p-1">
+                  <rec.icon size={32} />
+                </div>
+                <p className="pl-4 font-semibold">{rec.value}</p>
+              </li>
+            )
+        )}
+        {customProfileRecords.map(
+          rec =>
+            rec.value && (
+              <li key={rec.name} className="flex flex-col items-left ml-2 py-3">
+                <div className="pl-4 font-semibold border-l-2 flex">
+                  <p>{rec.name}</p>
+                  <button className="bg-app-orange px-1 ml-auto rounded-md" onClick={() => deleteCustomField(rec.name)}>
+                    Delete
+                  </button>
+                </div>
+                <hr />
+                <p
+                  className="pl-4 font-semibold border-l-2 text-txt-main cursor-pointer"
+                  onClick={() => copyToClipboard(rec.value)}
+                >
+                  {rec.value}
+                </p>
+              </li>
+            )
+        )}
       </ul>
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable prettier/prettier */
@@ -25,12 +26,12 @@ const Reminder = () => {
       vacancy =>
         vacancy.archived === false &&
         vacancy.actions.length > 1 &&
-        vacancy.actions[vacancy.actions.length - 1].fulfilled === false
+        vacancy.actions.at(-1)!.fulfilled === false
     )
     .sort(
       (firstVacancy, secondVacancy) =>
-        firstVacancy?.actions[firstVacancy.actions.length - 1].deadline -
-        secondVacancy?.actions[secondVacancy.actions.length - 1].deadline
+        firstVacancy.actions.at(-1)!.deadline -
+        secondVacancy.actions.at(-1)!.deadline
     );
 
   const vacanciesFulfilledActions = response.data
@@ -38,12 +39,12 @@ const Reminder = () => {
       vacancy =>
         vacancy.archived === false &&
         vacancy.actions.length > 1 &&
-        vacancy.actions[vacancy.actions.length - 1].fulfilled === true
+        vacancy.actions.at(-1)!.fulfilled === true
     )
     .sort(
       (firstVacancy, secondVacancy) =>
-        firstVacancy?.actions[firstVacancy.actions.length - 1].deadline -
-        secondVacancy?.actions[secondVacancy.actions.length - 1].deadline
+        firstVacancy.actions.at(-1)!.deadline -
+        secondVacancy.actions.at(-1)!.deadline
     );
 
   return (
@@ -61,7 +62,7 @@ const Reminder = () => {
             <div className="flex justify-center mt-24 px-4">
               <Icons.Todos />
             </div>
-            <p className="text-center text-txt-main text-xl px-10 pt-8">You do not have any reminders yet</p>
+            <p className="text-center text-txt-main text-xl px-10 pt-8">No any reminders yet</p>
           </>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-28 mt-5 items-center gap-4 px-4">

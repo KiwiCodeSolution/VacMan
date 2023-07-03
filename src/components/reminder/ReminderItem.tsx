@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-shadow */
@@ -27,23 +28,23 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
   const { actions, cardColor, _id } = vacancy;
   const newActions = structuredClone(actions);
 
-  const actionItem = actions[actions.length - 1];
-  const deadlineItem = actionItem.deadline as IReminderVacancy["deadline"];
-  const fulfilledItem = actionItem.fulfilled as IReminderVacancy["fulfilled"];
+  const actionItem = actions.at(-1)!;
+  const deadlineItem = actionItem.deadline!;
+  const fulfilledItem = actionItem.fulfilled!;
 
   function fulfilled() {
-    newActions[newActions.length - 1].fulfilled = true;
+    newActions.at(-1)!.fulfilled = true;
     editVacancy({ _id, data: { actions: newActions }, goBack: false });
   }
   function undoFulfilled() {
-    newActions[newActions.length - 1].fulfilled = false;
+    newActions.at(-1)!.fulfilled = false;
     editVacancy({ _id, data: { actions: newActions }, goBack: false });
   }
 
   // styles
 
-  const isFulfilledBg = actionItem.fulfilled ? "bg-txt-grey" : null;
-  const disabledButtonStyle = actionItem.fulfilled ? null : `${effectButton}`;
+  const isFulfilledBg = actionItem.fulfilled && "bg-txt-grey";
+  const disabledButtonStyle = !actionItem.fulfilled && `${effectButton}`;
 
   const deadlineStyles = (fulfilledItem: IReminderVacancy["fulfilled"], deadlineItem: IReminderVacancy["deadline"]) => {
     if (fulfilledItem) {
@@ -79,6 +80,8 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
           </Link>
         </button>
       </li>
+      <p className="text-center font-bold text-lg">{actionItem.name}</p>
+      <hr />
       <li className="px-5 flex flex-col gap-y-1">
         <div className="flex gap-x-2 gap-y-1 font-bold">
           <div className="w-[24px]">
@@ -86,18 +89,20 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
           </div>
           Company: <span className="font-normal">"{vacancy.companyName}"</span>
         </div>
-        <div className="flex gap-x-2 gap-y-1 font-bold">
-          <div className="w-[24px]">
-            <Icons.Position size={24} />{" "}
+        {vacancy.position && (
+          <div className="flex gap-x-2 gap-y-1 font-bold">
+            <div className="w-[24px]">
+              <Icons.Position size={24} />{" "}
+            </div>
+            Vacancy: <span className="font-normal">{vacancy.position}</span>
           </div>
-          Vacancy: <span className="font-normal">{vacancy.position}</span>
-        </div>
-        <div className="flex gap-x-2 gap-y-1 font-bold">
+        )}
+        {/* <div className="flex gap-x-2 gap-y-1 font-bold">
           <div className="w-[24px]">
             <Icons.Action size={24} />{" "}
           </div>
           Action: <span className="font-normal">{actionItem.name}</span>
-        </div>
+        </div> */}
       </li>
 
       <li
@@ -106,7 +111,7 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
         {actionItem.fulfilled ? (
           <button
             type="button"
-            className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
+            className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey bg-bg-light rounded-3xl w-full ${disabledButtonStyle}`}
             onClick={() => undoFulfilled()}
           >
             Undo Fulfilled
@@ -116,14 +121,14 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
             <Link
               to={`/${_id}/EditAction`}
               state={{ from: location }}
-              className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
+              className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey bg-bg-light rounded-3xl w-full ${disabledButtonStyle}`}
             >
               <Icons.Edit />
               Edit
             </Link>
             <button
               type="button"
-              className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey rounded-3xl w-full ${disabledButtonStyle}`}
+              className={`flex justify-center items-center gap-x-3 py-[4px] px-[10px] border border-bg-grey bg-bg-light rounded-3xl w-full ${disabledButtonStyle}`}
               onClick={() => fulfilled()}
             >
               <Icons.Checked />

@@ -13,6 +13,7 @@ import {
   updateProfile,
   updateSettings,
   uploadAvatar,
+  sendFeedback
 } from "./userOperations";
 
 export interface IProfile {
@@ -223,6 +224,15 @@ const userSlice = createSlice({
         state.profile = payload.profile;
       })
       .addCase(uploadAvatar.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(sendFeedback.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(sendFeedback.fulfilled, state => {
+        state.isLoading = false;
+      })
+      .addCase(sendFeedback.rejected, state => {
         state.isLoading = false;
       }),
 });
