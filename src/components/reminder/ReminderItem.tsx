@@ -89,14 +89,12 @@ const ReminderItem = ({ vacancy }: ReminderProps) => {
           </div>
           Company: <span className="font-normal">"{vacancy.companyName}"</span>
         </div>
-        {vacancy.position && (
-          <div className="flex gap-x-2 gap-y-1 font-bold">
-            <div className="w-[24px]">
-              <Icons.Position size={24} />{" "}
-            </div>
-            Vacancy: <span className="font-normal">{vacancy.position}</span>
+        <div className="flex gap-x-2 gap-y-1 font-bold">
+          <div className="w-[24px]">
+            <Icons.Position size={24} />{" "}
           </div>
-        )}
+          Vacancy: <span className="font-normal">{vacancy.position || "___________"}</span>
+        </div>
         {/* <div className="flex gap-x-2 gap-y-1 font-bold">
           <div className="w-[24px]">
             <Icons.Action size={24} />{" "}

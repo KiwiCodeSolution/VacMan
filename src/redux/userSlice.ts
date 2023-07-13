@@ -40,10 +40,9 @@ const initialState = {
   passCodeVerified: false,
   onBoarding: true,
   isLoading: false,
-  showStartingPage: true,
   currProfile: "",
-  profile: { avatar: "", phoneNumber: "", position: "" } as IProfile,
-  settings: { lang: "eng", theme: "light", notification: false } as ISettings,
+  profile: {} as IProfile,
+  settings: {} as ISettings,
   message: "",
   reminder: false,
 };
@@ -60,9 +59,6 @@ const userSlice = createSlice({
     },
     setIsLoading(state, { payload }: PayloadAction<boolean>) {
       state.isLoading = payload;
-    },
-    setShowStartingPage(state, { payload }: PayloadAction<boolean>) {
-      state.showStartingPage = payload;
     },
     setSettings(state, { payload }: PayloadAction<ISettings>) {
       state.settings = payload;
@@ -125,7 +121,6 @@ const userSlice = createSlice({
         state.currProfile = "";
         state.profile = {} as IProfile;
         state.settings = {} as ISettings;
-        state.showStartingPage = true;
         state.passCodeVerified = false;
         state.isLoading = false;
       })
@@ -237,6 +232,6 @@ const userSlice = createSlice({
       }),
 });
 
-export const { setIsAuth, setOnBoarding, setIsLoading, setShowStartingPage, setUser, setMessage, setReminder } =
+export const { setIsAuth, setOnBoarding, setIsLoading, setUser, setMessage, setReminder } =
   userSlice.actions;
 export default userSlice.reducer;

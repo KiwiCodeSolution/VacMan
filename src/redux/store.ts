@@ -5,6 +5,7 @@ import user from "./userSlice";
 // eslint-disable-next-line import/no-cycle
 import { vacancyAPI } from "./VacancyQueries";
 import notificationsSlice from "./notificationsSlice";
+import appSlice from "./appSlice";
 
 const persistConfig = { key: "user", storage };
 const persistedUserReducer = persistReducer(persistConfig, user);
@@ -14,6 +15,7 @@ const store = configureStore({
     user: persistedUserReducer,
     [vacancyAPI.reducerPath]: vacancyAPI.reducer,
     notification: notificationsSlice,
+    appState: appSlice,
   },
   // eslint-disable-next-line prettier/prettier
   middleware: getDefaultMiddleware =>

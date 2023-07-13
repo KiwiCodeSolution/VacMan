@@ -66,7 +66,7 @@ export default function Main() {
       ) : (
         <div className="relative">
           <Header />
-          {vacancies.length ?
+          {response?.data.length ?
             (<div className="sticky top-20 z-10 px-4">
               <Formik initialValues={initialValues} onSubmit={handelFormSubmit} className="h-20 bg-bg-light">
                 <Form autoComplete="off" className="flex sticky top-0 left-0 right-0 mt-2">
@@ -96,15 +96,15 @@ export default function Main() {
               </Formik>
             </div>
             ) : (
-            <div className="flex flex-col gap-y-4">
-              <p className="text-center text-txt-main text-xl pt-8">Start adding a new record from..</p>
-              <div className="flex flex-wrap justify-center gap-2">
-                <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://djinni.co/jobs/" target="_blank" rel="noreferrer">Djinni</a>
-                <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://dou.ua" target="_blank" rel="noreferrer">Dou</a>
-                <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://ua.jooble.org" target="_blank" rel="noreferrer">Jooble</a>
-                <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://work.ua" target="_blank" rel="noreferrer">Work.ua</a>
+              <div className="flex flex-col gap-y-4">
+                <p className="text-center text-txt-main text-xl pt-8">Start adding a new record from..</p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://djinni.co/jobs/" target="_blank" rel="noreferrer">Djinni</a>
+                  <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://dou.ua" target="_blank" rel="noreferrer">Dou</a>
+                  <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://ua.jooble.org" target="_blank" rel="noreferrer">Jooble</a>
+                  <a className="p-2 border border-bg-grey rounded-xl shadow-lg" href="https://work.ua" target="_blank" rel="noreferrer">Work.ua</a>
+                </div>
               </div>
-            </div>
             )
           }
 

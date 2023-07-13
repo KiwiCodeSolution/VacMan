@@ -161,7 +161,7 @@ export const updateSettings = createAsyncThunk<
 });
 
 export const uploadAvatar = createAsyncThunk<
-  { message: string; profile: IProfile }, any, { rejectValue: string }
+  { message: string; profile: IProfile }, unknown, { rejectValue: string }
   >("user/uploadAvatar", async (data, { rejectWithValue }) => {
   const response = await axios.post("profile/uploadAva", data);
   if (response.status !== 200) {

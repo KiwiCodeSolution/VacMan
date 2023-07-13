@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 
-import { setShowStartingPage } from "./redux/userSlice";
+import { setShowStartingPage } from "./redux/appSlice";
 
 // pages & components
 import StartingPage from "./pages/starting";
@@ -37,13 +37,22 @@ import HelpFeedback from "pages/Private/helpFeedback";
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { token, showStartingPage } = useAppSelector(state => state.user);
+  const { showStartingPage } = useAppSelector(state => state.appState);
+  const { token } = useAppSelector(state => state.user);
   const { showNotification, message } = useAppSelector(state => state.notification);
 
   useEffect(() => {
-    dispatch(currentUser());
-    setTimeout(() => dispatch(setShowStartingPage(false)), 3000); // App Logo
-  }, [dispatch, token]);
+    if (token) dispatch(currentUser());
+    let timeoutId: NodeJS.Timeout;
+    if (showStartingPage) {
+      timeoutId = setTimeout(() => {
+        dispatch(setShowStartingPage(false)); // App Logo
+        console.log("setShowStartingPage(true).. ");
+        setTimeout(() => { dispatch(setShowStartingPage(true)) }, 15000);
+      }, 3000);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [showStartingPage]);
 
   useEffect(() => {
     if (message === "user not authorized ") dispatch(currentUser())
@@ -56,7 +65,6 @@ const App = () => {
     }, 3000);
     return () => clearTimeout(time);
   }, [dispatch, showNotification]);
-
 
   return showStartingPage ? (
     <StartingPage />
