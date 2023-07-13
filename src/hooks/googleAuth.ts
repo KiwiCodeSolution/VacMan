@@ -3,10 +3,7 @@ import { setIsAuth, setIsLoading, setUser } from "../redux/userSlice";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { setAuthHeader } from "redux/userOperations";
-
-// const serverURL = "http://localhost:3030";
-// const serverURL = "http://kiwicode.tech:5000";
-const serverURL = "https://vacmanserver-production.up.railway.app";
+import serverUrl from "../appConfig";
 
 const getGoogleUserData = async (accessToken: string) => {
   try {
@@ -24,7 +21,7 @@ const useGoogleAuth = () => {
     onSuccess: async resp => {
       dispatch(setIsLoading(true));
       const userData = await getGoogleUserData(resp.access_token);
-      const { data } = await axios.post(`${serverURL}/auth/googleAuth`, { userData });
+      const { data } = await axios.post(`${serverUrl}/auth/googleAuth`, { userData });
       setAuthHeader(data.token);
       data.currProfile = "google";
       dispatch(setUser(data));
