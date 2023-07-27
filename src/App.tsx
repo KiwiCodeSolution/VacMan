@@ -47,7 +47,6 @@ const App = () => {
     if (showStartingPage) {
       timeoutId = setTimeout(() => {
         dispatch(setShowStartingPage(false)); // App Logo
-        console.log("setShowStartingPage(true).. ");
         setTimeout(() => { dispatch(setShowStartingPage(true)) }, 600000);
       }, 3000);
     }
