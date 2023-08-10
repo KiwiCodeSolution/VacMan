@@ -21,7 +21,7 @@ const useGoogleAuth = () => {
     onSuccess: async resp => {
       dispatch(setIsLoading(true));
       const userData = await getGoogleUserData(resp.access_token);
-      const { data } = await axios.post(`${serverUrl}/auth/googleAuth`, { userData });
+      const { data } = await axios.post(`${serverUrl}auth/googleAuth`, { userData });
       setAuthHeader(data.token);
       data.currProfile = "google";
       dispatch(setUser(data));
