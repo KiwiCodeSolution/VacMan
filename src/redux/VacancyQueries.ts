@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
-
+import serverUrl from "../appConfig";
 // eslint-disable-next-line import/no-cycle
 import { RootState } from "./store";
 
@@ -58,10 +58,9 @@ const axiosBaseQuery =
         },
       };
     }
-  };
-// const baseURL = "https://kiwicode.tech:5000/";
-const baseUrl = "https://vacmanserver-production.up.railway.app/";
-// const baseUrl = "http://localhost:3030/";
+    };
+  
+const baseUrl = serverUrl;
 
 export const vacancyAPI = createApi({
   reducerPath: "vacancies",
